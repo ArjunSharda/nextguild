@@ -24,6 +24,10 @@ class Client:
      url = f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
      response = self.request('DELETE', url)
      return response
+    def get_message(self, channel_id, message_id):
+        url = f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
+        response = self.request('GET', url)
+        return response
     def get_channel_messages(self, channel_id):
         if channel_id in self.cache:
             return self.cache[channel_id]
@@ -59,3 +63,10 @@ class Client:
                 return data
             else:
                 raise ValueError(f'Request failed with status {response.status_code}: {data}')
+def main():
+    my_client = Client('gapi_dubGYJmp36uC1DjtrrTOQtb7eXXKcIbdNR2H/UeiYsc7wyVZm3ZZwHt9OioZo6dcjVz2+8MwEe4GWg7I+Col5Q==')
+    channel_id = '2d5991aa-115f-4106-92fd-8d78b7c34e59'
+    m_id = '80cb1a9c-c959-4f3f-965d-b65ecfb84c1e'
+    r = my_client.get_message(channel_id, m_id)
+    print(r)
+main()
