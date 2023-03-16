@@ -81,7 +81,7 @@ class Client:
         url = f'{self.base_url}/channels/{channelid}'
         response = self.request('GET', url)
         return response
-def main():
-    my_client = Client('gapi_u224/6sHSgWJuJm8tUwWiQmKLRA5j26S1wLlkgrB3nL8oPJEPuF4Nloec8fx5eVa4sL0w6usKQPP0I1ZaoVVFg==')
-    my_client.get_channel('b307ba24-1bf9-4f62-af2e-503108475001')
-main()
+    def delete_channel(self, channelid):
+        url = f'{self.base_url}/channels/{channelid}'
+        response = self.request('DELETE', url)
+        return response
