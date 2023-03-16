@@ -112,3 +112,11 @@ class Client:
         url = f'{self.base_url}/servers/{serverid}'
         response = self.request('GET', url)
         return response
+    def create_listitem(self, channelid, title, note=None):
+        data = {'message': title}
+        url = f'{self.base_url}/channels/{channelid}/items'
+        if note:
+            note = {'note': {'content': note}}
+            data.update(note)
+        response = self.request('POST', url, json=data)
+        return response
