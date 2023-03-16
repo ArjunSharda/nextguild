@@ -147,3 +147,7 @@ class Client:
         url = f'{self.base_url}/channels/{channelid}/items/{listitemid}/complete'
         response = self.request('POST', url)
         return response
+    def uncomplete_listitem(self, channelid, listitemid):
+        url = f'{self.base_url}/channels/{channelid}/items/{listitemid}/complete'
+        response = self.request('DELETE', url)
+        return response
