@@ -1,7 +1,6 @@
 import requests
 import json
 import time
-
 class Client:
     def __init__(self, token):
         self.token = token
@@ -16,21 +15,15 @@ class Client:
         data = {'content': content}
         response = self.request('POST', url, json=data)
         return response
-    def delete_message(self, channel_id, message_id):
-        url = f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
-        response = self.request('DELETE', url)
-        return response
     def edit_message(self, channel_id, message_id, content):
         url = f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
         data = {'content': content}
-        response = self.request('PATCH', url, json=data)
+        response = self.request('PUT', url, json=data)
         return response
-    def purge(self, channel_id):
-        messages = self.get_channel_messages(channel_id)
-        message_ids = [message['id'] for message in messages]
-        for message_id in message_ids:
-            self.delete_message(channel_id, message_id)
-        return len(message_ids)
+    def delete_message(self, channel_id, message_id):
+     url = f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
+     response = self.request('DELETE', url)
+     return response
     def get_channel_messages(self, channel_id):
         if channel_id in self.cache:
             return self.cache[channel_id]
@@ -40,10 +33,16 @@ class Client:
             response = self.request('GET', url)
             while response:
                 messages.extend(response)
-                last_message_id = response[-1]['id']
+                last_message_id = response
                 response = self.request('GET', url, params={'before': last_message_id})
             self.cache[channel_id] = messages
             return messages
+    def purge(self, channel_id, amount):
+     messages = self.get_channel_messages(channel_id)[:amount]
+     message_ids = [message['id'] for message in messages]
+     for message_id in message_ids:
+        self.delete_message(channel_id, message_id)
+     return len(message_ids)
     def request(self, method, url, **kwargs):
         response = requests.request(method, url, headers=self.headers, **kwargs)
         if response.status_code == 429:
