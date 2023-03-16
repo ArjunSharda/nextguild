@@ -108,3 +108,7 @@ class Client:
             data.update(ispublic)
         response = self.request('PATCH', url, json=data)
         return response
+    def get_server(self, serverid):
+        url = f'{self.base_url}/servers/{serverid}'
+        response = self.request('GET', url)
+        return response
