@@ -128,3 +128,7 @@ class Client:
         url = f'{self.base_url}/channels/{channelid}/items'
         response = self.request('GET', url)
         return response
+    def delete_listitem(self, channelid, listitemid):
+        url = f'{self.base_url}/channels/{channelid}/items/{listitemid}'
+        response = self.request('DELETE', url)
+        return response
