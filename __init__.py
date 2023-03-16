@@ -73,17 +73,13 @@ class Client:
         data = {'name': name, 'type': type}
         url = f'{self.base_url}/channels'
         if categoryid:
-            categoryid = {'categoryId': categoryid}
-            data.update(categoryid)
+            data.update({'categoryId': categoryid})
         if groupid:
-            groupid = {'groupId': groupid}
-            data.update(groupid)
+            data.update({'groupId': groupid})
         if serverid:
-            serverid = {'serverId': serverid}
-            data.update(serverid)
+            data.update({'serverId': serverid})
         if ispublic:
-            ispublic = {"isPublic": ispublic}
-            data.update(ispublic)
+            data.update({"isPublic": ispublic})
         response = self.request('POST', url, json=data)
         return response
     def get_channel(self, channelid):
@@ -98,14 +94,11 @@ class Client:
         data = {}
         url = f'{self.base_url}/channels/{channelid}'
         if name:
-            name = {'name': name}
-            data.update(name)
+            data.update({'name': name})
         if topic:
-            topic = {'topic': topic}
-            data.update(topic)
+            data.update({'topic': topic})
         if ispublic:
-            ispublic = {'ispublic': ispublic}
-            data.update(ispublic)
+            data.update({'ispublic': ispublic})
         response = self.request('PATCH', url, json=data)
         return response
     def get_server(self, serverid):
@@ -116,8 +109,7 @@ class Client:
         data = {'message': title}
         url = f'{self.base_url}/channels/{channelid}/items'
         if note:
-            note = {'note': {'content': note}}
-            data.update(note)
+            data.update({'note': {'content': note}})
         response = self.request('POST', url, json=data)
         return response
     def get_listitem(self, channelid, listitemid):
@@ -136,11 +128,9 @@ class Client:
         data = {}
         url = f'{self.base_url}/channels/{channelid}/items/{listitemid}'
         if title:
-            title = {'message': title}
-            data.update(title)
+            data.update({'message': title})
         if note:
-            note = {'note': {'content': note}}
-            data.update(note)
+            data.update({'note': {'content': note}})
         response = self.request('PUT', url, json=data)
         return response
     def complete_listitem(self, channelid, listitemid):
@@ -150,4 +140,31 @@ class Client:
     def uncomplete_listitem(self, channelid, listitemid):
         url = f'{self.base_url}/channels/{channelid}/items/{listitemid}/complete'
         response = self.request('DELETE', url)
+        return response
+    def create_event(self, channelid, title, description=None, location=None, startsAt=None, eventurl=None, color=None, isAllDay=None, rsvpLimit=None, autofillWaitlist=None, duration=None, isPrivate=None, roleIds=None):
+        data = {'name': title}
+        url = f'{self.base_url}/channels/{channelid}/events'
+        if description:
+            data.update({'description': description})
+        if location:
+            data.update({'location': location})
+        if startsAt:
+            data.update({'startsAt': startsAt})
+        if eventurl:
+            data.update({'url': eventurl})
+        if color:
+            data.update({'color': color})
+        if isAllDay:
+            data.update({'isAllDay': isAllDay})
+        if rsvpLimit:
+            data.update({'rsvpLimit': rsvpLimit})
+        if autofillWaitlist:
+            data.update({'autofillWaitlist': autofillWaitlist})
+        if duration:
+            data.update({'duration': duration})
+        if isPrivate:
+            data.update({'isPrivate': isPrivate})
+        if roleIds:
+            data.update({'roleIds': roleIds})
+        response = self.request('POST', url, json=data)
         return response
