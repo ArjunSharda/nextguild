@@ -69,12 +69,21 @@ class Client:
                 return data
             else:
                 raise ValueError(f'Request failed with status {response.status_code}: {data}')
-    def create_channel(self, name, type, serverid, groupid, categoryid: Optional[int]):
+    def create_channel(self, name, type, serverid, groupid=None, categoryid=None, ispublic=None):
+        data = {'name': name, 'type': type}
         url = f'{self.base_url}/channels'
         if categoryid:
-            data = {'name': name, 'type': type, 'serverId': serverid, 'groupId': groupid, 'categoryId': categoryid}
-        else:
-            data = {'name': name, 'type': type, 'serverId': serverid, 'groupId': groupid}
+            categoryid = {'categoryId': categoryid}
+            data.update(categoryid)
+        if groupid:
+            groupid = {'groupId': groupid}
+            data.update(groupid)
+        if serverid:
+            serverid = {'serverId': serverid}
+            data.update(serverid)
+        if ispublic:
+            ispublic = {"isPublic": ispublic}
+            data.update(ispublic)
         response = self.request('POST', url, json=data)
         return response
     def get_channel(self, channelid):
@@ -84,4 +93,18 @@ class Client:
     def delete_channel(self, channelid):
         url = f'{self.base_url}/channels/{channelid}'
         response = self.request('DELETE', url)
+        return response
+    def update_channel(self, channelid, name=None, topic=None, ispublic=None):
+        data = {}
+        url = f'{self.base_url}/channels/{channelid}'
+        if name:
+            name = {'name': name}
+            data.update(name)
+        if topic:
+            topic = {'topic': topic}
+            data.update(topic)
+        if ispublic:
+            ispublic = {'ispublic': ispublic}
+            data.update(ispublic)
+        response = self.request('PATCH', url, json=data)
         return response
