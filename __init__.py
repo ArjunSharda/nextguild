@@ -124,3 +124,7 @@ class Client:
         url = f'{self.base_url}/channels/{channelid}/items/{listitemid}'
         response = self.request('GET', url)
         return response
+    def get_listitems(self, channelid):
+        url = f'{self.base_url}/channels/{channelid}/items'
+        response = self.request('GET', url)
+        return response
