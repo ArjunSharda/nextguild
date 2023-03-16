@@ -1,6 +1,7 @@
 import requests
 import json
 import time
+
 class Client:
     def __init__(self, token):
         self.token = token
