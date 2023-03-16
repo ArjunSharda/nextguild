@@ -1,6 +1,7 @@
 import requests
 import json
 import time
+from typing import Optional
 class Client:
     def __init__(self, token):
         self.token = token
@@ -68,10 +69,11 @@ class Client:
                 return data
             else:
                 raise ValueError(f'Request failed with status {response.status_code}: {data}')
-def main():
-    my_client = Client('gapi_FmuNWwIb4I634q63K5y6J8uTT+acJm3fyjrDSBRPbCdM1aaRbk28hVLcP5WEkE/4sg6h7R23nJcD7luRggaqXg==')
-    channel_id = 'cfc483c7-b88e-4f9c-92ba-56e30751f49c'
-    m_id = ['e3217194-17bc-4447-a38a-d3ca04142d5d', '6db860a5-31a4-49a8-a5c9-3e8a68638f19']
-    my_client.send_reply(channel_id, 'this is a reply', m_id)
-    my_client.send_message(channel_id, 'and this is a message')
-main()
+    def create_channel(self, name, type, serverid, groupid, categoryid: Optional[int]):
+        url = f'{self.base_url}/channels'
+        if categoryid:
+            data = {'name': name, 'type': type, 'serverId': serverid, 'groupId': groupid, 'categoryId': categoryid}
+        else:
+            data = {'name': name, 'type': type, 'serverId': serverid, 'groupId': groupid}
+        response = self.request('POST', url, json=data)
+        return response
