@@ -120,3 +120,7 @@ class Client:
             data.update(note)
         response = self.request('POST', url, json=data)
         return response
+    def get_listitem(self, channelid, listitemid):
+        url = f'{self.base_url}/channels/{channelid}/items/{listitemid}'
+        response = self.request('GET', url)
+        return response
