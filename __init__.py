@@ -10,9 +10,14 @@ class Client:
         }
         self.base_url = 'https://www.guilded.gg/api/v1'
         self.cache = {}
-    def send_message(self, channel_id, content):
+    def send_message(self, channel_id, content, *replyids):
         url = f'{self.base_url}/channels/{channel_id}/messages'
         data = {'content': content}
+        response = self.request('POST', url, json=data)
+        return response
+    def send_reply(self, channel_id, content, replyids):
+        url = f'{self.base_url}/channels/{channel_id}/messages'
+        data = {'content': content, 'replyMessageIds': replyids}
         response = self.request('POST', url, json=data)
         return response
     def edit_message(self, channel_id, message_id, content):
@@ -64,9 +69,9 @@ class Client:
             else:
                 raise ValueError(f'Request failed with status {response.status_code}: {data}')
 def main():
-    my_client = Client('gapi_dubGYJmp36uC1DjtrrTOQtb7eXXKcIbdNR2H/UeiYsc7wyVZm3ZZwHt9OioZo6dcjVz2+8MwEe4GWg7I+Col5Q==')
-    channel_id = '2d5991aa-115f-4106-92fd-8d78b7c34e59'
-    m_id = '80cb1a9c-c959-4f3f-965d-b65ecfb84c1e'
-    r = my_client.get_message(channel_id, m_id)
-    print(r)
+    my_client = Client('gapi_FmuNWwIb4I634q63K5y6J8uTT+acJm3fyjrDSBRPbCdM1aaRbk28hVLcP5WEkE/4sg6h7R23nJcD7luRggaqXg==')
+    channel_id = 'cfc483c7-b88e-4f9c-92ba-56e30751f49c'
+    m_id = ['e3217194-17bc-4447-a38a-d3ca04142d5d', '6db860a5-31a4-49a8-a5c9-3e8a68638f19']
+    my_client.send_reply(channel_id, 'this is a reply', m_id)
+    my_client.send_message(channel_id, 'and this is a message')
 main()
