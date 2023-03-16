@@ -132,3 +132,14 @@ class Client:
         url = f'{self.base_url}/channels/{channelid}/items/{listitemid}'
         response = self.request('DELETE', url)
         return response
+    def update_listitem(self, channelid, listitemid, title, note=None):
+        data = {}
+        url = f'{self.base_url}/channels/{channelid}/items/{listitemid}'
+        if title:
+            title = {'message': title}
+            data.update(title)
+        if note:
+            note = {'note': {'content': note}}
+            data.update(note)
+        response = self.request('PUT', url, json=data)
+        return response
