@@ -143,3 +143,7 @@ class Client:
             data.update(note)
         response = self.request('PUT', url, json=data)
         return response
+    def complete_listitem(self, channelid, listitemid):
+        url = f'{self.base_url}/channels/{channelid}/items/{listitemid}/complete'
+        response = self.request('POST', url)
+        return response
