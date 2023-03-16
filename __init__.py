@@ -68,10 +68,3 @@ class Client:
                 return data
             else:
                 raise ValueError(f'Request failed with status {response.status_code}: {data}')
-def main():
-    my_client = Client('gapi_FmuNWwIb4I634q63K5y6J8uTT+acJm3fyjrDSBRPbCdM1aaRbk28hVLcP5WEkE/4sg6h7R23nJcD7luRggaqXg==')
-    channel_id = 'cfc483c7-b88e-4f9c-92ba-56e30751f49c'
-    m_id = ['e3217194-17bc-4447-a38a-d3ca04142d5d', '6db860a5-31a4-49a8-a5c9-3e8a68638f19']
-    my_client.send_reply(channel_id, 'this is a reply', m_id)
-    my_client.send_message(channel_id, 'and this is a message')
-main()
