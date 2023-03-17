@@ -56,19 +56,12 @@ class Client:
     def request(self, method, url, **kwargs):
         response = requests.request(method, url, headers=self.headers, **kwargs)
         if response.status_code == 429:
-            retry_after = int(response.headers.get('retry-after', '1'))
-            print(f'Received 429 status. Retrying after {retry_after} seconds.')
-            time.sleep(retry_after)
-            return self.request(method, url, **kwargs)
-        else:
-            data = response.json()
-            if 200 <= response.status_code < 300:
-                # Write response data to txt file
-                #with open('response.txt', 'w') as f:
-                    #f.write(json.dump(data, f))
-                return data
-            else:
-                raise ValueError(f'Request failed with status {response.status_code}: {data}')
+            time.sleep(response.json()['retryAfter'])
+            response = self.request(method, url, **kwargs)
+        return response.json()
+
+
+
     def create_channel(self, name, type, serverid, groupid=None, categoryid=None, ispublic=None):
         data = {'name': name, 'type': type}
         url = f'{self.base_url}/channels'
@@ -147,5 +140,3 @@ class Client:
         url = f'{self.base_url}/channels/{channelid}/items/{listitemid}/complete'
         response = self.request('POST', url)
         return response
-
-
