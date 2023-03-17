@@ -177,6 +177,6 @@ class Client:
         data = {'name': title}
         eurl = f'{self.base_url}/channels/{channelid}/events'
         for key, value in args.items():
-            data.update(f"{key}: {value}")
+            data.update({key: value})
         response = self.request('POST', eurl, json=data)
         return response
