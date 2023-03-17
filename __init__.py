@@ -34,22 +34,22 @@ class Client:
         url = f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
         response = self.request('GET', url)
         return response
-    def get_channel_messages(self, channel_id):
-        if channel_id in self.cache:
-            return self.cache[channel_id]
-        else:
-            url = f'{self.base_url}/channels/{channel_id}/messages'
-            messages = []
-            response = self.request('GET', url)
-            while response:
-                messages.extend(response)
-                last_message_id = response
-                response = self.request('GET', url, params={'before': last_message_id})
-            self.cache[channel_id] = messages
-            return messages
-    def purge(self, channel_id, amount):
-     messages = self.get_channel_messages(channel_id)[:amount]
-     message_ids = [message['id'] for message in messages]
+    def get_channel_messages(self, channel_id, limit=None, before=None, after=None, includePrivate=None):
+        url = f'{self.base_url}/channels/{channel_id}/messages'
+        data = {}
+        if limit:
+            data.update({'limit': limit})
+        if before:
+            data.update({'before': before})
+        if after:
+            data.update({'after': after})
+        if includePrivate:
+            data.update({'includePrivate': includePrivate})
+        response = self.request('GET', url, data=data)
+        return response
+    def purge(self, channel_id):
+     messages = self.get_channel_messages(channel_id)
+     message_ids = [msg['id'] for msg in messages['messages']]
      for message_id in message_ids:
         self.delete_message(channel_id, message_id)
      return len(message_ids)
@@ -147,3 +147,5 @@ class Client:
         url = f'{self.base_url}/channels/{channelid}/items/{listitemid}/complete'
         response = self.request('POST', url)
         return response
+
+
