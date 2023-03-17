@@ -163,3 +163,13 @@ class Client:
         url = f'https://www.guilded.gg/api/v1/servers/{serverid}/webhooks/{webhookid}'
         response = self.request('DELETE', url)
         return response
+    def get_webhook(self, serverid, webhookid):
+        url = f'https://www.guilded.gg/api/v1/servers/{serverid}/webhooks/{webhookid}'
+        response = self.request('GET', url)
+        return response
+    def send_webhook_message(self, serverid, webhookid, content):
+        webhookinformation = self.get_webhook(serverid, webhookid)
+        token = webhookinformation['webhook']['token']
+        url = f'https://media.guilded.gg/webhooks/{webhookid}/{token}'
+        data = {'content': content}
+        self.request('POST', url, json=data)
