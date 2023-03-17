@@ -61,7 +61,10 @@ class Client:
             time.sleep(retry_after)
             return self.request(method, url, **kwargs)
         else:
-            data = response.json()
+            try:
+                data = response.json()
+            except json.JSONDecodeError:
+                data = response.text
             if 200 <= response.status_code < 300:
                 # Write response data to txt file
                 #with open('response.txt', 'w') as f:
@@ -166,6 +169,11 @@ class Client:
     def get_webhook(self, serverid, webhookid):
         url = f'https://www.guilded.gg/api/v1/servers/{serverid}/webhooks/{webhookid}'
         response = self.request('GET', url)
+        return response
+    def get_webhooks(self, serverid, channelid):
+        url = f'https://www.guilded.gg/api/v1/servers/{serverid}/webhooks'
+        data = {'channelId': channelid}
+        response = self.request('GET', url, json=data)
         return response
     def send_webhook_message(self, serverid, webhookid, content):
         webhookinformation = self.get_webhook(serverid, webhookid)
