@@ -147,3 +147,8 @@ class Client:
         url = f'{self.base_url}/channels/{channelid}/items/{listitemid}/complete'
         response = self.request('POST', url)
         return response
+    def create_webhook(self, serverid, channelid, name):
+        url = f'{self.base_url}/servers/{serverid}/webhooks'
+        data = {'name': name, 'channelId': channelid}
+        response = self.request('POST', url, json=data)
+        return response
