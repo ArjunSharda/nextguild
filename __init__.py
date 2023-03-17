@@ -159,4 +159,7 @@ class Client:
             data.update({'channelId': channelid})
         response = self.request('PUT', url, json=data)
         return response
-
+    def delete_webhook(self, serverid, webhookid):
+        url = f'https://www.guilded.gg/api/v1/servers/{serverid}/webhooks/{webhookid}'
+        response = self.request('DELETE', url)
+        return response
