@@ -180,3 +180,14 @@ class Client:
             data.update({key: value})
         response = self.request('POST', eurl, json=data)
         return response
+    def get_events(self, channelid, before=None, after=None, limit=None):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events'
+        data = {}
+        if before:
+            data.update({'before': before})
+        if after:
+            data.update({'after': after})
+        if limit:
+            data.update({'limit': limit})
+        response = self.request('GET', url, json=data)
+        return response
