@@ -213,4 +213,26 @@ class Client:
         url = f'https://media.guilded.gg/webhooks/{webhookid}/{token}'
         data = {'content': content}
         self.request('POST', url, json=data)
+        
+        
+    def create_event(self, channelid, title, **args):
+        data = {'name': title}
+        eurl = f'{self.base_url}/channels/{channelid}/events'
+        for key, value in args.items():
+            data.update({key: value})
+        response = self.request('POST', eurl, json=data)
+        return response
+    
+    
+    def get_events(self, channelid, before=None, after=None, limit=None):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events'
+        data = {}
+        if before:
+            data.update({'before': before})
+        if after:
+            data.update({'after': after})
+        if limit:
+            data.update({'limit': limit})
+        response = self.request('GET', url, json=data)
+        return response     
 
