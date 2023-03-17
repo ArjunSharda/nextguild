@@ -152,3 +152,11 @@ class Client:
         data = {'name': name, 'channelId': channelid}
         response = self.request('POST', url, json=data)
         return response
+    def update_webhook(self, serverid, webhookid, name, channelid=None):
+        url = f'https://www.guilded.gg/api/v1/servers/{serverid}/webhooks/{webhookid}'
+        data = {'name': name}
+        if channelid:
+            data.update({'channelId': channelid})
+        response = self.request('PUT', url, json=data)
+        return response
+
