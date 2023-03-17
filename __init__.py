@@ -47,8 +47,8 @@ class Client:
             data.update({'includePrivate': includePrivate})
         response = self.request('GET', url, data=data)
         return response
-    def purge(self, channel_id):
-     messages = self.get_channel_messages(channel_id)
+    def purge(self, channel_id, amount):
+     messages = self.get_channel_messages(channel_id, amount)
      message_ids = [msg['id'] for msg in messages['messages']]
      for message_id in message_ids:
         self.delete_message(channel_id, message_id)
