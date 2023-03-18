@@ -448,7 +448,25 @@ class Client:
         response = self.request('DELETE', url)
         return response
 
-    # here's gonna be more stuff
+    def create_doc_reaction(self, channelid, docid, emoteid):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/emotes/{emoteid}'
+        response = self.request('PUT', url)
+        return response
+    
+    def delete_doc_reaction(self, channelid, docid, emoteid):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/emotes/{emoteid}'
+        response = self.request('DELETE', url)
+        return response
+    
+    def create_doc_comment_reaction(self, channelid, docid, commentid, emoteid):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}/emotes/{emoteid}'
+        response = self.request('PUT', url)
+        return response
+
+    def delete_doc_comment_reaction(self, channelid, docid, commentid, emoteid):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}/emotes/{emoteid}'
+        response = self.request('DELETE', url)
+        return response
 
     def create_doc(self, channelid, title, content):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs'
@@ -532,3 +550,10 @@ def get_id(obj):
                 return result
 
 
+def main():
+    my_client = Client('gapi_hWJi9KIep8tuNdbOyBkGyal/2StNzffoWub6LBVS3LnboerQKZOEFVPf9bm3FbBsViQDGKnKQGFsbYr8DFCebg==')
+    r = my_client.delete_doc_comment_reaction('7988f916-dc08-4304-a10e-8e8158a3cbf3', 365153, 1159661258, 90001164)
+    print(r)
+
+main()
+    
