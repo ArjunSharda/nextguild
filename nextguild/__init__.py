@@ -605,8 +605,8 @@ def get_id(obj):
 
 
 def main():
-    my_client = Client('gapi_BTNkHsszCh8ThLslkRvQgr3FjDYCrSvcalDUG3xydwaNPRfgOBkRcghVbRbvh7dXJaZh4LHsvLeYWvIKmqiiCQ==')
-    r = my_client.get_user_social('XjB2vaaj', 'mqEVqDXm', 'epic')
+    my_client = Client('gapi_RB7RYT4PtSF6Ke9jv7iSlZjiHohLuaHUa9HBKRDQ5DBhje5IooPhu5Hhpe8aJ3zjPa0rJ3iGZBddAPatmiHCAA==')
+    r = my_client.purge('cfc483c7-b88e-4f9c-92ba-56e30751f49c', 20)
     print(r)
 
 main()
