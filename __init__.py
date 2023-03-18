@@ -9,7 +9,9 @@ class Client:
         self.token = token
         self.headers = {
             'Authorization': f'Bearer {self.token}',
-            'User-Agent': 'NextGuild/1.0'
+            'User-Agent': 'NextGuild/1.0',
+            'Content-type': 'application/json',
+            'Accept': 'application/json'
         }
         self.base_url = 'https://www.guilded.gg/api/v1'
         self.cache = {}
@@ -230,7 +232,12 @@ class Client:
         url = f'https://media.guilded.gg/webhooks/{webhookid}/{token}'
         data = {'content': content}
         self.request('POST', url, json=data)
-
+    
+    def create_forum_post(self, channelid, title, content):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics'
+        data = {'title': title, 'content': content}
+        response = self.request('POST', url, json=data)
+        return response
 
 
 class message:
@@ -242,5 +249,3 @@ class message:
 
     def id(self, message):
         return message['message']['id']
-
-
