@@ -3,7 +3,6 @@ import json
 import time
 
 
-
 class Client:
 
   def __init__(self, token):
@@ -302,7 +301,75 @@ class Client:
     response = self.request('GET', url, params=params)
     return response
 
+  def get_forum_topic(self, channelid, forumtopicid):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}'
+    response = self.request('GET', url)
+    return response
 
+  def update_forum_topic(self, channelid, forumtopicid, title=None, content=None):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}'
+    data = {}
+    if title:
+      data['title'] = title
+    if content:
+      data['content'] = content
+    response = self.request('PATCH', url, json=data)
+    return response
+
+  def delete_forum_topic(self, channelid, forumtopicid):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}'
+    response = self.request('DELETE', url)
+    return response
+
+  def pin_forum_topic(self, channelid, forumtopicid):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/pin'
+    response = self.request('PUT', url)
+    return response
+
+  def unpin_forum_topic(self, channelid, forumtopicid):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/pin'
+    response = self.request('DELETE', url)
+    return response
+
+  def lock_forum_topic(self, channelid, forumtopicid):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/lock'
+    response = self.request('PUT', url)
+    return response
+
+  def unlock_forum_topic(self, channelid, forumtopicid):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/lock'
+    response = self.request('DELETE', url)
+    return response
+
+  def create_forum_comment(self, channelid, forumtopicid, content):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/comments'
+    data = {'content': content}
+    response = self.request('POST', url, json=data)
+    return response
+
+  def get_forum_comments(self, channelid, forumtopicid):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/comments'
+    response = self.request('GET', url)
+    return response
+
+  def get_forum_comment(self, channelid, forumtopicid, forumcommentid):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/comments/{forumcommentid}'
+    response = self.request('GET', url)
+    return response
+
+  def update_forum_comment(self, channelid, forumtopicid, forumcommentid, content):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/comments/{forumcommentid}'
+    data = {'content': content}
+    response = self.request('PATCH', url, json=data)
+    return response
+
+  def delete_forum_comment(self, channelid, forumtopicid, forumcommentid):
+    url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/comments/{forumcommentid}'
+    response = self.request('DELETE', url)
+    return response
+
+
+    
 class message:
 
   def content(self, message):
@@ -316,16 +383,16 @@ class message:
 
 
 def get_id(obj):
-    if isinstance(obj, dict):
-        for key, value in obj.items():
-            if key == 'id':
-                return value
-            else:
-                result = get_id(value)
-                if result is not None:
-                    return result
-    elif isinstance(obj, list):
-        for item in obj:
-            result = get_id(item)
-            if result is not None:
-                return result
+  if isinstance(obj, dict):
+    for key, value in obj.items():
+      if key == 'id':
+        return value
+      else:
+        result = get_id(value)
+        if result is not None:
+          return result
+  elif isinstance(obj, list):
+    for item in obj:
+      result = get_id(item)
+      if result is not None:
+        return result
