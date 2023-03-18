@@ -44,6 +44,35 @@ class Client:
         response = self.request('GET', url)
         return response
 
+    def get_channel_messages(self, channel_id, limit=None, before=None, after=None, includePrivate=None):
+        url = f'{self.base_url}/channels/{channel_id}/messages'
+        data = {}
+        if limit:
+            data.update({'limit': limit})
+        if before:
+            data.update({'before': before})
+        if after:
+            data.update({'after': after})
+        if includePrivate:
+            data.update({'includePrivate': includePrivate})
+        response = self.request('GET', url, data=data)
+        return response
+    def purge(self, channel_id, amount):
+     messages = self.get_channel_messages(channel_id, amount)
+     message_ids = [msg['id'] for msg in messages['messages']]
+     for message_id in message_ids:
+        self.delete_message(channel_id, message_id)
+     return len(message_ids)
+    def request(self, method, url, **kwargs):
+        response = requests.request(method, url, headers=self.headers, **kwargs)
+        if response.status_code == 429:
+            time.sleep(response.json()['retryAfter'])
+            response = self.request(method, url, **kwargs)
+        return response.json()
+
+
+
+
     def get_channel_messages(self, channel_id):
         if channel_id in self.cache:
             return self.cache[channel_id]
@@ -84,6 +113,7 @@ class Client:
                 return data
             else:
                 raise ValueError(f'Request failed with status {response.status_code}: {data}')
+
 
     def create_channel(self, name, type, serverid, groupid=None, categoryid=None, ispublic=None):
         data = {'name': name, 'type': type}
