@@ -201,7 +201,6 @@ class Client:
         data = {'name': name, 'channelId': channelid}
         response = self.request('POST', url, json=data)
         return response
-
     def update_webhook(self, serverid, webhookid, name, channelid=None):
         url = f'https://www.guilded.gg/api/v1/servers/{serverid}/webhooks/{webhookid}'
         data = {'name': name}
@@ -232,7 +231,6 @@ class Client:
         url = f'https://media.guilded.gg/webhooks/{webhookid}/{token}'
         data = {'content': content}
         self.request('POST', url, json=data)
-    
     def create_forum_post(self, channelid, title, content):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics'
         data = {'title': title, 'content': content}
