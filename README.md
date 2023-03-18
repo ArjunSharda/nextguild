@@ -1,8 +1,13 @@
 # NextGuild
 ![image](https://user-images.githubusercontent.com/77706434/225704407-da247647-9c9f-4115-a2f1-93d567f46ea7.png)
 
+# About
 
 NextGuild is a Python wrapper for [Guilded's API](https://www.guilded.gg/docs/api/).
+
+Planning on being the most simplest python library interacting with the Guilded API, Nextguild is planning to be beginner-friendly and be a great resource to learn Python programming, this is a library, with easy configuration.
+
+Made from a team of 3 people, this was a simple project originally thought for a fun purpose and for testing the Guilded API, which eventually turned into a bot library for multi-purpose use.
 
 
 # Development
@@ -28,5 +33,11 @@ to discuss what you would like to change.
 ## License
 
 The NextGuild Project is under the [MIT](https://choosealicense.com/licenses/mit/) license, and usage is subject to the terms of the MIT license.
+
+
+<hr>
+<h6 align="center">© The NextGuild Project 2023-present
+<br>
+All Rights Reserved</h6>
 
 
