@@ -265,6 +265,11 @@ class Client:
             data.update({key: value})
         response = self.request('POST', eurl, json=data)
         return response
+    
+    def delete_event(self, channelid, eventid):
+        url = f'{self.base_url}/channels/{channelid}/events/{eventid}'
+        response = self.request('DELETE', url)
+        return response
 
     def get_events(self, channelid, before=None, after=None, limit=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events'
@@ -550,10 +555,5 @@ def get_id(obj):
                 return result
 
 
-def main():
-    my_client = Client('gapi_hWJi9KIep8tuNdbOyBkGyal/2StNzffoWub6LBVS3LnboerQKZOEFVPf9bm3FbBsViQDGKnKQGFsbYr8DFCebg==')
-    r = my_client.delete_doc_comment_reaction('7988f916-dc08-4304-a10e-8e8158a3cbf3', 365153, 1159661258, 90001164)
-    print(r)
 
-main()
     
