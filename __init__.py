@@ -3,6 +3,7 @@ import json
 import time
 
 
+
 class Client:
 
   def __init__(self, token):
@@ -83,9 +84,6 @@ class Client:
       except json.JSONDecodeError:
         data = response.text
       if 200 <= response.status_code < 300:
-        # Write response data to txt file
-        # with open('response.txt', 'w') as f:
-        # f.write(json.dump(data, f))
         return data
       else:
         raise ValueError(
@@ -315,3 +313,19 @@ class message:
 
   def id(self, message):
     return message['message']['id']
+
+
+def get_id(obj):
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            if key == 'id':
+                return value
+            else:
+                result = get_id(value)
+                if result is not None:
+                    return result
+    elif isinstance(obj, list):
+        for item in obj:
+            result = get_id(item)
+            if result is not None:
+                return result
