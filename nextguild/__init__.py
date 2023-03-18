@@ -16,6 +16,12 @@ class Client:
         self.base_url = 'https://www.guilded.gg/api/v1'
         self.cache = {}
 
+
+    def get_user(self, userid):
+        url = f'https://www.guilded.gg/api/v1/users/{userid}'
+        response = self.request('GET', url)
+        return response
+    
     def send_message(self, channel_id, content):
         url = f'{self.base_url}/channels/{channel_id}/messages'
         data = {'content': content}
@@ -525,6 +531,19 @@ class Client:
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}'
         response = self.request('DELETE', url)
         return response
+    
+    def assign_role(self, serverid, userid, roleid):
+        url = f'https://www.guilded.gg/api/v1/servers/{serverid}/members/{userid}/roles/{roleid}'
+        response = self.request('PUT', url)
+        return response
+    def remove_role(self, serverid, userid, roleid):
+        url = f'https://www.guilded.gg/api/v1/servers/{serverid}/members/{userid}/roles/{roleid}'
+        response = self.request('DELETE', url)
+        return response
+    def get_roles(self, serverid, userid):
+        url = f'https://www.guilded.gg/api/v1/servers/{serverid}/members/{userid}/roles'
+        response = self.request('GET', url)
+        return response
 
 
 class message:
@@ -556,4 +575,3 @@ def get_id(obj):
 
 
 
-    
