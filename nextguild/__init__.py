@@ -16,28 +16,50 @@ class Client:
         self.base_url = 'https://www.guilded.gg/api/v1'
         self.cache = {}
 
+    def send_message(self, channel_id, content=None, embed=None):
+      payload = {}
 
-    def get_user(self, userid):
-        url = f'https://www.guilded.gg/api/v1/users/{userid}'
-        response = self.request('GET', url)
-        return response
-    
-    def send_message(self, channel_id, content):
-        url = f'{self.base_url}/channels/{channel_id}/messages'
-        data = {'content': content}
-        response = self.request('POST', url, json=data)
+      if content is not None:
+        payload['content'] = content
+
+      if embed is not None:
+        payload['embeds'] = [embed.to_dict()]
+
+      response = requests.post(
+        f'{self.base_url}/channels/{channel_id}/messages',
+        headers=self.headers,
+        json=payload
+      )
+      return response
+
+    def send_reply(self, channel_id, replyids, content=None, embed=None):
+        payload = {}
+        if content is not None:
+          payload['content'] = content
+
+
+        if embed is not None:
+          payload['embeds'] = [embed.to_dict()]
+
+        response = requests.post(
+          f'{self.base_url}/channels/{channel_id}/messages',
+          headers=self.headers,
+          json=payload
+        )
         return response
 
-    def send_reply(self, channel_id, content, replyids):
-        url = f'{self.base_url}/channels/{channel_id}/messages'
-        data = {'content': content, 'replyMessageIds': replyids}
-        response = self.request('POST', url, json=data)
-        return response
+    def edit_message(self, channel_id, message_id, content=None, embed=None):
+        payload = {}
+        if content is not None:
+          payload['content'] = content
 
-    def edit_message(self, channel_id, message_id, content):
-        url = f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
-        data = {'content': content}
-        response = self.request('PUT', url, json=data)
+        if embed is not None:
+          payload['embeds'] = [embed.to_dict()]
+        response = requests.post(
+          f'{self.base_url}/channels/{channel_id}/messages/{message_id}',
+          headers=self.headers,
+          json=payload
+        )
         return response
 
     def delete_message(self, channel_id, message_id):
@@ -146,7 +168,6 @@ class Client:
         response = self.request('GET', url)
         return response
 
-
     def get_server_member(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/members/{userid}'
         response = self.request('GET', url)
@@ -163,34 +184,30 @@ class Client:
         response = self.request('DELETE', url)
         return response
 
-
     def kick_member(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/members/{userid}'
         response = self.request('DELETE', url)
         return response
-    
-    
+
     def ban_member(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/bans/{userid}'
         response = self.request('PUT', url)
         return response
-    
+
     def unban_member(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/bans/{userid}'
         response = self.request('DELETE', url)
         return response
-    
-    
-    def get_server_ban(self, serverid, userid):
+
+    def get_member_ban(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/bans/{userid}'
         response = self.request('GET', url)
         return response
-    
-    def get_server_bans(self, serverid):
+
+    def get_member_bans(self, serverid):
         url = f'{self.base_url}/servers/{serverid}/bans'
         response = self.request('GET', url)
         return response
-    
 
     def create_listitem(self, channelid, title, note=None):
         data = {'message': title}
@@ -271,11 +288,6 @@ class Client:
             data.update({key: value})
         response = self.request('POST', eurl, json=data)
         return response
-    
-    def delete_event(self, channelid, eventid):
-        url = f'{self.base_url}/channels/{channelid}/events/{eventid}'
-        response = self.request('DELETE', url)
-        return response
 
     def get_events(self, channelid, before=None, after=None, limit=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events'
@@ -319,16 +331,31 @@ class Client:
         response = self.request('GET', url, params=data)
         return response
 
-    def send_webhook_message(self, serverid, webhookid, content):
+    def send_webhook_message(self, serverid, webhookid, content=None, embed=None):
         webhookinformation = self.get_webhook(serverid, webhookid)
         token = webhookinformation['webhook']['token']
+        
         url = f'https://media.guilded.gg/webhooks/{webhookid}/{token}'
-        data = {'content': content}
-        self.request('POST', url, json=data)
+        payload = {}
 
-    def create_forum_post(self, channelid, title, content):
+        if content is not None:
+          payload['content'] = content
+
+        if embed is not None:
+          payload['embed'] = embed
+
+        
+        self.request('POST', url, json=payload)
+
+    def create_forum_post(self, channelid, title, content=None, embed=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics'
-        data = {'title': title, 'content': content}
+        if content is not None:
+          data = {'title': title, 'content': content}
+
+        if embed is not None:
+          data = {'title':title, 'embeds': embed}
+
+          
         response = self.request('POST', url, json=data)
         return response
 
@@ -347,13 +374,16 @@ class Client:
         response = self.request('GET', url)
         return response
 
-    def update_forum_topic(self, channelid, forumtopicid, title=None, content=None):
+    def update_forum_topic(self, channelid, forumtopicid, title=None, content=None, embed=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}'
         data = {}
         if title:
             data['title'] = title
         if content:
             data['content'] = content
+
+        if embed:
+          data['embeds'] = embed
         response = self.request('PATCH', url, json=data)
         return response
 
@@ -382,9 +412,14 @@ class Client:
         response = self.request('DELETE', url)
         return response
 
-    def create_forum_comment(self, channelid, forumtopicid, content):
+    def create_forum_comment(self, channelid, forumtopicid, content=None, embed=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/comments'
-        data = {'content': content}
+        if content:
+        
+          data = {'content': content}
+
+        if embed:
+          data = {'embeds':embed}
         response = self.request('POST', url, json=data)
         return response
 
@@ -398,9 +433,13 @@ class Client:
         response = self.request('GET', url)
         return response
 
-    def update_forum_comment(self, channelid, forumtopicid, forumcommentid, content):
+    def update_forum_comment(self, channelid, forumtopicid, forumcommentid, content=None, embed=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/topics/{forumtopicid}/comments/{forumcommentid}'
-        data = {'content': content}
+        if content is not None:
+          data = {'content': content}
+
+        if embed is not None:
+          data = {'embeds': embed}
         response = self.request('PATCH', url, json=data)
         return response
 
@@ -459,29 +498,14 @@ class Client:
         response = self.request('DELETE', url)
         return response
 
-    def create_doc_reaction(self, channelid, docid, emoteid):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/emotes/{emoteid}'
-        response = self.request('PUT', url)
-        return response
-    
-    def delete_doc_reaction(self, channelid, docid, emoteid):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/emotes/{emoteid}'
-        response = self.request('DELETE', url)
-        return response
-    
-    def create_doc_comment_reaction(self, channelid, docid, commentid, emoteid):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}/emotes/{emoteid}'
-        response = self.request('PUT', url)
-        return response
+    # here's gonna be more stuff
 
-    def delete_doc_comment_reaction(self, channelid, docid, commentid, emoteid):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}/emotes/{emoteid}'
-        response = self.request('DELETE', url)
-        return response
-
-    def create_doc(self, channelid, title, content):
+    def create_doc(self, channelid, title, content=None, embed=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs'
-        data = {'title': title, 'content': content}
+        if content:
+          data = {'title': title, 'content': content}
+        if embed:
+          data = {'title': title, 'embeds': embed}
         response = self.request('POST', url, json=data)
         return response
 
@@ -515,62 +539,28 @@ class Client:
         response = self.request('DELETE', url)
         return response
 
-    def create_doc_comment(self, channelid, docid, content):
+    def create_doc_comment(self, channelid, docid, content=None, embed=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments'
-        data = {'content': content}
+        if content:
+          data = {'content': content}
+        if embed:
+          data = {'embeds':embed}
         response = self.request('POST', url, json=data)
         return response
 
-    def update_doc_comment(self, channelid, docid, commentid, content):
+    def update_doc_comment(self, channelid, docid, commentid, content=None, embed=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}'
-        data = {'content': content}
+        if content:
+          data = {'content': content}
+
+        if embed:
+          data = {'embeds': embed}
         response = self.request('PATCH', url, json=data)
         return response
 
     def delete_doc_comment(self, channelid, docid, commentid):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}'
         response = self.request('DELETE', url)
-        return response
-    
-    def assign_role(self, serverid, userid, roleid):
-        url = f'https://www.guilded.gg/api/v1/servers/{serverid}/members/{userid}/roles/{roleid}'
-        response = self.request('PUT', url)
-        return response
-    def remove_role(self, serverid, userid, roleid):
-        url = f'https://www.guilded.gg/api/v1/servers/{serverid}/members/{userid}/roles/{roleid}'
-        response = self.request('DELETE', url)
-        return response
-    def get_roles(self, serverid, userid):
-        url = f'https://www.guilded.gg/api/v1/servers/{serverid}/members/{userid}/roles'
-        response = self.request('GET', url)
-        return response
-    
-    def assign_group(self, groupid, userid):
-        url = f'https://www.guilded.gg/api/v1/groups/{groupid}/members/{userid}'
-        response = self.request('PUT', url)
-        return response
-    def remove_group(self, groupid, userid):
-        url = f'https://www.guilded.gg/api/v1/groups/{groupid}/members/{userid}'
-        response = self.request('DELETE', url)
-        return response
-    def award_user_xp(self, serverid, userid, amount):
-        url = f'{self.base_url}/servers/{serverid}/members/{userid}/xp'
-        data = {'total': amount}
-        response = self.request('PUT', url, json=data)
-        return response
-    def set_user_xp(self, serverid, userid, total):
-        url = f'{self.base_url}/servers/{serverid}/members/{userid}/xp'
-        data = {'total': total}
-        response = self.request('PUT', url, json=data)
-        return response
-    def award_role_xp(self, serverid, roleid, amount):
-        url = f'{self.base_url}/servers/{serverid}/roles/{roleid}/xp'
-        data = {'amount': amount}
-        response = self.request('POST', url, json=data)
-        return response
-    def get_user_social(self, serverid, userid, socialtype):
-        url = f'{self.base_url}/servers/{serverid}/members/{userid}/social-links/{socialtype}'
-        response = self.request('GET', url)
         return response
 
 
@@ -586,20 +576,54 @@ class message:
         return message['message']['id']
 
 
-def get_id(obj):
-    if isinstance(obj, dict):
-        for key, value in obj.items():
-            if key == 'id':
-                return value
-            else:
-                result = get_id(value)
-                if result is not None:
-                    return result
-    elif isinstance(obj, list):
-        for item in obj:
-            result = get_id(item)
-            if result is not None:
-                return result
+class Embed:
+    def __init__(self, title=None, description=None, color=None, author=None, author_url=None, author_icon=None,
+                 footer=None, footer_icon=None, thumbnail=None, image=None, fields=None):
+        self.embed = {}
 
+        if title:
+            self.embed.update({'title': title})
 
+        if description:
+            self.embed.update({'description': description})
 
+        if color:
+            self.embed.update({'color': color})
+
+        if author or author_url or author_icon:
+            author_dict = {}
+            if author:
+                author_dict.update({'name': author})
+            if author_url:
+                author_dict.update({'url': author_url})
+            if author_icon:
+                author_dict.update({'iconUrl': author_icon})
+            self.embed.update({'author': author_dict})
+
+        if footer or footer_icon:
+            footer_dict = {}
+            if footer:
+                footer_dict.update({'text': footer})
+            if footer_icon:
+                footer_dict.update({'iconUrl': footer_icon})
+            self.embed.update({'footer': footer_dict})
+
+        if thumbnail:
+            self.embed.update({'thumbnail': {'url': thumbnail}})
+
+        if image:
+            self.embed.update({'image': {'url': image}})
+
+        if fields:
+            self.embed.update({'fields': fields})
+        else:
+            self.embed.update({'fields': []})
+
+    def add_field(self, title, value):
+        self.embed['fields'].append({
+            'name': title,
+            'value': value
+        })
+
+    def to_dict(self):
+        return self.embed
