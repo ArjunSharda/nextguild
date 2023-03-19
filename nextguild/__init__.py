@@ -265,6 +265,19 @@ class Client:
         response = self.request('POST', eurl, json=data)
         return response
 
+    def update_event(self, channelid, eventid, title, **args):
+        data = {'name': title}
+        eurl = f'{self.base_url}/channels/{channelid}/events/{eventid}'
+        for key, value in args.items():
+            data.update({key: value})
+        response = self.request('PUT', eurl, json=data)
+        return response
+
+    def get_event(self, channelid, eventid):
+        url = f'{self.base_url}/channels/{channelid}/events/{eventid}'
+        response = self.request('GET', url)
+        return response
+
     def get_events(self, channelid, before=None, after=None, limit=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events'
         params = {}
@@ -284,20 +297,26 @@ class Client:
         return response
 
 
-    def get_calendar_event_rsvp(self, channelid, eventid):
+    def get_calendar_event_rsvp(self, channelid, eventid, userid='@me'):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp'
         response = self.request('GET', url)
         return response
 
 
-    def create_calendar_event_rsvp(self, channelid, eventid, rsvp):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp'
-        data = {'rsvp': rsvp}
+    def create_calendar_event_rsvp(self, channelid, eventid, rsvp, userid='@me'):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp/{userid}'
+        data = {'status': rsvp}
         response = self.request('POST', url, json=data)
         return response
 
-    def delete_calendar_event_rsvp(self, channelid, eventid):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp'
+    def update_calendar_event_rsvp(self, channelid, eventid, rsvp, userid='@me'):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp/{userid}'
+        data = {'status': rsvp}
+        response = self.request('PUT', url, json=data)
+        return response
+
+    def delete_calendar_event_rsvp(self, channelid, eventid, userid='@me'):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp/{userid}'
         response = self.request('DELETE', url)
         return response
 
@@ -477,7 +496,25 @@ class Client:
         response = self.request('DELETE', url)
         return response
 
-    # here's gonna be more stuff
+    def create_doc_reaction(self, channelid, docid, emoteid):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/emotes/{emoteid}'
+        response = self.request('PUT', url)
+        return response
+
+    def delete_doc_reaction(self, channelid, docid, emoteid):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/emotes/{emoteid}'
+        response = self.request('DELETE', url)
+        return response
+
+    def create_doc_comment_reaction(self, channelid, docid, commentid, emoteid):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}/emotes/{emoteid}'
+        response = self.request('PUT', url)
+        return response
+
+    def delete_doc_comment_reaction(self, channelid, docid, commentid, emoteid):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}/emotes/{emoteid}'
+        response = self.request('DELETE', url)
+        return response
 
     def create_doc(self, channelid, title, content):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs'
