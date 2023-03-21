@@ -42,7 +42,7 @@ add_field
 
 .. code-block:: python
 
-    Embed.add_field(self, title, value):
+    Embed.add_field(title, value):
 
 Adds a field to the embed.
 
