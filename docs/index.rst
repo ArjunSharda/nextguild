@@ -21,8 +21,8 @@ Support and Troubleshooting
 If you encounter any issues or have questions, please follow these steps:
 
 Check our documentation.
-If your issue still persists, join our :ref: `support server`_ and ask for help in the appropriate channels. You may also raise a GitHub issue, however we are more active on our support server.
+If your issue still persists, join our `support server`_ and ask for help in the appropriate channels. You may also raise a GitHub issue, however we are more active on our support server.
 We're committed to helping you make the most of NextGuild and ensuring a smooth experience when working with the Guilded API. Our aim is to revolutionize how programmers interact with the Guilded API.
 
-.. _guide: http://docutils.sourceforge.net/docs/user/rst/quickref.html#hyperlink-targets
+.. _guide: https://discord.gg/nextguild
 .. _support server: https://discord.gg/nextguild
