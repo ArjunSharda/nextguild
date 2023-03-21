@@ -1,3 +1,11 @@
+import requests
+import json
+import time
+import asyncio
+import websockets
+from functools import wraps
+
+
 class Client:
 
     def __init__(self, token):
@@ -10,6 +18,7 @@ class Client:
         }
         self.base_url = 'https://www.guilded.gg/api/v1'
         self.cache = {}
+        self._message_handlers = []
 
     def send_message(self, channel_id, content=None, embed=None):
         payload = {}
@@ -265,19 +274,6 @@ class Client:
         response = self.request('POST', eurl, json=data)
         return response
 
-    def update_event(self, channelid, eventid, title, **args):
-        data = {'name': title}
-        eurl = f'{self.base_url}/channels/{channelid}/events/{eventid}'
-        for key, value in args.items():
-            data.update({key: value})
-        response = self.request('PUT', eurl, json=data)
-        return response
-
-    def get_event(self, channelid, eventid):
-        url = f'{self.base_url}/channels/{channelid}/events/{eventid}'
-        response = self.request('GET', url)
-        return response
-
     def get_events(self, channelid, before=None, after=None, limit=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events'
         params = {}
@@ -297,26 +293,20 @@ class Client:
         return response
 
 
-    def get_calendar_event_rsvp(self, channelid, eventid, userid='@me'):
+    def get_calendar_event_rsvp(self, channelid, eventid):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp'
         response = self.request('GET', url)
         return response
 
 
-    def create_calendar_event_rsvp(self, channelid, eventid, rsvp, userid='@me'):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp/{userid}'
-        data = {'status': rsvp}
+    def create_calendar_event_rsvp(self, channelid, eventid, rsvp):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp'
+        data = {'rsvp': rsvp}
         response = self.request('POST', url, json=data)
         return response
 
-    def update_calendar_event_rsvp(self, channelid, eventid, rsvp, userid='@me'):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp/{userid}'
-        data = {'status': rsvp}
-        response = self.request('PUT', url, json=data)
-        return response
-
-    def delete_calendar_event_rsvp(self, channelid, eventid, userid='@me'):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp/{userid}'
+    def delete_calendar_event_rsvp(self, channelid, eventid):
+        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp'
         response = self.request('DELETE', url)
         return response
 
@@ -496,25 +486,7 @@ class Client:
         response = self.request('DELETE', url)
         return response
 
-    def create_doc_reaction(self, channelid, docid, emoteid):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/emotes/{emoteid}'
-        response = self.request('PUT', url)
-        return response
-
-    def delete_doc_reaction(self, channelid, docid, emoteid):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/emotes/{emoteid}'
-        response = self.request('DELETE', url)
-        return response
-
-    def create_doc_comment_reaction(self, channelid, docid, commentid, emoteid):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}/emotes/{emoteid}'
-        response = self.request('PUT', url)
-        return response
-
-    def delete_doc_comment_reaction(self, channelid, docid, commentid, emoteid):
-        url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}/emotes/{emoteid}'
-        response = self.request('DELETE', url)
-        return response
+    # here's gonna be more stuff
 
     def create_doc(self, channelid, title, content):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs'
@@ -581,7 +553,9 @@ class Embed:
             self.embed.update({'description': description})
 
         if color:
-            self.embed.update({'color': color})
+          if isinstance(color, str) and color.startswith("#"):
+            color = int(color[1:], 16)
+          self.embed.update({'color': color})
 
         if author or author_url or author_icon:
             author_dict = {}
@@ -617,3 +591,51 @@ class Embed:
             'name': title,
             'value': value
         })
+
+class Message:
+    def __init__(self, eventData):
+        self.content = eventData['message']['content']
+        self.channelId = eventData['message']['channelId']
+        self.authorId = eventData['message']['createdBy']
+        self.guildId = eventData['serverId']
+        self.messageId = eventData['message']['id']
+      
+class Events:
+    def __init__(self, client):
+        self._message_handlers = []
+        self.client = client
+
+  
+
+    def on_message(self, func):
+        @wraps(func)
+        def wrapper(message):
+            return func(message)
+
+        self._message_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_message(self, eventData):
+        message = Message(eventData)
+        for handler in self._message_handlers:
+            await handler(message)
+
+    async def start(self):
+        async with websockets.connect('wss://www.guilded.gg/websocket/v1', extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
+            print('connected to Guilded!')
+            while True:
+                data = await websocket.recv()
+                json_data = json.loads(data)
+
+                if 't' in json_data and 'd' in json_data:
+                    eventType, eventData = json_data['t'], json_data['d']
+                else:
+                    continue
+
+                if eventType == 'ChatMessageCreated':
+                    await self._handle_message(eventData)
+
+       
+
+    def run(self):
+      asyncio.run(self.start())
