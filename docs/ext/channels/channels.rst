@@ -81,7 +81,7 @@ Update a specific channel's information.
 |             |         |                                          |
 +-------------+---------+------------------------------------------+
 | topic       | str,    | The new topic for the channel.           |
-              | optional|                                          |
+|             | optional|                                          |
 +-------------+---------+------------------------------------------+
 | ispublic    | bool,   |  Whether the channel is public           |
 |             | optional|  or not.                                 |
