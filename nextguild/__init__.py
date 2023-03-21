@@ -536,6 +536,10 @@ class Client:
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments/{commentid}'
         response = self.request('DELETE', url)
         return response
+      
+    def get_bot_user_id(self):
+      response = requests.get(f'https://www.guilded.gg/api/v1/users/@me', headers=self.headers)
+      return response.json()['user']['id']  
 
 
 class Embed:
@@ -645,7 +649,6 @@ class Events:
     async def start(self):
         async with websockets.connect('wss://www.guilded.gg/websocket/v1',
                                       extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
-            print('connected to Guilded!')
             while True:
                 data = await websocket.recv()
                 json_data = json.loads(data)
@@ -670,3 +673,4 @@ class Events:
 
     def run(self):
         asyncio.run(self.start())
+
