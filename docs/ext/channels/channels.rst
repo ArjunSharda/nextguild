@@ -4,13 +4,12 @@ Channels
 This document provides an overview of the channel-related methods available in the NextGuild library. The following methods are used to interact with channels:
 
 
-
 create_channel
 --------------
 
 .. code-block:: python
 
-    bot.create_channel(self, name, type, serverid, groupid=None, categoryid=None, ispublic=None):
+     bot.create_channel(self, name, type, serverid, groupid=None, categoryid=None, ispublic=None):
 
 Create a new channel in the specified server or group.
 
@@ -24,14 +23,14 @@ Create a new channel in the specified server or group.
 | serverid    | str     | The ID of the server to create the       |
 |             |         | channel in.                              |
 +-------------+---------+------------------------------------------+
-| groupid     | str, optional | The ID of the group to create the  |
-|             |         | channel in.                              |
+| groupid     | str,    | The ID of the group to create the        |
+|             | optional| channel in.                              |
 +-------------+---------+------------------------------------------+
-| categoryid  | str, optional | The ID of the category to create   |
-|             |         | the channel in.                          |
+| categoryid  | str,    | The ID of the category to create         |
+|             | optional| the channel in.                          |
 +-------------+---------+------------------------------------------+
-| ispublic    | bool, optional | Whether the channel is public or  |
-|             |         | private.                                 |
+| ispublic    | bool,   | Whether the channel is public or         |
+|             | optional| private.                                 |
 +-------------+---------+------------------------------------------+
 
 get_channel
@@ -78,10 +77,12 @@ Update a specific channel's information.
 +=============+=========+==========================================+
 | channelid   | str     | The ID of the channel to update.         |
 +-------------+---------+------------------------------------------+
-| name        | str, optional | The new name for the channel.      |
+| name        | str     |    The new name for the channel.         |
+|             |         |                                          |
 +-------------+---------+------------------------------------------+
-| topic       | str, optional | The new topic for the channel.     |
+| topic       | str,    | The new topic for the channel.           |
+              | optional|                                          |
 +-------------+---------+------------------------------------------+
-| ispublic    | bool, optional | Whether the channel is public or  |
-|             |         | private.                                 |
+| ispublic    | bool,   |  Whether the channel is public           |
+|             | optional|  or not.                                 |
 +-------------+---------+------------------------------------------+
