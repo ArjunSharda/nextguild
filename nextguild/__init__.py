@@ -286,18 +286,15 @@ class Client:
         response = self.request('GET', url, params=params)
         return response
 
-
     def delete_event(self, channelid, eventid):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}'
         response = self.request('DELETE', url)
         return response
 
-
     def get_calendar_event_rsvp(self, channelid, eventid):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp'
         response = self.request('GET', url)
         return response
-
 
     def create_calendar_event_rsvp(self, channelid, eventid, rsvp):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvp'
@@ -314,7 +311,6 @@ class Client:
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/events/{eventid}/rsvps'
         response = self.request('GET', url)
         return response
-
 
     def create_webhook(self, serverid, channelid, name):
         url = f'{self.base_url}/servers/{serverid}/webhooks'
@@ -541,6 +537,7 @@ class Client:
         response = self.request('DELETE', url)
         return response
 
+
 class Embed:
     def __init__(self, title=None, description=None, color=None, author=None, author_url=None, author_icon=None,
                  footer=None, footer_icon=None, thumbnail=None, image=None, fields=None):
@@ -553,9 +550,9 @@ class Embed:
             self.embed.update({'description': description})
 
         if color:
-          if isinstance(color, str) and color.startswith("#"):
-            color = int(color[1:], 16)
-          self.embed.update({'color': color})
+            if isinstance(color, str) and color.startswith("#"):
+                color = int(color[1:], 16)
+            self.embed.update({'color': color})
 
         if author or author_url or author_icon:
             author_dict = {}
@@ -592,6 +589,7 @@ class Embed:
             'value': value
         })
 
+
 class Message:
     def __init__(self, eventData):
         self.content = eventData['message']['content']
@@ -599,13 +597,14 @@ class Message:
         self.authorId = eventData['message']['createdBy']
         self.guildId = eventData['serverId']
         self.messageId = eventData['message']['id']
-      
+
+
 class Events:
     def __init__(self, client):
         self._message_handlers = []
+        self._member_join_handlers = []
+        self._member_leave_handlers = []
         self.client = client
-
-  
 
     def on_message(self, func):
         @wraps(func)
@@ -620,8 +619,32 @@ class Events:
         for handler in self._message_handlers:
             await handler(message)
 
+    def on_member_join(self, func):
+        @wraps(func)
+        def wrapper(member):
+            return func(member)
+
+        self._member_join_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_member_join(self, eventData):
+        for handler in self._member_join_handlers:
+            await handler(eventData)
+    def on_member_leave(self, func):
+        @wraps(func)
+        def wrapper(member):
+            return func(member)
+
+        self._member_leave_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_member_leave(self, eventData):
+        for handler in self._member_leave_handlers:
+            await handler(eventData)
+
     async def start(self):
-        async with websockets.connect('wss://www.guilded.gg/websocket/v1', extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
+        async with websockets.connect('wss://www.guilded.gg/websocket/v1',
+                                      extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
             print('connected to Guilded!')
             while True:
                 data = await websocket.recv()
@@ -635,7 +658,15 @@ class Events:
                 if eventType == 'ChatMessageCreated':
                     await self._handle_message(eventData)
 
-       
+                if eventType == 'ServerMemberJoined':
+                    await self._handle_member_join(eventData)
+                    print(eventType, eventData)
+
+                    
+                if eventType == 'ServerMemberRemoved':
+                    await self._handle_member_leave(eventData)
+                    print(eventType, eventData)
+
 
     def run(self):
-      asyncio.run(self.start())
+        asyncio.run(self.start())
