@@ -8,7 +8,7 @@ send_message
 
 .. code-block:: python
 
-    bot.send_message(self, channel_id, content=None, embed=None)
+    bot.send_message(channel_id, content=None, embed=None)
 
 Send a message to the specified channel. Optionally, provide content and/or an embed.
 
@@ -28,7 +28,7 @@ send_reply
 
 .. code-block:: python
 
-    bot.send_reply(self, channel_id, content, replyids)
+    bot.send_reply(channel_id, content, replyids)
 
 Send a reply to a message in the specified channel.
 
@@ -47,7 +47,7 @@ edit_message
 
 .. code-block:: python
 
-    bot.edit_message(self, channel_id, message_id, content)
+    bot.edit_message(channel_id, message_id, content)
 
 Edit an existing message in the specified channel.
 
@@ -67,7 +67,7 @@ delete_message
 
 .. code-block:: python
 
-    bot.delete_message(self, channel_id, message_id)
+    bot.delete_message(channel_id, message_id)
 
 Delete a message in the specified channel.
 
@@ -85,7 +85,7 @@ get_message
 
 .. code-block:: python
 
-    bot.get_message(self, channel_id, message_id)
+    bot.get_message(channel_id, message_id)
 
 Retrieve a specific message from a channel.
 
@@ -103,7 +103,7 @@ get_channel_messages
 
 .. code-block:: python
 
-    bot.get_channel_messages(self, channel_id, limit=None, before=None, after=None, includePrivate=None)
+    bot.get_channel_messages(channel_id, limit=None, before=None, after=None, includePrivate=None)
 
 Retrieves a list of messages from a channel.
 
@@ -126,7 +126,7 @@ purge
 
 .. code-block:: python
 
-    bot.purge(self, channel_id, amount)
+    bot.purge(channel_id, amount)
 
 Purge a specified number of messages from a channel.
 

@@ -9,7 +9,7 @@ create_channel
 
 .. code-block:: python
 
-     bot.create_channel(self, name, type, serverid, groupid=None, categoryid=None, ispublic=None):
+     bot.create_channel(name, type, serverid, groupid=None, categoryid=None, ispublic=None):
 
 Create a new channel in the specified server or group.
 
@@ -38,7 +38,7 @@ get_channel
 
 .. code-block:: python
 
-    bot.get_channel(self, channelid):
+    bot.get_channel(channelid):
 
 Retrieve information about a specific channel.
 
@@ -53,7 +53,7 @@ delete_channel
 
 .. code-block:: python
 
-    bot.delete_channel(self, channelid):
+    bot.delete_channel(channelid):
 
 Delete a specific channel.
 
@@ -68,7 +68,7 @@ update_channel
 
 .. code-block:: python
 
-    bot.update_channel(self, channelid, name=None, topic=None, ispublic=None):
+    bot.update_channel(channelid, name=None, topic=None, ispublic=None):
 
 Update a specific channel's information.
 
