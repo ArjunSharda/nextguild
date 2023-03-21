@@ -23,7 +23,7 @@ pip install nextguild
 
 ## Documentation
 
-For NextGuild's official documentation, click [this link](https://github.com/ArjunSharda/nextguild/docs/)
+For NextGuild's official documentation, click [this link](https://nextguild.readthedocs.io)
 
 ## Contributing
 
