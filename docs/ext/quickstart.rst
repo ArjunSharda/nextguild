@@ -1,7 +1,7 @@
 Quickstart
 ========
 
-Looking for a quick example of what a bot may look like? Here's a simple example of a bot that responds to a command with a message:
+Looking for a quick example of what a bot may look like? Here's a simple example of a bot that responds to a command with a message of ping:
 
 Example Bot
 --------------------
@@ -23,4 +23,5 @@ Example Bot
 This bot will respond to any message that says "!ping" with "Pong!".
 
 Great! You've now made your first bot!
-Now continue down your path of becoming a great bot developer...
+
+Now, you've marked a checkpoint towards the path of using the NextGuild library proficiently. You can check the website for references, etc, while using our library.
