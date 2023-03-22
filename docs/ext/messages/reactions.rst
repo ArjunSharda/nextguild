@@ -23,8 +23,6 @@ React to a specified message with a specified emoteid.
 | emoteid     | str           | The emote ID to react with                 |
 +-------------+---------------+--------------------------------------------+
 
-
-
 delete_reaction
 ---------------
 
@@ -45,8 +43,6 @@ Delete a reaction from a message.
 | emoteid     | str           | The emote ID to delete the reaction        |
 +-------------+---------------+--------------------------------------------+
 
-
-
 create_topic_reaction
 ---------------------
 
@@ -55,9 +51,6 @@ create_topic_reaction
     bot.create_topic_reaction(channelid, topicid, emoteid)
 
 Creates a reaction on the topic.
-
-
-
 
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
@@ -70,10 +63,6 @@ Creates a reaction on the topic.
 | emoteid     | str           | The emote ID to react with                 |
 +-------------+---------------+--------------------------------------------+
 
-
-
-
-
 delete_topic_reaction
 ---------------------
 
@@ -82,9 +71,6 @@ delete_topic_reaction
     bot.delete_topic_reaction(channelid, topicid, emoteid)
 
 Deletes a reaction from the topic.
-
-
-
 
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
@@ -97,8 +83,6 @@ Deletes a reaction from the topic.
 | emoteid     | str           | The emote ID to delete the reaction        |
 +-------------+---------------+--------------------------------------------+
 
-
-
 create_topic_comment_reaction
 -----------------------------
 
@@ -107,9 +91,6 @@ create_topic_comment_reaction
     bot.create_topic_comment_reaction(channelid, topicid, topiccommentid, emoteid)
 
 Creates a reaction on a topic's comment.
-
-
-
 
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
@@ -124,8 +105,6 @@ Creates a reaction on a topic's comment.
 | emoteid     | str           | The emote ID to react with                 |
 +-------------+---------------+--------------------------------------------+
 
-
-
 delete_topic_comment_reaction
 -----------------------------
 
@@ -133,10 +112,7 @@ delete_topic_comment_reaction
 
     bot.delete_topic_comment_reaction(channelid, topicid, topiccommentid, emoteid)
 
-Delete's a reaction on a topic's comment.
-
-
-
+Deletes a reaction on a topic's comment.
 
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
@@ -151,12 +127,6 @@ Delete's a reaction on a topic's comment.
 | emoteid     | str           | The emote ID to delete the reaction        |
 +-------------+---------------+--------------------------------------------+
 
-
-
-
-
-
-
 create_event_reaction
 ---------------------
 
@@ -165,8 +135,6 @@ create_event_reaction
     bot.create_event_reaction(channelid, eventid, emoteid)
 
 Create a reaction on a event.
-
-
 
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
@@ -179,8 +147,6 @@ Create a reaction on a event.
 | emoteid     | str           | The emote ID to create the reaction        |
 +-------------+---------------+--------------------------------------------+
 
-
-
 delete_event_reaction
 ---------------------
 
@@ -189,8 +155,6 @@ delete_event_reaction
     bot.delete_event_reaction(channelid, eventid, emoteid)
 
 Delete a reaction on a event.
-
-
 
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
@@ -203,9 +167,6 @@ Delete a reaction on a event.
 | emoteid     | str           | The emote ID to delete the reaction        |
 +-------------+---------------+--------------------------------------------+
 
-
-
-
 create_event_comment_reaction
 -----------------------------
 
@@ -215,7 +176,6 @@ create_event_comment_reaction
 
 Create a reaction on a event's comment.
 
-
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
 +=============+===============+============================================+
@@ -224,12 +184,10 @@ Create a reaction on a event's comment.
 +-------------+---------------+--------------------------------------------+
 | eventid     | str           |The event ID where the comment is located in|
 +-------------+---------------+--------------------------------------------+
-|commentid.   |  str          |The comment ID to create the reaction on    |
+|commentid    |  str          |The comment ID to create the reaction on    |
 +-------------+---------------+--------------------------------------------+
 | emoteid     | str           | The emote ID to create the reaction        |
 +-------------+---------------+--------------------------------------------+
-
-
 
 delete_event_comment_reaction
 -----------------------------
@@ -239,7 +197,6 @@ delete_event_comment_reaction
     bot.delete_event_comment_reaction(channelid, eventid, commentid, emoteid)
 
 Delete a reaction on a event's comment.
-
 
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
@@ -253,9 +210,4 @@ Delete a reaction on a event's comment.
 +-------------+---------------+--------------------------------------------+
 | emoteid     | str           | The emote ID to delete the reaction        |
 +-------------+---------------+--------------------------------------------+
-
-
-
-
-
 
