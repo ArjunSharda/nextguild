@@ -1,5 +1,5 @@
 Reactions
-========
+=========
 
 This section provides an overview of the reaction-related methods available in the NextGuild library. The following methods are used to interact with reactions:
 
