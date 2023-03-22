@@ -15,7 +15,7 @@ Creates a doc in the specified channel.
 +-------------+---------------+---------------------------------------------+
 | Parameter   | Type          | Description                                 |
 +=============+===============+=============================================+
-| channelid  | str           | The ID of the channel to create the doc in. |
+| channelid   | str           | The ID of the channel to create the doc in. |
 +-------------+---------------+---------------------------------------------+
 | title       | str           | The title of the doc.                       |
 +-------------+---------------+---------------------------------------------+
