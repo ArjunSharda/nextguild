@@ -195,7 +195,7 @@ Delete a reaction on a event.
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
 +=============+===============+============================================+
-| channel_id  | str           | The ID of the channel where the event is
+| channel_id  | str           | The ID of the channel where the event is   |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
 | eventid     | str           |The event ID, to delete the reaction from   |
