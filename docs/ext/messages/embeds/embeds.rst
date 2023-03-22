@@ -11,7 +11,7 @@ The constructor for the Embed class. Initializes an embed object with the provid
 +---------------+------------------+-------------------------------------------------+
 | Parameter     | Type             | Description                                     |
 +===============+==================+=================================================+
-| title         | str, optional    | The title of the embed.                        |
+| title         | str, optional    | The title of the embed.                         |
 +---------------+------------------+-------------------------------------------------+
 | description   | str, optional    | The description of the embed.                   |
 +---------------+------------------+-------------------------------------------------+
