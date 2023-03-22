@@ -64,7 +64,8 @@ Edit an existing message in the specified channel.
 +-------------+---------+-----------------------------------------+
 | content     | optional,str| The updated content of the message. |
 +-------------+---------+-----------------------------------------+
-| embed       | optional, object | An embed object to be sent with the message |
+| embed       | optional, object | An embed object to be sent with|
+|             |                  |  the message                   |
 +-------------+---------+-----------------------------------------+
 
 delete_message
