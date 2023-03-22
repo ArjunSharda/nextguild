@@ -3,6 +3,8 @@ Embeds
 
 This page provides an overview of the Embed class and its methods available in the NextGuild library. The Embed class is used to create rich embeds for messages.
 
+Embed
+-----------
 .. code-block:: python
         embed = Embed(title=None, description=None, color=None, author=None, author_url=None, author_icon=None, footer=None, footer_icon=None, thumbnail=None, image=None, fields=None)
                      
