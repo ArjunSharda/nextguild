@@ -7,7 +7,7 @@ project_dir = pathlib.Path(__file__).parent.resolve()
 long_description = (project_dir / "README.md").read_text(encoding="utf-8")
 
 setup(
-    name="nextguild"
+    name="nextguild",
     version="1.0.0",
     description="Simplify interactions with the Guilded API",
     long_description=long_description,
