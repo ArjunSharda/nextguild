@@ -1,7 +1,7 @@
 XP
 ==
 
-This document provides an overview of the XP-related methods available in the NextGuild library. The following methods are used to manage XP:
+This section provides an overview of the XP-related methods available in the NextGuild library. The following methods are used to manage XP:
 
 award_xp
 --------
