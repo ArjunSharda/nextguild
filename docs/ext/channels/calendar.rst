@@ -12,42 +12,43 @@ create_event
 
 
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| Parameter              | Type   | Description                                                                                                                  |
+| Parameter              | Type   | Description                                                                                               |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| channelid              | str    | The channel ID of the event.                                                                                                 |
+| channelid              | str    | The channel ID of the event.                                                                              |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| title                  | str    | The name of the event (min length 1; max length 60).                                                                          |
+| title                  | str    | The name of the event (min length 1; max length 60).                                                     |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| description            | str    | The description of the event (min length 1; max length 8000) [OPTIONAL].                                                      |
+| description            | str    | The description of the event (min length 1; max length 8000) [OPTIONAL].                                 |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| location               | str    | The location of the event (min length 1; max length 8000) [OPTIONAL].                                                           |
+| location               | str    | The location of the event (min length 1; max length 8000) [OPTIONAL].                                      |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| startsAt               | str    | The ISO 8601 timestamp that the event starts at [OPTIONAL].                                                                    |
+| startsAt               | str    | The ISO 8601 timestamp that the event starts at [OPTIONAL].                                               |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| url                    | str    | A URL to associate with the event [OPTIONAL].                                                                                 |
+| url                    | str    | A URL to associate with the event [OPTIONAL].                                                             |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| color                  | int    | The color of the event when viewing in the calendar (min 0; max 16777215) [INTEGER] [OPTIONAL].                               |
+| color                  | int    | The color of the event when viewing in the calendar (min 0; max 16777215) [INTEGER] [OPTIONAL].           |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| isAllDay               | bool   | Does the event last all day? example: "true" or "false" [OPTIONAL].                                                           |
+| isAllDay               | bool   | Does the event last all day? example: "true" or "false" [OPTIONAL].                                       |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| rsvpLimit              | int    | The number of RSVPs to allow before waitlisting RSVPs (min 1).                                                                 |
+| rsvpLimit              | int    | The number of RSVPs to allow before waitlisting RSVPs (min 1).                                            |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
 | autofillWaitlist       | bool   | When rsvpLimit is set, users from the waitlist will be added as space becomes available in the event [OPTIONAL].              |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| duration               | int    | The duration of the event in minutes (min 1) [INTEGER] [OPTIONAL].                                                             |
+| duration               | int    | The duration of the event in minutes (min 1) [INTEGER] [OPTIONAL].                                       |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| isPrivate              | bool   | Whether or not the event is private. example: "true" or "false" [OPTIONAL, public by default].                                |
+| isPrivate              | bool   | Whether or not the event is private. example: "true" or "false" [OPTIONAL, public by default].           
+|
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| roleIds                | list   | The role IDs to restrict the event to (min items 1; must have unique items true) [ARRAY] [OPTIONAL].                          |
+| roleIds                | list   | The role IDs to restrict the event to (min items 1; must have unique items true) [ARRAY] [OPTIONAL].     |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
 | repeat_type            | str    | How often you want your event to repeat ("once", "everyDay", "everyWeek", "everyMonth", or "custom") [OPTIONAL].               |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
-| every                  | dict   | Apply further clarification to your events. This must have type set to custom. [OPTIONAL].                                     |
+| every                  | dict   | Apply further clarification to your events. This must have type set to custom. [OPTIONAL].                |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
 | endsAfterOccurrences   | int    | Used to control the end date of the event repeat (only used when type is custom) (max 24) [NUMBER] [OPTIONAL].                 |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
 | endDate                | str    | The ISO 8601 timestamp that the event ends at (only used when type is custom); if used with endsAfterOccurrences,               |
-|                        |        | the earliest resultant date of the two will be used [OPTIONAL].                                                               |
+|                        |        | the earliest resultant date of the two will be used [OPTIONAL].                                            |
 +------------------------+--------+------------------------------------------------------------------------------------------------------------------------------+
 
 
