@@ -1,7 +1,7 @@
 Webhooks
 ========
 
-This document provides an overview of the webhook-related methods available in the NextGuild library. The following methods are used to interact with webhooks:
+This section provides an overview of the webhook-related methods available in the NextGuild library. The following methods are used to interact with webhooks:
 
 create_webhook
 --------------
