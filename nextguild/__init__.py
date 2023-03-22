@@ -713,7 +713,9 @@ class Events:
         self._message_handlers = []
         self._member_join_handlers = []
         self._member_leave_handlers = []
+        self._ready_handlers = []
         self.client = client
+
 
     def on_message(self, func):
         @wraps(func)
@@ -751,10 +753,23 @@ class Events:
     async def _handle_member_leave(self, eventData):
         for handler in self._member_leave_handlers:
             await handler(eventData)
+            
+    def on_ready(self, func):
+        @wraps(func)
+        async def wrapper():
+            return await func()
+
+        self._ready_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_ready(self):
+        for handler in self._ready_handlers:
+            await handler()        
 
     async def start(self):
         async with websockets.connect('wss://www.guilded.gg/websocket/v1',
                                       extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
+            await self._handle_ready()
             while True:
                 data = await websocket.recv()
                 json_data = json.loads(data)
@@ -769,11 +784,9 @@ class Events:
 
                 if eventType == 'ServerMemberJoined':
                     await self._handle_member_join(eventData)
-                    print(eventType, eventData)
 
                 if eventType == 'ServerMemberRemoved':
                     await self._handle_member_leave(eventData)
-                    print(eventType, eventData)
 
     def run(self):
         asyncio.run(self.start())
