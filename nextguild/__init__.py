@@ -698,7 +698,6 @@ class Embed:
             'value': value
         })
 
-
 class Message:
     def __init__(self, eventData):
         self.content = eventData['message']['content']
@@ -713,6 +712,7 @@ class Events:
         self._message_handlers = []
         self._member_join_handlers = []
         self._member_leave_handlers = []
+        self._ready_handlers = []
         self.client = client
 
     def on_message(self, func):
@@ -752,9 +752,22 @@ class Events:
         for handler in self._member_leave_handlers:
             await handler(eventData)
 
+    def on_ready(self, func):
+        @wraps(func)
+        def wrapper():
+            return func()
+
+        self._ready_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_ready(self):
+        for handler in self._ready_handlers:
+            await handler()
+
     async def start(self):
         async with websockets.connect('wss://www.guilded.gg/websocket/v1',
                                       extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
+            await self._handle_ready()
             while True:
                 data = await websocket.recv()
                 json_data = json.loads(data)
