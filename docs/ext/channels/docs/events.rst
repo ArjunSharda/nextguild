@@ -61,7 +61,8 @@ get_events
 ----------
 
 .. code-block:: python
-   bot.get_events(self, channelid, before=None, after=None, limit=None)
+
+    bot.get_events(channelid, before=None, after=None, limit=None)
    
 Retrieves events from the specified channel.
 
@@ -81,7 +82,9 @@ delete_event
 ------------
 
 .. code-block:: python
-    bot.delete_event(self, channelid, eventid)
+
+    bot.delete_event(channelid, eventid)
+    
 Deletes an event from the specified channel.
 
 +-----------+------+------------------------------------+
@@ -96,7 +99,8 @@ get_calendar_event_rsvp
 -----------------------
 
 .. code-block:: python
-    bot.get_calendar_event_rsvp(self, channelid, eventid)
+
+    bot.get_calendar_event_rsvp(channelid, eventid)
     
 Retrieves the RSVP status for the specified event.
 
@@ -112,7 +116,9 @@ create_calendar_event_rsvp
 --------------------------
 
 .. code-block:: python
-    bot.create_calendar_event_rsvp(self, channelid, eventid, rsvp)
+
+    bot.create_calendar_event_rsvp(channelid, eventid, rsvp)
+    
 Creates an RSVP for the specified event.
 
 +-----------+------+------------------------------------+
@@ -132,7 +138,8 @@ delete_calendar_event_rsvp
 --------------------------
 
 .. code-block:: python
-    bot.delete_calendar_event_rsvp(self, channelid, eventid)
+
+    bot.delete_calendar_event_rsvp(channelid, eventid)
    
 Deletes the RSVP for the specified event.
 
@@ -148,7 +155,8 @@ get_calendar_event_rsvps
 ------------------------
 
 .. code-block:: python
-    bot.get_calendar_event_rsvps(self, channelid, eventid)
+
+    bot.get_calendar_event_rsvps(channelid, eventid)
     
 Retrieves all RSVPs for the specified event.
 
