@@ -41,6 +41,9 @@ Send a reply to a message in the specified channel.
 +-------------+---------+-----------------------------------------+
 | replyids    | list    | A list of message IDs to reply to.      |
 +-------------+---------+-----------------------------------------+
+| embed       | list    | An embed object to be sent with the     |
+|             |         |    message                              |
++-------------+---------+-----------------------------------------+
 
 edit_message
 ------------
@@ -96,6 +99,9 @@ Retrieve a specific message from a channel.
 |             |         | is.                                      |
 +-------------+---------+------------------------------------------+
 | message_id  | str     | The ID of the message to retrieve.       |
++-------------+---------+------------------------------------------+
+| embed       | str,    | An embed object to send with the message |
+|             | optional|                                          |
 +-------------+---------+------------------------------------------+
 
 get_channel_messages
