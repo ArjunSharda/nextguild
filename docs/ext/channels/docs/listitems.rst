@@ -1,3 +1,9 @@
+List Items
+=========
+
+This section provides an overview of the list item methods available in the NextGuild library. The following methods are used to interact with list items:
+
+
 create_listitem
 ---------------
 
