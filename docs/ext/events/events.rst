@@ -51,6 +51,7 @@ on_member_join
 --------------
 A decorator for when a member joins a server.
 Example usage:
+
 .. code-block:: python
 
     client = Client("YOUR_TOKEN_HERE")
@@ -59,7 +60,7 @@ Example usage:
     
     @events.on_member_join
     async def your_sample_project(member):
-        client.send_message("YOUR_CHANNEL_ID_HERE", "A new member has joined the server!")
+        client.send_message("YOUR_CHANNEL_ID_HERE", "A member has joined the server!")
         
         
         
