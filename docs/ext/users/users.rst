@@ -13,3 +13,12 @@ This section provides an overview of the user-related methods available in the N
 +-----------+------+-------------------------------------+
 | type      | str  | The type of the social link         |
 +-----------+------+-------------------------------------+
+
+
+
+
+.. code-block:: python
+   bot.get_bot_user_id()
+   
+Gets the user id of the bot. No parameters
+ 
