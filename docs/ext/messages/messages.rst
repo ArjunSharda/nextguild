@@ -62,7 +62,9 @@ Edit an existing message in the specified channel.
 +-------------+---------+-----------------------------------------+
 | message_id  | str     | The ID of the message to edit.          |
 +-------------+---------+-----------------------------------------+
-| content     | str     | The updated content of the message.     |
+| content     | optional,str| The updated content of the message. |
++-------------+---------+-----------------------------------------+
+| embed       | optional, object | An embed object to be sent with the message |
 +-------------+---------+-----------------------------------------+
 
 delete_message
@@ -99,9 +101,6 @@ Retrieve a specific message from a channel.
 |             |         | is.                                      |
 +-------------+---------+------------------------------------------+
 | message_id  | str     | The ID of the message to retrieve.       |
-+-------------+---------+------------------------------------------+
-| embed       | str,    | An embed object to send with the message |
-|             | optional|                                          |
 +-------------+---------+------------------------------------------+
 
 get_channel_messages
@@ -144,5 +143,3 @@ Purge a specified number of messages from a channel.
 +-------------+---------+------------------------------------------+
 | amount      | int     | The number of messages to purge.         |
 +-------------+---------+------------------------------------------+
-
-    
