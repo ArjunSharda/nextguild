@@ -1,8 +1,6 @@
 Events
 ========
 
-
-
 This section covers the events that the NextGuild library has to offer, and how to implement them.
 
 
@@ -33,6 +31,7 @@ message
 -------
 
 The message class.
+
 +-----------+------+--------------------------------------------+
 | Data      | Type | Description                                |
 +===========+======+============================================+
