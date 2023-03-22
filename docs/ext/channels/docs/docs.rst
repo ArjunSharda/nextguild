@@ -1,7 +1,7 @@
 Docs
 ========
 
-This section provides an overview of the doc-related methods available in the NextGuild library. The following methods are used to interact with docs:
+This section provides an overview of the document-related methods available in the NextGuild library. The following methods are used to interact with documents:
 
 create_doc
 ------------
