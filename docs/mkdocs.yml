@@ -1,0 +1,9 @@
+site_name: Arjun Sharda
+nav:
+  - Home: index.rst
+  - Section 1:
+      - Subsection 1: ext/messages/messages.rst
+      - Subsection 2: ext/messages/embeds/embeds.rst
+  - Section 2:
+      - Subsection 1: ext/channels/channels.rst
+      - Subsection 2: ext/webhooks/webhooks.rst
