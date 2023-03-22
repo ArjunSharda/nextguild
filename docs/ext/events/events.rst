@@ -1,9 +1,9 @@
-Messages
+Events
 ========
 
 
 
-This section covers the messages class, and how to properly use it.
+This section covers the events that the NextGuild library has to offer, and how to implement them.
 
 
 
@@ -82,6 +82,24 @@ Example usage:
 
 
 
+on_ready
+--------
+Used to, normally, execute a action when the bot is ready to be used.
+
+Example usage:
+
+
+.. code-block:: python
+
+    client = Client("YOUR_TOKEN_HERE")
+    events = Events(client)
+    
+    
+    @events.on_ready
+    async def on_ready_example():
+      print("Bot is ready!")
+    
+
 
 run
 ----
@@ -103,6 +121,8 @@ Example usage:
     events.run()
     
     
+    
+ 
     
     
 
