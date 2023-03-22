@@ -2,7 +2,7 @@ Roles
 =====
 
 
-This document provides an overview of the role-related methods available in the NextGuild library. The following methods are used to interact with roles:
+This section provides an overview of the role-related methods available in the NextGuild library. The following methods are used to interact with roles:
 
 
 add_role
