@@ -24,5 +24,5 @@ Check our documentation.
 If your issue still persists, join our `support server`_ and ask for help in the appropriate channels. You may also raise a GitHub issue, however we are more active on our support server.
 We're committed to helping you make the most of NextGuild and ensuring a smooth experience when working with the Guilded API. Our aim is to revolutionize how programmers interact with the Guilded API.
 
-.. _guide: https://discord.gg/nextguild
-.. _support server: https://discord.gg/nextguild
+.. _guide: https://guilded.gg/nextguild
+.. _support server: https://guilded.gg/nextguild
