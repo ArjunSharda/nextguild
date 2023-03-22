@@ -65,7 +65,7 @@ get_doc
 
 .. code-block:: python
 
-    bot.delete_message(channel_id, message_id)
+    bot.get_doc(channel_id, message_id)
 
 Retrieves a doc in the specified channel.
 
