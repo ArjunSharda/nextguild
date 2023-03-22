@@ -6,7 +6,7 @@ This section provides an overview of the user-related methods available in the N
 
     bot.get_social_link(userid, type)
 
-+---------+------+--------------------------------------+
++-----------+------+-------------------------------------+
 | Parameter | Type | Description                         |
 +===========+======+=====================================+
 | userid    | str  | The ID of the user                  |
