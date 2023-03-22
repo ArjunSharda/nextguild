@@ -1,7 +1,7 @@
 Messages
 ========
 
-This document provides an overview of the message-related methods available in the NextGuild library. The following methods are used to interact with channels and messages:
+This section provides an overview of the message-related methods available in the NextGuild library. The following methods are used to interact with channels and messages:
 
 send_message
 ------------
