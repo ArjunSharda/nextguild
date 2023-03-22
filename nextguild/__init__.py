@@ -39,7 +39,7 @@ class Client:
         url = f'{self.base_url}/channels/{channel_id}/messages'
         if content is not None:
             data = {'content': content, 'replyMessageIds': replyids}
-            
+
         if embed is not None:
             data = {'embeds': [embed.embed], 'replyMessageIds': replyids}
         response = self.request('POST', url, json=data)
@@ -203,7 +203,6 @@ class Client:
         url = f'{self.base_url}/servers/{serverid}/members/{userid}/roles'
         response = self.request('GET', url)
         return response
-    
 
     def unban_member(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/bans/{userid}'
@@ -215,10 +214,53 @@ class Client:
         response = self.request('GET', url)
         return response
 
+    def add_group_member(self, groupid, userid):
+        url = f'{self.base_url}/groups/{groupid}/members/{userid}'
+        response = self.request('PUT', url)
+        return response
+
+    def remove_group_member(self, groupid, userid):
+        url = f'{self.base_url}/groups/{groupid}/members/{userid}'
+        response = self.request('DELETE', url)
+        return response
+
+
     def get_member_bans(self, serverid):
         url = f'{self.base_url}/servers/{serverid}/bans'
         response = self.request('GET', url)
         return response
+
+
+    def get_social_link(self, userid, type):
+        url = f'{self.base_url}/users/{userid}/social-links/{type}'
+        response = self.request('GET', url)
+        return response
+
+
+    def award_xp(self, userid, amount):
+        url = f'{self.base_url}/servers/{self.serverid}/members/{userid}/xp'
+        data = {'amount': amount}
+        response = self.request('POST', url, json=data)
+        return response
+
+
+    def get_xp(self, userid):
+        url = f'{self.base_url}/servers/{self.serverid}/members/{userid}/xp'
+        response = self.request('GET', url)
+        return response
+
+    def set_xp(self, userid, amount):
+        url = f'{self.base_url}/servers/{self.serverid}/members/{userid}/xp'
+        data = {'amount': amount}
+        response = self.request('PUT', url, json=data)
+        return response
+
+    def award_xp_to_role(self, roleid, amount):
+        url = f'{self.base_url}/servers/{self.serverid}/roles/{roleid}/xp'
+        data = {'amount': amount}
+        response = self.request('POST', url, json=data)
+        return response
+
 
     def create_listitem(self, channelid, title, note=None):
         data = {'message': title}
@@ -378,7 +420,7 @@ class Client:
             data = {'content': content}
         if embed:
             data = {'embeds': embed.embed}
-            
+
         self.request('POST', url, json=data)
 
     def create_forum_post(self, channelid, title, content=None, embed=None):
@@ -413,7 +455,7 @@ class Client:
             data = {'title': title, 'content': content}
         if embed:
             data = {'title': title, 'embeds': embed.embed}
-            
+
         response = self.request('PATCH', url, json=data)
         return response
 
@@ -448,7 +490,7 @@ class Client:
             data = {'content': content}
         if embed:
             data = {'embeds': embed.embed}
-            
+
         response = self.request('POST', url, json=data)
         return response
 
@@ -536,7 +578,7 @@ class Client:
             data = {'title': title, 'content': content}
         if embed:
             data = {'title': title, 'embeds': embed.embed}
-            
+
         response = self.request('POST', url, json=data)
         return response
 
@@ -560,10 +602,10 @@ class Client:
         data = {}
         if content:
             data = {'title': title, 'content': content}
-            
+
         if embed:
             data = {'title': title, 'embeds': embed.embed}
-            
+
         response = self.request('PUT', url, json=data)
         return response
 
@@ -574,13 +616,13 @@ class Client:
 
     def create_doc_comment(self, channelid, docid, content=None, embed=None):
         url = f'https://www.guilded.gg/api/v1/channels/{channelid}/docs/{docid}/comments'
-            
+
         data = {}
         if data:
-           data = {'content': content}
+            data = {'content': content}
         if embed:
             data = {'embeds': embed.embed}
-            
+
         response = self.request('POST', url, json=data)
         return response
 
@@ -591,8 +633,7 @@ class Client:
             data = {'content': content}
         if embed:
             data = {'embeds': embed.embed}
-            
-            
+
         response = self.request('PATCH', url, json=data)
         return response
 
