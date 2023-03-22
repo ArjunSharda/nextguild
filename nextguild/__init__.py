@@ -237,26 +237,26 @@ class Client:
         return response
 
 
-    def award_xp(self, userid, amount):
-        url = f'{self.base_url}/servers/{self.serverid}/members/{userid}/xp'
+    def award_xp(self, serverid, userid, amount):
+        url = f'{self.base_url}/servers/{serverid}/members/{userid}/xp'
         data = {'amount': amount}
         response = self.request('POST', url, json=data)
         return response
 
 
-    def get_xp(self, userid):
-        url = f'{self.base_url}/servers/{self.serverid}/members/{userid}/xp'
+    def get_xp(self, serverid, userid):
+        url = f'{self.base_url}/servers/{serverid}/members/{userid}/xp'
         response = self.request('GET', url)
         return response
 
-    def set_xp(self, userid, amount):
-        url = f'{self.base_url}/servers/{self.serverid}/members/{userid}/xp'
+    def set_xp(self, serverid, userid, amount):
+        url = f'{self.base_url}/servers/{serverid}/members/{userid}/xp'
         data = {'amount': amount}
         response = self.request('PUT', url, json=data)
         return response
 
-    def award_xp_to_role(self, roleid, amount):
-        url = f'{self.base_url}/servers/{self.serverid}/roles/{roleid}/xp'
+    def award_xp_to_role(self, serverid, roleid, amount):
+        url = f'{self.base_url}/servers/{serverid}/roles/{roleid}/xp'
         data = {'amount': amount}
         response = self.request('POST', url, json=data)
         return response
