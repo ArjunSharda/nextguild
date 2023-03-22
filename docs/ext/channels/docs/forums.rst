@@ -15,8 +15,7 @@ Create a forum post with a specified title and optional content or embed.
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
 +=============+===============+============================================+
-| channel_id  | str           | The ID of the channel where the post is    |
-|             |               |   in.                                      |
+| channel_id  | str           | The ID of the channel where the post is in.|
 +-------------+---------------+--------------------------------------------+
 | title       | str           | The title of the forum post.               |
 +-------------+---------------+--------------------------------------------+
