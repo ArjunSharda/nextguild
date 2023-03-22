@@ -15,7 +15,7 @@ Example Bot
     events = Events(bot)
 
     @events.on_message
-    def pingcommand(message):
+    async def pingcommand(message):
         if message.content == "!ping":
             bot.send_message(message.channelId, "Pong!")
     bot.run()
