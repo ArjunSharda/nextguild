@@ -201,7 +201,7 @@ class Client:
 
     def ban_member(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/bans/{userid}'
-        response = self.request('POST', url)
+        response = self.request('PUT', url)
         return response
 
     def add_role(self, serverid, userid, roleid):
@@ -711,7 +711,6 @@ class Embed:
 
 class Message:
     def __init__(self, eventData):
-        print(eventData)
         try:
           self.content = eventData['message']['content']
         except:
@@ -745,6 +744,8 @@ class Events:
         self._message_delete_handlers = []
         self._member_join_handlers = []
         self._member_leave_handlers = []
+        self._member_banned_handlers = []
+        self._member_unbanned_handlers = []
         self._ready_handlers = []
         self.client = client
 
@@ -811,6 +812,30 @@ class Events:
         for handler in self._member_leave_handlers:
             await handler(eventData)
 
+    def on_member_banned(self, func):
+        @wraps(func)
+        def wrapper(member):
+            return func(member)
+    
+        self._member_banned_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_member_banned(self, eventData):
+        for handler in self._member_banned_handlers:
+            await handler(eventData)
+
+    def on_member_unbanned(self, func):
+        @wraps(func)
+        def wrapper(member):
+            return func(member)
+    
+        self._member_unbanned_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_member_unbanned(self, eventData):
+        for handler in self._member_unbanned_handlers:
+            await handler(eventData)
+
     def on_ready(self, func):
         @wraps(func)
         async def wrapper():
@@ -830,22 +855,26 @@ class Events:
             while True:
                 data = await websocket.recv()
                 json_data = json.loads(data)
+                
 
                 if 't' in json_data and 'd' in json_data:
                     eventType, eventData = json_data['t'], json_data['d']
                 else:
                     continue
 
-                if eventType == 'ChatMessageCreated':
-                    await self._handle_create_message(eventData)
-                if eventType == 'ChatMessageUpdated':
-                    await self._handle_update_message(eventData)
-                if eventType == 'ChatMessageDeleted':
-                    await self._handle_delete_message(eventData)
-                if eventType == 'ServerMemberJoined':
-                    await self._handle_member_join(eventData)
-                if eventType == 'ServerMemberRemoved':
-                    await self._handle_member_leave(eventData)
+                print(eventData)
+                event_handlers = {
+                  'ChatMessageCreated': self._handle_create_message,
+                  'ChatMessageUpdated': self._handle_update_message,
+                  'ChatMessageDeleted': self._handle_delete_message,
+                  'ServerMemberJoined': self._handle_member_join,
+                  'ServerMemberRemoved': self._handle_member_leave,
+                  'ServerMemberBanned': self._handle_member_banned,
+                  'ServerMemberUnbanned': self._handle_member_unbanned,
+                  }
+                handler = event_handlers.get(eventType)
+                if handler:
+                    await handler(eventData)
 
     def run(self):
         asyncio.run(self.start())
