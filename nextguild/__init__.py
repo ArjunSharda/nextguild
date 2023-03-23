@@ -20,7 +20,7 @@ class Client:
         self.cache = {}
         self._message_handlers = []
 
-    def send_message(self, channel_id, content=None, embed=None, isPrivate=None, media=None):
+    def send_message(self, channel_id, content=None, embed=None, isPrivate=None):
         payload = {}
 
         if content is not None:
@@ -32,8 +32,6 @@ class Client:
         if isPrivate is not None:
             payload['isPrivate'] = isPrivate
             
-        if media is not None:
-            payload['media'] = media
 
         response = requests.post(
             f'{self.base_url}/channels/{channel_id}/messages',
@@ -41,7 +39,7 @@ class Client:
             json=payload
         )
 
-    def send_reply(self, channel_id, replyids, content=None, embed=None, isPrivate=None, media=None):
+    def send_reply(self, channel_id, replyids, content=None, embed=None, isPrivate=None):
         url = f'{self.base_url}/channels/{channel_id}/messages'
         data = {}
         if content is not None:
@@ -53,14 +51,12 @@ class Client:
         if isPrivate is not None:
             data['isPrivate'] = isPrivate
 
-        if media is not None:
-            data['media'] = media
 
 
         response = self.request('POST', url, json=data)
         return response
 
-    def edit_message(self, channel_id, message_id, content=None, embed=None, isPrivate=None, media=None):
+    def edit_message(self, channel_id, message_id, content=None, embed=None, isPrivate=None):
         payload = {}
         if content is not None:
             payload['content'] = content
@@ -70,9 +66,6 @@ class Client:
 
         if isPrivate is not None:
             payload['isPrivate'] = isPrivate
-
-        if media is not None:
-            payload['media'] = media
 
 
         url = f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
