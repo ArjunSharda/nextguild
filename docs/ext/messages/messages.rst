@@ -8,7 +8,7 @@ send_message
 
 .. code-block:: python
 
-    bot.send_message(channel_id, content=None, embed=None)
+    bot.send_message(channel_id, content=None, embed=None, isprivate=None)
 
 Send a message to the specified channel. Optionally, provide content and/or an embed.
 
@@ -22,13 +22,15 @@ Send a message to the specified channel. Optionally, provide content and/or an e
 | embed       | object,       | An embed object to be sent with the        |
 |             | optional      | message.                                   |
 +-------------+---------------+--------------------------------------------+
+| isprivate   | bool          | If the message should be private or not.   |
++-------------+---------------+--------------------------------------------+
 
 send_reply
 ----------
 
 .. code-block:: python
 
-    bot.send_reply(channel_id, content, replyids)
+    bot.send_reply(channel_id, content, replyids, embed=None, isprivate=None)
 
 Send a reply to a message in the specified channel.
 
@@ -44,13 +46,15 @@ Send a reply to a message in the specified channel.
 | embed       | list    | An embed object to be sent with the     |
 |             |         |    message                              |
 +-------------+---------+-----------------------------------------+
+| isprivate   | bool    | If the message should be private or not.|
++-------------+---------+-----------------------------------------+
 
 edit_message
 ------------
 
 .. code-block:: python
 
-    bot.edit_message(channel_id, message_id, content)
+    bot.edit_message(channel_id, message_id, content, embed, isprivate=None)
 
 Edit an existing message in the specified channel.
 
@@ -67,6 +71,8 @@ Edit an existing message in the specified channel.
 | embed       | optional, object | An embed object to be sent with|
 |             |                  |  the message                   |
 +-------------+---------+-----------------------------------------+
+| isprivate   | bool    | If the message should be private or not.|
++-------------+---------------+-----------------------------------+
 
 delete_message
 --------------
