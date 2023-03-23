@@ -711,7 +711,6 @@ class Embed:
 
 class Message:
     def __init__(self, eventData):
-        print(eventData)
         self.content = eventData['message']['content']
         self.authorId = eventData['message']['createdBy']
         self.channelId = eventData['message']['channelId']
