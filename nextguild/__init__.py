@@ -862,7 +862,6 @@ class Events:
                 else:
                     continue
 
-                print(eventData)
                 event_handlers = {
                   'ChatMessageCreated': self._handle_create_message,
                   'ChatMessageUpdated': self._handle_update_message,
