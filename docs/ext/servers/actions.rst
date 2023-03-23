@@ -8,7 +8,7 @@ update_nickname
 
 .. code-block:: python
 
-    bot.update_nickname(serverid, userid, nickname)
+    update_nickname(serverid, userid, nickname)
 
 Updates the nickname of a member in the specified server.
 
@@ -27,7 +27,7 @@ delete_nickname
 
 .. code-block:: python
 
-    bot.delete_nickname(serverid, userid)
+    delete_nickname(serverid, userid)
 
 Deletes the nickname of a member in the specified server.
 
@@ -44,7 +44,7 @@ kick_member
 
 .. code-block:: python
 
-    bot.kick_member(serverid, userid)
+    kick_member(serverid, userid)
 
 Kicks a member from the specified server.
 
@@ -61,7 +61,7 @@ ban_member
 
 .. code-block:: python
 
-    bot.ban_member(serverid, userid)
+    ban_member(serverid, userid)
 
 Bans a member from the specified server.
 
@@ -80,7 +80,7 @@ unban_member
 
 .. code-block:: python
 
-    bot.unban_member(serverid, userid)
+    unban_member(serverid, userid)
 
 Unbans a member from the specified server.
 
@@ -97,7 +97,7 @@ get_member_ban
 
 .. code-block:: python
 
-    bot.get_member_ban(serverid, userid)
+    get_member_ban(serverid, userid)
 
 Gets the ban information for a member in the specified server.
 
@@ -114,7 +114,7 @@ get_member_bans
 
 .. code-block:: python
 
-    bot.get_member_bans(serverid)
+    get_member_bans(serverid)
 
 Gets the ban information for all banned members in the specified server.
 
