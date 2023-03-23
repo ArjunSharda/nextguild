@@ -9,7 +9,7 @@ Embed
 
 .. code-block:: python
 
-    Embed = embed(title=None, description=None, color=None, author=None, author_url=None, author_icon=None, footer=None, footer_icon=None, thumbnail=None, image=None, fields=None)
+    yourembed = Embed(title, description, color, author, author_url, author_icon, footer, footer_icon, thumbnail, image, fields)
                      
 The constructor for the Embed class. Initializes an embed object with the provided parameters.
 
