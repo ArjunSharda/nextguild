@@ -711,11 +711,16 @@ class Embed:
 
 class Message:
     def __init__(self, eventData):
+        print(eventData)
         self.content = eventData['message']['content']
         self.authorId = eventData['message']['createdBy']
         self.channelId = eventData['message']['channelId']
         self.guildId = eventData['serverId']
         self.messageId = eventData['message']['id']
+        try:
+          self.mentions = eventData['message']['mentions']['users']
+        except:
+          self.mentions = []
 
 
 class Events:
