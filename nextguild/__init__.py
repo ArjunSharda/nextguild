@@ -82,12 +82,7 @@ class Client:
         response = self.request('GET', url)
         return response
 
-    def get_channel_messages(self,
-                             channel_id,
-                             limit=None,
-                             before=None,
-                             after=None,
-                             includePrivate=None):
+    def get_channel_messages(self,channel_id,limit=None,before=None,after=None,includePrivate=None):
         url = f'{self.base_url}/channels/{channel_id}/messages'
         params = {}
         if limit:
@@ -126,13 +121,7 @@ class Client:
                 raise ValueError(
                     f'Request failed with status {response.status_code}: {data}')
 
-    def create_channel(self,
-                       name,
-                       type,
-                       serverid,
-                       groupid=None,
-                       categoryid=None,
-                       ispublic=None):
+    def create_channel(self,name,type,serverid,groupid=None,categoryid=None,ispublic=None):
         data = {'name': name, 'type': type}
         url = f'{self.base_url}/channels'
         if categoryid:
@@ -820,8 +809,7 @@ class Events:
             await handler()
 
     async def start(self):
-        async with websockets.connect('wss://www.guilded.gg/websocket/v1',
-                                      extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
+        async with websockets.connect('wss://www.guilded.gg/websocket/v1',extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
             await self._handle_ready()
             while True:
                 data = await websocket.recv()
