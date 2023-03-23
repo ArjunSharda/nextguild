@@ -8,7 +8,7 @@ create_event
 
 .. code-block:: python
 
-    bot.create_event(channelid=None, title=None, description=None, location=None, startsAt=None, url=None, color=None, isAllDay=None, rsvpLimit=None, autofillWaitlist=None, duration=None, isPrivate=None, roleIds=None, repeat_type=None, every=None, endsAfterOccurences=None, endDate=None)
+    create_event(channelid, title, description, location, startsAt, url, color, isAllDay, rsvpLimit, autofillWaitlist, duration, isPrivate, roleIds, repeat_type, every, endsAfterOccurences, endDate)
     
     
  
