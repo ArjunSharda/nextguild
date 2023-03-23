@@ -18,7 +18,7 @@ Example Bot
     async def pingcommand(message):
         if message.content == "!ping":
             bot.send_message(message.channelId, "Pong!")
-    bot.run()
+    events.run()
 
 This bot will respond to any message that says "!ping" with "Pong!".
 
