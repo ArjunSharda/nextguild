@@ -8,7 +8,7 @@ send_message
 
 .. code-block:: python
 
-    send_message(channel_id, content=None, embed=None, isprivate=None)
+    send_message(channel_id, content, embed, isprivate)
 
 Send a message to the specified channel. Optionally, provide content and/or an embed.
 
@@ -30,7 +30,7 @@ send_reply
 
 .. code-block:: python
 
-    send_reply(channel_id, content, replyids, embed=None, isprivate=None)
+    send_reply(channel_id, content, replyids, embed, isprivate)
 
 Send a reply to a message in the specified channel.
 
@@ -54,7 +54,7 @@ edit_message
 
 .. code-block:: python
 
-    edit_message(channel_id, message_id, content, embed, isprivate=None)
+    edit_message(channel_id, message_id, content, embed, isprivate)
 
 Edit an existing message in the specified channel.
 
@@ -116,7 +116,7 @@ get_channel_messages
 
 .. code-block:: python
 
-    get_channel_messages(channel_id, limit=None, before=None, after=None, includePrivate=None)
+    get_channel_messages(channel_id, limit, before, after, includePrivate)
 
 Retrieves a list of messages from a channel.
 
