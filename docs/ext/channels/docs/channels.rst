@@ -23,7 +23,7 @@ Creates a new channel.
 +-------------+---------------+-----------------------------------------------+
 | groupid     | str, optional | The ID of the group to create the channel in. |
 +-------------+---------------+-----------------------------------------------+
-| categoryid  | str, optional |The ID of the category to create the channel in|
+| categoryid  | int, optional |The ID of the category to create the channel in|
 +-------------+---------------+-----------------------------------------------+
 | ispublic    | bool, optional| Whether the channel is public or not.         |
 +-------------+---------------+-----------------------------------------------+
