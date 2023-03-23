@@ -1,4 +1,4 @@
-doccomments.rst
+Document Comments
 ===============
 
 This section provides an overview of the document comment-related methods available in the NextGuild library. The following methods are used to interact with document comments:
