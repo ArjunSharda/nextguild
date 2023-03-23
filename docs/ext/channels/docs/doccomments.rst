@@ -15,14 +15,14 @@ Creates a comment on a document.
 +-------------+--------+----------------------------------------+
 | Parameter   | Type   | Description                            |
 +=============+========+========================================+
-| channelid   | str    | The ID of the channel the doc is in.   |
+| channelid   |str     | The ID of the channel the doc is in.   |
 +-------------+--------+----------------------------------------+
-| docid       | str    | The ID of the document to comment on.  |
+| docid       |int     | The ID of the document to comment on.  |
 +-------------+--------+----------------------------------------+
-| content     | str,   | The content of the comment.            |
+| content     |str,    | The content of the comment.            |
 |             |optional|                                        |
 +-------------+--------+----------------------------------------+
-| embed       | Embed, | The embed of the comment.              |
+| embed       |Embed,  | The embed of the comment.              |
 |             |optional|                                        |
 +-------------+--------+----------------------------------------+
 
@@ -38,16 +38,16 @@ Updates a document comment.
 +-------------+--------+-----------------------------------------+
 | Parameter   | Type   | Description                             |
 +=============+========+=========================================+
-| channelid   | str    | The ID of the channel the doc is in.    |
+| channelid   |str     | The ID of the channel the doc is in.    |
 +-------------+--------+-----------------------------------------+
-| docid       | str    |The ID of the document the comment is in.|
+| docid       |int     |The ID of the document the comment is in.|
 +-------------+--------+-----------------------------------------+
-| commentid   | str    | The ID of the comment to update.        |
+| commentid   |int     | The ID of the comment to update.        |
 +-------------+--------+-----------------------------------------+
-| content     | str,   | The new content of the comment.         |
+| content     |str,    | The new content of the comment.         |
 |             |optional|                                         |
 +-------------+--------+-----------------------------------------+
-| embed       | Embed, | The new embed of the comment.           |
+| embed       |Embed,  | The new embed of the comment.           |
 |             |optional|                                         |
 +-------------+--------+-----------------------------------------+
 
@@ -63,9 +63,9 @@ Deletes a document comment.
 +-------------+--------+-----------------------------------------+
 | Parameter   | Type   | Description                             |
 +=============+========+=========================================+
-| channelid   | str    | The ID of the channel the doc is in.    |
+| channelid   |str     | The ID of the channel the doc is in.    |
 +-------------+--------+-----------------------------------------+
-| docid       | str    |The ID of the document the comment is in.|
+| docid       |int     |The ID of the document the comment is in.|
 +-------------+--------+-----------------------------------------+
-| commentid   | str    | The ID of the comment to delete.        |
+| commentid   |int     | The ID of the comment to delete.        |
 +-------------+--------+-----------------------------------------+
