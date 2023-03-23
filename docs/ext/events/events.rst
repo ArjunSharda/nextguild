@@ -25,6 +25,22 @@ Example usage:
         print(message.authorId)
         
         
+on_message_update
+-----------
+A decorator used for when a message is updated
+
+Example usage:
+
+.. code-block:: python
+
+    client = Client("YOUR_TOKEN_HERE")
+    events = Events(client)
+    
+    
+    @events.on_message_update
+    async def your_sample_project(message):
+      if message.content == "!ping":
+        print(message.authorId)
 
 
 message
