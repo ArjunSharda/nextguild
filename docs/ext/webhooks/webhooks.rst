@@ -8,7 +8,7 @@ create_webhook
 
 .. code-block:: python
 
-    bot.create_webhook(serverid, channelid, name)
+    create_webhook(serverid, channelid, name)
 
 Creates a webhook in the specified channel.
 
@@ -27,7 +27,7 @@ update_webhook
 
 .. code-block:: python
 
-    bot.update_webhook(serverid, webhookid, name, channelid)
+    update_webhook(serverid, webhookid, name, channelid)
 
 Update a specified webhook.
 
@@ -49,7 +49,7 @@ delete_webhook
 
 .. code-block:: python
 
-    bot.delete_webhook(serverid, webhookid)
+    delete_webhook(serverid, webhookid)
 
 Delete a specified webhook.
 
@@ -66,7 +66,7 @@ get_webhook
 
 .. code-block:: python
 
-    bot.get_webhook(serverid, webhookid)
+    get_webhook(serverid, webhookid)
 
 Get a webhook in the specified server.
 
@@ -82,7 +82,8 @@ get_webhooks
 ------------
 
 .. code-block:: python
-    bot.get_webhooks(serverid, channelid)
+
+    get_webhooks(serverid, channelid)
     
 Get the webhooks of a specified channel.
 
@@ -99,7 +100,8 @@ send_webhook_message
 --------------------
 
 .. code-block:: python
-    bot.send_webhook_message(serverid, webhookid, content=None, embed=None)
+
+    send_webhook_message(serverid, webhookid, content, embed)
     
 Send a message using a webhook.
 
