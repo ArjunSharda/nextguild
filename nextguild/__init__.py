@@ -711,11 +711,27 @@ class Embed:
 
 class Message:
     def __init__(self, eventData):
-        self.content = eventData['message']['content']
-        self.authorId = eventData['message']['createdBy']
-        self.channelId = eventData['message']['channelId']
-        self.guildId = eventData['serverId']
-        self.messageId = eventData['message']['id']
+        print(eventData)
+        try:
+          self.content = eventData['message']['content']
+        except:
+          self.content = []
+        try:
+          self.authorId = eventData['message']['createdBy']
+        except:
+          self.authorId = []
+        try:
+          self.channelId = eventData['message']['channelId']
+        except:
+          self.channelId = []
+        try:
+          self.guildId = eventData['serverId']
+        except:
+          self.guildId = []
+        try:
+          self.messageId = eventData['message']['id']
+        except:
+          self.messageId = []
         try:
           self.mentions = eventData['message']['mentions']['users']
         except:
@@ -726,6 +742,7 @@ class Events:
     def __init__(self, client):
         self._message_create_handlers = []
         self._message_update_handlers = []
+        self._message_delete_handlers = []
         self._member_join_handlers = []
         self._member_leave_handlers = []
         self._ready_handlers = []
@@ -755,6 +772,19 @@ class Events:
     async def _handle_update_message(self, eventData):
         message = Message(eventData)
         for handler in self._message_update_handlers:
+            await handler(message)
+            
+    def on_message_delete(self, func):
+        @wraps(func)
+        def wrapper(message):
+            return func(message)
+
+        self._message_delete_handlers.append(wrapper)
+        return wrapper
+      
+    async def _handle_delete_message(self, eventData):
+        message = Message(eventData)
+        for handler in self._message_delete_handlers:
             await handler(message)
 
     def on_member_join(self, func):
@@ -810,6 +840,8 @@ class Events:
                     await self._handle_create_message(eventData)
                 if eventType == 'ChatMessageUpdated':
                     await self._handle_update_message(eventData)
+                if eventType == 'ChatMessageDeleted':
+                    await self._handle_delete_message(eventData)
                 if eventType == 'ServerMemberJoined':
                     await self._handle_member_join(eventData)
                 if eventType == 'ServerMemberRemoved':
