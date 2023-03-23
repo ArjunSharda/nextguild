@@ -8,7 +8,7 @@ send_message
 
 .. code-block:: python
 
-    send_message(channel_id, content, embed, isprivate)
+    send_message(channel_id, content, embed, isPrivate)
 
 Send a message to the specified channel. Optionally, provide content and/or an embed.
 
@@ -22,7 +22,7 @@ Send a message to the specified channel. Optionally, provide content and/or an e
 | embed       | object,       | An embed object to be sent with the        |
 |             | optional      | message.                                   |
 +-------------+---------------+--------------------------------------------+
-| isprivate   | bool          | If the message should be private or not.   |
+| isPrivate   | bool          | If the message should be private or not.   |
 +-------------+---------------+--------------------------------------------+
 
 send_reply
@@ -30,7 +30,7 @@ send_reply
 
 .. code-block:: python
 
-    send_reply(channel_id, content, replyids, embed, isprivate)
+    send_reply(channel_id, content, replyids, embed, isPrivate)
 
 Send a reply to a message in the specified channel.
 
@@ -46,7 +46,7 @@ Send a reply to a message in the specified channel.
 | embed       | list    | An embed object to be sent with the     |
 |             |         |    message                              |
 +-------------+---------+-----------------------------------------+
-| isprivate   | bool    | If the message should be private or not.|
+| isPrivate   | bool    | If the message should be private or not.|
 +-------------+---------+-----------------------------------------+
 
 edit_message
@@ -54,7 +54,7 @@ edit_message
 
 .. code-block:: python
 
-    edit_message(channel_id, message_id, content, embed, isprivate)
+    edit_message(channel_id, message_id, content, embed, isPrivate)
 
 Edit an existing message in the specified channel.
 
@@ -72,7 +72,7 @@ Edit an existing message in the specified channel.
 | embed       |object,  | An embed object to be sent with         |
 |             |optional |  the message                            |
 +-------------+---------+-----------------------------------------+
-| isprivate   | bool    | If the message should be private or not.|
+| isPrivate   | bool    | If the message should be private or not.|
 +-------------+---------------+-----------------------------------+
 
 delete_message
