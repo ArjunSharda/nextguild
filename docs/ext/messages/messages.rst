@@ -66,10 +66,11 @@ Edit an existing message in the specified channel.
 +-------------+---------+-----------------------------------------+
 | message_id  | str     | The ID of the message to edit.          |
 +-------------+---------+-----------------------------------------+
-| content     | optional,str| The updated content of the message. |
+| content     |optional,|     The updated content of the message. |
+|             | str     |                                         |
 +-------------+---------+-----------------------------------------+
-| embed       | optional, object | An embed object to be sent with|
-|             |                  |  the message                   |
+| embed       |object,  | An embed object to be sent with         |
+|             |optional |  the message                            |
 +-------------+---------+-----------------------------------------+
 | isprivate   | bool    | If the message should be private or not.|
 +-------------+---------------+-----------------------------------+
