@@ -8,7 +8,7 @@ award_xp
 
 .. code-block:: python
 
-    bot.award_xp(serverid, userid, amount)
+    award_xp(serverid, userid, amount)
 
 Awards XP to a member in the specified server.
 
@@ -27,7 +27,7 @@ get_xp
 
 .. code-block:: python
 
-    bot.get_xp(serverid, userid)
+    get_xp(serverid, userid)
 
 Gets the current XP of a member in the specified server.
 
@@ -44,7 +44,7 @@ set_xp
 
 .. code-block:: python
 
-    bot.set_xp(serverid, userid, amount)
+    set_xp(serverid, userid, amount)
 
 Sets the XP of a member in the specified server.
 
@@ -63,7 +63,7 @@ award_xp_to_role
 
 .. code-block:: python
 
-    bot.award_xp_to_role(serverid, roleid, amount)
+    award_xp_to_role(serverid, roleid, amount)
 
 Awards XP to all members with a specific role in the specified server.
 
@@ -72,7 +72,7 @@ Awards XP to all members with a specific role in the specified server.
 +===========+======+==========================================+
 | serverid  | str  | The ID of the server                     |
 +-----------+------+------------------------------------------+
-| roleid    | str  | The ID of the role to award XP to       |
+| roleid    | int  | The ID of the role to award XP to       |
 +-----------+------+------------------------------------------+
 | amount    | int  | The amount of XP to award               |
 +-----------+------+------------------------------------------+
