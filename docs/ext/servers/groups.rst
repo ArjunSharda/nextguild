@@ -8,7 +8,7 @@ add_group_member
 
 .. code-block:: python
 
-    bot.add_group_member(groupid, userid)
+    add_group_member(groupid, userid)
 
 Adds a member to the specified group.
 
@@ -25,7 +25,7 @@ remove_group_member
 
 .. code-block:: python
 
-    bot.remove_group_member(groupid, userid)
+    remove_group_member(groupid, userid)
 
 Removes a member from the specified group.
 
