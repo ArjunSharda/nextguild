@@ -76,6 +76,6 @@ Updates a channel.
 +-------------+--------+----------------------------------------+
 | topic       | str    | The new topic of the channel.          |  
 +-------------+--------+----------------------------------------+
-| ispublic    | bool,  | Whether the channel is public          |
+| ispublic    |bool,   | Whether the channel is public          |
 |             |optional|  or not.                               |
 +-------------+--------+----------------------------------------+
