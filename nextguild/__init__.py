@@ -727,10 +727,9 @@ class Events:
         self.client = client
 
     def on_message(self, *args, **kwargs):
-        def decorator(func):
-            @wraps(func)
-            def wrapper(message):
-                return func(message, *args, **kwargs)
+        @wraps(func)
+        def wrapper(message):
+            return func(message, *args, **kwargs)
 
             self._message_handlers.append(wrapper)
             return wrapper
