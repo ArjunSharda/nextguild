@@ -9,7 +9,7 @@ create_listitem
 
 .. code-block:: python
 
-    bot.create_listitem(channelid, title, note=None)
+    create_listitem(channelid, title, note=None)
 
 Creates a new list item in the specified channel.
 
@@ -29,7 +29,7 @@ get_listitem
 
 .. code-block:: python
 
-    bot.get_listitem(channelid, listitemid)
+    get_listitem(channelid, listitemid)
 
 Retrieves a list item from the specified channel.
 
@@ -46,7 +46,7 @@ get_listitems
 
 .. code-block:: python
 
-    bot.get_listitems(channelid)
+    get_listitems(channelid)
 
 Retrieves all list items from the specified channel.
 
@@ -62,7 +62,7 @@ delete_listitem
 
 .. code-block:: python
 
-    bot.delete_listitem(channelid, listitemid)
+    delete_listitem(channelid, listitemid)
 
 Deletes a list item from the specified channel.
 
@@ -79,7 +79,7 @@ update_listitem
 
 .. code-block:: python
 
-    bot.update_listitem(channelid, listitemid, title, note=None)
+    update_listitem(channelid, listitemid, title, note=None)
 
 Updates a list item in the specified channel.
 
@@ -102,7 +102,7 @@ complete_listitem
 
 .. code-block:: python
 
-    bot.complete_listitem(channelid, listitemid)
+    complete_listitem(channelid, listitemid)
 
 Marks a list item as complete in the specified channel.
 
@@ -121,7 +121,7 @@ uncomplete_listitem
 
 .. code-block:: python
 
-    bot.uncomplete_listitem(channelid, listitemid)
+    uncomplete_listitem(channelid, listitemid)
 
 
 +------------+------+--------------------------------------------+
