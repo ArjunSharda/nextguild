@@ -8,7 +8,7 @@ create_reaction
 
 .. code-block:: python
 
-    bot.create_reaction(channelid, contentid, emoteid)
+    create_reaction(channelid, messageid, emoteid)
 
 React to a specified message with a specified emoteid.
 
@@ -18,9 +18,9 @@ React to a specified message with a specified emoteid.
 | channel_id  | str           | The ID of the channel where the message is |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
-| contentid   | str           | The content ID of the message.             |
+| messageid   | str           | The ID of the message.                     |
 +-------------+---------------+--------------------------------------------+
-| emoteid     | str           | The emote ID to react with                 |
+| emoteid     | int           | The emote ID to react with                 |
 +-------------+---------------+--------------------------------------------+
 
 delete_reaction
@@ -28,7 +28,7 @@ delete_reaction
 
 .. code-block:: python
 
-    bot.delete_reaction(channelid, contentid, emoteid)
+    delete_reaction(channelid, messageid, emoteid)
 
 Delete a reaction from a message.
 
@@ -38,9 +38,9 @@ Delete a reaction from a message.
 | channel_id  | str           | The ID of the channel where the message is |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
-| contentid   | str           | The content ID of the message.             |
+| messageid   | str           | The ID of the message.                     |
 +-------------+---------------+--------------------------------------------+
-| emoteid     | str           | The emote ID to delete the reaction        |
+| emoteid     | int           | The emote ID to delete the reaction        |
 +-------------+---------------+--------------------------------------------+
 
 create_topic_reaction
@@ -48,7 +48,7 @@ create_topic_reaction
 
 .. code-block:: python
 
-    bot.create_topic_reaction(channelid, topicid, emoteid)
+    create_topic_reaction(channelid, topicid, emoteid)
 
 Creates a reaction on the topic.
 
@@ -58,9 +58,9 @@ Creates a reaction on the topic.
 | channel_id  | str           | The ID of the channel where the message is |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
-| topicid     | str           | The topic ID to react onto.                |
+| topicid     | int           | The topic ID to react onto.                |
 +-------------+---------------+--------------------------------------------+
-| emoteid     | str           | The emote ID to react with                 |
+| emoteid     | int           | The emote ID to react with                 |
 +-------------+---------------+--------------------------------------------+
 
 delete_topic_reaction
@@ -68,7 +68,7 @@ delete_topic_reaction
 
 .. code-block:: python
 
-    bot.delete_topic_reaction(channelid, topicid, emoteid)
+    delete_topic_reaction(channelid, topicid, emoteid)
 
 Deletes a reaction from the topic.
 
@@ -78,9 +78,9 @@ Deletes a reaction from the topic.
 | channel_id  | str           | The ID of the channel where the message is |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
-| topicid     | str           | The topic ID to delete the reaction from.  |
+| topicid     | int           | The topic ID to delete the reaction from.  |
 +-------------+---------------+--------------------------------------------+
-| emoteid     | str           | The emote ID to delete the reaction        |
+| emoteid     | int           | The emote ID to delete the reaction        |
 +-------------+---------------+--------------------------------------------+
 
 create_topic_comment_reaction
@@ -88,7 +88,7 @@ create_topic_comment_reaction
 
 .. code-block:: python
 
-    bot.create_topic_comment_reaction(channelid, topicid, topiccommentid, emoteid)
+    create_topic_comment_reaction(channelid, topicid, topiccommentid, emoteid)
 
 Creates a reaction on a topic's comment.
 
@@ -98,11 +98,11 @@ Creates a reaction on a topic's comment.
 | channel_id  | str           | The ID of the channel where the comment is |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
-| topicid     | str           |The topic ID where the comment is located in|
+| topicid     | int           |The topic ID where the comment is located in|
 +-------------+---------------+--------------------------------------------+
-|topiccomentid|  str          |  The topic's comment ID to react to.       |
+| commentid   | int           | The topic's comment ID to react to.        |
 +-------------+---------------+--------------------------------------------+
-| emoteid     | str           | The emote ID to react with                 |
+| emoteid     | int           | The emote ID to react with                 |
 +-------------+---------------+--------------------------------------------+
 
 delete_topic_comment_reaction
@@ -110,7 +110,7 @@ delete_topic_comment_reaction
 
 .. code-block:: python
 
-    bot.delete_topic_comment_reaction(channelid, topicid, topiccommentid, emoteid)
+    delete_topic_comment_reaction(channelid, topicid, topiccommentid, emoteid)
 
 Deletes a reaction on a topic's comment.
 
@@ -120,11 +120,11 @@ Deletes a reaction on a topic's comment.
 | channel_id  | str           | The ID of the channel where the comment is |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
-| topicid     | str           |The topic ID where the comment is located in|
+| topicid     | int           |The topic ID where the comment is located in|
 +-------------+---------------+--------------------------------------------+
-|topiccomentid|  str          |The comment ID to delete the reaction from  |
+| commentid   | int           | The comment ID to delete the reaction from |
 +-------------+---------------+--------------------------------------------+
-| emoteid     | str           | The emote ID to delete the reaction        |
+| emoteid     | int           | The emote ID to delete the reaction        |
 +-------------+---------------+--------------------------------------------+
 
 create_event_reaction
@@ -132,7 +132,7 @@ create_event_reaction
 
 .. code-block:: python
 
-    bot.create_event_reaction(channelid, eventid, emoteid)
+    create_event_reaction(channelid, eventid, emoteid)
 
 Create a reaction on a event.
 
@@ -142,9 +142,9 @@ Create a reaction on a event.
 | channel_id  | str           | The ID of the channel where the event is   |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
-| eventid     | str           |The event ID, to react to                   |
+| eventid     | int           | The event ID to react to                   |
 +-------------+---------------+--------------------------------------------+
-| emoteid     | str           | The emote ID to create the reaction        |
+| emoteid     | int           | The emote ID to create the reaction        |
 +-------------+---------------+--------------------------------------------+
 
 delete_event_reaction
@@ -152,7 +152,7 @@ delete_event_reaction
 
 .. code-block:: python
 
-    bot.delete_event_reaction(channelid, eventid, emoteid)
+    delete_event_reaction(channelid, eventid, emoteid)
 
 Delete a reaction on a event.
 
@@ -162,9 +162,9 @@ Delete a reaction on a event.
 | channel_id  | str           | The ID of the channel where the event is   |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
-| eventid     | str           |The event ID, to delete the reaction from   |
+| eventid     | int           | The event ID, to delete the reaction from  |
 +-------------+---------------+--------------------------------------------+
-| emoteid     | str           | The emote ID to delete the reaction        |
+| emoteid     | int           | The emote ID to delete the reaction        |
 +-------------+---------------+--------------------------------------------+
 
 create_event_comment_reaction
@@ -172,19 +172,19 @@ create_event_comment_reaction
 
 .. code-block:: python
 
-    bot.create_event_comment_reaction(channelid, eventid, commentid, emoteid)
+    create_event_comment_reaction(channelid, eventid, commentid, emoteid)
 
 Create a reaction on a event's comment.
 
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
 +=============+===============+============================================+
-| channel_id  | str           | The ID of the channel where the comment is |
+| channelid   | str           | The ID of the channel where the comment is |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
 | eventid     | str           |The event ID where the comment is located in|
 +-------------+---------------+--------------------------------------------+
-|commentid    |  str          |The comment ID to create the reaction on    |
+| commentid   | int           | The comment ID to create the reaction on   |
 +-------------+---------------+--------------------------------------------+
 | emoteid     | str           | The emote ID to create the reaction        |
 +-------------+---------------+--------------------------------------------+
@@ -194,20 +194,103 @@ delete_event_comment_reaction
 
 .. code-block:: python
 
-    bot.delete_event_comment_reaction(channelid, eventid, commentid, emoteid)
+    delete_event_comment_reaction(channelid, eventid, commentid, emoteid)
 
 Delete a reaction on a event's comment.
 
 +-------------+---------------+--------------------------------------------+
 | Parameter   | Type          | Description                                |
 +=============+===============+============================================+
-| channel_id  | str           | The ID of the channel where the comment is |
+| channelid   | str           | The ID of the channel where the comment is |
 |             |               |   in.                                      |
 +-------------+---------------+--------------------------------------------+
-| eventid     | str           |The event ID where the comment is located in|
+| eventid     | int           |The event ID where the comment is located in|
 +-------------+---------------+--------------------------------------------+
-|commentid.   |  str          |The comment ID to delete the reaction from  |
+| commentid   | int           |The comment ID to delete the reaction from  |
 +-------------+---------------+--------------------------------------------+
-| emoteid     | str           | The emote ID to delete the reaction        |
+| emoteid     | int           | The emote ID to delete the reaction        |
 +-------------+---------------+--------------------------------------------+
 
+create_doc_reaction
+---------------------
+
+.. code-block:: python
+
+    create_doc_reaction(channelid, docid, emoteid)
+
+Create a reaction on a doc.
+
++-------------+---------------+--------------------------------------------+
+| Parameter   | Type          | Description                                |
++=============+===============+============================================+
+| channelid   | str           | The ID of the channel where the doc is     |
+|             |               |   in.                                      |
++-------------+---------------+--------------------------------------------+
+| docid       | int           | The doc ID to react to                     |
++-------------+---------------+--------------------------------------------+
+| emoteid     | int           | The emote ID to create the reaction        |
++-------------+---------------+--------------------------------------------+
+
+delete_doc_reaction
+---------------------
+
+.. code-block:: python
+
+    delete_doc_reaction(channelid, docid, emoteid)
+
+Delete a reaction on a doc.
+
++-------------+---------------+--------------------------------------------+
+| Parameter   | Type          | Description                                |
++=============+===============+============================================+
+| channel_id  | str           | The ID of the channel where the doc is     |
+|             |               |   in.                                      |
++-------------+---------------+--------------------------------------------+
+| docid       | int           | The doc ID, to delete the reaction from    |
++-------------+---------------+--------------------------------------------+
+| emoteid     | int           | The emote ID to delete the reaction        |
++-------------+---------------+--------------------------------------------+
+
+create_doc_comment_reaction
+-----------------------------
+
+.. code-block:: python
+
+    create_doc_comment_reaction(channelid, docid, commentid, emoteid)
+
+Create a reaction on a doc's comment.
+
++-------------+---------------+--------------------------------------------+
+| Parameter   | Type          | Description                                |
++=============+===============+============================================+
+| channelid   | str           | The ID of the channel where the comment is |
+|             |               |   in.                                      |
++-------------+---------------+--------------------------------------------+
+| docid       | str           |The doc ID where the comment is located in  |
++-------------+---------------+--------------------------------------------+
+| commentid   | int           | The comment ID to create the reaction on   |
++-------------+---------------+--------------------------------------------+
+| emoteid     | str           | The emote ID to create the reaction        |
++-------------+---------------+--------------------------------------------+
+
+delete_doc_comment_reaction
+-----------------------------
+
+.. code-block:: python
+
+    delete_event_comment_reaction(channelid, eventid, commentid, emoteid)
+
+Delete a reaction on a doc's comment.
+
++-------------+---------------+--------------------------------------------+
+| Parameter   | Type          | Description                                |
++=============+===============+============================================+
+| channelid   | str           | The ID of the channel where the comment is |
+|             |               |   in.                                      |
++-------------+---------------+--------------------------------------------+
+| docid       | int           |The doc ID where the comment is located in  |
++-------------+---------------+--------------------------------------------+
+|commentid    | int           |The comment ID to delete the reaction from  |
++-------------+---------------+--------------------------------------------+
+| emoteid     | int           | The emote ID to delete the reaction        |
++-------------+---------------+--------------------------------------------+
