@@ -1,6 +1,10 @@
 Users
-----------------
+================
+
 This section provides an overview of the user-related methods available in the NextGuild library. The following methods are used to interact with users:
+
+Get Social Link
+------------
 
 .. code-block:: python
 
@@ -46,7 +50,8 @@ These are the available types:
 | Epic Games          | ``epic``               |
 +---------------------+------------------------+
 
-
+Get Bot User ID
+------------
 
 .. code-block:: python
 
