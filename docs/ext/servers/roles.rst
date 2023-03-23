@@ -10,7 +10,7 @@ add_role
 
 .. code-block:: python
 
-    bot.add_role(serverid, userid, roleid)
+    add_role(serverid, userid, roleid)
 
 Adds a role to a member in the specified server.
 
@@ -21,7 +21,7 @@ Adds a role to a member in the specified server.
 +-----------+------+----------------------------------------------+
 | userid    | str  | The ID of the member to add the role to      |
 +-----------+------+----------------------------------------------+
-| roleid    | str  | The ID of the role to add                    |
+| roleid    | int  | The ID of the role to add                    |
 +-----------+------+----------------------------------------------+
 
 remove_role
@@ -29,7 +29,7 @@ remove_role
 
 .. code-block:: python
 
-    bot.remove_role(serverid, userid, roleid)
+    remove_role(serverid, userid, roleid)
 
 Removes a role from a member in the specified server.
 
@@ -40,7 +40,7 @@ Removes a role from a member in the specified server.
 +-----------+------+----------------------------------------------+
 | userid    | str  | The ID of the member to remove the role from |
 +-----------+------+----------------------------------------------+
-| roleid    | str  | The ID of the role to remove                 |
+| roleid    | int  | The ID of the role to remove                 |
 +-----------+------+----------------------------------------------+
 
 
@@ -49,7 +49,7 @@ get_member_roles
 
 .. code-block:: python
 
-    bot.get_member_roles(serverid, userid)
+    get_member_roles(serverid, userid)
 
 Gets the roles of a member in the specified server.
 
