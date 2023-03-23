@@ -20,7 +20,7 @@ Example usage:
     
     
     @events.on_message
-    async def your_sample_project(message):
+    async def on_message_example(message):
       if message.content == "!ping":
         print(message.authorId)
         
@@ -38,7 +38,7 @@ Example usage:
     
     
     @events.on_message_update
-    async def your_sample_project(message):
+    async def on_message_update_example(message):
       if message.content == "!ping":
         print(message.authorId)
 
@@ -75,7 +75,7 @@ Example usage:
     
     
     @events.on_member_join
-    async def your_sample_project(member):
+    async def on_member_join_example(member):
         client.send_message("YOUR_CHANNEL_ID_HERE", "A member has joined the server!")
         
         
@@ -93,7 +93,7 @@ Example usage:
     
     
     @events.on_member_leave
-    async def your_sample_project(member):
+    async def on_member_leave_example(member):
         client.send_message("YOUR_CHANNEL_ID_HERE", "A member has left the server!")
 
 
