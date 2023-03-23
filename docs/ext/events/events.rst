@@ -42,6 +42,53 @@ Example usage:
       if message.content == "!ping":
         print(message.authorId)
 
+on_message_delete
+-----------
+A decorator used for when a message is deleted
+
+Example usage:
+
+.. code-block:: python
+
+    client = Client("YOUR_TOKEN_HERE")
+    events = Events(client)
+    
+    
+    @events.on_message_delete
+    async def on_message_delete_example(message):
+      print(f'{message.authorId} just deleted a message!')
+
+on_member_banned
+-----------
+A decorator used for when a member is banned
+
+Example usage:
+
+.. code-block:: python
+
+    client = Client("YOUR_TOKEN_HERE")
+    events = Events(client)
+    
+    
+    @events.on_member_ban
+    async def on_member_banned_example(member):
+      print('Someone just got banned!')
+
+on_member_unbanned
+-----------
+A decorator used for when a member is unbanned
+
+Example usage:
+
+.. code-block:: python
+
+    client = Client("YOUR_TOKEN_HERE")
+    events = Events(client)
+    
+    
+    @events.on_member_unbanned
+    async def on_member_unbanned_example(member):
+      print('Someone just got unbanned!')
 
 message
 -------
@@ -61,7 +108,8 @@ The message class.
 +-----------+------+--------------------------------------------+
 | messageId | int  | The ID of the message sent                 |
 +-----------+------+--------------------------------------------+
-
+| mentions  | arr  | The mentions in the message                |
++-----------+------+--------------------------------------------+
 
 on_member_join
 --------------
