@@ -19,9 +19,11 @@ Creates a comment on a document.
 +-------------+--------+----------------------------------------+
 | docid       | str    | The ID of the document to comment on.  |
 +-------------+--------+----------------------------------------+
-| content     | str, optional | The content of the comment.     |
+| content     | str,   | The content of the comment.            |
+|             |optional|                                        |
 +-------------+--------+----------------------------------------+
-| embed       | Embed, optional | The embed of the comment.     |
+| embed       | Embed, | The embed of the comment.              |
+|             |optional|                                        |
 +-------------+--------+----------------------------------------+
 
 update_doc_comment
@@ -42,9 +44,11 @@ Updates a document comment.
 +-------------+--------+-----------------------------------------+
 | commentid   | str    | The ID of the comment to update.        |
 +-------------+--------+-----------------------------------------+
-| content     | str, optional | The new content of the comment.  |
+| content     | str,   | The new content of the comment.         |
+|             |optional|                                         |
 +-------------+--------+-----------------------------------------+
-| embed       | Embed, optional | The new embed of the comment.  |
+| embed       | Embed, | The new embed of the comment.           |
+|             |optional|                                         |
 +-------------+--------+-----------------------------------------+
 
 delete_doc_comment
