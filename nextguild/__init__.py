@@ -712,15 +712,16 @@ class Embed:
 class Message:
     def __init__(self, eventData):
         self.content = eventData['message']['content']
-        self.channelId = eventData['message']['channelId']
         self.authorId = eventData['message']['createdBy']
+        self.channelId = eventData['message']['channelId']
         self.guildId = eventData['serverId']
         self.messageId = eventData['message']['id']
 
 
 class Events:
     def __init__(self, client):
-        self._message_handlers = []
+        self._message_create_handlers = []
+        self._message_update_handlers = []
         self._member_join_handlers = []
         self._member_leave_handlers = []
         self._ready_handlers = []
@@ -731,12 +732,25 @@ class Events:
         def wrapper(message):
             return func(message)
 
-        self._message_handlers.append(wrapper)
+        self._message_create_handlers.append(wrapper)
         return wrapper
-
-    async def _handle_message(self, eventData):
+      
+    async def _handle_create_message(self, eventData):
         message = Message(eventData)
-        for handler in self._message_handlers:
+        for handler in self._message_create_handlers:
+            await handler(message)
+  
+    def on_message_update(self, func):
+        @wraps(func)
+        def wrapper(message):
+            return func(message)
+
+        self._message_update_handlers.append(wrapper)
+        return wrapper
+      
+    async def _handle_update_message(self, eventData):
+        message = Message(eventData)
+        for handler in self._message_update_handlers:
             await handler(message)
 
     def on_member_join(self, func):
@@ -789,13 +803,14 @@ class Events:
                     continue
 
                 if eventType == 'ChatMessageCreated':
-                    await self._handle_message(eventData)
-
+                    await self._handle_create_message(eventData)
+                if eventType == 'ChatMessageUpdated':
+                    await self._handle_update_message(eventData)
                 if eventType == 'ServerMemberJoined':
                     await self._handle_member_join(eventData)
-
                 if eventType == 'ServerMemberRemoved':
                     await self._handle_member_leave(eventData)
 
     def run(self):
         asyncio.run(self.start())
+
