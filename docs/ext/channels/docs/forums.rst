@@ -8,7 +8,7 @@ create_forum_post
 
 .. code-block:: python
 
-    bot.create_forum_post(channelid, title, content=None, embed=None)
+    create_forum_post(channelid, title, content, embed)
 
 Create a forum post with a specified title and optional content or embed.
 
@@ -29,7 +29,7 @@ get_forum_topics
 
 .. code-block:: python
 
-    bot.get_forum_topics(channelid, before=None, limit=None)
+    bot.get_forum_topics(channelid, before, limit)
 
 Get a list of forum topics in a specified channel.
 
@@ -48,7 +48,7 @@ get_forum_topic
 
 .. code-block:: python
 
-    bot.get_forum_topic(channelid, forumtopicid)
+    get_forum_topic(channelid, forumtopicid)
 
 Get a specific forum topic using the topic ID.
 
@@ -65,7 +65,7 @@ update_forum_topic
 
 .. code-block:: python
 
-    bot.update_forum_topic(channelid, forumtopicid, title=None, content=None, embed=None)
+    update_forum_topic(channelid, forumtopicid, title, content, embed)
 
 Update a forum topic with a new title, content, or embed.
 
@@ -88,7 +88,7 @@ delete_forum_topic
 
 .. code-block:: python
 
-    bot.delete_forum_topic(channelid, forumtopicid)
+    delete_forum_topic(channelid, forumtopicid)
 
 Delete a forum topic using the topic ID.
 
@@ -107,7 +107,7 @@ pin_forum_topic
 
 .. code-block:: python
 
-    bot.pin_forum_topic(channelid, forumtopicid)
+    pin_forum_topic(channelid, forumtopicid)
 
 Pin a forum topic using the topic ID.
 
@@ -124,7 +124,7 @@ unpin_forum_topic
 
 .. code-block:: python
 
-    bot.unpin_forum_topic(channelid, forumtopicid)
+    unpin_forum_topic(channelid, forumtopicid)
 
 Unpin a forum topic using the topic ID.
 
@@ -141,7 +141,7 @@ lock_forum_topic
 
 .. code-block:: python
 
-    bot.lock_forum_topic(channelid, forumtopicid)
+    lock_forum_topic(channelid, forumtopicid)
 
 Lock a forum topic using the topic ID.
 
@@ -158,7 +158,7 @@ unlock_forum_topic
 
 .. code-block:: python
 
-    bot.unlock_forum_topic(channelid, forumtopicid)
+    unlock_forum_topic(channelid, forumtopicid)
 
 Unlock a forum topic using the topic ID.
 
