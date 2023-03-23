@@ -201,7 +201,7 @@ class Client:
 
     def ban_member(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/bans/{userid}'
-        response = self.request('PUT', url)
+        response = self.request('POST', url)
         return response
 
     def add_role(self, serverid, userid, roleid):
