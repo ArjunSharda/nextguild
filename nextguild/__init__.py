@@ -20,14 +20,20 @@ class Client:
         self.cache = {}
         self._message_handlers = []
 
-    def send_message(self, channel_id, content=None, embed=None):
+    def send_message(self, channel_id, content=None, embed=None, isPrivate=None, media=None):
         payload = {}
 
         if content is not None:
-            payload = {'content': content}
+            payload['content'] = content
 
         if embed is not None:
-            payload = {'embeds': [embed.embed]}
+            payload['embeds'] = [embed.embed]
+            
+        if isPrivate is not None:
+            payload['isPrivate'] = isPrivate
+            
+        if media is not None:
+            payload['media'] = media
 
         response = requests.post(
             f'{self.base_url}/channels/{channel_id}/messages',
@@ -35,23 +41,39 @@ class Client:
             json=payload
         )
 
-    def send_reply(self, channel_id, replyids, content=None, embed=None):
+    def send_reply(self, channel_id, replyids, content=None, embed=None, isPrivate=None, media=None):
         url = f'{self.base_url}/channels/{channel_id}/messages'
+        data = {}
         if content is not None:
-            data = {'content': content, 'replyMessageIds': replyids}
+            data['content'] = content
 
         if embed is not None:
-            data = {'embeds': [embed.embed], 'replyMessageIds': replyids}
+            data['embeds'] = [embed.embed]
+
+        if isPrivate is not None:
+            data['isPrivate'] = isPrivate
+
+        if media is not None:
+            data['media'] = media
+
+
         response = self.request('POST', url, json=data)
         return response
 
-    def edit_message(self, channel_id, message_id, content=None, embed=None):
+    def edit_message(self, channel_id, message_id, content=None, embed=None, isPrivate=None, media=None):
         payload = {}
         if content is not None:
-            payload = {'content': content}
+            payload['content'] = content
 
         if embed is not None:
-            payload = {'embeds': [embed.embed]}
+            payload['embeds'] = [embed.embed]
+
+        if isPrivate is not None:
+            payload['isPrivate'] = isPrivate
+
+        if media is not None:
+            payload['media'] = media
+
 
         url = f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
         response = self.request('PUT', url, json=payload)
@@ -224,25 +246,21 @@ class Client:
         response = self.request('DELETE', url)
         return response
 
-
     def get_member_bans(self, serverid):
         url = f'{self.base_url}/servers/{serverid}/bans'
         response = self.request('GET', url)
         return response
-
 
     def get_social_link(self, userid, type):
         url = f'{self.base_url}/users/{userid}/social-links/{type}'
         response = self.request('GET', url)
         return response
 
-
     def award_xp(self, serverid, userid, amount):
         url = f'{self.base_url}/servers/{serverid}/members/{userid}/xp'
         data = {'amount': amount}
         response = self.request('POST', url, json=data)
         return response
-
 
     def get_xp(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/members/{userid}/xp'
@@ -260,7 +278,6 @@ class Client:
         data = {'amount': amount}
         response = self.request('POST', url, json=data)
         return response
-
 
     def create_listitem(self, channelid, title, note=None):
         data = {'message': title}
@@ -716,8 +733,6 @@ class Events:
         self._ready_handlers = []
         self.client = client
 
-
-
     def on_message(self, *args, **kwargs):
         def decorator(func):
             @wraps(func)
@@ -726,7 +741,6 @@ class Events:
 
             self._message_handlers.append(wrapper)
             return wrapper
-
 
     async def _handle_message(self, eventData):
         message = Message(eventData)
@@ -756,7 +770,7 @@ class Events:
     async def _handle_member_leave(self, eventData):
         for handler in self._member_leave_handlers:
             await handler(eventData)
-            
+
     def on_ready(self, func):
         @wraps(func)
         async def wrapper():
@@ -767,7 +781,7 @@ class Events:
 
     async def _handle_ready(self):
         for handler in self._ready_handlers:
-            await handler()        
+            await handler()
 
     async def start(self):
         async with websockets.connect('wss://www.guilded.gg/websocket/v1',
