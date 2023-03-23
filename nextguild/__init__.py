@@ -726,13 +726,13 @@ class Events:
         self._ready_handlers = []
         self.client = client
 
-    def on_message(self, *args, **kwargs):
+    def on_message(self, func):
         @wraps(func)
         def wrapper(message):
-            return func(message, *args, **kwargs)
+            return func(message)
 
-            self._message_handlers.append(wrapper)
-            return wrapper
+        self._message_handlers.append(wrapper)
+        return wrapper
 
     async def _handle_message(self, eventData):
         message = Message(eventData)
