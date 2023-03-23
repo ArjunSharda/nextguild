@@ -9,7 +9,7 @@ create_listitem
 
 .. code-block:: python
 
-    create_listitem(channelid, title, note=None)
+    create_listitem(channelid, title, note)
 
 Creates a new list item in the specified channel.
 
