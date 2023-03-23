@@ -8,7 +8,7 @@ create_doc
 
 .. code-block:: python
 
-    bot.create_doc(channelid, title, content)
+    create_doc(channelid, title, content)
 
 Creates a doc in the specified channel.
 
@@ -27,7 +27,7 @@ update_doc
 
 .. code-block:: python
 
-    bot.update_doc(channelid, docid, title, content)
+    update_doc(channelid, docid, title, content)
 
 Updates a doc in the specified channel.
 
@@ -36,7 +36,7 @@ Updates a doc in the specified channel.
 +=============+===============+=============================================+
 | channelid   | str           | The ID of the channel to update the doc in. |
 +-------------+---------------+---------------------------------------------+
-| docid       | str           | The ID of the doc to update                 |
+| docid       | int           | The ID of the doc to update                 |
 +-------------+---------------+---------------------------------------------+
 | title       | str           | The title of the doc.                       |
 +-------------+---------------+---------------------------------------------+
@@ -48,7 +48,7 @@ delete_doc
 
 .. code-block:: python
 
-    bot.delete_doc(channelid, docid)
+    delete_doc(channelid, docid)
 
 Deletes a doc in the specified channel.
 
@@ -57,7 +57,7 @@ Deletes a doc in the specified channel.
 +=============+===============+=============================================+
 | channelid   | str           | The ID of the channel to update the doc in. |
 +-------------+---------------+---------------------------------------------+
-| docid       | str           | The ID of the doc to update                 |
+| docid       | int           | The ID of the doc to update                 |
 +-------------+---------------+---------------------------------------------+
 
 get_doc
@@ -65,7 +65,7 @@ get_doc
 
 .. code-block:: python
 
-    bot.get_doc(channel_id, message_id)
+    get_doc(channel_id, message_id)
 
 Retrieves a doc in the specified channel.
 
@@ -74,7 +74,7 @@ Retrieves a doc in the specified channel.
 +=============+===============+=============================================+
 | channelid   | str           | The ID of the channel to update the doc in. |
 +-------------+---------------+---------------------------------------------+
-| docid       | str           | The ID of the doc to update                 |
+| docid       | int           | The ID of the doc to update                 |
 +-------------+---------------+---------------------------------------------+
 
 get_docs
@@ -82,7 +82,7 @@ get_docs
 
 .. code-block:: python
 
-    bot.get_docs(channel_id)
+    get_docs(channel_id)
 
 Retrieves all the docs in the specified channel.
 
