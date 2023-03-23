@@ -72,10 +72,10 @@ Updates a channel.
 +=============+========+========================================+
 | channelid   | str    | The ID of the channel to update.       |
 +-------------+--------+----------------------------------------+
-| name        | str, optional | The new name of the channel.    |
+| name        | str    | The new name of the channel.           |
 +-------------+--------+----------------------------------------+
-| topic       | str, optional | The new topic of the channel.   |
+| topic       | str    | The new topic of the channel.          |  
 +-------------+--------+----------------------------------------+
-| ispublic    | bool, optional| Whether the channel is public   |
-|             |               |  or not.
+| ispublic    | bool,  | Whether the channel is public          |
+|             |optional|  or not.                               |
 +-------------+--------+----------------------------------------+
