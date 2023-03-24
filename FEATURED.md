@@ -1,5 +1,5 @@
 # Featured
-The NextGuild Project loves to see people who have made innovative, and new creations using NextGuild. Submission can be sent in the creations channel in NextGuild's support server (https://guilded.gg/nextguild).
+The NextGuild Project loves to see people who have made innovative, and new creations using NextGuild. Submission can be sent in the creations channel in NextGuild's support server (https://guilded.gg/nextguild). Note, you must be open sourced.
 # A - Z
 
 
@@ -18,11 +18,11 @@ The NextGuild Project loves to see people who have made innovative, and new crea
 ## G
 ### Ghostly
 <br>
-https://www.guilded.gg/b/711e240d-7b47-438b-af3a-af4f3cb39d6c
+Bot Invite: https://www.guilded.gg/b/711e240d-7b47-438b-af3a-af4f3cb39d6c
 </br>
-https://www.guilded.gg/Ghostly
+Support Server: https://www.guilded.gg/Ghostly
 <br>
-https://github.com/Ghost-bot2023/ghostlybot
+GitHub Repository: https://github.com/Ghost-bot2023/ghostlybot
 </br>
 <br>
 </br>
