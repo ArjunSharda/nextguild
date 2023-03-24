@@ -62,7 +62,7 @@ get_events
 
 .. code-block:: python
 
-    bot.get_events(channelid, before=None, after=None, limit=None)
+    bot.get_events(channelid, before, after, limit)
    
 Retrieves events from the specified channel.
 
