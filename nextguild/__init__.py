@@ -28,10 +28,9 @@ class Client:
 
         if embed is not None:
             payload['embeds'] = [embed.embed]
-            
+
         if isPrivate is not None:
             payload['isPrivate'] = isPrivate
-            
 
         response = requests.post(
             f'{self.base_url}/channels/{channel_id}/messages',
@@ -51,8 +50,6 @@ class Client:
         if isPrivate is not None:
             data['isPrivate'] = isPrivate
 
-
-
         response = self.request('POST', url, json=data)
         return response
 
@@ -66,7 +63,6 @@ class Client:
 
         if isPrivate is not None:
             payload['isPrivate'] = isPrivate
-
 
         url = f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
         response = self.request('PUT', url, json=payload)
@@ -82,7 +78,7 @@ class Client:
         response = self.request('GET', url)
         return response
 
-    def get_channel_messages(self,channel_id,limit=None,before=None,after=None,includePrivate=None):
+    def get_channel_messages(self, channel_id, limit=None, before=None, after=None, includePrivate=None):
         url = f'{self.base_url}/channels/{channel_id}/messages'
         params = {}
         if limit:
@@ -121,7 +117,7 @@ class Client:
                 raise ValueError(
                     f'Request failed with status {response.status_code}: {data}')
 
-    def create_channel(self,name,type,serverid,groupid=None,categoryid=None,ispublic=None):
+    def create_channel(self, name, type, serverid, groupid=None, categoryid=None, ispublic=None):
         data = {'name': name, 'type': type}
         url = f'{self.base_url}/channels'
         if categoryid:
@@ -672,29 +668,66 @@ class Embed:
 class Message:
     def __init__(self, eventData):
         try:
-          self.content = eventData['message']['content']
+            self.content = eventData['message']['content']
         except:
-          self.content = []
+            self.content = []
         try:
-          self.authorId = eventData['message']['createdBy']
+            self.authorId = eventData['message']['createdBy']
         except:
-          self.authorId = []
+            self.authorId = []
         try:
-          self.channelId = eventData['message']['channelId']
+            self.channelId = eventData['message']['channelId']
         except:
-          self.channelId = []
+            self.channelId = []
         try:
-          self.guildId = eventData['serverId']
+            self.guildId = eventData['serverId']
         except:
-          self.guildId = []
+            self.guildId = []
         try:
-          self.messageId = eventData['message']['id']
+            self.messageId = eventData['message']['id']
         except:
-          self.messageId = []
+            self.messageId = []
         try:
-          self.mentions = eventData['message']['mentions']['users']
+            self.mentions = eventData['message']['mentions']['users']
         except:
-          self.mentions = []
+            self.mentions = []
+
+
+class Reaction:
+    def __init__(self, eventData):
+        print(eventData)
+        self.eventData = eventData
+        self.serverId = eventData['serverId']
+        self.channelId = eventData['reaction']['channelId']
+        self.userId = eventData['reaction']['createdBy']
+        self.emote_name = eventData['reaction']['emote']['name']
+        self.emoteid = eventData['reaction']['emote']['id']
+        self.emote_url = eventData['reaction']['emote']['url']
+
+class CalendarReaction:
+    def __init__(self, eventData):
+        print(eventData)
+        self.eventData = eventData
+        self.serverId = eventData['serverId']
+        self.channelId = eventData['reaction']['channelId']
+        self.userId = eventData['reaction']['createdBy']
+        self.emote_name = eventData['reaction']['emote']['name']
+        self.emoteid = eventData['reaction']['emote']['id']
+        self.emote_url = eventData['reaction']['emote']['url']
+        self.calendar_event_id = eventData['reaction']['calendarEventId']
+
+class ForumTopicCommentReaction:
+    def __init__(self, eventData):
+        print(eventData)
+        self.eventData = eventData
+        self.serverId = eventData['serverId']
+        self.channelId = eventData['reaction']['channelId']
+        self.userId = eventData['reaction']['createdBy']
+        self.emote_name = eventData['reaction']['emote']['name']
+        self.emoteid = eventData['reaction']['emote']['id']
+        self.emote_url = eventData['reaction']['emote']['url']
+        self.forumTopicId = eventData['reaction']['forumTopicId']
+        self.forumTopicCommentId = eventData['reaction']['forumTopicCommentId']
 
 
 class Events:
@@ -707,6 +740,12 @@ class Events:
         self._member_banned_handlers = []
         self._member_unbanned_handlers = []
         self._ready_handlers = []
+        self._reaction_create_handlers = []
+        self._reaction_delete_handlers = []
+        self._forum_topic_comment_reaction_create_handlers = []
+        self._forum_topic_comment_reaction_delete_handlers = []
+        self._calendar_event_reaction_create_handlers = []
+        self._calendar_event_reaction_delete_handlers = []
         self.client = client
 
     def on_message(self, func):
@@ -716,12 +755,12 @@ class Events:
 
         self._message_create_handlers.append(wrapper)
         return wrapper
-      
+
     async def _handle_create_message(self, eventData):
         message = Message(eventData)
         for handler in self._message_create_handlers:
             await handler(message)
-  
+
     def on_message_update(self, func):
         @wraps(func)
         def wrapper(message):
@@ -729,12 +768,12 @@ class Events:
 
         self._message_update_handlers.append(wrapper)
         return wrapper
-      
+
     async def _handle_update_message(self, eventData):
         message = Message(eventData)
         for handler in self._message_update_handlers:
             await handler(message)
-            
+
     def on_message_delete(self, func):
         @wraps(func)
         def wrapper(message):
@@ -742,7 +781,7 @@ class Events:
 
         self._message_delete_handlers.append(wrapper)
         return wrapper
-      
+
     async def _handle_delete_message(self, eventData):
         message = Message(eventData)
         for handler in self._message_delete_handlers:
@@ -776,7 +815,7 @@ class Events:
         @wraps(func)
         def wrapper(member):
             return func(member)
-    
+
         self._member_banned_handlers.append(wrapper)
         return wrapper
 
@@ -788,7 +827,7 @@ class Events:
         @wraps(func)
         def wrapper(member):
             return func(member)
-    
+
         self._member_unbanned_handlers.append(wrapper)
         return wrapper
 
@@ -808,13 +847,91 @@ class Events:
         for handler in self._ready_handlers:
             await handler()
 
+    def on_reaction_create(self, func):
+        @wraps(func)
+        def wrapper(reaction):
+            return func(reaction)
+
+        self._reaction_create_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_create_reaction(self, eventData):
+        reaction = Reaction(eventData)
+        for handler in self._reaction_create_handlers:
+            await handler(reaction)
+
+    def on_reaction_delete(self, func):
+        @wraps(func)
+        def wrapper(reaction):
+            return func(reaction)
+
+        self._reaction_delete_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_delete_reaction(self, eventData):
+        reaction = Reaction(eventData)
+        for handler in self._reaction_delete_handlers:
+            await handler(reaction)
+
+    def on_forum_topic_comment_reaction_create(self, func):
+        @wraps(func)
+        def wrapper(reaction):
+            return func(reaction)
+
+        self._forum_topic_comment_reaction_create_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_forum_topic_comment_reaction_create(self, eventData):
+        reaction = ForumTopicCommentReaction(eventData)
+        for handler in self._forum_topic_comment_reaction_create_handlers:
+            await handler(reaction)
+
+    def on_forum_topic_comment_reaction_delete(self, func):
+        @wraps(func)
+        def wrapper(reaction):
+            return func(reaction)
+
+        self._forum_topic_comment_reaction_delete_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_forum_topic_comment_reaction_delete(self, eventData):
+        reaction = ForumTopicCommentReaction(eventData)
+        for handler in self._forum_topic_comment_reaction_delete_handlers:
+            await handler(reaction)
+
+    def on_calendar_event_reaction_create(self, func):
+        @wraps(func)
+        def wrapper(reaction):
+            return func(reaction)
+
+        self._calendar_event_reaction_create_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_calendar_event_reaction_create(self, eventData):
+        reaction = CalendarReaction(eventData)
+        for handler in self._calendar_event_reaction_create_handlers:
+            await handler(reaction)
+
+    def on_calendar_event_reaction_delete(self, func):
+        @wraps(func)
+        def wrapper(reaction):
+            return func(reaction)
+
+        self._calendar_event_reaction_delete_handlers.append(wrapper)
+        return wrapper
+
+    async def _handle_calendar_event_reaction_delete(self, eventData):
+        reaction = CalendarReaction(eventData)
+        for handler in self._calendar_event_reaction_delete_handlers:
+            await handler(reaction)
+
     async def start(self):
-        async with websockets.connect('wss://www.guilded.gg/websocket/v1',extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
+        async with websockets.connect('wss://www.guilded.gg/websocket/v1',
+                                      extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
             await self._handle_ready()
             while True:
                 data = await websocket.recv()
                 json_data = json.loads(data)
-                
 
                 if 't' in json_data and 'd' in json_data:
                     eventType, eventData = json_data['t'], json_data['d']
@@ -822,18 +939,26 @@ class Events:
                     continue
 
                 event_handlers = {
-                  'ChatMessageCreated': self._handle_create_message,
-                  'ChatMessageUpdated': self._handle_update_message,
-                  'ChatMessageDeleted': self._handle_delete_message,
-                  'ServerMemberJoined': self._handle_member_join,
-                  'ServerMemberRemoved': self._handle_member_leave,
-                  'ServerMemberBanned': self._handle_member_banned,
-                  'ServerMemberUnbanned': self._handle_member_unbanned,
-                  }
+                    'ChatMessageCreated': self._handle_create_message,
+                    'ChatMessageUpdated': self._handle_update_message,
+                    'ChatMessageDeleted': self._handle_delete_message,
+                    'ServerMemberJoined': self._handle_member_join,
+                    'ServerMemberRemoved': self._handle_member_leave,
+                    'ServerMemberBanned': self._handle_member_banned,
+                    'ServerMemberUnbanned': self._handle_member_unbanned,
+                    'ChannelMessageReactionCreated': self._handle_create_reaction,
+                    'ChannelMessageReactionDeleted': self._handle_delete_reaction,
+                    'ForumTopicCommentReactionCreated': self._handle_forum_topic_comment_reaction_create,
+                    'ForumTopicCommentReactionDeleted': self._handle_forum_topic_comment_reaction_delete,
+                    'CalendarEventReactionCreated': self._handle_calendar_event_reaction_create,
+                    'CalendarEventReactionDeleted': self._handle_calendar_event_reaction_delete
+
+                }
                 handler = event_handlers.get(eventType)
                 if handler:
                     await handler(eventData)
 
     def run(self):
         asyncio.run(self.start())
+
 
