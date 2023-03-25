@@ -43,6 +43,25 @@ Removes a role from a member in the specified server.
 | roleid    | int  | The ID of the role to remove                 |
 +-----------+------+----------------------------------------------+
 
+member_has_role
+-----------
+
+.. code-block:: python
+
+    member_has_role(serverid, userid, roleid)
+
+Returns True if the specified member has the specified role.
+
++-----------+------+----------------------------------------------+
+| Parameter | Type | Description                                  |
++===========+======+==============================================+
+| serverid  | str  | The ID of the server                         |
++-----------+------+----------------------------------------------+
+| userid    | str  | The ID of the member                         |
++-----------+------+----------------------------------------------+
+| roleid    | int  | The ID of the role                           |
++-----------+------+----------------------------------------------+
+
 
 get_member_roles
 ----------------
