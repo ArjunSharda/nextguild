@@ -63,9 +63,9 @@ Updates the nickname of a member in the specified server.
 +-----------+------+---------------------------------------------------+
 | Parameter | Type | Description                                       |
 +===========+======+===================================================+
-| serverid  | str  | The ID of the server where the member is located |
+| serverid  | str  | The ID of the server where the member is located  |
 +-----------+------+---------------------------------------------------+
-| userid    | str  | The ID of the member whose nickname to update    |
+| userid    | str  | The ID of the member whose nickname to update     |
 +-----------+------+---------------------------------------------------+
 | nickname  | str  | The new nickname for the member                   |
 +-----------+------+---------------------------------------------------+
@@ -82,9 +82,9 @@ Deletes the nickname of a member in the specified server.
 +-----------+------+---------------------------------------------------+
 | Parameter | Type | Description                                       |
 +===========+======+===================================================+
-| serverid  | str  | The ID of the server where the member is located |
+| serverid  | str  | The ID of the server where the member is located  |
 +-----------+------+---------------------------------------------------+
-| userid    | str  | The ID of the member whose nickname to delete    |
+| userid    | str  | The ID of the member whose nickname to delete     |
 +-----------+------+---------------------------------------------------+
 
 kick_member
@@ -152,7 +152,7 @@ Gets the ban information for a member in the specified server.
 +-----------+------+---------------------------------------------------+
 | Parameter | Type | Description                                       |
 +===========+======+===================================================+
-| serverid  | str  | The ID of the server where the member is banned  |
+| serverid  | str  | The ID of the server where the member is banned   |
 +-----------+------+---------------------------------------------------+
 | userid    | str  | The ID of the banned member                       |
 +-----------+------+---------------------------------------------------+
