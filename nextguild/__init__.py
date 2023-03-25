@@ -615,6 +615,15 @@ class Client:
     def get_bot_user_id(self):
         response = requests.get(f'https://www.guilded.gg/api/v1/users/@me', headers=self.headers)
         return response.json()['user']['id']
+    
+    def is_member_owner(self, serverid, userid):
+        r = self.get_server(serverid)
+        response = r['server']['ownerId']
+        uid = userid['id']
+        if uid == response:
+          return True
+        else:
+          return False
 
 
 class Embed:
