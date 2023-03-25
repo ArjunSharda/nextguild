@@ -39,7 +39,7 @@ Calendar Reactions
 +-------------------------------+----------------------------------------------+
 |``reaction.emote_url``         |The URL of the reaction that was created      |
 +-------------------------------+----------------------------------------------+
-|``reaction.calendar_event_id``|The ID of the channel the reaction was sent in |
+|``reaction.calendar_event_id`` |The ID of the channel the reaction was sent in |
 +-------------------------------+----------------------------------------------+
 
 Forum Topic Comment Reactions
