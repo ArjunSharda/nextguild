@@ -3,6 +3,54 @@ Actions
 
 This section describes various actions that can be performed using the provided methods.
 
+get_server
+---------------
+
+.. code-block:: python
+
+    get_server(serverid)
+
+Gets information from the specified server.
+
++-----------+------+---------------------------------------------------+
+| Parameter | Type | Description                                       |
++===========+======+===================================================+
+| serverid  | str  | The ID of the server to get                       |
++-----------+------+---------------------------------------------------+
+
+get_server_members
+---------------
+
+.. code-block:: python
+
+    get_server_members(serverid)
+
+Gets the members in a specified server.
+
++-----------+------+---------------------------------------------------+
+| Parameter | Type | Description                                       |
++===========+======+===================================================+
+| serverid  | str  | The ID of the server to get the members from      |
++-----------+------+---------------------------------------------------+
+
+get_server_member
+---------------
+
+.. code-block:: python
+
+    get_server_member(serverid, memberid)
+
+Gets the specified member in the specified server.
+
++-----------+------+---------------------------------------------------+
+| Parameter | Type | Description                                       |
++===========+======+===================================================+
+| serverid  | str  | The ID of the server to get the member from       |
++-----------+------+---------------------------------------------------+
+| memberid  | str  | The ID of member to get                           |
++-----------+------+---------------------------------------------------+
+
+
 update_nickname
 ---------------
 
