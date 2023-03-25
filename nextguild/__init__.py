@@ -184,9 +184,12 @@ class Client:
         response = self.request('DELETE', url)
         return response
 
-    def ban_member(self, serverid, userid):
+    def ban_member(self, serverid, userid, reason=None):
         url = f'{self.base_url}/servers/{serverid}/bans/{userid}'
-        response = self.request('POST', url)
+        if reason:
+          response = self.request('POST', url, data = {'reason': reason})
+        else:
+          response = self.request('POST', url)
         return response
 
     def add_role(self, serverid, userid, roleid):
