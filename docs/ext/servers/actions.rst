@@ -50,6 +50,23 @@ Gets the specified member in the specified server.
 | memberid  | str  | The ID of member to get                           |
 +-----------+------+---------------------------------------------------+
 
+is_member_owner
+---------------
+
+.. code-block:: python
+
+    is_member_owner(serverid, memberid)
+
+Returns True if the member is the owner, returns False if it isn't.
+
++-----------+------+---------------------------------------------------+
+| Parameter | Type | Description                                       |
++===========+======+===================================================+
+| serverid  | str  | The ID of the server                              |
++-----------+------+---------------------------------------------------+
+| memberid  | str  | The ID of member                                  |
++-----------+------+---------------------------------------------------+
+
 
 update_nickname
 ---------------
