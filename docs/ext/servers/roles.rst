@@ -14,15 +14,15 @@ add_role
 
 Adds a role to a member in the specified server.
 
-+-----------+------+----------------------------------------------+
-| Parameter | Type | Description                                  |
-+===========+======+==============================================+
++-----------+------+--------------------------------------------------+
+| Parameter | Type | Description                                      |
++===========+======+==================================================+
 | serverid  | str  | The ID of the server where the member is located |
-+-----------+------+----------------------------------------------+
-| userid    | str  | The ID of the member to add the role to      |
-+-----------+------+----------------------------------------------+
-| roleid    | int  | The ID of the role to add                    |
-+-----------+------+----------------------------------------------+
++-----------+------+--------------------------------------------------+
+| userid    | str  | The ID of the member to add the role to          |
++-----------+------+--------------------------------------------------+
+| roleid    | int  | The ID of the role to add                        |
++-----------+------+--------------------------------------------------+
 
 remove_role
 -----------
@@ -33,15 +33,15 @@ remove_role
 
 Removes a role from a member in the specified server.
 
-+-----------+------+----------------------------------------------+
-| Parameter | Type | Description                                  |
-+===========+======+==============================================+
++-----------+------+--------------------------------------------------+
+| Parameter | Type | Description                                      |
++===========+======+==================================================+
 | serverid  | str  | The ID of the server where the member is located |
-+-----------+------+----------------------------------------------+
-| userid    | str  | The ID of the member to remove the role from |
-+-----------+------+----------------------------------------------+
-| roleid    | int  | The ID of the role to remove                 |
-+-----------+------+----------------------------------------------+
++-----------+------+--------------------------------------------------+
+| userid    | str  | The ID of the member to remove the role from     |
++-----------+------+--------------------------------------------------+
+| roleid    | int  | The ID of the role to remove                     |
++-----------+------+--------------------------------------------------+
 
 member_has_role
 -----------
@@ -75,7 +75,7 @@ Gets the roles of a member in the specified server.
 +-----------+------+---------------------------------------------------+
 | Parameter | Type | Description                                       |
 +===========+======+===================================================+
-| serverid  | str  | The ID of the server where the member is located |
+| serverid  | str  | The ID of the server where the member is located  |
 +-----------+------+---------------------------------------------------+
-| userid    | str  | The ID of the member whose roles to fetch        |
+| userid    | str  | The ID of the member whose roles to fetch         |
 +-----------+------+---------------------------------------------------+
