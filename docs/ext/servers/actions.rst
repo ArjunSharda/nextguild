@@ -3,6 +3,71 @@ Actions
 
 This section describes various actions that can be performed using the provided methods.
 
+get_server
+---------------
+
+.. code-block:: python
+
+    get_server(serverid)
+
+Gets information from the specified server.
+
++-----------+------+---------------------------------------------------+
+| Parameter | Type | Description                                       |
++===========+======+===================================================+
+| serverid  | str  | The ID of the server to get                       |
++-----------+------+---------------------------------------------------+
+
+get_server_members
+---------------
+
+.. code-block:: python
+
+    get_server_members(serverid)
+
+Gets the members in a specified server.
+
++-----------+------+---------------------------------------------------+
+| Parameter | Type | Description                                       |
++===========+======+===================================================+
+| serverid  | str  | The ID of the server to get the members from      |
++-----------+------+---------------------------------------------------+
+
+get_server_member
+---------------
+
+.. code-block:: python
+
+    get_server_member(serverid, memberid)
+
+Gets the specified member in the specified server.
+
++-----------+------+---------------------------------------------------+
+| Parameter | Type | Description                                       |
++===========+======+===================================================+
+| serverid  | str  | The ID of the server to get the member from       |
++-----------+------+---------------------------------------------------+
+| memberid  | str  | The ID of member to get                           |
++-----------+------+---------------------------------------------------+
+
+member_is_owner
+---------------
+
+.. code-block:: python
+
+    member_is_owner(serverid, memberid)
+
+Returns True if the member is the owner, returns False if it isn't.
+
++-----------+------+---------------------------------------------------+
+| Parameter | Type | Description                                       |
++===========+======+===================================================+
+| serverid  | str  | The ID of the server                              |
++-----------+------+---------------------------------------------------+
+| memberid  | str  | The ID of member                                  |
++-----------+------+---------------------------------------------------+
+
+
 update_nickname
 ---------------
 
@@ -15,9 +80,9 @@ Updates the nickname of a member in the specified server.
 +-----------+------+---------------------------------------------------+
 | Parameter | Type | Description                                       |
 +===========+======+===================================================+
-| serverid  | str  | The ID of the server where the member is located |
+| serverid  | str  | The ID of the server where the member is located  |
 +-----------+------+---------------------------------------------------+
-| userid    | str  | The ID of the member whose nickname to update    |
+| userid    | str  | The ID of the member whose nickname to update     |
 +-----------+------+---------------------------------------------------+
 | nickname  | str  | The new nickname for the member                   |
 +-----------+------+---------------------------------------------------+
@@ -34,9 +99,9 @@ Deletes the nickname of a member in the specified server.
 +-----------+------+---------------------------------------------------+
 | Parameter | Type | Description                                       |
 +===========+======+===================================================+
-| serverid  | str  | The ID of the server where the member is located |
+| serverid  | str  | The ID of the server where the member is located  |
 +-----------+------+---------------------------------------------------+
-| userid    | str  | The ID of the member whose nickname to delete    |
+| userid    | str  | The ID of the member whose nickname to delete     |
 +-----------+------+---------------------------------------------------+
 
 kick_member
@@ -104,7 +169,7 @@ Gets the ban information for a member in the specified server.
 +-----------+------+---------------------------------------------------+
 | Parameter | Type | Description                                       |
 +===========+======+===================================================+
-| serverid  | str  | The ID of the server where the member is banned  |
+| serverid  | str  | The ID of the server where the member is banned   |
 +-----------+------+---------------------------------------------------+
 | userid    | str  | The ID of the banned member                       |
 +-----------+------+---------------------------------------------------+
