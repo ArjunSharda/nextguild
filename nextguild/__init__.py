@@ -206,7 +206,7 @@ class Client:
     def get_member_roles(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/members/{userid}/roles'
         response = self.request('GET', url)
-        return response
+        return response['roleIds']
 
     def unban_member(self, serverid, userid):
         url = f'{self.base_url}/servers/{serverid}/bans/{userid}'
@@ -616,11 +616,18 @@ class Client:
         response = requests.get(f'https://www.guilded.gg/api/v1/users/@me', headers=self.headers)
         return response.json()['user']['id']
     
-    def is_member_owner(self, serverid, userid):
+    def member_is_owner(self, serverid, userid):
         r = self.get_server(serverid)
         response = r['server']['ownerId']
         uid = userid['id']
         if uid == response:
+          return True
+        else:
+          return False
+
+    def member_has_role(self, serverid, userid, roleid):
+        l = self.get_member_roles(serverid, userid)
+        if int(roleid) in l:
           return True
         else:
           return False
@@ -701,7 +708,7 @@ class Message:
         except:
           self.messageId = []
         try:
-          self.mentions = eventData['message']['mentions']['users']
+          self.mentions = [user['id'] for user in eventData['message']['mentions']['users']]
         except:
           self.mentions = []
 
@@ -845,4 +852,3 @@ class Events:
 
     def run(self):
         asyncio.run(self.start())
-
