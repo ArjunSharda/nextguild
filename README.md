@@ -9,10 +9,6 @@ Planning on being the most simplest python library interacting with the Guilded 
 
 Made from a team of 2 people, this was a simple project originally thought for a fun purpose and for testing the Guilded API, which eventually turned into a bot library for multi-purpose use.
 
-
-# Development
-
-Currently, NextGuild is not at a stable version and it is not recommended to use the package until a stable version is released.
 ## Installation
 
 Use the Python Package Index package manager [pip](https://pip.pypa.io/en/stable/) to install NextGuild to start using this package for your project.
