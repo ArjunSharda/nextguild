@@ -35,3 +35,16 @@ class Message:
 
     async def reply(self):  # TODO "reply" method
         pass
+
+    
+          
+
+class Webhook:
+    def __init__(self, eventData: dict):
+        self.eventData: dict = eventData
+        self.webhookId: str = eventData['webhook']['id']
+        self.webhookName: str = eventData['webhook']['name']
+        self.channelId: str = eventData['webhook']['channelId']
+        self.serverId: str = eventData['serverId']
+        self.createdAt: str = eventData['webhook']['createdAt']
+        self.createdBy: str = eventData['webhook']['createdBy']
