@@ -89,27 +89,7 @@ Example usage:
     @events.on_member_unbanned
     async def on_member_unbanned_example(member):
       print('Someone just got unbanned!')
-
-message
--------
-
-The message class.
-
-+-----------+------+--------------------------------------------+
-| Data      | Type | Description                                |
-+===========+======+============================================+
-| content   | str  | The content of a message                   |
-+-----------+------+--------------------------------------------+
-| channelId | str  |The channel ID of where the message was sent|
-+-----------+------+--------------------------------------------+
-| authorId  | str  | The ID of the author who sent the message  |
-+-----------+------+--------------------------------------------+
-| guildId   | int  | The guild ID of where the message was sent |
-+-----------+------+--------------------------------------------+
-| messageId | int  | The ID of the message sent                 |
-+-----------+------+--------------------------------------------+
-| mentions  | arr  | The mentions in the message                |
-+-----------+------+--------------------------------------------+
+      
 
 on_member_join
 --------------
@@ -143,7 +123,72 @@ Example usage:
     @events.on_member_leave
     async def on_member_leave_example(member):
         client.send_message("YOUR_CHANNEL_ID_HERE", "A member has left the server!")
+        
+ 
+on_webhook_create
+---------------
+A decorator for when a webhook is created.
+Example usage:
 
+
+.. code-block:: python
+
+    client = Client("YOUR_TOKEN_HERE")
+    events = Events(client)
+    
+    
+    @events.on_webhook_create
+    async def on_webhook_create(webhook):
+        client.send_message("YOUR_CHANNEL_ID_HERE", "A webhook has been created!")
+        
+on_webhook_update
+---------------
+A decorator for when a webhook is updated.
+Example usage:
+
+
+.. code-block:: python
+
+    client = Client("YOUR_TOKEN_HERE")
+    events = Events(client)
+    
+    
+    @events.on_webhook_update
+    async def on_webhook_update(webhook):
+        client.send_message("YOUR_CHANNEL_ID_HERE", "A webhook has been updated!")
+
+
+on_reaction_create
+----------------
+A decorator for when a reaction is created.
+Example usage:
+
+
+.. code-block:: python
+
+    client = Client("YOUR_TOKEN_HERE")
+    events = Events(client)
+    
+    
+    @events.on_reaction_create
+    async def on_webhook_create(reaction):
+        client.send_message("YOUR_CHANNEL_ID_HERE", "A reaction has been created!")
+
+on_reaction_delete
+----------------
+A decorator for when a reaction is deleted.
+Example usage:
+
+
+.. code-block:: python
+
+    client = Client("YOUR_TOKEN_HERE")
+    events = Events(client)
+    
+    
+    @events.on_reaction_delete
+    async def on_webhook_delete(reaction):
+        client.send_message("YOUR_CHANNEL_ID_HERE", "A reaction has been deleted!")
 
 
 on_ready
