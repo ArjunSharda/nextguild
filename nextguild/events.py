@@ -289,8 +289,12 @@ class Events:
 
 
     async def start(self):
-        async with websockets.connect('wss://www.guilded.gg/websocket/v1',
-                                      extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
+        async with websockets.connect(
+                'wss://www.guilded.gg/websocket/v1',
+                extra_headers={
+                    'Authorization': f'Bearer {self.client.token}'
+                }
+        ) as websocket:
             await self._handle_ready()
             while True:
                 data = await websocket.recv()
@@ -309,12 +313,18 @@ class Events:
                     'ServerMemberRemoved': self._handle_member_leave,
                     'ServerMemberBanned': self._handle_member_banned,
                     'ServerMemberUnbanned': self._handle_member_unbanned,
-                    'ChannelMessageReactionCreated': self._handle_create_reaction,
-                    'ChannelMessageReactionDeleted': self._handle_delete_reaction,
-                    'ForumTopicCommentReactionCreated': self._handle_forum_topic_comment_reaction_create,
-                    'ForumTopicCommentReactionDeleted': self._handle_forum_topic_comment_reaction_delete,
-                    'CalendarEventReactionCreated': self._handle_calendar_event_reaction_create,
-                    'CalendarEventReactionDeleted': self._handle_calendar_event_reaction_delete,
+                    'ChannelMessageReactionCreated':
+                        self._handle_create_reaction,
+                    'ChannelMessageReactionDeleted':
+                        self._handle_delete_reaction,
+                    'ForumTopicCommentReactionCreated':
+                        self._handle_forum_topic_comment_reaction_create,
+                    'ForumTopicCommentReactionDeleted':
+                        self._handle_forum_topic_comment_reaction_delete,
+                    'CalendarEventReactionCreated':
+                        self._handle_calendar_event_reaction_create,
+                    'CalendarEventReactionDeleted':
+                        self._handle_calendar_event_reaction_delete,
                     'ServerChannelCreated': self._handle_create_channel,
                     'ServerChannelDeleted': self._handle_delete_channel,
                     'ServerChannelUpdated': self._handle_update_channel,
