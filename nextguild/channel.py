@@ -2,13 +2,11 @@
 
 
 class Channel:
-    def __init__(self, eventData: dict):
-        self.eventData: dict = eventData
-        self.channelId: str = eventData['channel']['id']
-        self.channelName: str = eventData['channel']['name']
-        self.channelType: str = eventData['channel']['type']
-        self.serverId: str = eventData['serverId']
-        self.groupId: str = eventData['channel']['groupId']
-        self.createdBy: str = eventData['channel']['createdBy']
-          
-        
+    def __init__(self, event_data: dict):
+        self.event_data: dict = event_data
+        self.channel_id: str = event_data.get('channel', {}).get('id')
+        self.channel_name: str = event_data.get('channel', {}).get('name')
+        self.channel_type: str = event_data.get('channel', {}).get('type')
+        self.server_id: str = event_data.get('serverId')
+        self.group_id: str = event_data.get('channel', {}).get('groupId')
+        self.created_by: str = event_data.get('channel', {}).get('createdBy')
