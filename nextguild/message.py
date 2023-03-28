@@ -40,11 +40,11 @@ class Message:
           
 
 class Webhook:
-    def __init__(self, eventData: dict):
-        self.eventData: dict = eventData
-        self.webhookId: str = eventData['webhook']['id']
-        self.webhookName: str = eventData['webhook']['name']
-        self.channelId: str = eventData['webhook']['channelId']
-        self.serverId: str = eventData['serverId']
-        self.createdAt: str = eventData['webhook']['createdAt']
-        self.createdBy: str = eventData['webhook']['createdBy']
+    def __init__(self, event_data: dict):
+        self.event_data: dict = event_data
+        self.webhook_id: str = event_data.get('webhook', {}).get('id')
+        self.webhook_name: str = event_data.get('webhook', {}).get('name')
+        self.channel_id: str = event_data.get('webhook', {}).get('channelId')
+        self.server_id: str = event_data.get('serverId')
+        self.created_at: str = event_data.get('webhook', {}).get('createdAt')
+        self.created_by: str = event_data.get('webhook', {}).get('createdBy')
