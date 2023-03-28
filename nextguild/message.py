@@ -36,8 +36,6 @@ class Message:
     async def reply(self):  # TODO "reply" method
         pass
 
-    
-          
 
 class Webhook:
     def __init__(self, event_data: dict):

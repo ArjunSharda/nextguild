@@ -26,9 +26,7 @@ class CalendarReaction(Reaction):
             'calendarEventId'
         )
 
-          
 
- 
 class ForumTopicCommentReaction(Reaction):
     def __init__(self, event_data: dict):
         super().__init__(event_data)

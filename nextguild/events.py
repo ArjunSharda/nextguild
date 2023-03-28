@@ -37,7 +37,6 @@ class Events:
         self._webhook_update_handlers = []
         self.client = client
 
-
     def on_message(self, func):
         @wraps(func)
         def wrapper(message):
@@ -84,7 +83,6 @@ class Events:
 
         self._member_join_handlers.append(wrapper)
         return wrapper
-
 
     async def _handle_member_join(self, event_data):
         for handler in self._member_join_handlers:
@@ -237,7 +235,6 @@ class Events:
         self._channel_delete_handlers.append(wrapper)
         return wrapper
 
-
     async def _handle_delete_channel(self, event_data):
         channel = Channel(event_data)
         for handler in self._channel_delete_handlers:
@@ -255,7 +252,6 @@ class Events:
         channel = Channel(event_data)
         for handler in self._channel_update_handlers:
             await handler(channel)
-
 
     def on_webhook_create(self, func):
         @wraps(func)
@@ -282,11 +278,6 @@ class Events:
         webhook = Webhook(event_data)
         for handler in self._webhook_update_handlers:
             await handler(webhook)
-
-
-
-
-
 
     async def start(self):
         async with websockets.connect(
@@ -342,5 +333,3 @@ class Events:
         except KeyboardInterrupt:
             # TODO Handle standard exit
             pass
-
-
