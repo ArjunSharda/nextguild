@@ -1,48 +1,37 @@
 # -*- coding: utf-8 -*-
-
 class Reaction:
-    def __init__(self, eventData: dict):
-        print(eventData)
-        self.eventData: dict = eventData
-        self.serverId: str = eventData['serverId']
-        self.channelId: str = eventData['reaction']['channelId']
-        self.userId: str = eventData['reaction']['createdBy']
-        self.emote_name: str = eventData['reaction']['emote']['name']
-        self.emoteid: str = eventData['reaction']['emote']['id']
-        self.emote_url: str = eventData['reaction']['emote']['url']
+    def __init__(self, event_data: dict):
+        self.event_data: dict = event_data
+        self.server_id: str = event_data.get('serverId')
+        self.channel_id: str = event_data.get('reaction', {}).get('channelId')
+        self.user_id: str = event_data.get('reaction', {}).get('createdBy')
+        self.emote_name: str = event_data.get('reaction', {}).get('emote', {}).get('name')
+        self.emote_id: str = event_data.get('reaction', {}).get('emote', {}).get('id')
+        self.emote_url: str = event_data.get('reaction', {}).get('emote', {}).get('url')
 
 
 class CalendarReaction:
-    def __init__(self, eventData: dict):
-        print(eventData)
-        self.eventData: dict = eventData
-        self.serverId: str = eventData['serverId']
-        self.channelId: str = eventData['reaction']['channelId']
-        self.userId: str = eventData['reaction']['createdBy']
-        self.emote_name: str = eventData['reaction']['emote']['name']
-        self.emoteid: str = eventData['reaction']['emote']['id']
-        self.emote_url: str = eventData['reaction']['emote']['url']
-        self.calendar_event_id: str = eventData['reaction']['calendarEventId']
+    def __init__(self, event_data: dict):
+        self.event_data: dict = event_data
+        self.server_id: str = event_data.get('serverId')
+        self.channel_id: str = event_data.get('reaction', {}).get('channelId')
+        self.user_id: str = event_data.get('reaction', {}).get('createdBy')
+        self.emote_name: str = event_data.get('reaction', {}).get('emote', {}).get('name')
+        self.emote_id: str = event_data.get('reaction', {}).get('emote', {}).get('id')
+        self.emote_url: str = event_data.get('reaction', {}).get('emote', {}).get('url')
+        self.calendar_event_id: str = event_data.get('reaction', {}).get('calendarEventId')
 
           
- 
-
-
-
 class ForumTopicCommentReaction:
-    def __init__(self, eventData: dict):
-        self.eventData: dict = eventData
-        self.serverId: str = eventData['serverId']
-        self.channelId: str = eventData['reaction']['channelId']
-        self.userId: str = eventData['reaction']['createdBy']
-        self.emote_name: str = eventData['reaction']['emote']['name']
-        self.emoteid: str = eventData['reaction']['emote']['id']
-        self.emote_url: str = eventData['reaction']['emote']['url']
-        self.forumTopicId: str = eventData['reaction']['forumTopicId']
-        self.forumTopicCommentId: str = eventData['reaction']['forumTopicCommentId']
+    def __init__(self, event_data: dict):
+        self.event_data: dict = event_data
+        self.server_id: str = event_data.get('serverId')
+        self.channel_id: str = event_data.get('reaction', {}).get('channelId')
+        self.user_id: str = event_data.get('reaction', {}).get('createdBy')
+        self.emote_name: str = event_data.get('reaction', {}).get('emote', {}).get('name')
+        self.emote_id: str = event_data.get('reaction', {}).get('emote', {}).get('id')
+        self.emote_url: str = event_data.get('reaction', {}).get('emote', {}).get('url')
+        self.forum_topic_id: str = event_data.get('reaction', {}).get('forumTopicId')
+        self.forum_topic_comment_id: str = event_data.get('reaction', {}).get('forumTopicCommentId')
 
-          
-          
-          
-          
  
