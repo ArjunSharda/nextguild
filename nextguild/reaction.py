@@ -22,7 +22,7 @@ class CalendarReaction(Reaction):
         self.emote_url: str = event_data.get('reaction', {}).get(
             'emote', {}
         ).get('url')
-        self.calendar_event_id: str = event_data.get('reaction', {}).get(
+        self.calendar_event_id: int = event_data.get('reaction', {}).get(
             'calendarEventId'
         )
 
@@ -30,9 +30,9 @@ class CalendarReaction(Reaction):
 class ForumTopicCommentReaction(Reaction):
     def __init__(self, event_data: dict):
         super().__init__(event_data)
-        self.forum_topic_id: str = event_data.get(
+        self.forum_topic_id: int = event_data.get(
             'reaction', {}
         ).get('forumTopicId')
-        self.forum_topic_comment_id: str = event_data.get(
+        self.forum_topic_comment_id: int = event_data.get(
             'reaction', {}
         ).get('forumTopicCommentId')
