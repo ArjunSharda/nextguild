@@ -79,7 +79,7 @@ update_listitem
 
 .. code-block:: python
 
-    update_listitem(channelid, listitemid, title, note=None)
+    update_listitem(channelid, listitemid, message, note=None)
 
 Updates a list item in the specified channel.
 
@@ -91,7 +91,7 @@ Updates a list item in the specified channel.
 +-----------+---------+-------------------------------------------+
 | listitemid| str     | The title of the list item                |
 +-----------+---------+-------------------------------------------+
-| title     | str,    | The new title of the list item            |
+| message   | str,    | The new message of the list item          |
 +-----------+---------+-------------------------------------------+
 |  note     | str,    |  A new note for the list item             |
 |           | optional|                                           |
