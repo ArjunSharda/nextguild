@@ -525,19 +525,19 @@ class Client:
             self,
             channel_id: str,
             list_item_id: str,
-            title: str,
+            message: str,
             note: str = None
     ):
         data = {}
 
         if title:
-            data.update({'message': title})
+            data.update({'message': message})
 
         if note:
             data.update({'note': {'content': note}})
 
         response = self.request(
-            'PUT',
+            'PATCH',
             f'{self.base_url}/channels/{channel_id}/items/{list_item_id}',
             json=data
         )
