@@ -19,9 +19,6 @@ class Reaction:
 class CalendarReaction(Reaction):
     def __init__(self, event_data: dict):
         super().__init__(event_data)
-        self.emote_url: str = event_data.get('reaction', {}).get(
-            'emote', {}
-        ).get('url')
         self.calendar_event_id: int = event_data.get('reaction', {}).get(
             'calendarEventId'
         )
