@@ -10,9 +10,11 @@ if __name__ == '__main__':
     client = Client(BOT_TOKEN)
     events = Events(client)
 
+
     @events.on_ready
     async def on_ready():
         print('Ready!')
+
 
     @events.on_message
     async def ping_command(message: Message):

@@ -5,8 +5,8 @@ from datetime import datetime
 
 import requests
 
-from nextguild.message import Message
 from nextguild.embed import Embed
+from nextguild.message import Message
 
 
 class Client:

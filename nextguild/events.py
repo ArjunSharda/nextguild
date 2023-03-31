@@ -5,11 +5,9 @@ from functools import wraps
 
 import websockets
 
-from nextguild.client import Client
-from nextguild.message import Message, Webhook
-from nextguild.reaction import Reaction, CalendarReaction, ForumTopicComentReaction
 from nextguild.channel import Channel
-
+from nextguild.message import Message, Webhook
+from nextguild.reaction import Reaction, CalendarReaction, ForumTopicCommentReaction
 
 
 class Events:
@@ -38,7 +36,6 @@ class Events:
         self._webhook_update_handlers = []
         self.client = client
 
-
     def on_message(self, func):
         @wraps(func)
         def wrapper(message):
@@ -47,8 +44,8 @@ class Events:
         self._message_create_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_create_message(self, eventData):
-        message = Message(eventData)
+    async def _handle_create_message(self, event_data):
+        message = Message(event_data)
         for handler in self._message_create_handlers:
             await handler(message)
 
@@ -60,8 +57,8 @@ class Events:
         self._message_update_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_update_message(self, eventData):
-        message = Message(eventData)
+    async def _handle_update_message(self, event_data):
+        message = Message(event_data)
         for handler in self._message_update_handlers:
             await handler(message)
 
@@ -73,8 +70,8 @@ class Events:
         self._message_delete_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_delete_message(self, eventData):
-        message = Message(eventData)
+    async def _handle_delete_message(self, event_data):
+        message = Message(event_data)
         for handler in self._message_delete_handlers:
             await handler(message)
 
@@ -86,10 +83,9 @@ class Events:
         self._member_join_handlers.append(wrapper)
         return wrapper
 
-
-    async def _handle_member_join(self, eventData):
+    async def _handle_member_join(self, event_data):
         for handler in self._member_join_handlers:
-            await handler(eventData)
+            await handler(event_data)
 
     def on_member_leave(self, func):
         @wraps(func)
@@ -99,9 +95,9 @@ class Events:
         self._member_leave_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_member_leave(self, eventData):
+    async def _handle_member_leave(self, event_data):
         for handler in self._member_leave_handlers:
-            await handler(eventData)
+            await handler(event_data)
 
     def on_member_banned(self, func):
         @wraps(func)
@@ -111,9 +107,9 @@ class Events:
         self._member_banned_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_member_banned(self, eventData):
+    async def _handle_member_banned(self, event_data):
         for handler in self._member_banned_handlers:
-            await handler(eventData)
+            await handler(event_data)
 
     def on_member_unbanned(self, func):
         @wraps(func)
@@ -123,9 +119,9 @@ class Events:
         self._member_unbanned_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_member_unbanned(self, eventData):
+    async def _handle_member_unbanned(self, event_data):
         for handler in self._member_unbanned_handlers:
-            await handler(eventData)
+            await handler(event_data)
 
     def on_ready(self, func):
         @wraps(func)
@@ -147,8 +143,8 @@ class Events:
         self._reaction_create_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_create_reaction(self, eventData):
-        reaction = Reaction(eventData)
+    async def _handle_create_reaction(self, event_data):
+        reaction = Reaction(event_data)
         for handler in self._reaction_create_handlers:
             await handler(reaction)
 
@@ -160,8 +156,8 @@ class Events:
         self._reaction_delete_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_delete_reaction(self, eventData):
-        reaction = Reaction(eventData)
+    async def _handle_delete_reaction(self, event_data):
+        reaction = Reaction(event_data)
         for handler in self._reaction_delete_handlers:
             await handler(reaction)
 
@@ -173,8 +169,8 @@ class Events:
         self._forum_topic_comment_reaction_create_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_forum_topic_comment_reaction_create(self, eventData):
-        reaction = ForumTopicCommentReaction(eventData)
+    async def _handle_forum_topic_comment_reaction_create(self, event_data):
+        reaction = ForumTopicCommentReaction(event_data)
         for handler in self._forum_topic_comment_reaction_create_handlers:
             await handler(reaction)
 
@@ -186,8 +182,8 @@ class Events:
         self._forum_topic_comment_reaction_delete_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_forum_topic_comment_reaction_delete(self, eventData):
-        reaction = ForumTopicCommentReaction(eventData)
+    async def _handle_forum_topic_comment_reaction_delete(self, event_data):
+        reaction = ForumTopicCommentReaction(event_data)
         for handler in self._forum_topic_comment_reaction_delete_handlers:
             await handler(reaction)
 
@@ -199,8 +195,8 @@ class Events:
         self._calendar_event_reaction_create_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_calendar_event_reaction_create(self, eventData):
-        reaction = CalendarReaction(eventData)
+    async def _handle_calendar_event_reaction_create(self, event_data):
+        reaction = CalendarReaction(event_data)
         for handler in self._calendar_event_reaction_create_handlers:
             await handler(reaction)
 
@@ -212,8 +208,8 @@ class Events:
         self._calendar_event_reaction_delete_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_calendar_event_reaction_delete(self, eventData):
-        reaction = CalendarReaction(eventData)
+    async def _handle_calendar_event_reaction_delete(self, event_data):
+        reaction = CalendarReaction(event_data)
         for handler in self._calendar_event_reaction_delete_handlers:
             await handler(reaction)
 
@@ -225,11 +221,10 @@ class Events:
         self._channel_create_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_create_channel(self, eventData):
-      channel = Channel(eventData)
-      for handler in self._channel_create_handlers:
-        await handler(channel)
-
+    async def _handle_create_channel(self, event_data):
+        channel = Channel(event_data)
+        for handler in self._channel_create_handlers:
+            await handler(channel)
 
     def on_channel_delete(self, func):
         @wraps(func)
@@ -239,9 +234,8 @@ class Events:
         self._channel_delete_handlers.append(wrapper)
         return wrapper
 
-
-    async def _handle_delete_channel(self, eventData):
-        channel = Channel(eventData)
+    async def _handle_delete_channel(self, event_data):
+        channel = Channel(event_data)
         for handler in self._channel_delete_handlers:
             await handler(channel)
 
@@ -253,11 +247,10 @@ class Events:
         self._channel_update_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_update_channel(self, eventData):
-        channel = Channel(eventData)
+    async def _handle_update_channel(self, event_data):
+        channel = Channel(event_data)
         for handler in self._channel_update_handlers:
             await handler(channel)
-
 
     def on_webhook_create(self, func):
         @wraps(func)
@@ -267,8 +260,8 @@ class Events:
         self._webhook_create_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_create_webhook(self, eventData):
-        webhook = Webhook(eventData)
+    async def _handle_create_webhook(self, event_data):
+        webhook = Webhook(event_data)
         for handler in self._webhook_create_handlers:
             await handler(webhook)
 
@@ -280,26 +273,25 @@ class Events:
         self._webhook_update_handlers.append(wrapper)
         return wrapper
 
-    async def _handle_update_webhook(self, eventData):
-        webhook = Webhook(eventData)
+    async def _handle_update_webhook(self, event_data):
+        webhook = Webhook(event_data)
         for handler in self._webhook_update_handlers:
             await handler(webhook)
 
-
-
-
-
-
     async def start(self):
-        async with websockets.connect('wss://www.guilded.gg/websocket/v1',
-                                      extra_headers={'Authorization': f'Bearer {self.client.token}'}) as websocket:
+        async with websockets.connect(
+                'wss://www.guilded.gg/websocket/v1',
+                extra_headers={
+                    'Authorization': f'Bearer {self.client.token}'
+                }
+        ) as websocket:
             await self._handle_ready()
             while True:
                 data = await websocket.recv()
                 json_data = json.loads(data)
 
                 if 't' in json_data and 'd' in json_data:
-                    eventType, eventData = json_data['t'], json_data['d']
+                    event_type, event_data = json_data['t'], json_data['d']
                 else:
                     continue
 
@@ -311,12 +303,18 @@ class Events:
                     'ServerMemberRemoved': self._handle_member_leave,
                     'ServerMemberBanned': self._handle_member_banned,
                     'ServerMemberUnbanned': self._handle_member_unbanned,
-                    'ChannelMessageReactionCreated': self._handle_create_reaction,
-                    'ChannelMessageReactionDeleted': self._handle_delete_reaction,
-                    'ForumTopicCommentReactionCreated': self._handle_forum_topic_comment_reaction_create,
-                    'ForumTopicCommentReactionDeleted': self._handle_forum_topic_comment_reaction_delete,
-                    'CalendarEventReactionCreated': self._handle_calendar_event_reaction_create,
-                    'CalendarEventReactionDeleted': self._handle_calendar_event_reaction_delete,
+                    'ChannelMessageReactionCreated':
+                        self._handle_create_reaction,
+                    'ChannelMessageReactionDeleted':
+                        self._handle_delete_reaction,
+                    'ForumTopicCommentReactionCreated':
+                        self._handle_forum_topic_comment_reaction_create,
+                    'ForumTopicCommentReactionDeleted':
+                        self._handle_forum_topic_comment_reaction_delete,
+                    'CalendarEventReactionCreated':
+                        self._handle_calendar_event_reaction_create,
+                    'CalendarEventReactionDeleted':
+                        self._handle_calendar_event_reaction_delete,
                     'ServerChannelCreated': self._handle_create_channel,
                     'ServerChannelDeleted': self._handle_delete_channel,
                     'ServerChannelUpdated': self._handle_update_channel,
@@ -324,9 +322,9 @@ class Events:
                     'ServerWebhookUpdated': self._handle_update_webhook
 
                 }
-                handler = event_handlers.get(eventType)
+                handler = event_handlers.get(event_type)
                 if handler:
-                    await handler(eventData)
+                    await handler(event_data)
 
     def run(self):
         try:
@@ -334,5 +332,3 @@ class Events:
         except KeyboardInterrupt:
             # TODO Handle standard exit
             pass
-
-
