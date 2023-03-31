@@ -7,8 +7,7 @@ import websockets
 
 from nextguild.channel import Channel
 from nextguild.message import Message, Webhook
-from nextguild.reaction import Reaction, CalendarReaction, \
-    ForumTopicCommentReaction
+from nextguild.reaction import Reaction, CalendarReaction, ForumTopicCommentReaction
 
 
 class Events:
