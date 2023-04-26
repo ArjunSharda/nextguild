@@ -8,7 +8,7 @@ Example Bot
 
 .. code-block:: python
 
-    from nextguild import Client, Events, Message, Embed, Reaction, CalendarReaction, ForumTopicCommentReaction
+    from nextguild import *
     token = "YOUR_TOKEN_HERE"
 
     bot = Client(token)
