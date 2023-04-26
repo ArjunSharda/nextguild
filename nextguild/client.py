@@ -663,6 +663,53 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvps'
         )
         return response
+    
+    def create_announcement(self, channel_id: str, title: str, content: str):
+        response = self.request(
+            'POST',
+            f'{self.base_url}/channels/{channel_id}/announcements',
+            json={'title': title, 'content': content}
+        )
+        return response
+    
+    def get_announcement(self, channel_id: str, announcement_id: str):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}'
+        )
+        return response
+    
+    def get_announcements(self, channel_id: str, before: str = None, limit: str = None):
+        params = {}
+        if before:
+            params['before'] = before
+        if limit:
+            params['limit'] = limit
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements'
+        )
+        return response
+    
+    def update_announcement(self, channel_id: str, announcement_id: str, title: str = None, content: str = None):
+        params = {}
+        if title:
+            params['title'] = title
+        if content:
+            params['content'] = content
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}',
+            json=params
+        )
+        return response
+    
+    def delete_announcement(self, channel_id: str, announcement_id: str):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}'
+        )
+        return response
 
     def create_webhook(
             self,
