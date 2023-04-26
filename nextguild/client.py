@@ -710,6 +710,43 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}'
         )
         return response
+    
+    def create_announcement_comment(self, channel_id: str, announcement_id: str, content: str):
+        response = self.request(
+            'POST',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments',
+            json={'content': content}
+        )
+        return response
+    
+    def get_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: str):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}'
+        )
+        return response
+    
+    def get_announcement_comments(self, channel_id: str, announcement_id: str):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments'
+        )
+        return response
+    
+    def update_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: str, content: str):
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}',
+            json={'content': content}
+        )
+        return response
+    
+    def delete_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: str):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}'
+        )
+        return response
 
     def create_webhook(
             self,
