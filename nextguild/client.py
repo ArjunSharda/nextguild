@@ -173,7 +173,9 @@ class Client:
         # except json.JSONDecodeError:
         #     data = response.text
         #     breakpoint()
-        data: dict = json.loads(response.content)
+        try:
+            data: dict = json.loads(response.content)
+        except: return
         if 200 <= code < 300:
             return data
         raise ValueError(f'Request failed with status {code}: {data}')
@@ -1248,14 +1250,24 @@ class Client:
         return response
 
     def get_bot_user_id(self):
-        response = self.request(f'{self.base_url}/users/@me', headers=self.headers)
+        response = self.request('GET', f'{self.base_url}/users/@me')
         return response.json()['user']['id']
     
     def get_user_servers(self, user_id: str):
-        response = self.request(f'{self.base_url}users/{user_id}/servers', headers=self.headers)
+        response = self.request('GET', f'{self.base_url}users/{user_id}/servers')
         return response
 
     def get_bot_servers(self):
-        response = self.request(f'{self.base_url}/users/@me/servers', headers=self.headers)
+        response = self.request('GET', f'{self.base_url}/users/@me/servers')
         return response
+    
+    def get_default_channel(self, server_id: str):
+        r = self.request('GET', f'{self.base_url}/servers/{server_id}')
+        try:
+            print(r)
+            response = r['server']['defaultChannelId']
+        except:
+            response = 'No default channel found'
+        return response
+        
 
