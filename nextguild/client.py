@@ -5,8 +5,8 @@ from datetime import datetime
 
 import requests
 
-from nextguild.embed import Embed
-from nextguild.message import Message
+from embed import Embed
+from message import Message
 
 
 class Client:
@@ -528,10 +528,7 @@ class Client:
             message: str,
             note: str = None
     ):
-        data = {}
-
-        if title:
-            data.update({'message': message})
+        data = {'message': message}
 
         if note:
             data.update({'note': {'content': note}})
@@ -1251,5 +1248,14 @@ class Client:
         return response
 
     def get_bot_user_id(self):
-        response = requests.get(f'/users/@me', headers=self.headers)
+        response = self.request(f'{self.base_url}/users/@me', headers=self.headers)
         return response.json()['user']['id']
+    
+    def get_user_servers(self, user_id: str):
+        response = self.request(f'{self.base_url}users/{user_id}/servers', headers=self.headers)
+        return response
+
+    def get_bot_servers(self):
+        response = self.request(f'{self.base_url}/users/@me/servers', headers=self.headers)
+        return response
+

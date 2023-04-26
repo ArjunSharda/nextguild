@@ -5,9 +5,9 @@ from functools import wraps
 
 import websockets
 
-from nextguild.channel import Channel
-from nextguild.message import Message, Webhook
-from nextguild.reaction import Reaction, CalendarReaction, ForumTopicCommentReaction
+from channel import Channel
+from message import Message, Webhook
+from reaction import Reaction, CalendarReaction, ForumTopicCommentReaction
 
 
 class Events:

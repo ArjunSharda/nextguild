@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from nextguild.embed import Embed
+from embed import Embed
 
 
 class Message:
@@ -10,7 +10,7 @@ class Message:
         ["00": {...}, "01": {...}, "02": {...}]
         """
         message: dict = payload.get('message', payload)
-        self.message_id: str = message.get('id')
+        self.id: str = message.get('id')
         self.type: str = message.get('type')
         self.server_id: str = message.get('serverId')
         self.channel_id: str = message.get('channelId')
@@ -29,7 +29,7 @@ class Message:
         # TODO Model "mentions" attribute
         self.mentions: list[dict] = message.get('mentions', [])
         self.created_at: str = message.get('createdAt')
-        self.created_by: str = message.get('createdBy')
+        self.author_id: str = message.get('createdBy')
         self.created_by_webhook_id: str = message.get('createdByWebhookId')
         self.updated_at: str = message.get('updatedAt')
 
@@ -40,9 +40,9 @@ class Message:
 class Webhook:
     def __init__(self, event_data: dict):
         self.event_data: dict = event_data
-        self.webhook_id: str = event_data.get('webhook', {}).get('id')
-        self.webhook_name: str = event_data.get('webhook', {}).get('name')
+        self.id: str = event_data.get('webhook', {}).get('id')
+        self.name: str = event_data.get('webhook', {}).get('name')
         self.channel_id: str = event_data.get('webhook', {}).get('channelId')
         self.server_id: str = event_data.get('serverId')
         self.created_at: str = event_data.get('webhook', {}).get('createdAt')
-        self.created_by: str = event_data.get('webhook', {}).get('createdBy')
+        self.author_id: str = event_data.get('webhook', {}).get('createdBy')

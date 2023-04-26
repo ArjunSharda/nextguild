@@ -58,4 +58,30 @@ Get Bot User ID
    get_bot_user_id()
    
 Gets the user id of the bot. No parameters
+
+Get User's Servers
+------------
+
+.. code-block:: python
+
+   get_user_servers(userid)
+   
+Gets all the servers that the specified user is in. Currently the bot can only get the servers that itself is in.
+
++-----------+------+-------------------------------------+
+| Parameter | Type | Description                         |
++===========+======+=====================================+
+| userid    | str  | The ID of the user                  |
++-----------+------+-------------------------------------+
+
+
+Get Bot's Servers
+------------
+
+.. code-block:: python
+
+   get_bot_servers()
+   
+
+Gets all the servers that the bot is in. No parameters.
  
