@@ -20,7 +20,7 @@ The constructor for the Embed class. Initializes an embed object with the provid
 +---------------+------------------+-------------------------------------------------+
 | description   | str, optional    | The description of the embed.                   |
 +---------------+------------------+-------------------------------------------------+
-| color         | str, optional    | The color of the embed, as a hexadecimal string.|
+| color         | str, optional    | The color of the embed, as a decimal string*    |
 +---------------+------------------+-------------------------------------------------+
 | author        | str, optional    | The name of the author for the embed.           |
 +---------------+------------------+-------------------------------------------------+
@@ -38,6 +38,9 @@ The constructor for the Embed class. Initializes an embed object with the provid
 +---------------+------------------+-------------------------------------------------+
 | fields        | list, optional   | A list of fields to be added to the embed.      |
 +---------------+------------------+-------------------------------------------------+
+\*Confused about the color parameter? Check out `this website`_
+
+.. _this website: https://www.checkyourmath.com/convert/color/hexadecimal_decimal.php
 
 add_field
 ---------

@@ -147,9 +147,9 @@ class Client:
             amount: int
     ):
         messages = self.get_channel_messages(channel_id, amount)
-        message_ids = [msg.message_id for msg in messages]
-        for message_id in message_ids:
-            self.delete_message(channel_id, message_id)
+        message_ids = [msg.id for msg in messages]
+        for id in message_ids:
+            self.delete_message(channel_id, id)
         return len(message_ids)
 
     def request(self, method: str, url: str, **kwargs) -> dict:
