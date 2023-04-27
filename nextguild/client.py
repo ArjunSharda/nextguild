@@ -584,9 +584,7 @@ class Client:
     def is_server_owner(self, server_id, user_id):
         """Checks if a user is the owner of a server."""
         ownerid = self.get_server(server_id)["server"]["ownerId"]
-        if ownerid == user_id:
-                return ownerid == user_id
-        else: return False
+        return ownerid == user_id
     def get_events(
             self,
             channel_id: str,
