@@ -30,7 +30,7 @@ class Message:
         self.mentions: list[dict] = message.get('mentions', [])
         self.created_at: str = message.get('createdAt')
         self.author_id: str = message.get('createdBy')
-        self.created_by_webhook_id: str = message.get('createdByWebhookId')
+        self.webhook_id: str = message.get('createdByWebhookId')
         self.updated_at: str = message.get('updatedAt')
 
     async def reply(self):  # TODO "reply" method

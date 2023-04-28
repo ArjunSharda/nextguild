@@ -1,4 +1,4 @@
-Message Data
+The Message Class
 ------------
 
 This document provides information for all the information you can recieve from a message.
@@ -6,9 +6,11 @@ This document provides information for all the information you can recieve from 
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-|``message.content``          |The message's content                         |
+|``message.content``          |The content of the message                    |
 +-----------------------------+----------------------------------------------+
-|``message.type``             |The type of message that was sent             |
+|``message.embeds``           |The embeds that the message contains          |
++-----------------------------+----------------------------------------------+
+|``message.type``             |The type of the message                       |
 +-----------------------------+----------------------------------------------+
 |``message.author_id``        |The ID of the user that sent the message      |
 +-----------------------------+----------------------------------------------+
@@ -24,8 +26,6 @@ This document provides information for all the information you can recieve from 
 |``message.mentions``         |The user mentions that the message contains   |
 +-----------------------------+----------------------------------------------+
 |``message.reply_message_ids``|The user mentions that the message contains   |
-+-----------------------------+----------------------------------------------+
-|``message.embeds``           |The embeds that the message contains          |
 +-----------------------------+----------------------------------------------+
 |``message.created_at``       |When the message was created                  |
 +-----------------------------+----------------------------------------------+

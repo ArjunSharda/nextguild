@@ -1121,7 +1121,7 @@ class Client:
     def get_doc(
             self,
             channel_id: str,
-            doc_id: str
+            doc_id: int
     ):
         response = self.request(
             'GET',
@@ -1133,28 +1133,21 @@ class Client:
             self,
             channel_id: str,
             doc_id: str,
-            title: str = None,
-            content: str = None,
-            *,
-            embed: Embed = None
+            title: str,
+            content: str,
     ):
-        data = {'title': title}
-        if content:
-            data.update(content=content)
-        elif embed:
-            data.update(embeds=[embed.to_dict])
 
         response = self.request(
             'PUT',
             f'{self.base_url}/channels/{channel_id}/docs/{doc_id}',
-            json=data
+            json={'title': title, 'content': content}
         )
         return response
 
     def delete_doc(
             self,
             channel_id: str,
-            doc_id: str
+            doc_id: int
     ):
         response = self.request(
             'DELETE',
@@ -1166,21 +1159,13 @@ class Client:
             self,
             channel_id: str,
             doc_id: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            content: str,
     ):
-        if content:
-            data = {'content': content}
-        elif embed:
-            data = {'embeds': embed.to_dict}
-        else:
-            data = {}
 
         response = self.request(
             'POST',
             f'{self.base_url}/channels/{channel_id}/docs/{doc_id}/comments',
-            json=data
+            json={'content': content}
         )
         return response
 
@@ -1189,26 +1174,22 @@ class Client:
             channel_id: str,
             doc_id: int,
             comment_id: int,
-            content: str = None,
+            content: str,
     ):
-        if content:
-            data = {'content': content}
-        else:
-            data = {}
 
         response = self.request(
             'PATCH',
             f'{self.base_url}/channels/{channel_id}/docs/{doc_id}/comments/'
             f'{comment_id}',
-            json=data
+            json={'content': content}
         )
         return response
 
     def delete_doc_comment(
             self,
             channel_id: str,
-            doc_id: str,
-            comment_id: str
+            doc_id: int,
+            comment_id: int
     ):
         response = self.request(
             'DELETE',
