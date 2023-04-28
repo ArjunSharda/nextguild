@@ -147,9 +147,9 @@ class Client:
             amount: int
     ):
         messages = self.get_channel_messages(channel_id, amount)
-        message_ids = [msg.message_id for msg in messages]
-        for message_id in message_ids:
-            self.delete_message(channel_id, message_id)
+        message_ids = [msg.id for msg in messages]
+        for id in message_ids:
+            self.delete_message(channel_id, id)
         return len(message_ids)
 
     def request(self, method: str, url: str, **kwargs) -> dict:
@@ -173,7 +173,9 @@ class Client:
         # except json.JSONDecodeError:
         #     data = response.text
         #     breakpoint()
-        data: dict = json.loads(response.content)
+        try:
+            data: dict = json.loads(response.content)
+        except: return
         if 200 <= code < 300:
             return data
         raise ValueError(f'Request failed with status {code}: {data}')
@@ -596,6 +598,10 @@ class Client:
         )
         return response
 
+    def is_server_owner(self, server_id: str, user_id: str):
+        """Checks if a user is the owner of a server."""
+        ownerid = self.get_server(server_id).get('server', {}).get('ownerId')
+        return ownerid == user_id
     def get_events(
             self,
             channel_id: str,
@@ -678,6 +684,90 @@ class Client:
         response = self.request(
             'GET',
             f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvps'
+        )
+        return response
+    
+    def create_announcement(self, channel_id: str, title: str, content: str):
+        response = self.request(
+            'POST',
+            f'{self.base_url}/channels/{channel_id}/announcements',
+            json={'title': title, 'content': content}
+        )
+        return response
+    
+    def get_announcement(self, channel_id: str, announcement_id: str):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}'
+        )
+        return response
+    
+    def get_announcements(self, channel_id: str, before: str = None, limit: str = None):
+        params = {}
+        if before:
+            params['before'] = before
+        if limit:
+            params['limit'] = limit
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements'
+        )
+        return response
+    
+    def update_announcement(self, channel_id: str, announcement_id: str, title: str = None, content: str = None):
+        params = {}
+        if title:
+            params['title'] = title
+        if content:
+            params['content'] = content
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}',
+            json=params
+        )
+        return response
+    
+    def delete_announcement(self, channel_id: str, announcement_id: str):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}'
+        )
+        return response
+    
+    def create_announcement_comment(self, channel_id: str, announcement_id: str, content: str):
+        response = self.request(
+            'POST',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments',
+            json={'content': content}
+        )
+        return response
+    
+    def get_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: str):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}'
+        )
+        return response
+    
+    def get_announcement_comments(self, channel_id: str, announcement_id: str):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments'
+        )
+        return response
+    
+    def update_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: str, content: str):
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}',
+            json={'content': content}
+        )
+        return response
+    
+    def delete_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: str):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}'
         )
         return response
 
@@ -1199,14 +1289,24 @@ class Client:
         return response
 
     def get_bot_user_id(self):
-        response = self.request(f'{self.base_url}/users/@me', headers=self.headers)
+        response = self.request('GET', f'{self.base_url}/users/@me')
         return response.json()['user']['id']
     
     def get_user_servers(self, user_id: str):
-        response = self.request(f'{self.base_url}users/{user_id}/servers', headers=self.headers)
+        response = self.request('GET', f'{self.base_url}users/{user_id}/servers')
         return response
 
     def get_bot_servers(self):
-        response = self.request(f'{self.base_url}/users/@me/servers', headers=self.headers)
+        response = self.request('GET', f'{self.base_url}/users/@me/servers')
         return response
+    
+    def get_default_channel(self, server_id: str):
+        r = self.request('GET', f'{self.base_url}/servers/{server_id}')
+        try:
+            print(r)
+            response = r['server']['defaultChannelId']
+        except:
+            response = 'No default channel found'
+        return response
+        
 
