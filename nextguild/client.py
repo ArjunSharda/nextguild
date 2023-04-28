@@ -579,6 +579,22 @@ class Client:
             json=data
         )
         return response
+    
+    def update_event(
+            self,
+            channel_id: str,
+            event_id: int,
+            **kwargs
+    ):
+        data = {}
+        for key, value in kwargs.items():
+            data.update({key: value})
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}',
+            json=data
+        )
+        return response
 
     def get_events(
             self,
@@ -619,11 +635,12 @@ class Client:
     def get_calendar_event_rsvp(
             self,
             channel_id: str,
-            event_id: int
+            event_id: int,
+            user_id: str
     ):
         response = self.request(
             'GET',
-            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvp'
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvps/{user_id}'
         )
         return response
 
@@ -631,23 +648,25 @@ class Client:
             self,
             channel_id: str,
             event_id: int,
-            rsvp: str
+            user_id: str,
+            status: str
     ):
         response = self.request(
             'POST',
-            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvp',
-            json={'rsvp': rsvp}
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvps/{user_id}',
+            json={'status': status}
         )
         return response
 
     def delete_calendar_event_rsvp(
             self,
             channel_id: str,
-            event_id: int
+            event_id: int,
+            user_id: str
     ):
         response = self.request(
             'DELETE',
-            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvp'
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvps/{user_id}'
         )
         return response
 
@@ -732,46 +751,28 @@ class Client:
             self,
             server_id: str,
             webhook_id: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            content: str,
     ):
         token = self.get_webhook(server_id, webhook_id)['webhook']['token']
-        data = {}
-
-        if content:
-            data = {'content': content}
-
-        if embed:
-            data = {'embeds': embed.to_dict}
 
         response = self.request(
             'POST',
             f'https://media.guilded.gg/webhooks/{webhook_id}/{token}',
-            json=data
+            json={'content': content}
         )
         return response
 
-    def create_forum_post(
+    def create_forum_topic(
             self,
             channel_id: str,
             title: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            content: str,
     ):
-        data = {}
-
-        if content:
-            data = {'title': title, 'content': content}
-
-        if embed:
-            data = {'title': title, 'embeds': embed.to_dict}
 
         response = self.request(
             'POST',
             f'/channels/{channel_id}/topics',
-            json=data
+            json= {'title': title, 'content': content}
         )
         return response
 
@@ -799,7 +800,7 @@ class Client:
     def get_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'GET',
@@ -810,19 +811,17 @@ class Client:
     def update_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str,
+            forum_topic_id: int,
             title: str = None,
             content: str = None,
-            *,
-            embed: Embed = None
     ):
         data = {}
 
         if content:
-            data = {'title': title, 'content': content}
-
-        if embed:
-            data = {'title': title, 'embeds': embed.to_dict}
+            data['content'] = content
+        
+        if title:
+            data['title'] = title
 
         response = self.request(
             'PATCH',
@@ -834,7 +833,7 @@ class Client:
     def delete_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'DELETE',
@@ -845,7 +844,7 @@ class Client:
     def pin_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'PUT',
@@ -856,7 +855,7 @@ class Client:
     def unpin_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'DELETE',
@@ -867,7 +866,7 @@ class Client:
     def lock_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'PUT',
@@ -878,7 +877,7 @@ class Client:
     def unlock_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'DELETE',
@@ -889,30 +888,21 @@ class Client:
     def create_forum_comment(
             self,
             channel_id: str,
-            forum_topic_id: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            forum_topic_id: int,
+            content: str,
     ):
-        data = {}
-
-        if content:
-            data.update(content=content)
-
-        if embed:
-            data.update(embeds=[embed.to_dict])
 
         response = self.request(
             'POST',
             f'/channels/{channel_id}/topics/{forum_topic_id}/comments',
-            json=data
+            json={'content': content}
         )
         return response
 
     def get_forum_comments(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'GET',
@@ -923,8 +913,8 @@ class Client:
     def get_forum_comment(
             self,
             channel_id: str,
-            forum_topic_id: str,
-            forum_comment_id: str
+            forum_topic_id: int,
+            forum_comment_id: int
     ):
         response = self.request(
             'GET',
@@ -936,33 +926,24 @@ class Client:
     def update_forum_comment(
             self,
             channel_id: str,
-            forum_topic_id: str,
-            forum_comment_id: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            forum_topic_id: int,
+            forum_comment_id: int,
+            content: str,
     ):
-        data = {}
-
-        if content:
-            data = {'content': content}
-
-        if embed:
-            data = {'embeds': embed.to_dict}
 
         response = self.request(
             'PATCH',
             f'/channels/{channel_id}/topics/{forum_topic_id}/comments/'
             f'{forum_comment_id}',
-            json=data
+            json={'content': content}
         )
         return response
 
     def delete_forum_comment(
             self,
             channel_id: str,
-            forum_topic_id: str,
-            forum_comment_id: str
+            forum_topic_id: int,
+            forum_comment_id: int
     ):
         response = self.request(
             'DELETE',
@@ -971,35 +952,35 @@ class Client:
         )
         return response
 
-    def create_reaction(
+    def create_message_reaction(
             self,
             channel_id: str,
-            content_id: str,
-            emote_id: str
+            message_id: str,
+            emote_id: int
     ):
         response = self.request(
             'PUT',
-            f'/channels/{channel_id}/content/{content_id}/emotes/{emote_id}'
+            f'/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}'
         )
         return response
 
-    def delete_reaction(
+    def delete_message_reaction(
             self,
             channel_id: str,
-            content_id: str,
-            emote_id: str
+            message_id: str,
+            emote_id: int
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/content/{content_id}/emotes/{emote_id}'
+            f'/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}'
         )
         return response
 
     def create_topic_reaction(
             self,
             channel_id: str,
-            topic_id: str,
-            emote_id: str
+            topic_id: int,
+            emote_id: int
     ):
         response = self.request(
             'PUT',
@@ -1010,8 +991,8 @@ class Client:
     def delete_topic_reaction(
             self,
             channel_id: str,
-            topic_id: str,
-            emote_id: str
+            topic_id: int,
+            emote_id: int
     ):
         response = self.request(
             'DELETE',
@@ -1022,9 +1003,9 @@ class Client:
     def create_topic_comment_reaction(
             self,
             channel_id: str,
-            topic_id: str,
-            topic_comment_id: str,
-            emote_id: str
+            topic_id: int,
+            topic_comment_id: int,
+            emote_id: int
     ):
         response = self.request(
             'PUT',
@@ -1036,9 +1017,9 @@ class Client:
     def delete_topic_comment_reaction(
             self,
             channel_id: str,
-            topic_id: str,
-            topic_comment_id: str,
-            emote_id: str
+            topic_id: int,
+            topic_comment_id: int,
+            emote_id: int
     ):
         response = self.request(
             'DELETE',
@@ -1050,8 +1031,8 @@ class Client:
     def create_event_reaction(
             self,
             channel_id: str,
-            event_id: str,
-            emote_id: str
+            event_id: int,
+            emote_id: int
     ):
         response = self.request(
             'PUT',
@@ -1063,8 +1044,8 @@ class Client:
     def delete_event_reaction(
             self,
             channel_id: str,
-            event_id: str,
-            emote_id: str
+            event_id: int,
+            emote_id: int
     ):
         response = self.request(
             'DELETE',
@@ -1076,9 +1057,9 @@ class Client:
     def create_event_comment_reaction(
             self,
             channel_id: str,
-            event_id: str,
-            comment_id: str,
-            emote_id: str
+            event_id: int,
+            comment_id: int,
+            emote_id: int
     ):
         response = self.request(
             'PUT',
@@ -1090,9 +1071,9 @@ class Client:
     def delete_event_comment_reaction(
             self,
             channel_id: str,
-            event_id: str,
-            comment_id: str,
-            emote_id: str
+            event_id: int,
+            comment_id: int,
+            emote_id: int
     ):
         response = self.request(
             'DELETE',
@@ -1105,21 +1086,14 @@ class Client:
             self,
             channel_id: str,
             title: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            content: str
     ):
-        data = {'title': title}
 
-        if content:
-            data.update(content=content)
-        elif embed:
-            data.update(embeds=[embed.to_dict])
 
         response = self.request(
             'POST',
             f'{self.base_url}/channels/{channel_id}/docs',
-            json=data
+            json={'title': title, 'content': content}
         )
         return response
 
@@ -1213,16 +1187,12 @@ class Client:
     def update_doc_comment(
             self,
             channel_id: str,
-            doc_id: str,
-            comment_id: str,
+            doc_id: int,
+            comment_id: int,
             content: str = None,
-            *,
-            embed: Embed = None
     ):
         if content:
             data = {'content': content}
-        elif embed:
-            data = {'embeds': embed.to_dict}
         else:
             data = {}
 

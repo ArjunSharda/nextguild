@@ -114,3 +114,17 @@ Gets the ban information for a user on a server.
 |                   |         | information for.                           |
 +-------------------+---------+--------------------------------------------+
 
+get_user_servers
+-----------------
+
+.. code-block:: python
+
+    get_user_servers(user_id)
+
+Gets the servers that a user is a member of.
+
++-------------------+---------+--------------------------------------------+
+| Parameter         | Type    | Description                                |
++===================+=========+============================================+
+| user_id           | string  | The ID of the user to get the servers for. |
++-------------------+---------+--------------------------------------------+
