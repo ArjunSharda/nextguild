@@ -190,6 +190,22 @@ Example usage:
     async def on_webhook_delete(reaction):
         client.send_message("YOUR_CHANNEL_ID_HERE", "A reaction has been deleted!")
 
+on_bot_membership_created
+---------------
+A decorator for when the bot joins a server
+Example usage:
+
+
+.. code-block:: python
+
+    client = Client("YOUR_TOKEN_HERE")
+    events = Events(client)
+    
+    
+    @events.on_bot_membership_created
+    async def on_bot_membership_created():
+        client.send_message("YOUR_CHANNEL_ID_HERE", "A webhook has been updated!")
+
 
 on_ready
 --------
