@@ -7,6 +7,7 @@ import requests
 
 from embed import Embed
 from message import Message
+from member import ServerMember, ServerMemberSummary
 
 
 class Client:
@@ -257,23 +258,26 @@ class Client:
     def get_server_members(
             self,
             server_id: str
-    ):
+    ) -> list[ServerMemberSummary]:
         response = self.request(
             'GET',
             f'{self.base_url}/servers/{server_id}/members'
         )
-        return response
+        return list(map(
+            lambda m: ServerMemberSummary(m),
+            response.get('members')
+        ))
 
     def get_server_member(
             self,
             server_id: str,
             user_id: str
-    ):
+    ) -> ServerMember:
         response = self.request(
             'GET',
             f'{self.base_url}/servers/{server_id}/members/{user_id}'
         )
-        return response
+        return ServerMember(response.get('member'))
 
     def update_nickname(
             self,
