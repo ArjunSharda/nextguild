@@ -581,6 +581,7 @@ class Client:
             json=data
         )
         return response
+
     def is_server_owner(self, server_id: str, user_id: str):
         """Checks if a user is the owner of a server."""
         ownerid = self.get_server(server_id).get('server', {}).get('ownerId')
