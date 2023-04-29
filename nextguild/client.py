@@ -186,7 +186,7 @@ class Client:
             channel_type,
             server_id: str,
             group_id: str = None,
-            category_id: str = None,
+            category_id: int = None,
             is_public: bool = False
     ):
         data = {'name': name, 'type': channel_type}
@@ -327,7 +327,7 @@ class Client:
             self,
             server_id: str,
             user_id: str,
-            role_id: str
+            role_id: int
     ):
         response = self.request(
             'PUT',
@@ -340,7 +340,7 @@ class Client:
             self,
             server_id: str,
             user_id: str,
-            role_id: str
+            role_id: int
     ):
         response = self.request(
             'DELETE',
@@ -465,7 +465,7 @@ class Client:
     def award_xp_to_role(
             self,
             server_id: str,
-            role_id: str,
+            role_id: int,
             amount: int
     ):
         response = self.request(
@@ -742,7 +742,7 @@ class Client:
         )
         return response
     
-    def get_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: str):
+    def get_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: int):
         response = self.request(
             'GET',
             f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}'
@@ -756,7 +756,7 @@ class Client:
         )
         return response
     
-    def update_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: str, content: str):
+    def update_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: int, content: str):
         response = self.request(
             'PATCH',
             f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}',
@@ -764,7 +764,7 @@ class Client:
         )
         return response
     
-    def delete_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: str):
+    def delete_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: int):
         response = self.request(
             'DELETE',
             f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}'
@@ -1272,7 +1272,7 @@ class Client:
     def update_doc(
             self,
             channel_id: str,
-            doc_id: str,
+            doc_id: int,
             title: str,
             content: str,
     ):
@@ -1298,7 +1298,7 @@ class Client:
     def create_doc_comment(
             self,
             channel_id: str,
-            doc_id: str,
+            doc_id: int,
             content: str,
     ):
 

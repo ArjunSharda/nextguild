@@ -74,7 +74,7 @@ Awards XP to all members of a role in a server.
 +===================+=========+============================================+
 | server_id         | str     | The ID of the server to award XP in.       |
 +-------------------+---------+--------------------------------------------+
-| role_id           | str     | The ID of the role to award XP to.         |
+| role_id           | int     | The ID of the role to award XP to.         |
 +-------------------+---------+--------------------------------------------+
 | amount            | int     | The amount of XP to award.                 |
 +-------------------+---------+--------------------------------------------+

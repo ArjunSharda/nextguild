@@ -20,7 +20,7 @@ Adds a role to a user.
 +-------------------+---------+--------------------------------------------+
 | user_id           | str     | The ID of the user to add the role to.     |
 +-------------------+---------+--------------------------------------------+
-| role_id           | str     | The ID of the role to add to the user.     |
+| role_id           | int     | The ID of the role to add to the user.     |
 +-------------------+---------+--------------------------------------------+
 
 remove_role
@@ -41,7 +41,7 @@ Removes a role from a user.
 | user_id           | str     | The ID of the user to remove the role      |
 |                   |         | from.                                      |
 +-------------------+---------+--------------------------------------------+
-| role_id           | str     | The ID of the role to remove from the      |
+| role_id           | int     | The ID of the role to remove from the      |
 |                   |         | user.                                      |
 +-------------------+---------+--------------------------------------------+
 
@@ -84,6 +84,6 @@ If you pass a list of role IDs, the type is defaulted to ``any``.
 | role_id           | int,    | The ID of the role(s) to check for.        |
 |                   | list    |                                            |
 +-------------------+---------+--------------------------------------------+
-| type              | str     | The type of check to perform. Valid        |
-|                   |         | options are ``any`` and ``all``.           |
+| type              | str,    | The type of check to perform. Valid        |
+|                   | optional| options are ``any`` and ``all``.           |
 +-------------------+---------+--------------------------------------------+
