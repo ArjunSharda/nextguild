@@ -1,5 +1,6 @@
 # NextGuild
-![image](https://user-images.githubusercontent.com/108808053/235311352-233b1046-406d-46f2-9c93-ab94ffaf06e5.png)
+![image](https://user-images.githubusercontent.com/108808053/235311374-bdcdcdac-3c04-4b86-b336-1d2a02f5e914.png)
+
 
 
 
