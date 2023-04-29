@@ -1,5 +1,6 @@
 # NextGuild
-![image](https://user-images.githubusercontent.com/108808053/235310873-2ce30983-11ec-4756-9806-562a0134be00.png)
+![image](https://user-images.githubusercontent.com/108808053/235311352-233b1046-406d-46f2-9c93-ab94ffaf06e5.png)
+
 
 
 # About
