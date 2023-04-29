@@ -9,7 +9,7 @@ create_channel
 
     create_channel(name, channel_type, server_id, server_id, group_id, category_id, is_public)
 
-Creates a channel.
+Create a channel.
 
 +-------------------+---------+---------------------------------------------+
 | Parameter         | Type    | Description                                 |
@@ -38,7 +38,7 @@ update_channel
 
     update_channel(channel_id, name, topic, is_public)
 
-Updates a channel.
+Update a channel.
 
 +-------------------+---------+---------------------------------------------+
 | Parameter         | Type    | Description                                 |
@@ -62,7 +62,7 @@ delete_channel
 
     delete_channel(channel_id)
 
-Deletes a channel.
+Delete a channel.
 
 +-------------------+---------+---------------------------------------------+
 | Parameter         | Type    | Description                                 |
@@ -77,10 +77,26 @@ get_channel
 
     get_channel(channel_id)
 
-Gets a channel.
+Get a channel.
 
 +-------------------+---------+---------------------------------------------+
 | Parameter         | Type    | Description                                 |
 +===================+=========+=============================================+
 | channel_id        | str     | The ID of the channel to get.               |
++-------------------+---------+---------------------------------------------+
+
+get_default_channel
+-------------------
+
+.. code-block:: python
+
+    get_default_channel(server_id)
+
+Get the default channel of a server.
+
++-------------------+---------+---------------------------------------------+
+| Parameter         | Type    | Description                                 |
++===================+=========+=============================================+
+| server_id         | str     | The ID of the server to get the default     |
+|                   |         | channel of.                                 |
 +-------------------+---------+---------------------------------------------+

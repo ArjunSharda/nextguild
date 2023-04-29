@@ -358,7 +358,7 @@ class Client:
             'GET',
             f'{self.base_url}/servers/{server_id}/members/{user_id}/roles'
         )
-        return response
+        return response['roleIds']
 
     def unban_member(
             self,
@@ -1308,5 +1308,23 @@ class Client:
         except:
             response = 'No default channel found'
         return response
+    
+    def member_has_role(self, server_id: str, user_id: str, role_id: int or list, type: str = 'any'):
+        r = self.get_member_roles(server_id, user_id)
+        if isinstance(role_id, list):
+            if type == 'any':
+                for i in role_id:
+                    if i in r:
+                        return True
+                return False
+            if type == 'all':
+                for i in role_id:
+                    if i not in r:
+                        return False
+                return True
+        if role_id in r:
+            return True
+        else:
+            return False
         
 
