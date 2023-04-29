@@ -1171,6 +1171,56 @@ class Client:
             f'/comments/{comment_id}/emotes/{emote_id}'
         )
         return response
+    
+    def create_announcement_reaction(
+            self,
+            channel_id: str,
+            announcement_id: str,
+            emote_id: int
+    ):
+        response = self.request(
+            'PUT',
+            f'/channels/{channel_id}/announcements/{announcement_id}/emotes/{emote_id}'
+        )
+        return response
+
+    def delete_announcement_reaction(
+            self,
+            channel_id: str,
+            announcement_id: str,
+            emote_id: int
+    ):
+        response = self.request(
+            'DELETE',
+            f'/channels/{channel_id}/announcements/{announcement_id}/emotes/{emote_id}'
+        )
+        return response
+    
+    def create_announcement_comment_reaction(
+            self,
+            channel_id: str,
+            announcement_id: str,
+            comment_id: int,
+            emote_id: int
+    ):
+        response = self.request(
+            'PUT',
+            f'channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}/emotes/{emote_id}'
+        )
+        return response
+    
+    def delete_announcement_comment_reaction(
+            self,
+            channel_id: str,
+            announcement_id: str,
+            comment_id: int,
+            emote_id: int
+    ):
+        response = self.request(
+            'DELETE',
+            f'channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}/emotes/{emote_id}'
+        )
+        return response
 
     def create_doc(
             self,

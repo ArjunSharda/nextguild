@@ -210,3 +210,92 @@ Delete a reaction on an event comment.
 | emote_id          | int     | The ID of the emote to remove.             |
 +-------------------+---------+--------------------------------------------+
 
+
+create_announcement_reaction
+-----------------
+
+.. code-block:: python
+
+    create_announcement_reaction(channel_id, announcement_id, emote_id)
+
+Create a reaction on an announcement.
+
++-------------------+---------+--------------------------------------------+
+| Parameter         | Type    | Description                                |
++===================+=========+============================================+
+| channel_id        | str     | The ID of the channel the announcement is  |
+|                   |         | in.                                        |
++-------------------+---------+--------------------------------------------+
+| announcement_id   | str     | The ID of the announcement to react to.    |
++-------------------+---------+--------------------------------------------+
+| emote_id          | int     | The ID of the emote to react with.         |
++-------------------+---------+--------------------------------------------+
+
+delete_announcement_reaction
+-----------------
+
+.. code-block:: python
+
+    delete_announcement_reaction(channel_id, announcement_id, emote_id)
+
+Delete a reaction on an announcement.
+
++-------------------+---------+--------------------------------------------+
+| Parameter         | Type    | Description                                |
++===================+=========+============================================+
+| channel_id        | str     | The ID of the channel the announcement is  |
+|                   |         | in.                                        |
++-------------------+---------+--------------------------------------------+
+| announcement_id   | str     | The ID of the announcement to remove the   |
+|                   |         | reaction from.                             |
++-------------------+---------+--------------------------------------------+
+| emote_id          | int     | The ID of the emote to remove.             |
++-------------------+---------+--------------------------------------------+
+
+create_announcement_comment_reaction
+-----------------
+
+.. code-block:: python
+
+    create_announcement_comment_reaction(channel_id, announcement_id, comment_id, emote_id)
+
+Create a reaction on an announcement comment.
+
++-------------------+---------+--------------------------------------------+
+| Parameter         | Type    | Description                                |
++===================+=========+============================================+
+| channel_id        | str     | The ID of the channel the announcement     |
+|                   |         | comment is in.                             |
++-------------------+---------+--------------------------------------------+
+| announcement_id   | str     | The ID of the announcement the comment is  |
+|                   |         | in.                                        |
++-------------------+---------+--------------------------------------------+
+| comment_id        | int     | The ID of the announcement comment to      |
+|                   |         | react to.                                  |
++-------------------+---------+--------------------------------------------+
+| emote_id          | int     | The ID of the emote to react with.         |
++-------------------+---------+--------------------------------------------+
+
+delete_announcement_comment_reaction
+-----------------
+
+.. code-block:: python
+
+    delete_announcement_comment_reaction(channel_id, announcement_id, comment_id, emote_id)
+
+Delete a reaction on an announcement comment.
+
++-------------------+---------+--------------------------------------------+
+| Parameter         | Type    | Description                                |
++===================+=========+============================================+
+| channel_id        | str     | The ID of the channel the announcement     |
+|                   |         | comment is in.                             |
++-------------------+---------+--------------------------------------------+
+| announcement_id   | str     | The ID of the announcement the comment is  |
+|                   |         | in.                                        |
++-------------------+---------+--------------------------------------------+
+| comment_id        | int     | The ID of the announcement comment to      |
+|                   |         | remove the reaction from.                  |
++-------------------+---------+--------------------------------------------+
+| emote_id          | int     | The ID of the emote to remove.             |
++-------------------+---------+--------------------------------------------+
