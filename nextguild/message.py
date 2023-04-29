@@ -27,7 +27,6 @@ class Message:
         self.is_silent: bool = message.get('isSilent', False)
         # If message has no mentions it's empty
         # TODO Model "mentions" attribute
-        print(message)
         self.mentions = [mention['id'] for mention in message.get('mentions', {}).get('users', [])]
         self.created_at: str = message.get('createdAt')
         self.author_id: str = message.get('createdBy')
