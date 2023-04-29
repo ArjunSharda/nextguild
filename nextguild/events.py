@@ -152,7 +152,7 @@ class Events:
         self._member_social_delete_handlers.append(wrapper)
         return wrapper
     
-    def on_doc_deleted(self, func):
+    def on_doc_delete(self, func):
         @wraps(func)
         def wrapper(member):
             return func(member)
@@ -160,7 +160,7 @@ class Events:
         self._doc_deleted_handlers.append(wrapper)
         return wrapper
     
-    def on_doc_updated(self, func):
+    def on_doc_update(self, func):
         @wraps(func)
         def wrapper(member):
             return func(member)
@@ -168,7 +168,7 @@ class Events:
         self._doc_updated_handlers.append(wrapper)
         return wrapper
     
-    def on_doc_created(self, func):
+    def on_doc_create(self, func):
         @wraps(func)
         def wrapper(member):
             return func(member)
@@ -176,7 +176,7 @@ class Events:
         self._doc_created_handlers.append(wrapper)
         return wrapper
     
-    def on_doc_comment_created(self, func):
+    def on_doc_comment_create(self, func):
         @wraps(func)
         def wrapper(member):
             return func(member)
@@ -184,7 +184,7 @@ class Events:
         self._doc_comment_created_handlers.append(wrapper)
         return wrapper
     
-    def on_doc_comment_updated(self, func):
+    def on_doc_comment_update(self, func):
         @wraps(func)
         def wrapper(member):
             return func(member)
@@ -192,7 +192,7 @@ class Events:
         self._doc_comment_updated_handlers.append(wrapper)
         return wrapper
     
-    def on_doc_comment_deleted(self, func):
+    def on_doc_comment_delete(self, func):
         @wraps(func)
         def wrapper(member):
             return func(member)
@@ -482,7 +482,6 @@ class Events:
         self._forum_topic_comment_delete_handlers.append(wrapper)
         return wrapper
     
-    #ANCHOR - Calendar Events
     def on_calendar_event_rsvp_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -491,7 +490,6 @@ class Events:
         self._calendar_event_rsvp_update_handlers.append(wrapper)
         return wrapper
     
-    #ANCHOR - Calendar Events
     def on_calendar_event_rsvp_many_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -500,7 +498,6 @@ class Events:
         self._calendar_event_rsvp_many_update_handlers.append(wrapper)
         return wrapper
     
-    #ANCHOR - Calendar Events
     def on_calendar_event_rsvp_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -573,7 +570,6 @@ class Events:
         self._channel_message_reaction_many_delete_handlers.append(wrapper)
         return wrapper
     
-    #ANCHOR - Channel Messages
     def on_calendar_event_comment_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -582,7 +578,6 @@ class Events:
         self._calendar_event_comment_create_handlers.append(wrapper)
         return wrapper
     
-    #ANCHOR - Channel Messages
     def on_calendar_event_comment_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -591,7 +586,6 @@ class Events:
         self._calendar_event_comment_update_handlers.append(wrapper)
         return wrapper
     
-    #ANCHOR - Channel Messages
     def on_calendar_event_comment_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -600,7 +594,6 @@ class Events:
         self._calendar_event_comment_delete_handlers.append(wrapper)
         return wrapper
     
-    #ANCHOR - Channel Messages
     def on_calendar_event_comment_reaction_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -609,7 +602,6 @@ class Events:
         self._calendar_event_comment_reaction_create_handlers.append(wrapper)
         return wrapper
     
-    #ANCHOR - Channel Messages
     def on_calendar_event_comment_reaction_delete(self, func):
         @wraps(func)
         def wrapper(event):
