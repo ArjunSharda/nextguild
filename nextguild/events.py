@@ -33,8 +33,7 @@ class Events:
         self._channel_update_handlers = []
         self._webhook_create_handlers = []
         self._webhook_delete_handlers = []
-        self._webhook_update_handlers = []
-        #start        
+        self._webhook_update_handlers = []   
         self._bot_server_join_handlers = []
         self._bot_server_leave_handlers = []
         self._member_update_handlers = []
@@ -54,6 +53,47 @@ class Events:
         self._forum_topic_create_handlers = []
         self._forum_topic_update_handlers = []
         self._forum_topic_delete_handlers = []
+        self._forum_topic_pinned_handlers = []
+        self._forum_topic_unpinned_handlers = []
+        self._forum_topic_reaction_create_handlers = []
+        self._forum_topic_reaction_delete_handlers = []
+        self._forum_topic_lock_handlers = []
+        self._forum_topic_unlock_handlers = []
+        self._forum_topic_comment_create_handlers = []
+        self._forum_topic_comment_update_handlers = []
+        self._forum_topic_comment_delete_handlers = []
+        self._calendar_event_rsvp_update_handlers = []
+        self._calendar_event_rsvp_many_update_handlers = []
+        self._calendar_event_rsvp_delete_handlers = []
+        self._list_item_create_handlers = []
+        self._list_item_update_handlers = []
+        self._list_item_delete_handlers = []
+        self._list_item_complete_handlers = []
+        self._list_item_uncomplete_handlers = []
+        self._channel_message_reaction_create_handlers = []
+        self._channel_message_reaction_delete_handlers = []
+        self._channel_message_reaction_many_delete_handlers = []
+        self._calendar_event_comment_create_handlers = []
+        self._calendar_event_comment_update_handlers = []
+        self._calendar_event_comment_delete_handlers = []
+        self._calendar_event_comment_reaction_create_handlers = []
+        self._calendar_event_comment_reaction_delete_handlers = []
+        self._doc_reaction_create_handlers = []
+        self._doc_reaction_delete_handlers = []
+        self._doc_comment_reaction_create_handlers = []
+        self._doc_comment_reaction_delete_handlers = []
+        self._calendar_event_series_create_handlers = []
+        self._calendar_event_series_delete_handlers = []
+        self._announcement_create_handlers = []
+        self._announcement_update_handlers = []
+        self._announcement_delete_handlers = []
+        self._announcement_reaction_create_handlers = []
+        self._announcement_reaction_delete_handlers = []
+        self._announcement_comment_create_handlers = []
+        self._announcement_comment_update_handlers = []
+        self._announcement_comment_delete_handlers = []
+        self._announcement_comment_reaction_create_handlers = []
+        self._announcement_comment_reaction_delete_handlers = []
         self.client = client
     
     def on_bot_membership_created(self, func):
@@ -288,26 +328,6 @@ class Events:
 
 
 
-    def on_reaction_create(self, func):
-        @wraps(func)
-        def wrapper(reaction):
-            return func(reaction)
-
-        self._reaction_create_handlers.append(wrapper)
-        return wrapper
-
-
-
-    def on_reaction_delete(self, func):
-        @wraps(func)
-        def wrapper(reaction):
-            return func(reaction)
-
-        self._reaction_delete_handlers.append(wrapper)
-        return wrapper
-
-
-
     def on_forum_topic_comment_reaction_create(self, func):
         @wraps(func)
         def wrapper(reaction):
@@ -390,6 +410,344 @@ class Events:
         self._webhook_update_handlers.append(wrapper)
         return wrapper
     
+    def on_forum_topic_pin(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._forum_topic_pinned_handlers.append(wrapper)
+        return wrapper
+    
+    def on_forum_topic_unpin(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._forum_topic_unpinned_handlers.append(wrapper)
+        return wrapper
+    
+    def on_forum_topic_reaction_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._forum_topic_reaction_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_forum_topic_reaction_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._forum_topic_reaction_delete_handlers.append(wrapper)
+        return wrapper
+
+    def on_forum_topic_lock(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._forum_topic_lock_handlers.append(wrapper)
+        return wrapper
+    
+    def on_forum_topic_unlock(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._forum_topic_unlock_handlers.append(wrapper)
+        return wrapper
+    
+    def on_forum_topic_comment_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._forum_topic_comment_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_forum_topic_comment_update(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._forum_topic_comment_update_handlers.append(wrapper)
+        return wrapper
+    
+    def on_forum_topic_comment_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._forum_topic_comment_delete_handlers.append(wrapper)
+        return wrapper
+    
+    #ANCHOR - Calendar Events
+    def on_calendar_event_rsvp_update(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._calendar_event_rsvp_update_handlers.append(wrapper)
+        return wrapper
+    
+    #ANCHOR - Calendar Events
+    def on_calendar_event_rsvp_many_update(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._calendar_event_rsvp_many_update_handlers.append(wrapper)
+        return wrapper
+    
+    #ANCHOR - Calendar Events
+    def on_calendar_event_rsvp_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._calendar_event_rsvp_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_list_item_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._list_item_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_list_item_update(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._list_item_update_handlers.append(wrapper)
+        return wrapper
+    
+    def on_list_item_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._list_item_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_list_item_complete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._list_item_complete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_list_item_uncomplete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._list_item_uncomplete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_channel_message_reaction_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._channel_message_reaction_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_channel_message_reaction_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._channel_message_reaction_delete_handlers.append(wrapper)
+        return wrapper
+
+    def on_channel_message_reaction_many_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._channel_message_reaction_many_delete_handlers.append(wrapper)
+        return wrapper
+    
+    #ANCHOR - Channel Messages
+    def on_calendar_event_comment_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._calendar_event_comment_create_handlers.append(wrapper)
+        return wrapper
+    
+    #ANCHOR - Channel Messages
+    def on_calendar_event_comment_update(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._calendar_event_comment_update_handlers.append(wrapper)
+        return wrapper
+    
+    #ANCHOR - Channel Messages
+    def on_calendar_event_comment_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._calendar_event_comment_delete_handlers.append(wrapper)
+        return wrapper
+    
+    #ANCHOR - Channel Messages
+    def on_calendar_event_comment_reaction_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._calendar_event_comment_reaction_create_handlers.append(wrapper)
+        return wrapper
+    
+    #ANCHOR - Channel Messages
+    def on_calendar_event_comment_reaction_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._calendar_event_comment_reaction_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_doc_reaction_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._doc_reaction_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_doc_reaction_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._doc_reaction_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_doc_comment_reaction_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._doc_comment_reaction_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_doc_comment_reaction_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._doc_comment_reaction_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_calendar_event_series_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._calendar_event_series_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_calendar_event_series_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._calendar_event_series_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_announcement_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._announcement_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_announcement_update(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._announcement_update_handlers.append(wrapper)
+        return wrapper
+    
+    def on_announcement_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._announcement_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_announcement_reaction_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._announcement_reaction_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_announcement_reaction_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._announcement_reaction_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_announcement_comment_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._announcement_comment_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_announcement_comment_update(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._announcement_comment_update_handlers.append(wrapper)
+        return wrapper
+    
+    def on_announcement_comment_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._announcement_comment_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_announcement_comment_reaction_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._announcement_comment_reaction_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_announcement_comment_reaction_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._announcement_comment_reaction_delete_handlers.append(wrapper)
+        return wrapper
+    
+
+
     async def _handle_bot_server_membership_created(self, event_data):
         for handler in self._bot_server_join_handlers:
             await handler(event_data)
@@ -563,6 +921,170 @@ class Events:
         for handler in self._webhook_update_handlers:
             await handler(webhook)
 
+    async def _handle_forum_topic_pinned(self, event_data):
+        for handler in self._forum_topic_pinned_handlers:
+            await handler(event_data)
+
+    async def _handle_forum_topic_unpinned(self, event_data):
+        for handler in self._forum_topic_unpinned_handlers:
+            await handler(event_data)
+
+    async def _handle_forum_topic_reaction_created(self, event_data):
+        for handler in self._forum_topic_reaction_create_handlers:
+            await handler(event_data)
+
+    async def _handle_forum_topic_reaction_deleted(self, event_data):
+        for handler in self._forum_topic_reaction_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_forum_topic_locked(self, event_data):
+        for handler in self._forum_topic_lock_handlers:
+            await handler(event_data)
+
+    async def _handle_forum_topic_unlocked(self, event_data):
+        for handler in self._forum_topic_unlock_handlers:
+            await handler(event_data)
+
+    async def _handle_forum_topic_comment_created(self, event_data):
+        for handler in self._forum_topic_comment_create_handlers:
+            await handler(event_data)
+
+    async def _handle_forum_topic_comment_updated(self, event_data):
+        for handler in self._forum_topic_comment_update_handlers:
+            await handler(event_data)
+    
+    async def _handle_forum_topic_comment_deleted(self, event_data):
+        for handler in self._forum_topic_comment_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_calendar_event_rsvp_updated(self, event_data):
+        for handler in self._calendar_event_rsvp_update_handlers:
+            await handler(event_data)
+    
+    async def _handle_calendar_event_rsvp_many_updated(self, event_data):
+        for handler in self._calendar_event_rsvp_many_update_handlers:
+            await handler(event_data)
+
+    async def _handle_calendar_event_rsvp_deleted(self, event_data):
+        for handler in self._calendar_event_rsvp_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_list_item_created(self, event_data):
+        for handler in self._list_item_create_handlers:
+            await handler(event_data)
+
+    async def _handle_list_item_updated(self, event_data):
+        for handler in self._list_item_update_handlers:
+            await handler(event_data)
+
+    async def _handle_list_item_deleted(self, event_data):
+        for handler in self._list_item_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_list_item_completed(self, event_data):
+        for handler in self._list_item_complete_handlers:
+            await handler(event_data)
+
+    async def _handle_list_item_uncompleted(self, event_data):
+        for handler in self._list_item_uncomplete_handlers:
+            await handler(event_data)
+
+    async def _handle_channel_message_reaction_created(self, event_data):
+        for handler in self._channel_message_reaction_create_handlers:
+            await handler(event_data)
+
+    async def _handle_channel_message_reaction_deleted(self, event_data):
+        for handler in self._channel_message_reaction_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_channel_message_reaction_many_deleted(self, event_data):
+        for handler in self._channel_message_reaction_many_delete_handlers:
+            await handler(event_data)
+    
+    async def _handle_calendar_event_comment_created(self, event_data):
+        for handler in self._calendar_event_comment_create_handlers:
+            await handler(event_data)
+
+    async def _handle_calendar_event_comment_updated(self, event_data):
+        for handler in self._calendar_event_comment_update_handlers:
+            await handler(event_data)
+
+    async def _handle_calendar_event_comment_deleted(self, event_data):
+        for handler in self._calendar_event_comment_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_calendar_event_comment_reaction_created(self, event_data):
+        for handler in self._calendar_event_comment_reaction_create_handlers:
+            await handler(event_data)
+
+    async def _handle_calendar_event_comment_reaction_deleted(self, event_data):
+        for handler in self._calendar_event_comment_reaction_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_doc_reaction_created(self, event_data):
+        for handler in self._doc_reaction_create_handlers:
+            await handler(event_data)
+
+    async def _handle_doc_reaction_deleted(self, event_data):
+        for handler in self._doc_reaction_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_doc_comment_reaction_created(self, event_data):
+        for handler in self._doc_comment_reaction_create_handlers:
+            await handler(event_data)
+    
+    async def _handle_doc_comment_reaction_deleted(self, event_data):
+        for handler in self._doc_comment_reaction_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_calendar_event_series_updated(self, event_data):
+        for handler in self._calendar_event_series_update_handlers:
+            await handler(event_data)
+
+    async def _handle_calendar_event_series_deleted(self, event_data):
+        for handler in self._calendar_event_series_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_announcement_created(self, event_data):
+        for handler in self._announcement_create_handlers:
+            await handler(event_data)
+
+    async def _handle_announcement_updated(self, event_data):
+        for handler in self._announcement_update_handlers:
+            await handler(event_data)
+
+    async def _handle_announcement_deleted(self, event_data):
+        for handler in self._announcement_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_announcement_reaction_created(self, event_data):
+        for handler in self._announcement_reaction_create_handlers:
+            await handler(event_data)
+
+    async def _handle_announcement_reaction_deleted(self, event_data):
+        for handler in self._announcement_reaction_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_announcement_comment_created(self, event_data):
+        for handler in self._announcement_comment_create_handlers:
+            await handler(event_data)
+
+    async def _handle_announcement_comment_updated(self, event_data):
+        for handler in self._announcement_comment_update_handlers:
+            await handler(event_data)
+
+    async def _handle_announcement_comment_deleted(self, event_data):
+        for handler in self._announcement_comment_delete_handlers:
+            await handler(event_data)
+
+    async def _handle_announcement_comment_reaction_created(self, event_data):
+        for handler in self._announcement_comment_reaction_create_handlers:
+            await handler(event_data)
+
+    async def _handle_announcement_comment_reaction_deleted(self, event_data):
+        for handler in self._announcement_comment_reaction_delete_handlers:
+            await handler(event_data)
+
     async def start(self):
         async with websockets.connect(
                 'wss://www.guilded.gg/websocket/v1',
@@ -617,7 +1139,48 @@ class Events:
                     'CalendarEventDeleted': self._handle_calendar_event_deleted,
                     'ForumTopicCreated': self._handle_forum_topic_created,
                     'ForumTopicUpdated': self._handle_forum_topic_updated,
-                    'ForumTopicDeleted': self._handle_forum_topic_deleted
+                    'ForumTopicDeleted': self._handle_forum_topic_deleted,
+                    'ForumTopicPinned': self._handle_forum_topic_pinned,
+                    'ForumTopicUnpinned': self._handle_forum_topic_unpinned,
+                    'ForumTopicReactionCreated': self._handle_forum_topic_reaction_created,
+                    'ForumTopicReactionDeleted': self._handle_forum_topic_reaction_deleted,
+                    'ForumTopicLocked': self._handle_forum_topic_locked,
+                    'ForumTopicUnlocked': self._handle_forum_topic_unlocked,
+                    'ForumTopicCommentCreated': self._handle_forum_topic_comment_created,
+                    'ForumTopicCommentUpdated': self._handle_forum_topic_comment_updated,
+                    'ForumTopicCommentDeleted': self._handle_forum_topic_comment_deleted,
+                    'CalendarEventRsvpUpdated': self._handle_calendar_event_rsvp_updated,
+                    'CalendarEventRsvpManyUpdated': self._handle_calendar_event_rsvp_many_updated,
+                    'CalendarEventRsvpDeleted': self._handle_calendar_event_rsvp_deleted,
+                    'ListItemCreated': self._handle_list_item_created,
+                    'ListItemUpdated': self._handle_list_item_updated,
+                    'ListItemDeleted': self._handle_list_item_deleted,
+                    'ListItemCompleted': self._handle_list_item_completed,
+                    'ListItemUncompleted': self._handle_list_item_uncompleted,
+                    'ChannelMessageReactionCreated': self._handle_channel_message_reaction_created,
+                    'ChannelMessageReactionDeleted': self._handle_channel_message_reaction_deleted,
+                    'ChannelMessageReactionManyDeleted': self._handle_channel_message_reaction_many_deleted,
+                    'CalendarEventCommentCreated': self._handle_calendar_event_comment_created,
+                    'CalendarEventCommentUpdated': self._handle_calendar_event_comment_updated,
+                    'CalendarEventCommentDeleted': self._handle_calendar_event_comment_deleted,
+                    'CalendarEventCommentReactionCreated': self._handle_calendar_event_comment_reaction_created,
+                    'CalendarEventCommentReactionDeleted': self._handle_calendar_event_comment_reaction_deleted,
+                    'DocReactionCreated': self._handle_doc_reaction_created,
+                    'DocReactionDeleted': self._handle_doc_reaction_deleted,
+                    'DocCommentReactionCreated': self._handle_doc_comment_reaction_created,
+                    'DocCommentReactionDeleted': self._handle_doc_comment_reaction_deleted,
+                    'CalendarEventSeriesUpdated': self._handle_calendar_event_series_updated,
+                    'CalendarEventSeriesDeleted': self._handle_calendar_event_series_deleted,
+                    'AnnouncementCreated': self._handle_announcement_created,
+                    'AnnouncementUpdated': self._handle_announcement_updated,
+                    'AnnouncementDeleted': self._handle_announcement_deleted,
+                    'AnnouncementReactionCreated': self._handle_announcement_reaction_created,
+                    'AnnouncementReactionDeleted': self._handle_announcement_reaction_deleted,
+                    'AnnouncementCommentCreated': self._handle_announcement_comment_created,
+                    'AnnouncementCommentUpdated': self._handle_announcement_comment_updated,
+                    'AnnouncementCommentDeleted': self._handle_announcement_comment_deleted,
+                    'AnnouncementCommentReactionCreated': self._handle_announcement_comment_reaction_created,
+                    'AnnouncementCommentReactionDeleted': self._handle_announcement_comment_reaction_deleted,
 
 
                 }

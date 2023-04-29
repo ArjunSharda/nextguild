@@ -11,23 +11,32 @@ This page requires that you've used this code at the top of the file:
     bot = Client('TOKEN')
     events = Events(bot)
 
-on_reaction_create
+on_channel_message_reaction_create
 --------
 
 .. code-block:: python
 
-    @events.on_reaction_create
+    @events.on_channel_message_reaction_create
     async def example():
-        print('A reaction was created!')
+        print('A reaction was created on a channel message!')
 
-on_reaction_delete
+on_channel_message_reaction_delete
 --------
 
 .. code-block:: python
 
-    @events.on_reaction_delete
+    @events.on_channel_message_reaction_delete
     async def example():
-        print('A reaction was deleted!')
+        print('A reaction was deleted on a channel message!')
+
+on_channel_message_reaction_many_delete
+--------
+
+.. code-block:: python
+
+    @events.on_channel_messager_reaction_many_delete
+    async def example():
+        print('Many reactions were deleted on a message in a channel!')
 
 on_forum_topic_comment_reaction_create
 --------
@@ -65,3 +74,38 @@ on_calendar_event_reaction_delete
     async def example():
         print('A reaction was deleted on a calendar event!')
 
+on_announcement_reaction_create
+--------
+
+.. code-block:: python
+
+    @events.on_announcement_reaction_create
+    async def example():
+        print('A reaction was created on an announcement!')
+
+on_announcement_reaction_delete
+--------
+
+.. code-block:: python
+
+    @events.on_announcement_reaction_delete
+    async def example():
+        print('A reaction was deleted on an announcement!')
+
+on_announcement_comment_reaction_create
+--------
+
+.. code-block:: python
+
+    @events.on_announcement_comment_reaction_create
+    async def example():
+        print('A reaction was created on an announcement comment!')
+
+on_announcement_comment_reaction_delete
+--------
+
+.. code-block:: python
+
+    @events.on_announcement_comment_reaction_delete
+    async def example():
+        print('A reaction was deleted on an announcement comment!')

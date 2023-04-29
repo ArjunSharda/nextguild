@@ -65,3 +65,4 @@ Forum Topic Comment Reactions
 +-----------------------------------+------------------------------------------------------+
 |``reaction.forum_topic_comment_id``|The ID of the forum comment the reaction was sent in  |
 +-----------------------------------+------------------------------------------------------+
+
