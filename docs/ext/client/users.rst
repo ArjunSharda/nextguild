@@ -128,3 +128,20 @@ Gets the servers that a user is a member of.
 +===================+=========+============================================+
 | user_id           | string  | The ID of the user to get the servers for. |
 +-------------------+---------+--------------------------------------------+
+
+member_is_owner
+-----------------
+
+.. code-block:: python
+
+    member_is_owner(server_id, user_id)
+
+Checks if a user is the owner of a server. Returns True or False.
+
++-------------------+---------+--------------------------------------------+
+| Parameter         | Type    | Description                                |
++===================+=========+============================================+
+| server_id         | string  | The ID of the server to check the owner of.|
++-------------------+---------+--------------------------------------------+
+| user_id           | string  | The ID of the user to check.               |
++-------------------+---------+--------------------------------------------+

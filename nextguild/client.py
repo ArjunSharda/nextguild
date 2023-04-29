@@ -598,7 +598,7 @@ class Client:
         )
         return response
 
-    def is_server_owner(self, server_id: str, user_id: str):
+    def member_is_owner(self, server_id: str, user_id: str):
         """Checks if a user is the owner of a server."""
         ownerid = self.get_server(server_id).get('server', {}).get('ownerId')
         return ownerid == user_id
@@ -1323,6 +1323,13 @@ class Client:
                         return False
                 return True
         if role_id in r:
+            return True
+        else:
+            return False
+        
+    def member_is_owner(self, server_id: str, user_id: str):
+        r = self.get_server(server_id)
+        if r['server']['ownerId'] == user_id:
             return True
         else:
             return False
