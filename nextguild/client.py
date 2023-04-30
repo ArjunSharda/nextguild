@@ -861,7 +861,7 @@ class Client:
 
         response = self.request(
             'POST',
-            f'/channels/{channel_id}/topics',
+            f'{self.base_url}/channels/{channel_id}/topics',
             json= {'title': title, 'content': content}
         )
         return response
@@ -882,7 +882,7 @@ class Client:
 
         response = self.request(
             'GET',
-            f'/channels/{channel_id}/topics',
+            f'{self.base_url}/channels/{channel_id}/topics',
             params=params
         )
         return response
@@ -894,7 +894,7 @@ class Client:
     ):
         response = self.request(
             'GET',
-            f'/channels/{channel_id}/topics/{forum_topic_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}'
         )
         return response
 
@@ -915,7 +915,7 @@ class Client:
 
         response = self.request(
             'PATCH',
-            f'/channels/{channel_id}/topics/{forum_topic_id}',
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}',
             json=data
         )
         return response
@@ -927,7 +927,7 @@ class Client:
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/topics/{forum_topic_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}'
         )
         return response
 
@@ -938,7 +938,7 @@ class Client:
     ):
         response = self.request(
             'PUT',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/pin'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/pin'
         )
         return response
 
@@ -949,7 +949,7 @@ class Client:
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/pin'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/pin'
         )
         return response
 
@@ -960,7 +960,7 @@ class Client:
     ):
         response = self.request(
             'PUT',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/lock'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/lock'
         )
         return response
 
@@ -971,7 +971,7 @@ class Client:
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/lock'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/lock'
         )
         return response
 
@@ -984,7 +984,7 @@ class Client:
 
         response = self.request(
             'POST',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/comments',
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/comments',
             json={'content': content}
         )
         return response
@@ -996,7 +996,7 @@ class Client:
     ):
         response = self.request(
             'GET',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/comments'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/comments'
         )
         return response
 
@@ -1008,8 +1008,7 @@ class Client:
     ):
         response = self.request(
             'GET',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/comments/'
-            f'{forum_comment_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/comments/{forum_comment_id}'
         )
         return response
 
@@ -1023,8 +1022,7 @@ class Client:
 
         response = self.request(
             'PATCH',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/comments/'
-            f'{forum_comment_id}',
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/comments/{forum_comment_id}',
             json={'content': content}
         )
         return response
@@ -1037,7 +1035,7 @@ class Client:
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/comments/'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/comments/'
             f'{forum_comment_id}'
         )
         return response
@@ -1050,7 +1048,7 @@ class Client:
     ):
         response = self.request(
             'PUT',
-            f'/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}'
         )
         return response
 
@@ -1062,7 +1060,7 @@ class Client:
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}'
         )
         return response
 
@@ -1074,7 +1072,7 @@ class Client:
     ):
         response = self.request(
             'PUT',
-            f'/channels/{channel_id}/topics/{topic_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{topic_id}/emotes/{emote_id}'
         )
         return response
 
@@ -1086,7 +1084,7 @@ class Client:
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/topics/{topic_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{topic_id}/emotes/{emote_id}'
         )
         return response
 
@@ -1100,7 +1098,7 @@ class Client:
         response = self.request(
             'PUT',
             f'{self.base_url}/channels/{channel_id}/topics/{topic_id}'
-            f'/comments/{topic_comment_id}/emotes/{emote_id}'
+            f'{self.base_url}/comments/{topic_comment_id}/emotes/{emote_id}'
         )
         return response
 
@@ -1113,8 +1111,7 @@ class Client:
     ):
         response = self.request(
             'DELETE',
-            f'{self.base_url}/channels/{channel_id}/topics/'
-            f'{topic_id}/comments/{topic_comment_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{topic_id}/comments/{topic_comment_id}/emotes/{emote_id}'
         )
         return response
 
@@ -1139,8 +1136,7 @@ class Client:
     ):
         response = self.request(
             'DELETE',
-            f'{self.base_url}/channels/{channel_id}/events/{event_id}/emotes/'
-            f'{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}/emotes/{emote_id}'
         )
         return response
 
@@ -1153,8 +1149,7 @@ class Client:
     ):
         response = self.request(
             'PUT',
-            f'{self.base_url}/channels/{channel_id}/events/{event_id}'
-            f'/comments/{comment_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}/comments/{comment_id}/emotes/{emote_id}'
         )
         return response
 
@@ -1180,7 +1175,7 @@ class Client:
     ):
         response = self.request(
             'PUT',
-            f'/channels/{channel_id}/announcements/{announcement_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/emotes/{emote_id}'
         )
         return response
 
@@ -1192,7 +1187,7 @@ class Client:
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/announcements/{announcement_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/emotes/{emote_id}'
         )
         return response
     
@@ -1205,7 +1200,7 @@ class Client:
     ):
         response = self.request(
             'PUT',
-            f'channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}/emotes/{emote_id}'
         )
         return response
     
@@ -1218,7 +1213,7 @@ class Client:
     ):
         response = self.request(
             'DELETE',
-            f'channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}/emotes/{emote_id}'
         )
         return response
 
