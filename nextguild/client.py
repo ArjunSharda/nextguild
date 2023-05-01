@@ -1335,7 +1335,7 @@ class Client:
 
     def get_bot_user_id(self):
         response = self.request('GET', f'{self.base_url}/users/@me')
-        return response.json()['user']['id']
+        return response['user']['id']
     
     def get_user_servers(self, user_id: str):
         response = self.request('GET', f'{self.base_url}users/{user_id}/servers')
