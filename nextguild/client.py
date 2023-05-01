@@ -1051,17 +1051,18 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}'
         )
         return response
-
+    
     def delete_message_reaction(
             self,
             channel_id: str,
             message_id: str,
             emote_id: int,
-            user_id: str = '@me'
+            user_id: str
     ):
         response = self.request(
             'DELETE',
-            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}?q={user_id}'
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}',
+            params={'userId': user_id}
         )
         return response
 
