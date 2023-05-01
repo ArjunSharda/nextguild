@@ -1056,11 +1056,12 @@ class Client:
             self,
             channel_id: str,
             message_id: str,
-            emote_id: int
+            emote_id: int,
+            user_id: str = '@me'
     ):
         response = self.request(
             'DELETE',
-            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}?q={user_id}'
         )
         return response
 
