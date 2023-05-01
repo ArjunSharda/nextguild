@@ -982,16 +982,19 @@ class Events:
             await handler(event_data)
 
     async def _handle_channel_message_reaction_created(self, event_data):
+        reaction = Reaction(event_data)
         for handler in self._channel_message_reaction_create_handlers:
-            await handler(event_data)
+            await handler(reaction)
 
     async def _handle_channel_message_reaction_deleted(self, event_data):
+        reaction = Reaction(event_data)
         for handler in self._channel_message_reaction_delete_handlers:
-            await handler(event_data)
+            await handler(reaction)
 
     async def _handle_channel_message_reaction_many_deleted(self, event_data):
+        reaction = Reaction(event_data)
         for handler in self._channel_message_reaction_many_delete_handlers:
-            await handler(event_data)
+            await handler(reaction)
     
     async def _handle_calendar_event_comment_created(self, event_data):
         for handler in self._calendar_event_comment_create_handlers:
