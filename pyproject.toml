@@ -7,7 +7,7 @@ name = "nextguild"
 version = "1.1.1"
 authors = [
     { name="Arjun Sharda", email="sharda.aj17@gmail.com" },
-    { name="Erik Thorsell", email="contact@erikthorsell.com"},
+    { name="Erik Thorsell", email="contact@erikthorsell.com" },
 ]
 description = "Interactions with the Guilded API made simpler"
 readme = "README.md"
