@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from embed import Embed
+from .embed import Embed
 
 
 class Message:
