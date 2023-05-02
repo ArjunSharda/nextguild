@@ -5,8 +5,8 @@ from datetime import datetime
 
 import requests
 
-from embed import Embed
-from message import Message
+from .embed import Embed
+from .message import Message
 
 
 class Client:
@@ -147,9 +147,9 @@ class Client:
             amount: int
     ):
         messages = self.get_channel_messages(channel_id, amount)
-        message_ids = [msg.message_id for msg in messages]
-        for message_id in message_ids:
-            self.delete_message(channel_id, message_id)
+        message_ids = [msg.id for msg in messages]
+        for id in message_ids:
+            self.delete_message(channel_id, id)
         return len(message_ids)
 
     def request(self, method: str, url: str, **kwargs) -> dict:
@@ -173,7 +173,9 @@ class Client:
         # except json.JSONDecodeError:
         #     data = response.text
         #     breakpoint()
-        data: dict = json.loads(response.content)
+        try:
+            data: dict = json.loads(response.content)
+        except: return
         if 200 <= code < 300:
             return data
         raise ValueError(f'Request failed with status {code}: {data}')
@@ -184,7 +186,7 @@ class Client:
             channel_type,
             server_id: str,
             group_id: str = None,
-            category_id: str = None,
+            category_id: int = None,
             is_public: bool = False
     ):
         data = {'name': name, 'type': channel_type}
@@ -325,7 +327,7 @@ class Client:
             self,
             server_id: str,
             user_id: str,
-            role_id: str
+            role_id: int
     ):
         response = self.request(
             'PUT',
@@ -338,7 +340,7 @@ class Client:
             self,
             server_id: str,
             user_id: str,
-            role_id: str
+            role_id: int
     ):
         response = self.request(
             'DELETE',
@@ -356,7 +358,7 @@ class Client:
             'GET',
             f'{self.base_url}/servers/{server_id}/members/{user_id}/roles'
         )
-        return response
+        return response['roleIds']
 
     def unban_member(
             self,
@@ -463,7 +465,7 @@ class Client:
     def award_xp_to_role(
             self,
             server_id: str,
-            role_id: str,
+            role_id: int,
             amount: int
     ):
         response = self.request(
@@ -579,7 +581,27 @@ class Client:
             json=data
         )
         return response
+    
+    def update_event(
+            self,
+            channel_id: str,
+            event_id: int,
+            **kwargs
+    ):
+        data = {}
+        for key, value in kwargs.items():
+            data.update({key: value})
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}',
+            json=data
+        )
+        return response
 
+    def member_is_owner(self, server_id: str, user_id: str):
+        """Checks if a user is the owner of a server."""
+        ownerid = self.get_server(server_id).get('server', {}).get('ownerId')
+        return ownerid == user_id
     def get_events(
             self,
             channel_id: str,
@@ -619,11 +641,12 @@ class Client:
     def get_calendar_event_rsvp(
             self,
             channel_id: str,
-            event_id: int
+            event_id: int,
+            user_id: str
     ):
         response = self.request(
             'GET',
-            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvp'
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvps/{user_id}'
         )
         return response
 
@@ -631,23 +654,25 @@ class Client:
             self,
             channel_id: str,
             event_id: int,
-            rsvp: str
+            user_id: str,
+            status: str
     ):
         response = self.request(
             'POST',
-            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvp',
-            json={'rsvp': rsvp}
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvps/{user_id}',
+            json={'status': status}
         )
         return response
 
     def delete_calendar_event_rsvp(
             self,
             channel_id: str,
-            event_id: int
+            event_id: int,
+            user_id: str
     ):
         response = self.request(
             'DELETE',
-            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvp'
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvps/{user_id}'
         )
         return response
 
@@ -659,6 +684,90 @@ class Client:
         response = self.request(
             'GET',
             f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvps'
+        )
+        return response
+    
+    def create_announcement(self, channel_id: str, title: str, content: str):
+        response = self.request(
+            'POST',
+            f'{self.base_url}/channels/{channel_id}/announcements',
+            json={'title': title, 'content': content}
+        )
+        return response
+    
+    def get_announcement(self, channel_id: str, announcement_id: str):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}'
+        )
+        return response
+    
+    def get_announcements(self, channel_id: str, before: str = None, limit: str = None):
+        params = {}
+        if before:
+            params['before'] = before
+        if limit:
+            params['limit'] = limit
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements'
+        )
+        return response
+    
+    def update_announcement(self, channel_id: str, announcement_id: str, title: str = None, content: str = None):
+        params = {}
+        if title:
+            params['title'] = title
+        if content:
+            params['content'] = content
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}',
+            json=params
+        )
+        return response
+    
+    def delete_announcement(self, channel_id: str, announcement_id: str):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}'
+        )
+        return response
+    
+    def create_announcement_comment(self, channel_id: str, announcement_id: str, content: str):
+        response = self.request(
+            'POST',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments',
+            json={'content': content}
+        )
+        return response
+    
+    def get_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: int):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}'
+        )
+        return response
+    
+    def get_announcement_comments(self, channel_id: str, announcement_id: str):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments'
+        )
+        return response
+    
+    def update_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: int, content: str):
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}',
+            json={'content': content}
+        )
+        return response
+    
+    def delete_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: int):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}'
         )
         return response
 
@@ -732,46 +841,28 @@ class Client:
             self,
             server_id: str,
             webhook_id: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            content: str,
     ):
         token = self.get_webhook(server_id, webhook_id)['webhook']['token']
-        data = {}
-
-        if content:
-            data = {'content': content}
-
-        if embed:
-            data = {'embeds': embed.to_dict}
 
         response = self.request(
             'POST',
             f'https://media.guilded.gg/webhooks/{webhook_id}/{token}',
-            json=data
+            json={'content': content}
         )
         return response
 
-    def create_forum_post(
+    def create_forum_topic(
             self,
             channel_id: str,
             title: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            content: str,
     ):
-        data = {}
-
-        if content:
-            data = {'title': title, 'content': content}
-
-        if embed:
-            data = {'title': title, 'embeds': embed.to_dict}
 
         response = self.request(
             'POST',
-            f'/channels/{channel_id}/topics',
-            json=data
+            f'{self.base_url}/channels/{channel_id}/topics',
+            json= {'title': title, 'content': content}
         )
         return response
 
@@ -791,7 +882,7 @@ class Client:
 
         response = self.request(
             'GET',
-            f'/channels/{channel_id}/topics',
+            f'{self.base_url}/channels/{channel_id}/topics',
             params=params
         )
         return response
@@ -799,34 +890,32 @@ class Client:
     def get_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'GET',
-            f'/channels/{channel_id}/topics/{forum_topic_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}'
         )
         return response
 
     def update_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str,
+            forum_topic_id: int,
             title: str = None,
             content: str = None,
-            *,
-            embed: Embed = None
     ):
         data = {}
 
         if content:
-            data = {'title': title, 'content': content}
-
-        if embed:
-            data = {'title': title, 'embeds': embed.to_dict}
+            data['content'] = content
+        
+        if title:
+            data['title'] = title
 
         response = self.request(
             'PATCH',
-            f'/channels/{channel_id}/topics/{forum_topic_id}',
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}',
             json=data
         )
         return response
@@ -834,224 +923,205 @@ class Client:
     def delete_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/topics/{forum_topic_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}'
         )
         return response
 
     def pin_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'PUT',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/pin'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/pin'
         )
         return response
 
     def unpin_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/pin'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/pin'
         )
         return response
 
     def lock_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'PUT',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/lock'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/lock'
         )
         return response
 
     def unlock_forum_topic(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/lock'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/lock'
         )
         return response
 
     def create_forum_comment(
             self,
             channel_id: str,
-            forum_topic_id: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            forum_topic_id: int,
+            content: str,
     ):
-        data = {}
-
-        if content:
-            data.update(content=content)
-
-        if embed:
-            data.update(embeds=[embed.to_dict])
 
         response = self.request(
             'POST',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/comments',
-            json=data
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/comments',
+            json={'content': content}
         )
         return response
 
     def get_forum_comments(
             self,
             channel_id: str,
-            forum_topic_id: str
+            forum_topic_id: int
     ):
         response = self.request(
             'GET',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/comments'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/comments'
         )
         return response
 
     def get_forum_comment(
             self,
             channel_id: str,
-            forum_topic_id: str,
-            forum_comment_id: str
+            forum_topic_id: int,
+            forum_comment_id: int
     ):
         response = self.request(
             'GET',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/comments/'
-            f'{forum_comment_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/comments/{forum_comment_id}'
         )
         return response
 
     def update_forum_comment(
             self,
             channel_id: str,
-            forum_topic_id: str,
-            forum_comment_id: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            forum_topic_id: int,
+            forum_comment_id: int,
+            content: str,
     ):
-        data = {}
-
-        if content:
-            data = {'content': content}
-
-        if embed:
-            data = {'embeds': embed.to_dict}
 
         response = self.request(
             'PATCH',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/comments/'
-            f'{forum_comment_id}',
-            json=data
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/comments/{forum_comment_id}',
+            json={'content': content}
         )
         return response
 
     def delete_forum_comment(
             self,
             channel_id: str,
-            forum_topic_id: str,
-            forum_comment_id: str
+            forum_topic_id: int,
+            forum_comment_id: int
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/topics/{forum_topic_id}/comments/'
+            f'{self.base_url}/channels/{channel_id}/topics/{forum_topic_id}/comments/'
             f'{forum_comment_id}'
         )
         return response
 
-    def create_reaction(
+    def create_message_reaction(
             self,
             channel_id: str,
-            content_id: str,
-            emote_id: str
+            message_id: str,
+            emote_id: int
     ):
         response = self.request(
             'PUT',
-            f'/channels/{channel_id}/content/{content_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}'
         )
         return response
-
-    def delete_reaction(
+    
+    def delete_message_reaction(
             self,
             channel_id: str,
-            content_id: str,
-            emote_id: str
+            message_id: str,
+            emote_id: int,
+            user_id: str
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/content/{content_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}',
+            params={'userId': user_id}
         )
         return response
 
     def create_topic_reaction(
             self,
             channel_id: str,
-            topic_id: str,
-            emote_id: str
+            topic_id: int,
+            emote_id: int
     ):
         response = self.request(
             'PUT',
-            f'/channels/{channel_id}/topics/{topic_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{topic_id}/emotes/{emote_id}'
         )
         return response
 
     def delete_topic_reaction(
             self,
             channel_id: str,
-            topic_id: str,
-            emote_id: str
+            topic_id: int,
+            emote_id: int
     ):
         response = self.request(
             'DELETE',
-            f'/channels/{channel_id}/topics/{topic_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{topic_id}/emotes/{emote_id}'
         )
         return response
 
     def create_topic_comment_reaction(
             self,
             channel_id: str,
-            topic_id: str,
-            topic_comment_id: str,
-            emote_id: str
+            topic_id: int,
+            topic_comment_id: int,
+            emote_id: int
     ):
         response = self.request(
             'PUT',
             f'{self.base_url}/channels/{channel_id}/topics/{topic_id}'
-            f'/comments/{topic_comment_id}/emotes/{emote_id}'
+            f'{self.base_url}/comments/{topic_comment_id}/emotes/{emote_id}'
         )
         return response
 
     def delete_topic_comment_reaction(
             self,
             channel_id: str,
-            topic_id: str,
-            topic_comment_id: str,
-            emote_id: str
+            topic_id: int,
+            topic_comment_id: int,
+            emote_id: int
     ):
         response = self.request(
             'DELETE',
-            f'{self.base_url}/channels/{channel_id}/topics/'
-            f'{topic_id}/comments/{topic_comment_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/topics/{topic_id}/comments/{topic_comment_id}/emotes/{emote_id}'
         )
         return response
 
     def create_event_reaction(
             self,
             channel_id: str,
-            event_id: str,
-            emote_id: str
+            event_id: int,
+            emote_id: int
     ):
         response = self.request(
             'PUT',
@@ -1063,41 +1133,89 @@ class Client:
     def delete_event_reaction(
             self,
             channel_id: str,
-            event_id: str,
-            emote_id: str
+            event_id: int,
+            emote_id: int
     ):
         response = self.request(
             'DELETE',
-            f'{self.base_url}/channels/{channel_id}/events/{event_id}/emotes/'
-            f'{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}/emotes/{emote_id}'
         )
         return response
 
     def create_event_comment_reaction(
             self,
             channel_id: str,
-            event_id: str,
-            comment_id: str,
-            emote_id: str
+            event_id: int,
+            comment_id: int,
+            emote_id: int
     ):
         response = self.request(
             'PUT',
-            f'{self.base_url}/channels/{channel_id}/events/{event_id}'
-            f'/comments/{comment_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/events/{event_id}/comments/{comment_id}/emotes/{emote_id}'
         )
         return response
 
     def delete_event_comment_reaction(
             self,
             channel_id: str,
-            event_id: str,
-            comment_id: str,
-            emote_id: str
+            event_id: int,
+            comment_id: int,
+            emote_id: int
     ):
         response = self.request(
             'DELETE',
             f'{self.base_url}/channels/{channel_id}/events/{event_id}'
             f'/comments/{comment_id}/emotes/{emote_id}'
+        )
+        return response
+    
+    def create_announcement_reaction(
+            self,
+            channel_id: str,
+            announcement_id: str,
+            emote_id: int
+    ):
+        response = self.request(
+            'PUT',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/emotes/{emote_id}'
+        )
+        return response
+
+    def delete_announcement_reaction(
+            self,
+            channel_id: str,
+            announcement_id: str,
+            emote_id: int
+    ):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/emotes/{emote_id}'
+        )
+        return response
+    
+    def create_announcement_comment_reaction(
+            self,
+            channel_id: str,
+            announcement_id: str,
+            comment_id: int,
+            emote_id: int
+    ):
+        response = self.request(
+            'PUT',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}/emotes/{emote_id}'
+        )
+        return response
+    
+    def delete_announcement_comment_reaction(
+            self,
+            channel_id: str,
+            announcement_id: str,
+            comment_id: int,
+            emote_id: int
+    ):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}/emotes/{emote_id}'
         )
         return response
 
@@ -1105,21 +1223,14 @@ class Client:
             self,
             channel_id: str,
             title: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            content: str
     ):
-        data = {'title': title}
 
-        if content:
-            data.update(content=content)
-        elif embed:
-            data.update(embeds=[embed.to_dict])
 
         response = self.request(
             'POST',
             f'{self.base_url}/channels/{channel_id}/docs',
-            json=data
+            json={'title': title, 'content': content}
         )
         return response
 
@@ -1147,7 +1258,7 @@ class Client:
     def get_doc(
             self,
             channel_id: str,
-            doc_id: str
+            doc_id: int
     ):
         response = self.request(
             'GET',
@@ -1158,29 +1269,22 @@ class Client:
     def update_doc(
             self,
             channel_id: str,
-            doc_id: str,
-            title: str = None,
-            content: str = None,
-            *,
-            embed: Embed = None
+            doc_id: int,
+            title: str,
+            content: str,
     ):
-        data = {'title': title}
-        if content:
-            data.update(content=content)
-        elif embed:
-            data.update(embeds=[embed.to_dict])
 
         response = self.request(
             'PUT',
             f'{self.base_url}/channels/{channel_id}/docs/{doc_id}',
-            json=data
+            json={'title': title, 'content': content}
         )
         return response
 
     def delete_doc(
             self,
             channel_id: str,
-            doc_id: str
+            doc_id: int
     ):
         response = self.request(
             'DELETE',
@@ -1191,54 +1295,38 @@ class Client:
     def create_doc_comment(
             self,
             channel_id: str,
-            doc_id: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            doc_id: int,
+            content: str,
     ):
-        if content:
-            data = {'content': content}
-        elif embed:
-            data = {'embeds': embed.to_dict}
-        else:
-            data = {}
 
         response = self.request(
             'POST',
             f'{self.base_url}/channels/{channel_id}/docs/{doc_id}/comments',
-            json=data
+            json={'content': content}
         )
         return response
 
     def update_doc_comment(
             self,
             channel_id: str,
-            doc_id: str,
-            comment_id: str,
-            content: str = None,
-            *,
-            embed: Embed = None
+            doc_id: int,
+            comment_id: int,
+            content: str,
     ):
-        if content:
-            data = {'content': content}
-        elif embed:
-            data = {'embeds': embed.to_dict}
-        else:
-            data = {}
 
         response = self.request(
             'PATCH',
             f'{self.base_url}/channels/{channel_id}/docs/{doc_id}/comments/'
             f'{comment_id}',
-            json=data
+            json={'content': content}
         )
         return response
 
     def delete_doc_comment(
             self,
             channel_id: str,
-            doc_id: str,
-            comment_id: str
+            doc_id: int,
+            comment_id: int
     ):
         response = self.request(
             'DELETE',
@@ -1248,14 +1336,49 @@ class Client:
         return response
 
     def get_bot_user_id(self):
-        response = self.request(f'{self.base_url}/users/@me', headers=self.headers)
-        return response.json()['user']['id']
+        response = self.request('GET', f'{self.base_url}/users/@me')
+        return response['user']['id']
     
     def get_user_servers(self, user_id: str):
-        response = self.request(f'{self.base_url}users/{user_id}/servers', headers=self.headers)
+        response = self.request('GET', f'{self.base_url}users/{user_id}/servers')
         return response
 
     def get_bot_servers(self):
-        response = self.request(f'{self.base_url}/users/@me/servers', headers=self.headers)
+        response = self.request('GET', f'{self.base_url}/users/@me/servers')
         return response
+    
+    def get_default_channel(self, server_id: str):
+        r = self.request('GET', f'{self.base_url}/servers/{server_id}')
+        try:
+            print(r)
+            response = r['server']['defaultChannelId']
+        except:
+            response = 'No default channel found'
+        return response
+    
+    def member_has_role(self, server_id: str, user_id: str, role_id: int or list, type: str = 'any'):
+        r = self.get_member_roles(server_id, user_id)
+        if isinstance(role_id, list):
+            if type == 'any':
+                for i in role_id:
+                    if i in r:
+                        return True
+                return False
+            if type == 'all':
+                for i in role_id:
+                    if i not in r:
+                        return False
+                return True
+        if role_id in r:
+            return True
+        else:
+            return False
+        
+    def member_is_owner(self, server_id: str, user_id: str):
+        r = self.get_server(server_id)
+        if r['server']['ownerId'] == user_id:
+            return True
+        else:
+            return False
+        
 

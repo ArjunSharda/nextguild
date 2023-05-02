@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from embed import Embed
+from .embed import Embed
 
 
 class Message:
@@ -27,10 +27,10 @@ class Message:
         self.is_silent: bool = message.get('isSilent', False)
         # If message has no mentions it's empty
         # TODO Model "mentions" attribute
-        self.mentions: list[dict] = message.get('mentions', [])
+        self.mentions = [mention['id'] for mention in message.get('mentions', {}).get('users', [])]
         self.created_at: str = message.get('createdAt')
         self.author_id: str = message.get('createdBy')
-        self.created_by_webhook_id: str = message.get('createdByWebhookId')
+        self.webhook_id: str = message.get('createdByWebhookId')
         self.updated_at: str = message.get('updatedAt')
 
     async def reply(self):  # TODO "reply" method

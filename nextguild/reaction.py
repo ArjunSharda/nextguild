@@ -2,6 +2,7 @@
 class Reaction:
     def __init__(self, event_data: dict):
         self.event_data: dict = event_data
+        self.message_id: str = event_data.get('reaction', {}).get('messageId')
         self.server_id: str = event_data.get('serverId')
         self.channel_id: str = event_data.get('reaction', {}).get('channelId')
         self.user_id: str = event_data.get('reaction', {}).get('createdBy')
