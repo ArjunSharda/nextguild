@@ -8,7 +8,7 @@ ChannelsTypes = Literal['announcements', 'chat', 'calendar', 'forums', 'media',
 
 class ServerChannel:
     def __init__(self, payload: dict):
-        payload = payload.get('channel', payload)
+        payload: dict = payload.get('channel', payload)
         self.id: str = payload.get('id')
         self.type: ChannelsTypes = payload.get('type')
         self.name: str = payload.get('name')
