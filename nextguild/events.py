@@ -5,7 +5,7 @@ from functools import wraps
 
 import websockets
 
-from .channel import Channel
+from .channel import ServerChannel
 from .message import Message, Webhook
 from .reaction import Reaction, CalendarReaction, ForumTopicCommentReaction
 
@@ -889,17 +889,17 @@ class Events:
             await handler(reaction)
 
     async def _handle_create_channel(self, event_data):
-        channel = Channel(event_data)
+        channel = ServerChannel(event_data)
         for handler in self._channel_create_handlers:
             await handler(channel)
 
     async def _handle_delete_channel(self, event_data):
-        channel = Channel(event_data)
+        channel = ServerChannel(event_data)
         for handler in self._channel_delete_handlers:
             await handler(channel)
     
     async def _handle_update_channel(self, event_data):
-        channel = Channel(event_data)
+        channel = ServerChannel(event_data)
         for handler in self._channel_update_handlers:
             await handler(channel)
     

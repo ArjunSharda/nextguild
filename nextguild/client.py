@@ -5,6 +5,7 @@ from datetime import datetime
 
 import requests
 
+from .channel import ServerChannel
 from .embed import Embed
 from .message import Message
 
@@ -202,7 +203,7 @@ class Client:
             f'{self.base_url}/channels',
             json=data
         )
-        return response
+        return ServerChannel(response.get('channel'))
 
     def get_channel(
             self,
@@ -212,7 +213,7 @@ class Client:
             'GET',
             f'{self.base_url}/channels/{channel_id}'
         )
-        return response
+        return ServerChannel(response.get('channel'))
 
     def delete_channel(
             self,
@@ -247,7 +248,7 @@ class Client:
             f'{self.base_url}/channels/{channel_id}',
             json=data
         )
-        return response
+        return ServerChannel(response.get('channel'))
 
     def get_server(
             self,
