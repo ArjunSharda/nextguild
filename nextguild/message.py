@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from .embed import Embed
+from .mentions import Mentions
 
 
 class Message:
@@ -25,9 +26,7 @@ class Message:
         self.reply_message_ids: list[str] = message.get('replyMessageIds', [])
         self.is_private: bool = message.get('isPrivate', False)
         self.is_silent: bool = message.get('isSilent', False)
-        # If message has no mentions it's empty
-        # TODO Model "mentions" attribute
-        self.mentions = [mention['id'] for mention in message.get('mentions', {}).get('users', [])]
+        self.mentions: Mentions = Mentions(message.get('mentions', {}))
         self.created_at: str = message.get('createdAt')
         self.author_id: str = message.get('createdBy')
         self.webhook_id: str = message.get('createdByWebhookId')
