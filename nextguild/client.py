@@ -1384,7 +1384,7 @@ class Client:
 
 
     def update_status(self, content: str, emote_id: int):
-        response = self.request('PATCH', f'{self.base_url}/users/@me/status', json={'content': content, 'emoteId': emote_id})
+        response = self.request('PUT', f'{self.base_url}/users/@me/status', json={'content': content, 'emoteId': emote_id})
         return response
 
 
