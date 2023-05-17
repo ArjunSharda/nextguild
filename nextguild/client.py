@@ -1383,13 +1383,13 @@ class Client:
 
 
 
-    def update_status(self, token: str, content: str, emote_id: int):
-        response = self.request('PATCH', f'{self.base_url}/users/{token}/status', json={'content': content, 'emoteId': emote_id})
+    def update_status(self, content: str, emote_id: int):
+        response = self.request('PATCH', f'{self.base_url}/users/@me/status', json={'content': content, 'emoteId': emote_id})
         return response
 
 
-    def delete_status(self, token: str):
-        response = self.request('DELETE', f'{self.base_url}/users/{token}/status')
+    def delete_status(self):
+        response = self.request('DELETE', f'{self.base_url}/users/@me/status')
         return response
 
 
