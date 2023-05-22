@@ -46,3 +46,12 @@ on_member_unbanned
     @events.on_member_unbanned
     async def example():
         print('A user was unbanned from the server!')
+        
+on_member_update
+--------
+
+.. code-block:: python
+
+    @events.on_member_update
+    async def example():
+        print('A member was updated!')
