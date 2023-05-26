@@ -6,6 +6,69 @@ class Data:
         self.server_id: str = self._get_server_id(event_data)
         self.channel_id: str = self._get_channel_id(event_data)
 
+        #not done yet!
+        self.created_by: str|None
+        self.deleted_by: str|None
+        self.owner_id: str|None
+        self.type: str|None
+        self.name: str|None
+        self.url: str|None
+        self.about: str|None
+        self.avatar: str|None
+        self.banner: str|None
+        self.timezone: str|None
+        self.is_verified: bool|None
+        self.default_channel_id: str|None
+        self.created_at: str|None
+        self.updated_at: str|None
+        self.content: str|None
+        self.embeds: list|None
+        self.reply_message_ids: list|None
+        self.is_private: bool|None
+        self.is_silent: bool|None
+        self.mentions: list|None
+        self.emote_id: int|None
+        self.is_owner: bool|None
+        self.nickname: str|None
+        self.joined_at: str|None
+        self.role_ids: list|None
+        self.reason: str|None
+        self.handle: str|None
+        self.service_id: str|None
+        self.token: str|None
+        self.title: str|None
+        self.updated_by: str|None
+        self.doc_id: str|None
+        self.bumped_at: str|None
+        self.is_pinned: bool|None
+        self.is_locked: bool|None
+        self.status: str|None
+        self.parent_list_item_id: str|None
+        self.completed_at: str|None
+        self.completed_by: str|None
+        self.note: dict|None
+        self.message_id: str|None
+        self.parent_id: str|None
+        self.is_home: bool|None
+        self.is_public: bool|None
+        self.archived_at: str|None
+        self.archived_by: str|None
+
+        #annoying
+        self.description: str|None
+        self.location: str|None
+        self.color: int|None
+        self.repeats: bool|None
+        self.series_id: str|None
+        self.rsvp_disabled: bool|None
+        self.is_all_day: bool|None
+        self.rsvp_limit: int|None
+        self.autofill_waitlist: bool|None
+        self.starts_at: str|None
+        self.duration: int|None
+        self.cancellation_description: str|None
+        self.cancellation_created_by: str|None
+
     def _get_user_id(self, event_data: dict) -> str:
         scenarios = [
             ('server', 'createdBy'),
