@@ -4,35 +4,36 @@ class Data:
         self.id: str|int = self._get_id(event_data)
         self.user_id: str = self._get_user_id(event_data)
         self.server_id: str = self._get_server_id(event_data)
+        self.group_id: str = self._get_group_id(event_data)
         self.channel_id: str = self._get_channel_id(event_data)
-
-        #not done yet!
-        self.created_by: str|None
+        self.created_by: str = self._get_created_by(event_data)
         self.deleted_by: str|None
-        self.owner_id: str|None
-        self.type: str|None
-        self.name: str|None
-        self.url: str|None
-        self.about: str|None
-        self.avatar: str|None
-        self.banner: str|None
-        self.timezone: str|None
-        self.is_verified: bool|None
-        self.default_channel_id: str|None
-        self.created_at: str|None
-        self.updated_at: str|None
-        self.content: str|None
-        self.embeds: list|None
-        self.reply_message_ids: list|None
-        self.is_private: bool|None
-        self.is_silent: bool|None
-        self.mentions: list|None
+        self.owner_id: str = self._get_owner_id(event_data)
+        self.type: str = self._get_type(event_data)
+        self.name: str = self._get_name(event_data)
+        self.url: str = self._get_url(event_data)
+        self.about: str = self._get_about(event_data)
+        self.avatar: str = self._get_avatar(event_data)
+        self.banner: str = self._get_banner(event_data)
+        self.timezone: str = self._get_timezone(event_data)
+        self.is_verified: bool = self._get_is_verified(event_data)
+        self.default_channel_id: str = self._get_default_channel_id(event_data)
+        self.created_at: str = self._get_created_at(event_data)
+        self.updated_at: str = self._get_updated_at(event_data)
+        self.content: str = self._get_content(event_data)
+        self.embeds: list = self._get_embeds(event_data)
+        self.reply_message_ids: list = self._get_reply_message_ids(event_data)
+        self.is_private: bool = self._get_is_private(event_data)
+        self.is_silent: bool = self._get_is_silent(event_data)
+        self.mentions: list = self._get_mentions(event_data)
+        self.is_kick: bool = self._get_is_kick(event_data)
+        self.is_ban: bool = self._get_is_ban(event_data)
         self.emote_id: int|None
         self.is_owner: bool|None
         self.nickname: str|None
         self.joined_at: str|None
         self.role_ids: list|None
-        self.reason: str|None
+        self.reason: str = self._get_reason(event_data)
         self.handle: str|None
         self.service_id: str|None
         self.token: str|None
@@ -42,7 +43,8 @@ class Data:
         self.bumped_at: str|None
         self.is_pinned: bool|None
         self.is_locked: bool|None
-        self.status: str|None
+        self.status: str = self._get_status(event_data)
+        self.status_emote: int = self._get_status_emote(event_data)
         self.parent_list_item_id: str|None
         self.completed_at: str|None
         self.completed_by: str|None
@@ -68,67 +70,21 @@ class Data:
         self.duration: int|None
         self.cancellation_description: str|None
         self.cancellation_created_by: str|None
-
-    def _get_user_id(self, event_data: dict) -> str:
-        scenarios = [
-            ('server', 'createdBy'),
-            ('server', 'deletedBy'),
-            ('message', 'createdBy'),
-            ('member', 'user', 'id'),
-            ('userId'),
-            ('serverMemberBan', 'user', 'id'),
-            ('userInfo', 'id'),
-            ('memberRoleIds', 'userId'),
-            ('channel', 'createdBy'),
-            ('socialLink', 'userId'),
-            ('webhook', 'createdBy'),
-            ('doc', 'createdBy'),
-            ('docComment', 'createdBy'),
-            ('calendarEvent', 'createdBy'),
-            ('forumTopic', 'createdBy'),
-            ('reaction', 'createdBy'),
-            ('forumTopicComment', 'createdBy'),
-            ('calendarEventRsvp', 'userId'),
-            ('listItem', 'createdBy'),
-            ('calendarEventComment', 'createdBy'),
-            ('group', 'createdBy'),
-            ('announcement', 'createdBy'),
-            ('announcementComment', 'createdBy')
-
-        ]
-        for scenario in scenarios:
-            if len(scenario) == 1:
-                user_id = event_data.get(scenario[0], '')
-            if len(scenario) == 2:
-                user_id = event_data.get(scenario[0], {}).get(scenario[1], '')
-            elif len(scenario) == 3:
-                user_id = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
-            if user_id:
-                return user_id
-        return ''
     
     def _get_id(self, event_data: dict) -> str|int:
         scenarios = [
+            ('serverMemberBan', 'user', 'id'),
+            ('id'),
             ('message', 'id'),
-            ('channel', 'id'),
-            ('webhook', 'id'),
-            ('doc', 'id'),
-            ('docComment', 'id'),
-            ('calendarEvent', 'id'),
-            ('forumTopic', 'id'),
-            ('forumTopicComment', 'id'),
-            ('listItem', 'id'),
-            ('calendarEventComment', 'id'),
-            ('calendarEventSeries', 'id'),
-            ('group', 'id'),
-            ('announcement', 'id')
+            ('member', 'user', 'id'),
+            ('userId'),
         ]
         for scenario in scenarios:
             if len(scenario) == 1:
                 id = event_data.get(scenario[0], '')
             if len(scenario) == 2:
                 id = event_data.get(scenario[0], {}).get(scenario[1], '')
-            elif len(scenario) == 3:
+            if len(scenario) == 3:
                 id = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
             if id:
                 return id
@@ -136,44 +92,386 @@ class Data:
 
     def _get_server_id(self, event_data: dict) -> str:
         scenarios = [
-            ('server', 'id'),
             ('serverId'),
+            ('server', 'id'),
+            ('message', 'serverId'),
         ]
         for scenario in scenarios:
             if len(scenario) == 1:
                 server_id = event_data.get(scenario[0], '')
-            elif len(scenario) == 2:
+            if len(scenario) == 2:
                 server_id = event_data.get(scenario[0], {}).get(scenario[1], '')
             if server_id:
                 return server_id
+            
+    def _get_group_id(self, event_data: dict) -> str:
+        scenarios = [
+            ('group', 'id'),
+            ('message', 'groupId'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                group_id = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                group_id = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if group_id:
+                return group_id
         return ''
     
     def _get_channel_id(self, event_data: dict) -> str:
         scenarios = [
             ('message', 'channelId'),
-            ('channel', 'id'),
-            ('webhook', 'channelId'),
-            ('doc', 'channelId'),
-            ('docComment', 'channelId'),
-            ('calendarEvent', 'channelId'),
-            ('forumTopic', 'channelId'),
-            ('forumTopicComment', 'channelId'),
-            ('reaction', 'channelId'),
-            ('calendarEventRsvp', 'channelId'),
-            ('listItem', 'channelId'),
-            ('channelId'),
-            ('calendarEventComment', 'channelId'),
-            ('calendarEventSeries', 'channelId'),
-            ('announcement', 'channelId'),
-            ('announcementComment', 'channelId')
         ]
         for scenario in scenarios:
             if len(scenario) == 1:
                 channel_id = event_data.get(scenario[0], '')
             if len(scenario) == 2:
                 channel_id = event_data.get(scenario[0], {}).get(scenario[1], '')
-            elif len(scenario) == 3:
-                channel_id = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
             if channel_id:
                 return channel_id
+        return ''
+
+    def _get_created_by(self, event_data: dict) -> str:
+        scenarios = [
+            ('createdBy'),
+            ('message', 'createdBy'),
+            ('serverMemberBan', 'createdBy'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                created_by = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                created_by = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if created_by == 'Ann6LewA':
+                created_by = event_data.get('message', {}).get('createdByWebhookId', '')
+            if created_by:
+                return created_by
+        return ''
+    
+    def _get_owner_id(self, event_data: dict) -> str:
+        scenarios = [
+            ('server', 'ownerId'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                owner_id = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                owner_id = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if owner_id:
+                return owner_id
+        return ''
+    
+    def _get_type(self, event_data: dict) -> str:
+        scenarios = [
+            ('server', 'type'),
+            ('message', 'type'),
+            ('member', 'user', 'type'),
+            ('serverMemberBan', 'user', 'type')
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                type = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                type = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if len(scenario) == 3:
+                type = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
+            if type:
+                return type
+        return ''
+    
+    def _get_name(self, event_data: dict) -> str:
+        scenarios = [
+            ('server', 'name'),
+            ('member', 'user', 'name'),
+            ('serverMemberBan', 'user', 'name')
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                name = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                name = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if len(scenario) == 3:
+                name = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
+            if name:
+                return name
+        return ''
+            
+    def _get_url(self, event_data: dict) -> str:
+        scenarios = [
+            ('server', 'url'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                url = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                url = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if url:
+                return url
+        return ''
+            
+    def _get_about(self, event_data: dict) -> str:
+        scenarios = [
+            ('server', 'about'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                about = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                about = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if about:
+                return about
+        return ''
+    
+    def _get_avatar(self, event_data: dict) -> str:
+        scenarios = [
+            ('server', 'avatar'),
+            ('member', 'user', 'avatar'),
+            ('serverMemberBan', 'user', 'avatar')
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                avatar = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                avatar = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if len(scenario) == 3:
+                avatar = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
+            if avatar:
+                return avatar
+        return ''
+    
+    def _get_banner(self, event_data: dict) -> str:
+        scenarios = [
+            ('server', 'banner'),
+            ('member', 'user', 'banner')
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                banner = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                banner = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if len(scenario) == 3:
+                banner = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
+            if banner:
+                return banner
+        return ''
+    
+    def _get_timezone(self, event_data: dict) -> str:
+        scenarios = [
+            ('server', 'timezone'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                timezone = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                timezone = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if timezone:
+                return timezone
+        return ''
+    
+    def _get_is_verified(self, event_data: dict) -> bool:
+        scenarios = [
+            ('server', 'isVerified'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                is_verified = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                is_verified = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if is_verified:
+                return is_verified
+        return ''
+    
+    def _get_default_channel_id(self, event_data: dict) -> str:
+        scenarios = [
+            ('server', 'defaultChannelId'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                default_channel_id = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                default_channel_id = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if default_channel_id:
+                return default_channel_id
+        return ''
+    
+    def _get_created_at(self, event_data: dict) -> str:
+        scenarios = [
+            ('serverMemberBan', 'createdAt'),
+            ('server', 'createdAt'),
+            ('message', 'createdAt'),
+            ('member', 'user', 'createdAt')
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                created_at = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                created_at = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if len(scenario) == 3:
+                created_at = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
+            if created_at:
+                return created_at
+        return ''
+    
+    def _get_updated_at(self, event_data: dict) -> str:
+        scenarios = [
+            ('message', 'updatedAt'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                updated_at = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                updated_at = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if updated_at:
+                return updated_at
+        return ''
+    
+    def _get_content(self, event_data: dict) -> str:
+        scenarios = [
+            ('message', 'content'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                content = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                content = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if content:
+                return content
+        return ''
+    
+    def _get_embeds(self, event_data: dict) -> list:
+        scenarios = [
+            ('message', 'embeds'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                embeds = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                embeds = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if embeds:
+                return embeds
+        return ''
+    
+    def _get_reply_message_ids(self, event_data: dict) -> list:
+        scenarios = [
+            ('message', 'replyMessageIds'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                reply_message_ids = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                reply_message_ids = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if reply_message_ids:
+                return reply_message_ids
+        return ''
+    
+    def _get_is_private(self, event_data: dict) -> bool:
+        scenarios = [
+            ('message', 'isPrivate'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                is_private = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                is_private = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if is_private:
+                return is_private
+        return ''
+    
+    def _get_is_silent(self, event_data: dict) -> bool:
+        scenarios = [
+            ('message', 'isSilent'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                is_silent = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                is_silent = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if is_silent:
+                return is_silent
+        return ''
+    
+    def _get_mentions(self, event_data: dict) -> list:
+        scenarios = [
+            ('message', 'mentions'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                mentions = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                mentions = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if mentions:
+                return mentions
+        return ''
+    
+    def _get_status(self, event_data: dict) -> str:
+        scenarios = [
+            ('member', 'user', 'status', 'content'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                status = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                status = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if len(scenario) == 3:
+                status = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
+            if len(scenario) == 4:
+                status = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], {}).get(scenario[3], '')
+            if status:
+                return status
+        return ''
+    
+    def _get_status_emote(self, event_data: dict) -> int:
+        scenarios = [
+            ('member', 'user', 'status', 'emoteId'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                status_emote = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                status_emote = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if len(scenario) == 3:
+                status_emote = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
+            if len(scenario) == 4:
+                status_emote = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], {}).get(scenario[3], '')
+            if status_emote:
+                return status_emote
+        return ''
+    
+    def _get_is_kick(self, event_data: dict) -> bool:
+        scenarios = [
+            ('isKick'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                is_kick = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                is_kick = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if is_kick:
+                return is_kick
+        return ''
+    
+    def _get_is_ban(self, event_data: dict) -> bool:
+        scenarios = [
+            ('isBan'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                is_ban = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                is_ban = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if is_ban:
+                return is_ban
+        return ''
+    
+    def _get_reason(self, event_data: dict) -> str:
+        scenarios = [
+            ('serverMemberBan', 'reason'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                reason = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                reason = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if reason:
+                return reason
         return ''
