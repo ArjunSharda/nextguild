@@ -2,6 +2,7 @@ class Data:
     def __init__(self, event_data: dict):
         self.event_data: dict = event_data
         self.id: str|int = self._get_id(event_data)
+        self.message_id: str = self._get_message_id(event_data)
         self.user_id: str = self._get_user_id(event_data)
         self.server_id: str = self._get_server_id(event_data)
         self.group_id: str = self._get_group_id(event_data)
@@ -30,9 +31,9 @@ class Data:
         self.is_ban: bool = self._get_is_ban(event_data)
         self.emote_id: int|None
         self.is_owner: bool|None
-        self.nickname: str|None
+        self.nickname: str = self._get_nickname(event_data)
         self.joined_at: str|None
-        self.role_ids: list|None
+        self.role_ids: list = self._get_role_ids(event_data)
         self.reason: str = self._get_reason(event_data)
         self.handle: str|None
         self.service_id: str|None
@@ -45,18 +46,15 @@ class Data:
         self.is_locked: bool|None
         self.status: str = self._get_status(event_data)
         self.status_emote: int = self._get_status_emote(event_data)
-        self.parent_list_item_id: str|None
         self.completed_at: str|None
         self.completed_by: str|None
         self.note: dict|None
         self.message_id: str|None
-        self.parent_id: str|None
+        self.parent_id: str = self._get_parent_id(event_data)
         self.is_home: bool|None
-        self.is_public: bool|None
+        self.is_public: bool = self._get_is_public(event_data)
         self.archived_at: str|None
         self.archived_by: str|None
-
-        #annoying
         self.description: str|None
         self.location: str|None
         self.color: int|None
@@ -70,6 +68,9 @@ class Data:
         self.duration: int|None
         self.cancellation_description: str|None
         self.cancellation_created_by: str|None
+        self.topic: str = self._get_topic(event_data)
+        self.root_id: str = self._get_root_id(event_data)
+        self.category_id: int = self._get_category_id(event_data)
     
     def _get_id(self, event_data: dict) -> str|int:
         scenarios = [
@@ -78,6 +79,8 @@ class Data:
             ('message', 'id'),
             ('member', 'user', 'id'),
             ('userId'),
+            ('userInfo', 'id'),
+            ('channel', 'id'),
         ]
         for scenario in scenarios:
             if len(scenario) == 1:
@@ -88,6 +91,19 @@ class Data:
                 id = event_data.get(scenario[0], {}).get(scenario[1], {}).get(scenario[2], '')
             if id:
                 return id
+        return ''
+    
+    def _get_message_id(self, event_data: dict) -> str:
+        scenarios = [
+            ('channel', 'messageId'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                message_id = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                message_id = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if message_id:
+                return message_id
         return ''
 
     def _get_server_id(self, event_data: dict) -> str:
@@ -108,6 +124,7 @@ class Data:
         scenarios = [
             ('group', 'id'),
             ('message', 'groupId'),
+            ('channel', 'groupId')
         ]
         for scenario in scenarios:
             if len(scenario) == 1:
@@ -136,6 +153,7 @@ class Data:
             ('createdBy'),
             ('message', 'createdBy'),
             ('serverMemberBan', 'createdBy'),
+            ('channel', 'createdBy'),
         ]
         for scenario in scenarios:
             if len(scenario) == 1:
@@ -166,7 +184,8 @@ class Data:
             ('server', 'type'),
             ('message', 'type'),
             ('member', 'user', 'type'),
-            ('serverMemberBan', 'user', 'type')
+            ('serverMemberBan', 'user', 'type'),
+            ('channel', 'type'),
         ]
         for scenario in scenarios:
             if len(scenario) == 1:
@@ -299,7 +318,8 @@ class Data:
             ('serverMemberBan', 'createdAt'),
             ('server', 'createdAt'),
             ('message', 'createdAt'),
-            ('member', 'user', 'createdAt')
+            ('member', 'user', 'createdAt'),
+            ('channel', 'createdAt'),
         ]
         for scenario in scenarios:
             if len(scenario) == 1:
@@ -437,6 +457,32 @@ class Data:
                 return status_emote
         return ''
     
+    def _get_parent_id(self, event_data: dict) -> str:
+        scenarios = [
+            ('channel', 'parentId'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                parent_id = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                parent_id = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if parent_id:
+                return parent_id
+        return ''
+    
+    def _get_is_public(self, event_data: dict) -> bool:
+        scenarios = [
+            ('channel', 'isPublic'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                is_public = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                is_public = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if is_public:
+                return is_public
+        return ''
+    
     def _get_is_kick(self, event_data: dict) -> bool:
         scenarios = [
             ('isKick'),
@@ -463,6 +509,32 @@ class Data:
                 return is_ban
         return ''
     
+    def _get_nickname(self, event_data: dict) -> str:
+        scenarios = [
+            ('userInfo', 'nickname'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                nickname = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                nickname = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if nickname:
+                return nickname
+        return ''
+    
+    def _get_role_ids(self, event_data: dict) -> list:
+        scenarios = [
+            ('memberRoleIds'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                role_ids = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                role_ids = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if role_ids:
+                return role_ids
+        return ''
+
     def _get_reason(self, event_data: dict) -> str:
         scenarios = [
             ('serverMemberBan', 'reason'),
@@ -474,4 +546,43 @@ class Data:
                 reason = event_data.get(scenario[0], {}).get(scenario[1], '')
             if reason:
                 return reason
+        return ''
+    
+    def _get_topic(self, event_data: dict) -> str:
+        scenarios = [
+            ('channel', 'topic'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                topic = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                topic = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if topic:
+                return topic
+        return ''
+    
+    def _get_root_id(self, event_data: dict) -> str:
+        scenarios = [
+            ('channel', 'rootId'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                root_id = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                root_id = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if root_id:
+                return root_id
+        return ''
+    
+    def _get_category_id(self, event_data: dict) -> int:
+        scenarios = [
+            ('channel', 'categoryId'),
+        ]
+        for scenario in scenarios:
+            if len(scenario) == 1:
+                category_id = event_data.get(scenario[0], '')
+            if len(scenario) == 2:
+                category_id = event_data.get(scenario[0], {}).get(scenario[1], '')
+            if category_id:
+                return category_id
         return ''

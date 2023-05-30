@@ -120,3 +120,25 @@ on_member_unbanned
 +-----------------------------+------------------------------------------------+
 | ``data.created_at``         | The time the user was banned                   |
 +-----------------------------+------------------------------------------------+
+
+on_member_updated
+--------
+
+.. code-block:: python
+
+    @events.on_member_updated
+    async def example(data):
+        print(f'{data.name} updated their profile!')
+
+Is called when a user's nickname changes
+
++-----------------------------+------------------------------------------------+
+| Type                        | Description                                    |
++=============================+================================================+
+| ``data.server_id``          | The ID of the server the user updated their    |
+|                             | profile in.                                    |
++-----------------------------+------------------------------------------------+
+| ``data.id``                 | The ID of the user whos profile was updated    |
++-----------------------------+------------------------------------------------+
+| ``data.nickname``           | The new nickname of the user                   |
++-----------------------------+------------------------------------------------+

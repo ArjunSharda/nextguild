@@ -112,7 +112,7 @@ class Events:
         self._bot_server_leave_handlers.append(wrapper)
         return wrapper
     
-    def on_member_update(self, func):
+    def on_member_updated(self, func):
         @wraps(func)
         def wrapper(member):
             return func(member)
@@ -120,7 +120,7 @@ class Events:
         self._member_update_handlers.append(wrapper)
         return wrapper
     
-    def on_roles_update(self, func):
+    def on_roles_updated(self, func):
         @wraps(func)
         def wrapper(member):
             return func(member)
