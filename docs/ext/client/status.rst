@@ -8,7 +8,7 @@ update_status
 
 .. code-block:: python
 
-    update_status(content, emote_id)
+    update_status(content, emote_id, expires_at)
 
 Updates the bot's status.
 
@@ -19,6 +19,9 @@ Updates the bot's status.
 |                   | optional|                                            |
 +-------------------+---------+--------------------------------------------+
 | emote_id          | int,    | The ID of the emote to use.                |
+|                   | optional|                                            |
++-------------------+---------+--------------------------------------------+
+| expires_at        | str,    | The time at which the status will expire.  |
 |                   | optional|                                            |
 +-------------------+---------+--------------------------------------------+
 
