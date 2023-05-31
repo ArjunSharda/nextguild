@@ -323,6 +323,88 @@ class Client:
             f'{self.base_url}/servers/{server_id}/bans/{user_id}'
         )
         return response
+    
+    def create_role(
+            self,
+            server_id: str,
+            name: str,
+            is_displayed_separately: bool = False,
+            is_self_assignable: bool = False,
+            is_mentionable: bool = False,
+            permissions: list[str] = [],
+            colors = []
+    ):
+        data = {
+            'name': name,
+            'isDisplayedSeparately': str(is_displayed_separately).lower(),
+            'isSelfAssignable': str(is_self_assignable).lower(),
+            'isMentionable': str(is_mentionable).lower(),
+            'permissions': permissions,
+            'colors': colors
+                }
+        response = self.request(
+            'POST',
+            f'{self.base_url}/servers/{server_id}/roles',
+            json=data
+        )
+        return response
+    
+    def get_role(
+            self,
+            server_id: str,
+            role_id: int
+    ):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/servers/{server_id}/roles/{role_id}'
+        )
+        return response
+    
+    def get_roles(
+            self,
+            server_id: str
+    ):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/servers/{server_id}/roles'
+        )
+        return response
+    
+    def update_role(
+            self,
+            server_id: str,
+            role_id: int,
+            name: str = None,
+            is_displayed_separately: bool = False,
+            is_self_assignable: bool = False,
+            is_mentionable: bool = False,
+            permissions: list[str] = [],
+            colors = []
+    ):
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/servers/{server_id}/roles/{role_id}',
+            json={
+                'name': name,
+                'isDisplayedSeparately': str(is_displayed_separately).lower(),
+                'isSelfAssignable': str(is_self_assignable).lower(),
+                'isMentionable': str(is_mentionable).lower(),
+                'permissions': permissions,
+                'colors': colors
+            }
+        )
+        return response
+    
+    def delete_role(
+            self,
+            server_id: str,
+            role_id: int
+    ):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/servers/{server_id}/roles/{role_id}'
+        )
+        return response
 
     def add_role(
             self,
