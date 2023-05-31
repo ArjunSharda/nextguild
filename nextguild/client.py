@@ -188,7 +188,9 @@ class Client:
             server_id: str,
             group_id: str = None,
             category_id: int = None,
-            is_public: bool = False
+            is_public: bool = False,
+            parent_id: str = None,
+            message_id: str = None
     ):
         data = {'name': name, 'type': channel_type}
         if category_id:
@@ -197,6 +199,10 @@ class Client:
             data.update({'group_id': group_id})
         if server_id:
             data.update({'server_id': server_id})
+        if parent_id:
+            data.update({'parentId': parent_id})
+        if message_id:
+            data.update({'messageId': message_id})
         data.update({"isPublic": str(is_public).lower()})
         response = self.request(
             'POST',
