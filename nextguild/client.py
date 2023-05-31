@@ -1471,8 +1471,11 @@ class Client:
 
 
 
-    def update_status(self, content: str, emote_id: int):
-        response = self.request('PUT', f'{self.base_url}/users/@me/status', json={'content': content, 'emoteId': emote_id})
+    def update_status(self, content: str, emote_id: int, expires_at: str = None):
+        json = {'content': content, 'emoteId': emote_id}
+        if expires_at:
+            json.update({'expiresAt': expires_at})
+        response = self.request('PUT', f'{self.base_url}/users/@me/status', json=json)
         return response
 
 
