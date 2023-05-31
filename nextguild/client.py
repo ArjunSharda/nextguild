@@ -188,7 +188,9 @@ class Client:
             server_id: str,
             group_id: str = None,
             category_id: int = None,
-            is_public: bool = False
+            is_public: bool = False,
+            parent_id: str = None,
+            message_id: str = None
     ):
         data = {'name': name, 'type': channel_type}
         if category_id:
@@ -197,6 +199,10 @@ class Client:
             data.update({'group_id': group_id})
         if server_id:
             data.update({'server_id': server_id})
+        if parent_id:
+            data.update({'parentId': parent_id})
+        if message_id:
+            data.update({'messageId': message_id})
         data.update({"isPublic": str(is_public).lower()})
         response = self.request(
             'POST',
@@ -321,6 +327,88 @@ class Client:
         response = self.request(
             'POST',
             f'{self.base_url}/servers/{server_id}/bans/{user_id}'
+        )
+        return response
+    
+    def create_role(
+            self,
+            server_id: str,
+            name: str,
+            is_displayed_separately: bool = False,
+            is_self_assignable: bool = False,
+            is_mentionable: bool = False,
+            permissions: list[str] = [],
+            colors = []
+    ):
+        data = {
+            'name': name,
+            'isDisplayedSeparately': str(is_displayed_separately).lower(),
+            'isSelfAssignable': str(is_self_assignable).lower(),
+            'isMentionable': str(is_mentionable).lower(),
+            'permissions': permissions,
+            'colors': colors
+                }
+        response = self.request(
+            'POST',
+            f'{self.base_url}/servers/{server_id}/roles',
+            json=data
+        )
+        return response
+    
+    def get_role(
+            self,
+            server_id: str,
+            role_id: int
+    ):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/servers/{server_id}/roles/{role_id}'
+        )
+        return response
+    
+    def get_roles(
+            self,
+            server_id: str
+    ):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/servers/{server_id}/roles'
+        )
+        return response
+    
+    def update_role(
+            self,
+            server_id: str,
+            role_id: int,
+            name: str = None,
+            is_displayed_separately: bool = False,
+            is_self_assignable: bool = False,
+            is_mentionable: bool = False,
+            permissions: list[str] = [],
+            colors = []
+    ):
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/servers/{server_id}/roles/{role_id}',
+            json={
+                'name': name,
+                'isDisplayedSeparately': str(is_displayed_separately).lower(),
+                'isSelfAssignable': str(is_self_assignable).lower(),
+                'isMentionable': str(is_mentionable).lower(),
+                'permissions': permissions,
+                'colors': colors
+            }
+        )
+        return response
+    
+    def delete_role(
+            self,
+            server_id: str,
+            role_id: int
+    ):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/servers/{server_id}/roles/{role_id}'
         )
         return response
 
@@ -1383,8 +1471,11 @@ class Client:
 
 
 
-    def update_status(self, content: str, emote_id: int):
-        response = self.request('PUT', f'{self.base_url}/users/@me/status', json={'content': content, 'emoteId': emote_id})
+    def update_status(self, content: str, emote_id: int, expires_at: str = None):
+        json = {'content': content, 'emoteId': emote_id}
+        if expires_at:
+            json.update({'expiresAt': expires_at})
+        response = self.request('PUT', f'{self.base_url}/users/@me/status', json=json)
         return response
 
 
