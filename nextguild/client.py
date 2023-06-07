@@ -184,8 +184,9 @@ class Client:
     def create_channel(
             self,
             name: str,
-            channel_type,
-            server_id: str,
+            channel_type: str,
+            topic: str = None,
+            server_id: str = None,
             group_id: str = None,
             category_id: int = None,
             is_public: bool = False,
@@ -196,9 +197,9 @@ class Client:
         if category_id:
             data.update({'categoryId': category_id})
         if group_id:
-            data.update({'group_id': group_id})
+            data.update({'groupId': group_id})
         if server_id:
-            data.update({'server_id': server_id})
+            data.update({'serverId': server_id})
         if parent_id:
             data.update({'parentId': parent_id})
         if message_id:
