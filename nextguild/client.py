@@ -194,6 +194,8 @@ class Client:
             message_id: str = None
     ):
         data = {'name': name, 'type': channel_type}
+        if topic:
+            data.update({'topic': topic})
         if category_id:
             data.update({'categoryId': category_id})
         if group_id:
