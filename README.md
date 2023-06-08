@@ -24,6 +24,11 @@ pip install nextguild
 
 For NextGuild's official documentation, click [this link](https://github.com/ArjunSharda/nextguild/tree/main/docs)
 
+## Founders
+
+[Arjun Sharda](https://github.com/ArjunSharda)
+[Erik Thorsell](https://github.com/erik-thorsell)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
