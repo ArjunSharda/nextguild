@@ -26,7 +26,7 @@ For NextGuild's official documentation, click [this link](https://github.com/Arj
 
 ## Founders
 
-[Arjun Sharda](https://github.com/ArjunSharda)
+[Arjun Sharda](https://github.com/ArjunSharda)<br>
 [Erik Thorsell](https://github.com/erik-thorsell)
 
 ## Contributing
