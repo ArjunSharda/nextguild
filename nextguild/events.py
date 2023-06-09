@@ -8,6 +8,8 @@ import websockets
 from channel import Channel
 from message import Message, Webhook
 from reaction import Reaction, CalendarReaction, ForumTopicCommentReaction
+from classes import Data
+
 
 
 class Events:
@@ -741,341 +743,403 @@ class Events:
 
 
     async def _handle_bot_server_membership_created(self, event_data):
+        event = Data(event_data)
         for handler in self._bot_server_join_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_bot_server_membership_deleted(self, event_data):
-        # TODO: server class
+        event = Data(event_data)
         for handler in self._bot_server_leave_handlers:
-            await handler(event_data)
+            await handler(event)
         
     async def _handle_server_member_updated(self, event_data):
-        # TODO: member class
+        event = Data(event_data)
         for handler in self._member_update_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_server_roles_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._roles_update_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_server_member_social_links_created(self, event_data):
+        event = Data(event_data)
         for handler in self._member_social_create_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_server_member_social_links_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._member_social_update_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_server_member_social_links_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._member_social_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_doc_created(self, event_data):
+        event = Data(event_data)
         for handler in self._doc_create_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_doc_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._doc_update_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_doc_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._doc_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_doc_comment_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._doc_comment_update_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_doc_comment_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._doc_comment_delete_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_doc_comment_created(self, event_data):
+        event = Data(event_data)
         for handler in self._doc_comment_create_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_calendar_event_created(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_create_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_calendar_event_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_update_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_calendar_event_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_delete_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_forum_topic_created(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_create_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_forum_topic_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_update_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_forum_topic_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_server_member_banned(self, event_data):
-        # TODO: member class
+        event = Data(event_data)
         for handler in self._member_banned_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_create_message(self, event_data):
-        message = Message(event_data)
+        event = Data(event_data)
         for handler in self._message_create_handlers:
-            await handler(message)
+            await handler(event)
 
     async def _handle_update_message(self, event_data):
-        message = Message(event_data)
+        event = Data(event_data)
         for handler in self._message_update_handlers:
-            await handler(message)
+            await handler(event)
 
     async def _handle_delete_message(self, event_data):
-        message = Message(event_data)
+        event = Data(event_data)
         for handler in self._message_delete_handlers:
-            await handler(message)
+            await handler(event)
 
     async def _handle_member_join(self, event_data):
+        event = Data(event_data)
         for handler in self._member_join_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_member_leave(self, event_data):
+        event = Data(event_data)
         for handler in self._member_leave_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_member_banned(self, event_data):
+        event = Data(event_data)
         for handler in self._member_banned_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_member_unbanned(self, event_data):
+        event = Data(event_data)
         for handler in self._member_unbanned_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_ready(self):
         for handler in self._ready_handlers:
             await handler()
 
     async def _handle_create_reaction(self, event_data):
-        reaction = Reaction(event_data)
+        event = Data(event_data)
         for handler in self._reaction_create_handlers:
-            await handler(reaction)
+            await handler(event)
 
     async def _handle_delete_reaction(self, event_data):
-        reaction = Reaction(event_data)
+        event = Data(event_data)
         for handler in self._reaction_delete_handlers:
-            await handler(reaction)
+            await handler(event)
 
     async def _handle_forum_topic_comment_reaction_create(self, event_data):
-        reaction = ForumTopicCommentReaction(event_data)
+        event = Data(event_data)
         for handler in self._forum_topic_comment_reaction_create_handlers:
-            await handler(reaction)
+            await handler(event)
 
     async def _handle_forum_topic_comment_reaction_delete(self, event_data):
-        reaction = ForumTopicCommentReaction(event_data)
+        event = Data(event_data)
         for handler in self._forum_topic_comment_reaction_delete_handlers:
-            await handler(reaction)
+            await handler(event)
 
     async def _handle_calendar_event_reaction_create(self, event_data):
-        reaction = CalendarReaction(event_data)
+        event = Data(event_data)
         for handler in self._calendar_event_reaction_create_handlers:
-            await handler(reaction)
+            await handler(event)
 
     async def _handle_calendar_event_reaction_delete(self, event_data):
-        reaction = CalendarReaction(event_data)
+        event = Data(event_data)
         for handler in self._calendar_event_reaction_delete_handlers:
-            await handler(reaction)
+            await handler(event)
 
     async def _handle_create_channel(self, event_data):
-        channel = Channel(event_data)
+        event = Data(event_data)
         for handler in self._channel_create_handlers:
-            await handler(channel)
+            await handler(event)
 
     async def _handle_delete_channel(self, event_data):
-        channel = Channel(event_data)
+        event = Data(event_data)
         for handler in self._channel_delete_handlers:
-            await handler(channel)
+            await handler(event)
     
     async def _handle_update_channel(self, event_data):
-        channel = Channel(event_data)
+        event = Data(event_data)
         for handler in self._channel_update_handlers:
-            await handler(channel)
+            await handler(event)
     
     async def _handle_create_webhook(self, event_data):
-        webhook = Webhook(event_data)
+        event = Data(event_data)
         for handler in self._webhook_create_handlers:
-            await handler(webhook)
+            await handler(event)
 
     async def _handle_update_webhook(self, event_data):
-        webhook = Webhook(event_data)
+        event = Data(event_data)
         for handler in self._webhook_update_handlers:
-            await handler(webhook)
+            await handler(event)
 
     async def _handle_forum_topic_pinned(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_pinned_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_forum_topic_unpinned(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_unpinned_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_forum_topic_reaction_created(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_reaction_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_forum_topic_reaction_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_reaction_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_forum_topic_locked(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_lock_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_forum_topic_unlocked(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_unlock_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_forum_topic_comment_created(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_comment_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_forum_topic_comment_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_comment_update_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_forum_topic_comment_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._forum_topic_comment_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_calendar_event_rsvp_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_rsvp_update_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_calendar_event_rsvp_many_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_rsvp_many_update_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_calendar_event_rsvp_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_rsvp_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_list_item_created(self, event_data):
+        event = Data(event_data)
         for handler in self._list_item_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_list_item_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._list_item_update_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_list_item_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._list_item_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_list_item_completed(self, event_data):
+        event = Data(event_data)
         for handler in self._list_item_complete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_list_item_uncompleted(self, event_data):
+        event = Data(event_data)
         for handler in self._list_item_uncomplete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_channel_message_reaction_created(self, event_data):
+        event = Data(event_data)
         for handler in self._channel_message_reaction_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_channel_message_reaction_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._channel_message_reaction_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_channel_message_reaction_many_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._channel_message_reaction_many_delete_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_calendar_event_comment_created(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_comment_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_calendar_event_comment_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_comment_update_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_calendar_event_comment_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_comment_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_calendar_event_comment_reaction_created(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_comment_reaction_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_calendar_event_comment_reaction_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_comment_reaction_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_doc_reaction_created(self, event_data):
+        event = Data(event_data)
         for handler in self._doc_reaction_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_doc_reaction_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._doc_reaction_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_doc_comment_reaction_created(self, event_data):
+        event = Data(event_data)
         for handler in self._doc_comment_reaction_create_handlers:
-            await handler(event_data)
+            await handler(event)
     
     async def _handle_doc_comment_reaction_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._doc_comment_reaction_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_calendar_event_series_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_series_update_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_calendar_event_series_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._calendar_event_series_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_announcement_created(self, event_data):
+        event = Data(event_data)
         for handler in self._announcement_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_announcement_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._announcement_update_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_announcement_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._announcement_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_announcement_reaction_created(self, event_data):
+        event = Data(event_data)
         for handler in self._announcement_reaction_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_announcement_reaction_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._announcement_reaction_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_announcement_comment_created(self, event_data):
+        event = Data(event_data)
         for handler in self._announcement_comment_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_announcement_comment_updated(self, event_data):
+        event = Data(event_data)
         for handler in self._announcement_comment_update_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_announcement_comment_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._announcement_comment_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_announcement_comment_reaction_created(self, event_data):
+        event = Data(event_data)
         for handler in self._announcement_comment_reaction_create_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def _handle_announcement_comment_reaction_deleted(self, event_data):
+        event = Data(event_data)
         for handler in self._announcement_comment_reaction_delete_handlers:
-            await handler(event_data)
+            await handler(event)
 
     async def start(self):
         async with websockets.connect(
