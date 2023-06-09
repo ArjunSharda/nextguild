@@ -38,6 +38,73 @@ on_channel_message_reaction_many_delete
     async def example():
         print('Many reactions were deleted on a message in a channel!')
 
+on_forum_topic_reaction_create 
+--------
+
+.. code-block:: python
+
+    @events.on_forum_topic_reaction_create
+    async def example(data):
+        print(f'A reaction with id {data.id} was created on a forum topic!')
+
++-----------------------------+----------------------------------------------+
+| Type                        | Description                                  |
++=============================+==============================================+
+| `data.channel_id`           | The id of the channel the reaction was       |
+|                             | created in.                                  |
++-----------------------------+----------------------------------------------+
+| `data.created_by`           | The user who created the reaction.           |
++-----------------------------+----------------------------------------------+
+| `data.id`                   | The id of the reaction.                      |
++-----------------------------+----------------------------------------------+
+| `data.name`                 | The name of the reaction.                    |
++-----------------------------+----------------------------------------------+
+| `data.url`                  | The url of the reaction.                     |
++-----------------------------+----------------------------------------------+
+| `data.server_id`            | The id of the server the reaction was        |
+|                             | created in.                                  |
++-----------------------------+----------------------------------------------+
+| `data.topic_id`             | The id of the forum topic the reaction was   |
+|                             | created in.                                  |
++-----------------------------+----------------------------------------------+
+| `data.emote_server_id`      | The id of the server the emote was           |
+|                             | created in.                                  |
++-----------------------------+----------------------------------------------+
+
+on_forum_topic_reaction_delete
+--------
+
+.. code-block:: python
+
+    @events.on_forum_topic_reaction_delete
+    async def example(data):
+        print(f'A reaction with id {data.id} was deleted on a forum topic!')
+
++-----------------------------+----------------------------------------------+
+| Type                        | Description                                  |
++=============================+==============================================+
+| `data.channel_id`           | The id of the channel the reaction was       |
+|                             | deleted in.                                  |
++-----------------------------+----------------------------------------------+
+| `data.created_by`           | The user who deleted the reaction.           |
++-----------------------------+----------------------------------------------+
+| `data.id`                   | The id of the reaction.                      |
++-----------------------------+----------------------------------------------+
+| `data.name`                 | The name of the reaction.                    |
++-----------------------------+----------------------------------------------+
+| `data.url`                  | The url of the reaction.                     |
++-----------------------------+----------------------------------------------+
+| `data.server_id`            | The id of the server the reaction was        |
+|                             | deleted in.                                  |
++-----------------------------+----------------------------------------------+
+| `data.topic_id`             | The id of the forum topic the reaction was   |
+|                             | deleted in.                                  |
++-----------------------------+----------------------------------------------+
+| `data.emote_server_id`      | The id of the server the emote was           |
+|                             | deleted in.                                  |
++-----------------------------+----------------------------------------------+
+
+
 on_forum_topic_comment_reaction_create
 --------
 
