@@ -7,7 +7,7 @@ create_channel
 --------------
 .. code-block:: python
 
-    create_channel(name, channel_type, server_id, server_id, group_id, category_id, is_public, parent_id, message_id)
+    create_channel(name, channel_type, topic, server_id, server_id, group_id, category_id, is_public, parent_id, message_id) 
 
 Create a channel.
 
@@ -18,7 +18,11 @@ Create a channel.
 +-------------------+---------+---------------------------------------------+
 | channel_type      | str     | The type of the channel.                    |
 +-------------------+---------+---------------------------------------------+
-| server_id         | str     | The ID of the server to create the channel. |
+| topic             | str,    | The topic of the channel.                   |
+|                   | optional|                                             |
++-------------------+---------+---------------------------------------------+
+| server_id         | str,    | The ID of the server to create the channel. |
+|                   | optional|                                             |
 +-------------------+---------+---------------------------------------------+
 | group_id          | str,    | The ID of the group to create the channel.  |
 |                   | optional|                                             |
