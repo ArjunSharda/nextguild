@@ -154,6 +154,7 @@ class Data:
             ('webhook', 'serverId'),
             ('doc', 'serverId'),
             ('calendarEvent', 'serverId'),
+            ('reaction', 'serverId')
         ]
         return self._scenario(event_data, scenarios)
             
