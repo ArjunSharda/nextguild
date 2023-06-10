@@ -17,10 +17,6 @@ on_announcement_create
 .. code-block:: python
 
     @events.on_announcement_create
-<<<<<<< Updated upstream
-    async def example():
-        print('An announcement has been created!')
-=======
     async def example(data):
         print(f'An announcement with the title {data.title} has been created!')
 
@@ -44,7 +40,6 @@ on_announcement_create
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the announcement             |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_announcement_update
 --------
@@ -52,10 +47,6 @@ on_announcement_update
 .. code-block:: python
 
     @events.on_announcement_update
-<<<<<<< Updated upstream
-    async def example():
-        print('An announcement has been updated!')
-=======
     async def example(data):
         print(f'An announcement with the title {data.title} has been updated!')
 
@@ -79,7 +70,6 @@ on_announcement_update
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the announcement             |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_announcement_delete
 --------
@@ -87,10 +77,6 @@ on_announcement_delete
 .. code-block:: python
 
     @events.on_announcement_delete
-<<<<<<< Updated upstream
-    async def example():
-        print('An announcement has been deleted!')
-=======
     async def example(data):
         print(f'An announcement with the title {data.title} has been deleted!')
 
@@ -114,7 +100,6 @@ on_announcement_delete
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the announcement             |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_announcement_comment_create
 --------
@@ -122,10 +107,6 @@ on_announcement_comment_create
 .. code-block:: python
 
     @events.on_announcement_comment_create
-<<<<<<< Updated upstream
-    async def example():
-        print('An announcement comment has been created!')
-=======
     async def example(data):
         print(f'An announcement comment with the content {data.content} has been created!')
 
@@ -150,7 +131,6 @@ on_announcement_comment_create
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the announcement comment     |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_announcement_comment_update
 --------
@@ -158,10 +138,6 @@ on_announcement_comment_update
 .. code-block:: python
 
     @events.on_announcement_comment_update
-<<<<<<< Updated upstream
-    async def example():
-        print('An announcement comment has been updated!')
-=======
     async def example(data):
         print(f'An announcement comment with the content {data.content} has been updated!')
 
@@ -189,7 +165,6 @@ on_announcement_comment_update
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the announcement comment     |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_announcement_comment_delete
 --------
@@ -197,10 +172,6 @@ on_announcement_comment_delete
 .. code-block:: python
 
     @events.on_announcement_comment_delete
-<<<<<<< Updated upstream
-    async def example():
-        print('An announcement comment has been deleted!')
-=======
     async def example(data):
         print(f'An announcement comment with the content {data.content} has been deleted!')
 
@@ -225,4 +196,3 @@ on_announcement_comment_delete
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the announcement comment     |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
