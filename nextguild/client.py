@@ -5,8 +5,8 @@ from datetime import datetime
 
 import requests
 
-from embed import Embed
-from message import Message
+from .embed import Embed
+from .message import Message
 
 
 class Client:
