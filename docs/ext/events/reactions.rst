@@ -9,6 +9,7 @@ This page requires that you've used this code at the top of the file:
     from nextguild import *
     bot = Client('TOKEN')
     events = Events(bot)
+    
 on_channel_message_reaction_create
 --------
 
