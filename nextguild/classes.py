@@ -8,7 +8,7 @@ class Data:
         self.group_id = self._get_group_id(event_data)
         self.channel_id = self._get_channel_id(event_data)
         self.created_by = self._get_created_by(event_data)
-        self.deleted_by
+        self.deleted_by = self._get_deleted_by(event_data)
         self.owner_id = self._get_owner_id(event_data)
         self.type = self._get_type(event_data)
         self.name = self._get_name(event_data)
@@ -21,6 +21,7 @@ class Data:
         self.default_channel_id = self._get_default_channel_id(event_data)
         self.created_at = self._get_created_at(event_data)
         self.updated_at = self._get_updated_at(event_data)
+        self.updated_by = self._get_updated_by(event_data)
         self.content = self._get_content(event_data)
         self.embeds = self._get_embeds(event_data)
         self.reply_message_ids = self._get_reply_message_ids(event_data)
@@ -29,10 +30,8 @@ class Data:
         self.mentions = self._get_mentions(event_data)
         self.is_kick = self._get_is_kick(event_data)
         self.is_ban = self._get_is_ban(event_data)
-        self.is_owner
         self.bumped_at = self._get_bumped_at(event_data)
         self.nickname = self._get_nickname(event_data)
-        self.joined_at
         self.role_ids = self._get_role_ids(event_data)
         self.reason = self._get_reason(event_data)
         self.handle = self._get_handle(event_data)
@@ -45,15 +44,14 @@ class Data:
         self.is_locked = self._get_is_locked(event_data)
         self.status = self._get_status(event_data)
         self.status_emote = self._get_status_emote(event_data)
-        self.completed_at
-        self.completed_by
-        self.note
-        self.message_id
+        self.completed_at = self._get_completed_at(event_data)
+        self.completed_by = self._get_completed_by(event_data)
+        self.note = self._get_note(event_data)
         self.parent_id = self._get_parent_id(event_data)
-        self.is_home
+        self.is_home = self._get_is_home(event_data)
         self.is_public = self._get_is_public(event_data)
-        self.archived_at
-        self.archived_by
+        self.archived_at = self._get_archived_at(event_data)
+        self.archived_by = self._get_archived_by(event_data)
         self.description = self._get_description(event_data)
         self.location = self._get_location(event_data)
         self.color = self._get_color(event_data)
@@ -71,6 +69,20 @@ class Data:
         self.category_id = self._get_category_id(event_data)
         self.emote_server_id = self._get_original_server_id(event_data)
         self.topic_id = self._get_forum_topic_id(event_data)
+        self.calendar_event_rsvps = self._get_calendar_event_rsvps(event_data)
+        self.count = self._get_count(event_data)
+        self.comment_id = self._get_comment_id(event_data)
+        self.event_id = self._get_event_id(event_data)
+        self.emote_id = self._get_emote_id(event_data)
+        self.announcement_id = self._get_announcement_id(event_data)
+        self.is_displayed_separately = self._get_is_displayed_separately(event_data)
+        self.is_mentionable = self._get_is_mentionable(event_data)
+        self.permissions = self._get_permissions(event_data)
+        self.colors = self._get_colors(event_data)
+        self.icon = self._get_icon(event_data)
+        self.position = self._get_position(event_data)
+        self.is_base = self._get_is_base(event_data)
+        self.bot_user_id = self._get_bot_user_id(event_data)
 
     def _scenario(self, event_data, scenarios):
         data = ''
@@ -88,6 +100,8 @@ class Data:
                     return True
                 if data == "false":
                     return False
+                if data == 'Ann6LewA':
+                    data = self._get_webhook_id(event_data)
                 return data
         return 'None'
     
@@ -107,6 +121,14 @@ class Data:
             ('reaction', 'emote', 'id'),
             ('forumTopicComment', 'id'),
             ('forumTopic', 'id'),
+            ('calendarEventRsvp', 'calendarEventId'),
+            ('listItem', 'id'),
+            ('calendarEventComment', 'id'),
+            ('calendarEventSeries', 'id'),
+            ('group', 'id'),
+            ('announcement', 'id'),
+            ('announcementComment', 'id'),
+            ('role', 'id'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -119,6 +141,7 @@ class Data:
     def _get_user_id(self, event_data: dict):
         scenarios = [
             ('socialLink', 'userId'),
+            ('calendarEventRsvp', 'userId'),
         ]
         return self._scenario(event_data, scenarios)
 
@@ -151,6 +174,12 @@ class Data:
             ('reaction', 'channelId'),
             ('forumTopicComment', 'channelId'),
             ('forumTopic', 'channelId'),
+            ('calendarEventRsvp', 'channelId'),
+            ('listItem', 'channelId'),
+            ('calendarEventComment', 'channelId'),
+            ('calendarEventSeries', 'channelId'),
+            ('announcement', 'channelId'),
+            ('announcementComment', 'channelId'),
         ]
         return self._scenario(event_data, scenarios)
 
@@ -167,6 +196,19 @@ class Data:
             ('reaction', 'createdBy'),
             ('forumTopicComment', 'createdBy'),
             ('forumTopic', 'createdBy'),
+            ('calendarEventRsvp', 'createdBy'),
+            ('listItem', 'createdBy'),
+            ('listItem', 'note', 'createdBy'),
+            ('calendarEventComment', 'createdBy'),
+            ('group', 'createdBy'),
+            ('announcement', 'createdBy'),
+            ('announcementComment', 'createdBy'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_deleted_by(self, event_data: dict):
+        scenarios = [
+            ('deletedBy'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -194,7 +236,9 @@ class Data:
             ('serverMemberBan', 'user', 'name'),
             ('webhook', 'name'),
             ('calendarEvent', 'name'),
-            ('reaction', 'emote', 'name')
+            ('reaction', 'emote', 'name'),
+            ('group', 'name'),
+            ('role', 'name'),
         ]
         return self._scenario(event_data, scenarios)
             
@@ -217,7 +261,8 @@ class Data:
             ('server', 'avatar'),
             ('member', 'user', 'avatar'),
             ('serverMemberBan', 'user', 'avatar'),
-            ('webhook', 'avatar')
+            ('webhook', 'avatar'),
+            ('group', 'avatar'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -260,6 +305,14 @@ class Data:
             ('calendarEvent', 'createdAt'),
             ('forumTopicComment', 'createdAt'),
             ('forumTopic', 'createdAt'),
+            ('calendarEventRsvp', 'createdAt'),
+            ('listItem', 'createdAt'),
+            ('listItem', 'note', 'createdAt'),
+            ('calendarEventComment', 'createdAt'),
+            ('group', 'createdAt'),
+            ('announcement', 'createdAt'),
+            ('announcementComment', 'createdAt'),
+            ('role', 'createdAt'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -270,6 +323,19 @@ class Data:
             ('docComment', 'updatedAt'),
             ('forumTopicComment', 'updatedAt'),
             ('forumTopic', 'updatedAt'),
+            ('calendarEventRsvp', 'updatedAt'),
+            ('listItem', 'updatedAt'),
+            ('listItem', 'note', 'updatedAt'),
+            ('calendarEventComment', 'updatedAt'),
+            ('group', 'updatedAt'),
+            ('announcement', 'updatedAt'),
+            ('role', 'updatedAt'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_updated_by(self, event_data: dict):
+        scenarios = [
+            ('group', 'updatedBy'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -280,6 +346,11 @@ class Data:
             ('docComment', 'content'),
             ('forumTopicComment', 'content'),
             ('forumTopic', 'content'),
+            ('listItem', 'message'),
+            ('listItem', 'note', 'content'),
+            ('calendarEventComment', 'content'),
+            ('announcement', 'content'),
+            ('announcementComment', 'content'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -316,12 +387,18 @@ class Data:
             ('calendarEvent', 'mentions'),
             ('forumTopicComment', 'mentions'),
             ('forumTopic', 'mentions'),
+            ('listItem', 'mentions'),
+            ('listItem', 'note', 'mentions'),
+            ('calendarEventComment', 'mentions'),
+            ('announcement', 'mentions'),
+            ('announcementComment', 'mentions'),
         ]
         return self._scenario(event_data, scenarios)
     
     def _get_status(self, event_data: dict):
         scenarios = [
             ('member', 'user', 'status', 'content'),
+            ('calendarEventRsvp', 'status'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -331,21 +408,60 @@ class Data:
         ]
         return self._scenario(event_data, scenarios)
     
+    def _get_completed_at(self, event_data: dict):
+        scenarios = [
+            ('listItem', 'completedAt'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_completed_by(self, event_data: dict):
+        scenarios = [
+            ('listItem', 'completedBy'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_note(self, event_data: dict):
+        scenarios = [
+            ('listItem', 'note'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
     def _get_parent_id(self, event_data: dict):
         scenarios = [
             ('channel', 'parentId'),
+            ('listItem', 'parentListItemId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_is_home(self, event_data: dict):
+        scenarios = [
+            ('channel', 'isHome'),
         ]
         return self._scenario(event_data, scenarios)
     
     def _get_is_public(self, event_data: dict):
         scenarios = [
             ('channel', 'isPublic'),
+            ('group', 'isPublic'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_archived_at(self, event_data: dict):
+        scenarios = [
+            ('group', 'archivedAt'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_archived_by(self, event_data: dict):
+        scenarios = [
+            ('group', 'archivedBy'),
         ]
         return self._scenario(event_data, scenarios)
     
     def _get_description(self, event_data: dict):
         scenarios = [
             ('calendarEvent', 'description'),
+            ('group', 'description'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -474,12 +590,16 @@ class Data:
         scenarios = [
             ('doc', 'title'),
             ('forumTopic', 'title'),
+            ('announcement', 'title'),
         ]
         return self._scenario(event_data, scenarios)
     
     def _updated_by(self, event_data: dict):
         scenarios = [
             ('doc', 'updatedBy'),
+            ('calendarEventRsvp', 'updatedBy'),
+            ('listItem', 'updatedBy'),
+            ('listItem', 'note', 'updatedBy'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -528,5 +648,119 @@ class Data:
     def _get_forum_topic_id(self, event_data: dict):
         scenarios = [
             ('forumTopicId'),
+            ('forumTopicComment', 'forumTopicId'),
+            ('reaction', 'forumTopicId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_calendar_event_rsvps(self, event_data: dict):
+        scenarios = [
+            ('calendarEventRsvps'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_webhook_id(self, event_data: dict):
+        scenarios = [
+            ('listItem', 'createdByWebhookId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_count(self, event_data: dict):
+        scenarios = [
+            ('count'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_comment_id(self, event_data: dict):
+        scenarios = [
+            ('reaction', 'forumTopicCommentId'),
+            ('reaction', 'calendarEventCommentId'),
+            ('reaction', 'docCommentId'),
+            ('reaction', 'announcementCommentId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_event_id(self, event_data: dict):
+        scenarios = [
+            ('calendarEventComment', 'calendarEventId'),
+            ('calendarEventId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_doc_id(self, event_data: dict):
+        scenarios = [
+            ('reaction', 'docId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_emote_id(self, event_data: dict):
+        scenarios = [
+            ('group', 'emoteId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_announcement_id(self, event_data: dict):
+        scenarios = [
+            ('reaction', 'announcementId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_is_displayed_separately(self, event_data: dict):
+        scenarios = [
+            ('role', 'isDisplayedSeparately'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_is_self_assignable(self, event_data: dict):
+        scenarios = [
+            ('role', 'isSelfAssignable'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_is_mentionable(self, event_data: dict):
+        scenarios = [
+            ('role', 'isMentionable'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_permissions(self, event_data: dict):
+        scenarios = [
+            ('role', 'permissions'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_colors(self, event_data: dict):
+        scenarios = [
+            ('role', 'colors'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_icon(self, event_data: dict):
+        scenarios = [
+            ('role', 'icon'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_icon(self, event_data: dict):
+        scenarios = [
+            ('role', 'icon'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_position(self, event_data: dict):
+        scenarios = [
+            ('role', 'position'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_is_base(self, event_data: dict):
+        scenarios = [
+            ('role', 'isBase'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_bot_user_id(self, event_data: dict):
+        scenarios = [
+            ('role', 'botUserId'),
         ]
         return self._scenario(event_data, scenarios)

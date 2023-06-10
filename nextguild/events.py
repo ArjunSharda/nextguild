@@ -96,6 +96,14 @@ class Events:
         self._announcement_comment_delete_handlers = []
         self._announcement_comment_reaction_create_handlers = []
         self._announcement_comment_reaction_delete_handlers = []
+        self._group_create_handlers = []
+        self._group_update_handlers = []
+        self._group_delete_handlers = []
+        self.on_user_status_create_handlers = []
+        self.on_user_status_delete_handlers = []
+        self.on_role_create_handlers = []
+        self.on_role_update_handlers = []
+        self.on_role_delete_handlers = []
         self.client = client
     
     def on_bot_membership_created(self, func):
@@ -740,6 +748,70 @@ class Events:
         self._announcement_comment_reaction_delete_handlers.append(wrapper)
         return wrapper
     
+    def on_group_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._group_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_group_update(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._group_update_handlers.append(wrapper)
+        return wrapper
+    
+    def on_group_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._group_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_user_status_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._user_status_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_user_status_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._user_status_delete_handlers.append(wrapper)
+        return wrapper
+    
+    def on_role_create(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._role_create_handlers.append(wrapper)
+        return wrapper
+    
+    def on_role_update(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._role_update_handlers.append(wrapper)
+        return wrapper
+    
+    def on_role_delete(self, func):
+        @wraps(func)
+        def wrapper(event):
+            return func(event)
+
+        self._role_delete_handlers.append(wrapper)
+        return wrapper
+    
 
 
     async def _handle_bot_server_membership_created(self, event_data):
@@ -1141,6 +1213,46 @@ class Events:
         for handler in self._announcement_comment_reaction_delete_handlers:
             await handler(event)
 
+    async def _handle_group_created(self, event_data):
+        event = Data(event_data)
+        for handler in self._group_create_handlers:
+            await handler(event)
+
+    async def _handle_group_updated(self, event_data):
+        event = Data(event_data)
+        for handler in self._group_update_handlers:
+            await handler(event)
+
+    async def _handle_group_deleted(self, event_data):
+        event = Data(event_data)
+        for handler in self._group_delete_handlers:
+            await handler(event)
+    
+    async def _handle_user_status_created(self, event_data):
+        event = Data(event_data)
+        for handler in self._user_status_create_handlers:
+            await handler(event)
+
+    async def _handle_user_status_deleted(self, event_data):
+        event = Data(event_data)
+        for handler in self._user_status_delete_handlers:
+            await handler(event)
+
+    async def _handle_role_created(self, event_data):
+        event = Data(event_data)
+        for handler in self._role_create_handlers:
+            await handler(event)
+
+    async def _handle_role_updated(self, event_data):
+        event = Data(event_data)
+        for handler in self._role_update_handlers:
+            await handler(event)
+
+    async def _handle_role_deleted(self, event_data):
+        event = Data(event_data)
+        for handler in self._role_delete_handlers:
+            await handler(event)
+
     async def start(self):
         async with websockets.connect(
                 'wss://www.guilded.gg/websocket/v1',
@@ -1237,6 +1349,14 @@ class Events:
                     'AnnouncementCommentDeleted': self._handle_announcement_comment_deleted,
                     'AnnouncementCommentReactionCreated': self._handle_announcement_comment_reaction_created,
                     'AnnouncementCommentReactionDeleted': self._handle_announcement_comment_reaction_deleted,
+                    'GroupCreated': self._handle_group_created,
+                    'GroupUpdated': self._handle_group_updated,
+                    'GroupDeleted': self._handle_group_deleted,
+                    'UserStatusCreated': self._handle_user_status_created,
+                    'UserStatusDeleted': self._handle_user_status_deleted,
+                    'RoleCreated': self._handle_role_created,
+                    'RoleUpdated': self._handle_role_updated,
+                    'RoleDeleted': self._handle_role_deleted,
 
 
                 }
