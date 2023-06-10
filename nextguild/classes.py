@@ -108,7 +108,7 @@ class Data:
     def _get_id(self, event_data: dict):
         scenarios = [
             ('serverMemberBan', 'user', 'id'),
-            ('id'),
+            ('id',),
             ('message', 'id'),
             ('member', 'user', 'id'),
             ('userId'),
@@ -148,13 +148,13 @@ class Data:
 
     def _get_server_id(self, event_data: dict):
         scenarios = [
-            ('serverId'),
+            ('reaction', 'serverId'),
+            ('serverId',),
             ('server', 'id'),
             ('message', 'serverId'),
             ('webhook', 'serverId'),
             ('doc', 'serverId'),
             ('calendarEvent', 'serverId'),
-            ('reaction', 'serverId')
         ]
         return self._scenario(event_data, scenarios)
             
@@ -187,7 +187,7 @@ class Data:
 
     def _get_created_by(self, event_data: dict):
         scenarios = [
-            ('createdBy'),
+            ('createdBy',),
             ('message', 'createdBy'),
             ('serverMemberBan', 'createdBy'),
             ('channel', 'createdBy'),
@@ -210,7 +210,7 @@ class Data:
     
     def _get_deleted_by(self, event_data: dict):
         scenarios = [
-            ('deletedBy'),
+            ('deletedBy',),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -535,13 +535,13 @@ class Data:
     
     def _get_is_kick(self, event_data: dict):
         scenarios = [
-            ('isKick'),
+            ('isKick',),
         ]
         return self._scenario(event_data, scenarios)
     
     def _get_is_ban(self, event_data: dict):
         scenarios = [
-            ('isBan'),
+            ('isBan',),
         ]
         return self._scenario(event_data, scenarios)
 
@@ -559,7 +559,7 @@ class Data:
     
     def _get_role_ids(self, event_data: dict):
         scenarios = [
-            ('memberRoleIds'),
+            ('memberRoleIds',),
             ('calendarEvent', 'roleIds'),
         ]
         return self._scenario(event_data, scenarios)
@@ -649,7 +649,7 @@ class Data:
     
     def _get_forum_topic_id(self, event_data: dict):
         scenarios = [
-            ('forumTopicId'),
+            ('forumTopicId',),
             ('forumTopicComment', 'forumTopicId'),
             ('reaction', 'forumTopicId'),
         ]
@@ -657,7 +657,7 @@ class Data:
     
     def _get_calendar_event_rsvps(self, event_data: dict):
         scenarios = [
-            ('calendarEventRsvps'),
+            ('calendarEventRsvps',),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -669,7 +669,7 @@ class Data:
     
     def _get_count(self, event_data: dict):
         scenarios = [
-            ('count'),
+            ('count',),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -685,7 +685,7 @@ class Data:
     def _get_event_id(self, event_data: dict):
         scenarios = [
             ('calendarEventComment', 'calendarEventId'),
-            ('calendarEventId'),
+            ('calendarEventId',),
         ]
         return self._scenario(event_data, scenarios)
     
