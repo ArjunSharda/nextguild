@@ -17,8 +17,29 @@ on_webhook_create
 .. code-block:: python
 
     @events.on_webhook_create
-    async def example():
-        print('A webhook was created!')
+    async def example(data):
+        print(f'A webhook with name {data.name} was created!')
+
++-----------------------------+----------------------------------------------+
+| Type                        | Description                                  |
++=============================+==============================================+
+| ``data.server_id``          | The ID of the server                         |
++-----------------------------+----------------------------------------------+
+| ``data.id``                 | The ID of the webhook                        |
++-----------------------------+----------------------------------------------+
+| ``data.name``               | The name of the webhook                      |
++-----------------------------+----------------------------------------------+
+| ``data.avatar``             | The avatar of the webhook                    |
++-----------------------------+----------------------------------------------+
+| ``data.channel_id``         | The ID of the channel the webhook            |
++-----------------------------+----------------------------------------------+
+| ``data.created_at``         | The time the webhook was created             |
++-----------------------------+----------------------------------------------+
+| ``data.created_by``         | The user who created the webhook             |
++-----------------------------+----------------------------------------------+
+| ``data.token``              | The token of the webhook                     |
++-----------------------------+----------------------------------------------+
+
 
 on_webhook_update
 --------
@@ -26,14 +47,25 @@ on_webhook_update
 .. code-block:: python
 
     @events.on_webhook_update
-    async def example():
-        print('A webhook was updated!')
+    async def example(data):
+        print(f'A webhook with name {data.name} was updated!')
 
-on_webhook_delete
---------
-
-.. code-block:: python
-
-    @events.on_webhook_delete
-    async def example():
-        print('A webhook was deleted!')
++-----------------------------+----------------------------------------------+
+| Type                        | Description                                  |
++=============================+==============================================+
+| ``data.server_id``          | The ID of the server                         |
++-----------------------------+----------------------------------------------+
+| ``data.id``                 | The ID of the webhook                        |
++-----------------------------+----------------------------------------------+
+| ``data.name``               | The name of the webhook                      |
++-----------------------------+----------------------------------------------+
+| ``data.avatar``             | The avatar of the webhook                    |
++-----------------------------+----------------------------------------------+
+| ``data.channel_id``         | The ID of the channel the webhook            |
++-----------------------------+----------------------------------------------+
+| ``data.created_at``         | The time the webhook was created             |
++-----------------------------+----------------------------------------------+
+| ``data.created_by``         | The user who created the webhook             |
++-----------------------------+----------------------------------------------+
+| ``data.token``              | The token of the webhook                     |
++-----------------------------+----------------------------------------------+

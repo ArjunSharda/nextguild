@@ -6,7 +6,7 @@ from datetime import datetime
 import requests
 
 from .embed import Embed
-from .message import Message
+from .classes import Data
 
 
 class Client:
@@ -56,7 +56,7 @@ class Client:
             url=f'{self.base_url}/channels/{channel_id}/messages',
             json=payload
         )
-        return Message(response)
+        return Data(response)
 
     def edit_message(
             self,
@@ -81,7 +81,7 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/messages/{message_id}',
             json=payload
         )
-        return Message(response)
+        return Data()
 
     def delete_message(
             self,
@@ -105,7 +105,7 @@ class Client:
             'GET',
             f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
         )
-        return Message(response)
+        return Data()
 
     def get_channel_messages(
             self,
@@ -137,7 +137,7 @@ class Client:
             params=params
         )
         return list(map(
-            lambda msg: Message(msg),
+            lambda msg: Data(msg),
             response.get('messages', [])
         ))
 
