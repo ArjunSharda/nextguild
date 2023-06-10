@@ -175,7 +175,8 @@ class Client:
         #     breakpoint()
         try:
             data: dict = json.loads(response.content)
-        except: return
+        except:
+            return
         if 200 <= code < 300:
             return data
         raise ValueError(f'Request failed with status {code}: {data}')
@@ -183,19 +184,28 @@ class Client:
     def create_channel(
             self,
             name: str,
-            channel_type,
-            server_id: str,
+            channel_type: str,
+            topic: str = None,
+            server_id: str = None,
             group_id: str = None,
             category_id: int = None,
-            is_public: bool = False
+            is_public: bool = False,
+            parent_id: str = None,
+            message_id: str = None
     ):
         data = {'name': name, 'type': channel_type}
+        if topic:
+            data.update({'topic': topic})
         if category_id:
             data.update({'categoryId': category_id})
         if group_id:
-            data.update({'group_id': group_id})
+            data.update({'groupId': group_id})
         if server_id:
-            data.update({'server_id': server_id})
+            data.update({'serverId': server_id})
+        if parent_id:
+            data.update({'parentId': parent_id})
+        if message_id:
+            data.update({'messageId': message_id})
         data.update({"isPublic": str(is_public).lower()})
         response = self.request(
             'POST',
@@ -320,6 +330,88 @@ class Client:
         response = self.request(
             'POST',
             f'{self.base_url}/servers/{server_id}/bans/{user_id}'
+        )
+        return response
+    
+    def create_role(
+            self,
+            server_id: str,
+            name: str,
+            is_displayed_separately: bool = False,
+            is_self_assignable: bool = False,
+            is_mentionable: bool = False,
+            permissions: list[str] = [],
+            colors = []
+    ):
+        data = {
+            'name': name,
+            'isDisplayedSeparately': str(is_displayed_separately).lower(),
+            'isSelfAssignable': str(is_self_assignable).lower(),
+            'isMentionable': str(is_mentionable).lower(),
+            'permissions': permissions,
+            'colors': colors
+                }
+        response = self.request(
+            'POST',
+            f'{self.base_url}/servers/{server_id}/roles',
+            json=data
+        )
+        return response
+    
+    def get_role(
+            self,
+            server_id: str,
+            role_id: int
+    ):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/servers/{server_id}/roles/{role_id}'
+        )
+        return response
+    
+    def get_roles(
+            self,
+            server_id: str
+    ):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/servers/{server_id}/roles'
+        )
+        return response
+    
+    def update_role(
+            self,
+            server_id: str,
+            role_id: int,
+            name: str = None,
+            is_displayed_separately: bool = False,
+            is_self_assignable: bool = False,
+            is_mentionable: bool = False,
+            permissions: list[str] = [],
+            colors = []
+    ):
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/servers/{server_id}/roles/{role_id}',
+            json={
+                'name': name,
+                'isDisplayedSeparately': str(is_displayed_separately).lower(),
+                'isSelfAssignable': str(is_self_assignable).lower(),
+                'isMentionable': str(is_mentionable).lower(),
+                'permissions': permissions,
+                'colors': colors
+            }
+        )
+        return response
+    
+    def delete_role(
+            self,
+            server_id: str,
+            role_id: int
+    ):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/servers/{server_id}/roles/{role_id}'
         )
         return response
 
@@ -581,7 +673,7 @@ class Client:
             json=data
         )
         return response
-    
+
     def update_event(
             self,
             channel_id: str,
@@ -602,6 +694,7 @@ class Client:
         """Checks if a user is the owner of a server."""
         ownerid = self.get_server(server_id).get('server', {}).get('ownerId')
         return ownerid == user_id
+
     def get_events(
             self,
             channel_id: str,
@@ -686,7 +779,7 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/events/{event_id}/rsvps'
         )
         return response
-    
+
     def create_announcement(self, channel_id: str, title: str, content: str):
         response = self.request(
             'POST',
@@ -694,14 +787,14 @@ class Client:
             json={'title': title, 'content': content}
         )
         return response
-    
+
     def get_announcement(self, channel_id: str, announcement_id: str):
         response = self.request(
             'GET',
             f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}'
         )
         return response
-    
+
     def get_announcements(self, channel_id: str, before: str = None, limit: str = None):
         params = {}
         if before:
@@ -713,7 +806,7 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/announcements'
         )
         return response
-    
+
     def update_announcement(self, channel_id: str, announcement_id: str, title: str = None, content: str = None):
         params = {}
         if title:
@@ -726,14 +819,14 @@ class Client:
             json=params
         )
         return response
-    
+
     def delete_announcement(self, channel_id: str, announcement_id: str):
         response = self.request(
             'DELETE',
             f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}'
         )
         return response
-    
+
     def create_announcement_comment(self, channel_id: str, announcement_id: str, content: str):
         response = self.request(
             'POST',
@@ -741,21 +834,21 @@ class Client:
             json={'content': content}
         )
         return response
-    
+
     def get_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: int):
         response = self.request(
             'GET',
             f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}'
         )
         return response
-    
+
     def get_announcement_comments(self, channel_id: str, announcement_id: str):
         response = self.request(
             'GET',
             f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments'
         )
         return response
-    
+
     def update_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: int, content: str):
         response = self.request(
             'PATCH',
@@ -763,7 +856,7 @@ class Client:
             json={'content': content}
         )
         return response
-    
+
     def delete_announcement_comment(self, channel_id: str, announcement_id: str, comment_id: int):
         response = self.request(
             'DELETE',
@@ -862,7 +955,7 @@ class Client:
         response = self.request(
             'POST',
             f'{self.base_url}/channels/{channel_id}/topics',
-            json= {'title': title, 'content': content}
+            json={'title': title, 'content': content}
         )
         return response
 
@@ -909,7 +1002,7 @@ class Client:
 
         if content:
             data['content'] = content
-        
+
         if title:
             data['title'] = title
 
@@ -1056,11 +1149,13 @@ class Client:
             self,
             channel_id: str,
             message_id: str,
-            emote_id: int
+            emote_id: int,
+            user_id: str
     ):
         response = self.request(
             'DELETE',
-            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}'
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/emotes/{emote_id}',
+            params={'userId': user_id}
         )
         return response
 
@@ -1166,7 +1261,7 @@ class Client:
             f'/comments/{comment_id}/emotes/{emote_id}'
         )
         return response
-    
+
     def create_announcement_reaction(
             self,
             channel_id: str,
@@ -1190,7 +1285,7 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/emotes/{emote_id}'
         )
         return response
-    
+
     def create_announcement_comment_reaction(
             self,
             channel_id: str,
@@ -1203,7 +1298,7 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/announcements/{announcement_id}/comments/{comment_id}/emotes/{emote_id}'
         )
         return response
-    
+
     def delete_announcement_comment_reaction(
             self,
             channel_id: str,
@@ -1223,7 +1318,6 @@ class Client:
             title: str,
             content: str
     ):
-
 
         response = self.request(
             'POST',
@@ -1335,8 +1429,8 @@ class Client:
 
     def get_bot_user_id(self):
         response = self.request('GET', f'{self.base_url}/users/@me')
-        return response.json()['user']['id']
-    
+        return response['user']['id']
+
     def get_user_servers(self, user_id: str):
         response = self.request('GET', f'{self.base_url}users/{user_id}/servers')
         return response
@@ -1344,7 +1438,7 @@ class Client:
     def get_bot_servers(self):
         response = self.request('GET', f'{self.base_url}/users/@me/servers')
         return response
-    
+
     def get_default_channel(self, server_id: str):
         r = self.request('GET', f'{self.base_url}/servers/{server_id}')
         try:
@@ -1353,7 +1447,46 @@ class Client:
         except:
             response = 'No default channel found'
         return response
-    
+
+
+    def create_group(self, server_id: str, name: str, description: str, emote_id: int, is_public: bool):
+        response = self.request('POST', f'{self.base_url}/servers/{server_id}/groups', json={'name': name, 'description': description, 'emoteId': emote_id, 'isPublic': is_public})
+        return response
+
+    def get_groups(self, server_id: str):
+        response = self.request('GET', f'{self.base_url}/servers/{server_id}/groups')
+        return response
+
+
+    def get_group(self, server_id: str, group_id: str):
+        response = self.request('GET', f'{self.base_url}/servers/{server_id}/groups/{group_id}')
+        return response
+
+    def update_group(self, server_id: str, group_id: str, name: str, description: str, emote_id: int, is_public: bool):
+
+        response = self.request('PATCH', f'{self.base_url}/servers/{server_id}/groups/{group_id}', json={'name': name, 'description': description, 'emoteId': emote_id, 'isPublic': is_public})
+        return response
+
+
+    def delete_group(self, server_id: str, group_id: str):
+        response = self.request('DELETE', f'{self.base_url}/servers/{server_id}/groups/{group_id}')
+        return response
+
+
+
+    def update_status(self, content: str, emote_id: int, expires_at: str = None):
+        json = {'content': content, 'emoteId': emote_id}
+        if expires_at:
+            json.update({'expiresAt': expires_at})
+        response = self.request('PUT', f'{self.base_url}/users/@me/status', json=json)
+        return response
+
+
+    def delete_status(self):
+        response = self.request('DELETE', f'{self.base_url}/users/@me/status')
+        return response
+
+
     def member_has_role(self, server_id: str, user_id: str, role_id: int or list, type: str = 'any'):
         r = self.get_member_roles(server_id, user_id)
         if isinstance(role_id, list):
@@ -1371,12 +1504,14 @@ class Client:
             return True
         else:
             return False
-        
+
     def member_is_owner(self, server_id: str, user_id: str):
         r = self.get_server(server_id)
         if r['server']['ownerId'] == user_id:
             return True
         else:
             return False
-        
+
+
+
 

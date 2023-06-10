@@ -11,7 +11,6 @@ from .reaction import Reaction, CalendarReaction, ForumTopicCommentReaction
 from .classes import Data
 
 
-
 class Events:
     def __init__(self, client):
         self._message_create_handlers = []

@@ -130,8 +130,6 @@ on_member_updated
     async def example(data):
         print(f'{data.name} updated their profile!')
 
-Is called when a user's nickname changes
-
 +-----------------------------+------------------------------------------------+
 | Type                        | Description                                    |
 +=============================+================================================+
@@ -142,3 +140,7 @@ Is called when a user's nickname changes
 +-----------------------------+------------------------------------------------+
 | ``data.nickname``           | The new nickname of the user                   |
 +-----------------------------+------------------------------------------------+
+=======
+    @events.on_member_update
+    async def example():
+        print('A member was updated!')

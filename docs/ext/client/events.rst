@@ -165,6 +165,7 @@ Update an event in the specified channel.
 
 
 Here is how to use the ``cancellation`` parameter.
+
 .. code-block:: python
 
     cancellation = {

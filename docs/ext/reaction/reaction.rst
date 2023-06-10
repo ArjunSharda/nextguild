@@ -7,15 +7,15 @@ Normal Reactions
 +-----------------------+----------------------------------------------+
 | Type                  | Description                                  |
 +=======================+==============================================+
-|``reaction.event_data`` |All of the data received                      |
+|``reaction.event_data``|All of the data received                      |
 +-----------------------+----------------------------------------------+
-|``reaction.channel_id`` |The ID of the channel the reaction was sent in|
+|``reaction.channel_id``|The ID of the channel the reaction was sent in|
 +-----------------------+----------------------------------------------+
-|``reaction.user_id``    |The ID of the user that created the reaction  |
+|``reaction.user_id``   |The ID of the user that created the reaction  |
 +-----------------------+----------------------------------------------+
 |``reaction.emote_name``|The name of the reaction that was created     |
 +-----------------------+----------------------------------------------+
-|``reaction.emote_id``   |The ID of the reaction that was created       |
+|``reaction.emote_id``  |The ID of the reaction that was created       |
 +-----------------------+----------------------------------------------+
 |``reaction.emote_url`` |The URL of the reaction that was created      |
 +-----------------------+----------------------------------------------+
@@ -25,21 +25,21 @@ Calendar Reactions
 +-------------------------------+----------------------------------------------+
 | Type                          | Description                                  |
 +===============================+==============================================+
-|``reaction.event_data``         |All of the data received                      |
+|``reaction.event_data``        |All of the data received                      |
 +-------------------------------+----------------------------------------------+
-|``reaction.server_id``          |The ID of the server the reaction was sent in |
+|``reaction.server_id``         |The ID of the server the reaction was sent in |
 +-------------------------------+----------------------------------------------+
-|``reaction.channel_id``         |The ID of the channel the reaction was sent in|
+|``reaction.channel_id``        |The ID of the channel the reaction was sent in|
 +-------------------------------+----------------------------------------------+
-|``reaction.user_id``            |The ID of the user that created the reaction  |
+|``reaction.user_id``           |The ID of the user that created the reaction  |
 +-------------------------------+----------------------------------------------+
 |``reaction.emote_name``        |The name of the reaction that was created     |
 +-------------------------------+----------------------------------------------+
-|``reaction.emote_id``           |The ID of the reaction that was created       |
+|``reaction.emote_id``          |The ID of the reaction that was created       |
 +-------------------------------+----------------------------------------------+
 |``reaction.emote_url``         |The URL of the reaction that was created      |
 +-------------------------------+----------------------------------------------+
-|``reaction.calendar_event_id`` |The ID of the channel the reaction was sent in |
+|``reaction.calendar_event_id`` |The ID of the channel the reaction was sent in|
 +-------------------------------+----------------------------------------------+
 
 Forum Topic Comment Reactions
@@ -47,17 +47,17 @@ Forum Topic Comment Reactions
 +-----------------------------------+------------------------------------------------------+
 | Type                              | Description                                          |
 +===================================+======================================================+
-|``reaction.event_data``             |All of the data received                              |
+|``reaction.event_data``            |All of the data received                              |
 +-----------------------------------+------------------------------------------------------+
-|``reaction.server_id``              |The ID of the server the reaction was sent in         |
+|``reaction.server_id``             |The ID of the server the reaction was sent in         |
 +-----------------------------------+------------------------------------------------------+
-|``reaction.channel_id``             |The ID of the channel the reaction was sent in        |
+|``reaction.channel_id``            |The ID of the channel the reaction was sent in        |
 +-----------------------------------+------------------------------------------------------+
-|``reaction.user_id``                |The ID of the user that created the reaction          |
+|``reaction.user_id``               |The ID of the user that created the reaction          |
 +-----------------------------------+------------------------------------------------------+
 |``reaction.emote_name``            |The name of the reaction that was created             |
 +-----------------------------------+------------------------------------------------------+
-|``reaction.emote_id``               |The ID of the reaction that was created               |
+|``reaction.emote_id``              |The ID of the reaction that was created               |
 +-----------------------------------+------------------------------------------------------+
 |``reaction.emote_url``             |The URL of the reaction that was created              |
 +-----------------------------------+------------------------------------------------------+
