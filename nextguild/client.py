@@ -81,7 +81,7 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/messages/{message_id}',
             json=payload
         )
-        return Data()
+        return Data(response)
 
     def delete_message(
             self,
@@ -105,7 +105,7 @@ class Client:
             'GET',
             f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
         )
-        return Data()
+        return Data(response)
 
     def get_channel_messages(
             self,
