@@ -95,11 +95,11 @@ class Events:
         self._group_create_handlers = []
         self._group_update_handlers = []
         self._group_delete_handlers = []
-        self.on_user_status_create_handlers = []
-        self.on_user_status_delete_handlers = []
-        self.on_role_create_handlers = []
-        self.on_role_update_handlers = []
-        self.on_role_delete_handlers = []
+        self._user_status_create_handlers = []
+        self._user_status_delete_handlers = []
+        self._role_create_handlers = []
+        self._role_update_handlers = []
+        self._role_delete_handlers = []
         self.client = client
     
     def on_bot_membership_created(self, func):
