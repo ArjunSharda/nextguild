@@ -17,10 +17,6 @@ on_list_item_create
 .. code-block:: python
 
     @events.on_list_item_create
-<<<<<<< Updated upstream
-    async def example():
-        print('A list item has been created!')
-=======
     async def example(data):
         notedata = Data(data.note)
         print(f'A list item with content {data.content} has been created! The note attached to it has the content {notedata.content}!')
@@ -63,7 +59,6 @@ Below is the data for the note attached to the list item.
 | ``notedata.mentions``       | The mentions in the note                     |
 +-----------------------------+----------------------------------------------+
 
->>>>>>> Stashed changes
 
 on_list_item_update
 --------
@@ -71,10 +66,6 @@ on_list_item_update
 .. code-block:: python
 
     @events.on_list_item_update
-<<<<<<< Updated upstream
-    async def example():
-        print('A list item has been updated!')
-=======
     async def example(data):
         notedata = Data(data.note)
         print(f'A list item with content {data.content} has been updated! The note attached to it has the content {notedata.content}!')
@@ -129,7 +120,6 @@ Below is the data for the note attached to the list item.
 +-----------------------------+----------------------------------------------+
 | ``notedata.mentions``       | The mentions in the note                     |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_list_item_delete
 --------
@@ -137,10 +127,6 @@ on_list_item_delete
 .. code-block:: python
 
     @events.on_list_item_delete
-<<<<<<< Updated upstream
-    async def example():
-        print('A list item has been deleted!')
-=======
     async def example(data):
         notedata = Data(data.note)
         print(f'A list item with content {data.content} has been deleted! The note attached to it has the content {notedata.content}!')
@@ -183,7 +169,6 @@ Below is the data for the note attached to the list item.
 | ``notedata.mentions``       | The mentions in the note                     |
 +-----------------------------+----------------------------------------------+
 
->>>>>>> Stashed changes
 
 on_list_item_complete
 --------
@@ -191,10 +176,6 @@ on_list_item_complete
 .. code-block:: python
 
     @events.on_list_item_complete
-<<<<<<< Updated upstream
-    async def example():
-        print('A list item has been completed!')
-=======
     async def example(data):
         notedata = Data(data.note)
         print(f'A list item with content {data.content} has been completed! The note attached to it has the content {notedata.content}!')
@@ -236,7 +217,6 @@ Below is the data for the note attached to the list item.
 +-----------------------------+----------------------------------------------+
 | ``notedata.mentions``       | The mentions in the note                     |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_list_item_uncomplete
 --------
@@ -244,10 +224,6 @@ on_list_item_uncomplete
 .. code-block:: python
 
     @events.on_list_item_uncomplete
-<<<<<<< Updated upstream
-    async def example():
-        print('A list item has been uncompleted!')
-=======
     async def example(data):
         notedata = Data(data.note)
         print(f'A list item with content {data.content} has been uncompleted! The note attached to it has the content {notedata.content}!')
@@ -289,4 +265,3 @@ Below is the data for the note attached to the list item.
 +-----------------------------+----------------------------------------------+
 | ``notedata.mentions``       | The mentions in the note                     |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes

@@ -17,10 +17,6 @@ on_calendar_event_create
 .. code-block:: python
 
     @events.on_calendar_event_create
-<<<<<<< Updated upstream
-    async def example():
-        print('A calendar event was created!')
-=======
     async def example(data):
         print(f'A calendar event with name {data.name} was created!')
 
@@ -72,7 +68,6 @@ on_calendar_event_create
 +-----------------------------+----------------------------------------------+
 | ``data.cancellation``       | Cancellation info                            |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_calendar_event_update
 --------
@@ -80,10 +75,6 @@ on_calendar_event_update
 .. code-block:: python
 
     @events.on_calendar_event_update
-<<<<<<< Updated upstream
-    async def example():
-        print('A calendar event was updated!')
-=======
     async def example(data):
         print(f'A calendar event with name {data.name} was updated!')
 
@@ -137,7 +128,6 @@ on_calendar_event_update
 +-----------------------------+----------------------------------------------+
 
 
->>>>>>> Stashed changes
 
 on_calendar_event_delete
 --------
@@ -145,10 +135,6 @@ on_calendar_event_delete
 .. code-block:: python
 
     @events.on_calendar_event_delete
-<<<<<<< Updated upstream
-    async def example():
-        print('A calendar event was deleted!')
-=======
     async def example(data):
         print(f'A calendar event with name {data.name} was deleted!')
 
@@ -200,7 +186,6 @@ on_calendar_event_delete
 +-----------------------------+----------------------------------------------+
 | ``data.cancellation``       | Cancellation info                            |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_calendar_event_comment_create
 --------
@@ -208,10 +193,6 @@ on_calendar_event_comment_create
 .. code-block:: python
 
     @events.on_calendar_event_comment_create
-<<<<<<< Updated upstream
-    async def example():
-        print('A calendar event comment was created!')
-=======
     async def example(data):
         print(f'A calendar event comment was created by {data.created_by}!')
 
@@ -234,7 +215,6 @@ on_calendar_event_comment_create
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions of the comment                  |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_calendar_event_comment_update
 --------
@@ -242,10 +222,6 @@ on_calendar_event_comment_update
 .. code-block:: python
 
     @events.on_calendar_event_comment_update
-<<<<<<< Updated upstream
-    async def example():
-        print('A calendar event comment was updated!')
-=======
     async def example(data):
         print(f'A calendar event comment was updated by {data.created_by}!')
 
@@ -270,7 +246,6 @@ on_calendar_event_comment_update
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions of the comment                  |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_calendar_event_comment_delete
 --------
@@ -281,8 +256,6 @@ on_calendar_event_comment_delete
     async def example():
         print('A calendar event comment was deleted!')
 
-<<<<<<< Updated upstream
-=======
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
@@ -303,17 +276,12 @@ on_calendar_event_comment_delete
 | ``data.mentions``           | The mentions of the comment                  |
 +-----------------------------+----------------------------------------------+
 
->>>>>>> Stashed changes
 on_calendar_event_rsvp_update
 --------
 
 .. code-block:: python
 
     @events.on_calendar_event_rsvp_update
-<<<<<<< Updated upstream
-    async def example():
-        print('A calendar event rsvp was updated!')
-=======
     async def example(data):
         print(f'A calendar event rsvp for user {data.user_id} was updated!')
 
@@ -338,7 +306,6 @@ on_calendar_event_rsvp_update
 +-----------------------------+----------------------------------------------+
 | ``data.updated_by``         | The user who updated the RSVP                |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_calendar_event_rsvp_many_update
 --------
@@ -346,10 +313,6 @@ on_calendar_event_rsvp_many_update
 .. code-block:: python
 
     @events.on_calendar_event_rsvp_many_update
-<<<<<<< Updated upstream
-    async def example():
-        print('A calendar event rsvp was updated!')
-=======
     async def example(data):
         for n in range(len(data.calendar_event_rsvps)):
             event = Data(data.calendar_event_rsvps[n])
@@ -362,7 +325,6 @@ on_calendar_event_rsvp_many_update
 +------------------------------+----------------------------------------------+
 | ``data.calendar_event_rsvps``| A list of calendar event rsvps               |
 +------------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_calendar_event_rsvp_delete
 --------
@@ -370,10 +332,6 @@ on_calendar_event_rsvp_delete
 .. code-block:: python
 
     @events.on_calendar_event_rsvp_delete
-<<<<<<< Updated upstream
-    async def example():
-        print('A calendar event rsvp was deleted!')
-=======
     async def example(data):
         print(f'A calendar event rsvp for user {data.user_id} was deleted!')
 
@@ -398,7 +356,6 @@ on_calendar_event_rsvp_delete
 +-----------------------------+----------------------------------------------+
 | ``data.updated_by``         | The user who updated the RSVP                |  
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_calendar_event_series_create
 --------
@@ -406,10 +363,6 @@ on_calendar_event_series_create
 .. code-block:: python
 
     @events.on_calendar_event_series_create
-<<<<<<< Updated upstream
-    async def example():
-        print('A calendar event series was created!')
-=======
     async def example(data):
         print(f'A calendar event series was created with the id {data.id}!')
 
@@ -424,7 +377,6 @@ on_calendar_event_series_create
 +-----------------------------+----------------------------------------------+
 | ``data.event_id``           | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_calendar_event_series_delete
 --------
@@ -432,10 +384,6 @@ on_calendar_event_series_delete
 .. code-block:: python
 
     @events.on_calendar_event_series_delete
-<<<<<<< Updated upstream
-    async def example():
-        print('A calendar event series was deleted!')
-=======
     async def example(data):
         print(f'A calendar event series with the id {data.id} was deleted!')
 
@@ -450,4 +398,3 @@ on_calendar_event_series_delete
 +-----------------------------+----------------------------------------------+
 | ``data.event_id``           | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes

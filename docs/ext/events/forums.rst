@@ -17,10 +17,6 @@ on_forum_topic_create
 .. code-block:: python
 
     @events.on_forum_topic_create
-<<<<<<< Updated upstream
-    async def example():
-        print('A forum topic has been created!')
-=======
     async def example(data):
         print(f'A forum topic with the name {data.title} been created!')
 
@@ -43,7 +39,6 @@ on_forum_topic_create
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_forum_topic_update
 --------
@@ -51,10 +46,6 @@ on_forum_topic_update
 .. code-block:: python
 
     @events.on_forum_topic_update
-<<<<<<< Updated upstream
-    async def example():
-        print('A forum topic has been updated!')
-=======
     async def example(data):
         print(f'A forum topic with the name {data.title} been updated!')
 
@@ -85,7 +76,6 @@ on_forum_topic_update
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_forum_topic_delete
 --------
@@ -93,10 +83,6 @@ on_forum_topic_delete
 .. code-block:: python
 
     @events.on_forum_topic_delete
-<<<<<<< Updated upstream
-    async def example():
-        print('A forum topic has been deleted!')
-=======
     async def example(data):
         print(f'A forum topic with the name {data.title} been deleted!')
 
@@ -127,7 +113,6 @@ on_forum_topic_delete
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_forum_topic_comment_create
 --------
@@ -135,10 +120,6 @@ on_forum_topic_comment_create
 .. code-block:: python
 
     @events.on_forum_topic_comment_create
-<<<<<<< Updated upstream
-    async def example():
-        print('A comment has been created on a forum topic!')
-=======
     async def example(data):
         print(f'A comment with the content {data.content} has been created on a forum topic!')
 
@@ -161,7 +142,6 @@ on_forum_topic_comment_create
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the comment                  |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_forum_topic_comment_update
 --------
@@ -169,10 +149,6 @@ on_forum_topic_comment_update
 .. code-block:: python
 
     @events.on_forum_topic_comment_update
-<<<<<<< Updated upstream
-    async def example():
-        print('A comment has been updated on a forum topic!')
-=======
     async def example(data):
         print(f'A comment with the content {data.content} has been updated on a forum topic!')
 
@@ -197,7 +173,6 @@ on_forum_topic_comment_update
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the comment                  |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_forum_topic_comment_delete
 --------
@@ -205,10 +180,6 @@ on_forum_topic_comment_delete
 .. code-block:: python
 
     @events.on_forum_topic_comment_delete
-<<<<<<< Updated upstream
-    async def example():
-        print('A comment has been deleted on a forum topic!')
-=======
     async def example(data):
         print(f'A comment with the content {data.content} has been deleted on a forum topic!')
 
@@ -231,7 +202,6 @@ on_forum_topic_comment_delete
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the comment                  |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_forum_topic_pin
 --------
@@ -239,10 +209,6 @@ on_forum_topic_pin
 .. code-block:: python
 
     @events.on_forum_topic_pin
-<<<<<<< Updated upstream
-    async def example():
-        print('A forum topic has been pinned!')
-=======
     async def example(data):
         print(f'A forum topic with the name {data.title} been pinned!')
 
@@ -271,7 +237,6 @@ on_forum_topic_pin
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_forum_topic_unpin
 --------
@@ -279,10 +244,6 @@ on_forum_topic_unpin
 .. code-block:: python
 
     @events.on_forum_topic_unpin
-<<<<<<< Updated upstream
-    async def example():
-        print('A forum topic has been unpinned!')
-=======
     async def example(data):
         print(f'A forum topic with the name {data.title} been unpinned!')
 
@@ -311,7 +272,6 @@ on_forum_topic_unpin
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 on_forum_topic_lock
 --------
@@ -319,10 +279,6 @@ on_forum_topic_lock
 .. code-block:: python
 
     @events.on_forum_topic_lock
-<<<<<<< Updated upstream
-    async def example():
-        print('A forum topic has been locked!')
-=======
     async def example(data):
         print(f'A forum topic with the name {data.title} been locked!')
 
@@ -352,7 +308,6 @@ on_forum_topic_lock
 | ``data.mentions``           | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
 
->>>>>>> Stashed changes
 
 on_forum_topic_unlock
 --------
@@ -360,10 +315,6 @@ on_forum_topic_unlock
 .. code-block:: python
 
     @events.on_forum_topic_unlock
-<<<<<<< Updated upstream
-    async def example():
-        print('A forum topic has been unlocked!')
-=======
     async def example(data):
         print(f'A forum topic with the name {data.title} been unlocked!')
 
@@ -392,7 +343,6 @@ on_forum_topic_unlock
 +-----------------------------+----------------------------------------------+
 | ``data.mentions``           | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 
 

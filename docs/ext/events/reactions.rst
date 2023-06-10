@@ -14,10 +14,6 @@ on_channel_message_reaction_create
 
 .. code-block:: python
     @events.on_channel_message_reaction_create
-<<<<<<< Updated upstream
-    async def example():
-        print('A reaction was created on a channel message!')
-=======
     async def example(data):
         print(f'A reaction with id {data.id} was created on a channel message!')
 
@@ -44,7 +40,6 @@ on_channel_message_reaction_create
 | ``data.emote_server_id``    | The id of the server the emote was           |	
 |                             | created in.                                  |
 +-----------------------------+----------------------------------------------+
->>>>>>> Stashed changes
 
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
