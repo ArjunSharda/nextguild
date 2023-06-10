@@ -23,22 +23,22 @@ on_announcement_create
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the announcement                   |
+| ``data.id``                   | The ID of the announcement                   |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the announcement was created        |
+| ``data.created_at``           | The time the announcement was created        |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The ID of the user who created the           |
+| ``data.created_by``           | The ID of the user who created the           |
 |                             | announcement                                 |
 +-----------------------------+----------------------------------------------+
-| `data.title`                | The title of the announcement                |
+| ``data.title``                | The title of the announcement                |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the announcement              |
+| ``data.content``              | The content of the announcement              |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the announcement             |
+| ``data.mentions``             | The mentions in the announcement             |
 +-----------------------------+----------------------------------------------+
 
 on_announcement_update
@@ -53,22 +53,22 @@ on_announcement_update
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the announcement                   |
+| ``data.id``                   | The ID of the announcement                   |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the announcement was created        |
+| ``data.created_at``           | The time the announcement was created        |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The ID of the user who created the           |
+| ``data.created_by``           | The ID of the user who created the           |
 |                             | announcement                                 |
 +-----------------------------+----------------------------------------------+
-| `data.title`                | The title of the announcement                |
+| ``data.title``                | The title of the announcement                |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the announcement              |
+| ``data.content``              | The content of the announcement              |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the announcement             |
+| ``data.mentions``             | The mentions in the announcement             |
 +-----------------------------+----------------------------------------------+
 
 on_announcement_delete
@@ -83,22 +83,22 @@ on_announcement_delete
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the announcement                   |
+| ``data.id``                   | The ID of the announcement                   |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the announcement was created        |
+| ``data.created_at``           | The time the announcement was created        |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The ID of the user who created the           |
+| ``data.created_by``           | The ID of the user who created the           |
 |                             | announcement                                 |
 +-----------------------------+----------------------------------------------+
-| `data.title`                | The title of the announcement                |
+| ``data.title``                | The title of the announcement                |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the announcement              |
+| ``data.content``              | The content of the announcement              |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the announcement             |
+| ``data.mentions``             | The mentions in the announcement             |
 +-----------------------------+----------------------------------------------+
 
 on_announcement_comment_create
@@ -113,23 +113,23 @@ on_announcement_comment_create
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the announcement comment           |
+| ``data.id``                   | The ID of the announcement comment           |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the announcement comment      |
+| ``data.content``              | The content of the announcement comment      |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the announcement comment was        |
+| ``data.created_at``           | The time the announcement comment was        |
 |                             | created                                      |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The ID of the user who created the           |
+| ``data.created_by``           | The ID of the user who created the           |
 |                             | announcement comment                         |
 +-----------------------------+----------------------------------------------+
-| `data.announcement_id`      | The ID of the announcement                   |
+| ``data.announcement_id``      | The ID of the announcement                   |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the announcement comment     |
+| ``data.mentions``             | The mentions in the announcement comment     |
 +-----------------------------+----------------------------------------------+
 
 on_announcement_comment_update
@@ -144,26 +144,26 @@ on_announcement_comment_update
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the announcement comment           |
+| ``data.id``                   | The ID of the announcement comment           |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the announcement comment      |
+| ``data.content``              | The content of the announcement comment      |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the announcement comment was        |
+| ``data.created_at``           | The time the announcement comment was        |
 |                             | created                                      |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The ID of the user who created the           |
+| ``data.created_by``           | The ID of the user who created the           |
 |                             | announcement comment                         |
 +-----------------------------+----------------------------------------------+
-| `data.updated_at`           | The time the announcement comment was        |
+| ``data.updated_at``           | The time the announcement comment was        |
 |                             | updated                                      |
 +-----------------------------+----------------------------------------------+
-| `data.announcement_id`      | The ID of the announcement                   |
+| ``data.announcement_id``      | The ID of the announcement                   |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the announcement comment     |
+| ``data.mentions``             | The mentions in the announcement comment     |
 +-----------------------------+----------------------------------------------+
 
 on_announcement_comment_delete
@@ -178,21 +178,21 @@ on_announcement_comment_delete
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the announcement comment           |
+| ``data.id``                   | The ID of the announcement comment           |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the announcement comment      |
+| ``data.content``              | The content of the announcement comment      |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the announcement comment was        |
+| ``data.created_at``           | The time the announcement comment was        |
 |                             | created                                      |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The ID of the user who created the           |
+| ``data.created_by``           | The ID of the user who created the           |
 |                             | announcement comment                         |
 +-----------------------------+----------------------------------------------+
-| `data.announcement_id`      | The ID of the announcement                   |
+| ``data.announcement_id``      | The ID of the announcement                   |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the announcement comment     |
+| ``data.mentions``             | The mentions in the announcement comment     |
 +-----------------------------+----------------------------------------------+

@@ -23,50 +23,50 @@ on_calendar_event_create
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the calendar event                 |
+| ``data.id``                   | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.name`                 | The name of the calendar event               |
+| ``data.name``                 | The name of the calendar event               |
 +-----------------------------+----------------------------------------------+
-| `data.description`          | The description of the calendar event        |
+| ``data.description``          | The description of the calendar event        |
 +-----------------------------+----------------------------------------------+
-| `data.location`             | The location of the calendar event           |
+| ``data.location``             | The location of the calendar event           |
 +-----------------------------+----------------------------------------------+
-| `data.url`                  | The URL of the calendar event                |
+| ``data.url``                  | The URL of the calendar event                |
 +-----------------------------+----------------------------------------------+
-| `data.color`                | The color of the calendar event              |
+| ``data.color``                | The color of the calendar event              |
 +-----------------------------+----------------------------------------------+
-| `data.repeats`              | If the calendar event repeats itself         |
+| ``data.repeats``              | If the calendar event repeats itself         |
 +-----------------------------+----------------------------------------------+
-| `data.series_id`            | The ID of the calendar event series          |
+| ``data.series_id``            | The ID of the calendar event series          |
 +-----------------------------+----------------------------------------------+
-| `data.role_ids`             | The IDs of the roles the event is restricted |
+| ``data.role_ids``             | The IDs of the roles the event is restricted |
 |                             | to                                           |
 +-----------------------------+----------------------------------------------+
-| `data.rsvp_disabled`        | If the RSVP is disabled                      |
+| ``data.rsvp_disabled``        | If the RSVP is disabled                      |
 +-----------------------------+----------------------------------------------+
-| `data.is_all_day`           | If the event is all day                      |
+| ``data.is_all_day``           | If the event is all day                      |
 +-----------------------------+----------------------------------------------+
-| `data.rsvp_limit`           | The RSVP limit of the event                  |
+| ``data.rsvp_limit``           | The RSVP limit of the event                  |
 +-----------------------------+----------------------------------------------+
-| `data.autofill_waitlist`    | If the waitlist will autofill                |
+| ``data.autofill_waitlist``    | If the waitlist will autofill                |
 +-----------------------------+----------------------------------------------+
-| `data.starts_at`            | The start time of the event                  |
+| ``data.starts_at``            | The start time of the event                  |
 +-----------------------------+----------------------------------------------+
-| `data.duration`             | The duration of the event                    |
+| ``data.duration``             | The duration of the event                    |
 +-----------------------------+----------------------------------------------+
-| `data.is_private`           | If the event is private                      |
+| ``data.is_private``           | If the event is private                      |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions of the event                    |
+| ``data.mentions``             | The mentions of the event                    |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the event was created               |
+| ``data.created_at``           | The time the event was created               |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the event               |
+| ``data.created_by``           | The user who created the event               |
 +-----------------------------+----------------------------------------------+
-| `data.cancellation`         | Cancellation info                            |
+| ``data.cancellation``         | Cancellation info                            |
 +-----------------------------+----------------------------------------------+
 
 on_calendar_event_update
@@ -81,50 +81,50 @@ on_calendar_event_update
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the calendar event                 |
+| ``data.id``                   | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.name`                 | The name of the calendar event               |
+| ``data.name``                 | The name of the calendar event               |
 +-----------------------------+----------------------------------------------+
-| `data.description`          | The description of the calendar event        |
+| ``data.description``          | The description of the calendar event        |
 +-----------------------------+----------------------------------------------+
-| `data.location`             | The location of the calendar event           |
+| ``data.location``             | The location of the calendar event           |
 +-----------------------------+----------------------------------------------+
-| `data.url`                  | The URL of the calendar event                |
+| ``data.url``                  | The URL of the calendar event                |
 +-----------------------------+----------------------------------------------+
-| `data.color`                | The color of the calendar event              |
+| ``data.color``                | The color of the calendar event              |
 +-----------------------------+----------------------------------------------+
-| `data.repeats`              | If the calendar event repeats itself         |
+| ``data.repeats``              | If the calendar event repeats itself         |
 +-----------------------------+----------------------------------------------+
-| `data.series_id`            | The ID of the calendar event series          |
+| ``data.series_id``            | The ID of the calendar event series          |
 +-----------------------------+----------------------------------------------+
-| `data.role_ids`             | The IDs of the roles the event is restricted |
+| ``data.role_ids``             | The IDs of the roles the event is restricted |
 |                             | to                                           |
 +-----------------------------+----------------------------------------------+
-| `data.rsvp_disabled`        | If the RSVP is disabled                      |
+| ``data.rsvp_disabled``        | If the RSVP is disabled                      |
 +-----------------------------+----------------------------------------------+
-| `data.is_all_day`           | If the event is all day                      |
+| ``data.is_all_day``           | If the event is all day                      |
 +-----------------------------+----------------------------------------------+
-| `data.rsvp_limit`           | The RSVP limit of the event                  |
+| ``data.rsvp_limit``           | The RSVP limit of the event                  |
 +-----------------------------+----------------------------------------------+
-| `data.autofill_waitlist`    | If the waitlist will autofill                |
+| ``data.autofill_waitlist``    | If the waitlist will autofill                |
 +-----------------------------+----------------------------------------------+
-| `data.starts_at`            | The start time of the event                  |
+| ``data.starts_at``            | The start time of the event                  |
 +-----------------------------+----------------------------------------------+
-| `data.duration`             | The duration of the event                    |
+| ``data.duration``             | The duration of the event                    |
 +-----------------------------+----------------------------------------------+
-| `data.is_private`           | If the event is private                      |
+| ``data.is_private``           | If the event is private                      |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions of the event                    |
+| ``data.mentions``             | The mentions of the event                    |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the event was created               |
+| ``data.created_at``           | The time the event was created               |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the event               |
+| ``data.created_by``           | The user who created the event               |
 +-----------------------------+----------------------------------------------+
-| `data.cancellation`         | Cancellation info                            |
+| ``data.cancellation``         | Cancellation info                            |
 +-----------------------------+----------------------------------------------+
 
 
@@ -141,50 +141,50 @@ on_calendar_event_delete
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the calendar event                 |
+| ``data.id``                   | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.name`                 | The name of the calendar event               |
+| ``data.name``                 | The name of the calendar event               |
 +-----------------------------+----------------------------------------------+
-| `data.description`          | The description of the calendar event        |
+| ``data.description``          | The description of the calendar event        |
 +-----------------------------+----------------------------------------------+
-| `data.location`             | The location of the calendar event           |
+| ``data.location``             | The location of the calendar event           |
 +-----------------------------+----------------------------------------------+
-| `data.url`                  | The URL of the calendar event                |
+| ``data.url``                  | The URL of the calendar event                |
 +-----------------------------+----------------------------------------------+
-| `data.color`                | The color of the calendar event              |
+| ``data.color``                | The color of the calendar event              |
 +-----------------------------+----------------------------------------------+
-| `data.repeats`              | If the calendar event repeats itself         |
+| ``data.repeats``              | If the calendar event repeats itself         |
 +-----------------------------+----------------------------------------------+
-| `data.series_id`            | The ID of the calendar event series          |
+| ``data.series_id``            | The ID of the calendar event series          |
 +-----------------------------+----------------------------------------------+
-| `data.role_ids`             | The IDs of the roles the event is restricted |
+| ``data.role_ids``             | The IDs of the roles the event is restricted |
 |                             | to                                           |
 +-----------------------------+----------------------------------------------+
-| `data.rsvp_disabled`        | If the RSVP is disabled                      |
+| ``data.rsvp_disabled``        | If the RSVP is disabled                      |
 +-----------------------------+----------------------------------------------+
-| `data.is_all_day`           | If the event is all day                      |
+| ``data.is_all_day``           | If the event is all day                      |
 +-----------------------------+----------------------------------------------+
-| `data.rsvp_limit`           | The RSVP limit of the event                  |
+| ``data.rsvp_limit``           | The RSVP limit of the event                  |
 +-----------------------------+----------------------------------------------+
-| `data.autofill_waitlist`    | If the waitlist will autofill                |
+| ``data.autofill_waitlist``    | If the waitlist will autofill                |
 +-----------------------------+----------------------------------------------+
-| `data.starts_at`            | The start time of the event                  |
+| ``data.starts_at``            | The start time of the event                  |
 +-----------------------------+----------------------------------------------+
-| `data.duration`             | The duration of the event                    |
+| ``data.duration``             | The duration of the event                    |
 +-----------------------------+----------------------------------------------+
-| `data.is_private`           | If the event is private                      |
+| ``data.is_private``           | If the event is private                      |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions of the event                    |
+| ``data.mentions``             | The mentions of the event                    |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the event was created               |
+| ``data.created_at``           | The time the event was created               |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the event               |
+| ``data.created_by``           | The user who created the event               |
 +-----------------------------+----------------------------------------------+
-| `data.cancellation`         | Cancellation info                            |
+| ``data.cancellation``         | Cancellation info                            |
 +-----------------------------+----------------------------------------------+
 
 on_calendar_event_comment_create
@@ -199,21 +199,21 @@ on_calendar_event_comment_create
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the calendar comment               |
+| ``data.id``                   | The ID of the calendar comment               |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the comment                   |
+| ``data.content``              | The content of the comment                   |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the comment was created             |
+| ``data.created_at``           | The time the comment was created             |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the comment             |
+| ``data.created_by``           | The user who created the comment             |
 +-----------------------------+----------------------------------------------+
-| `data.event_id`             | The ID of the calendar event                 |
+| ``data.event_id``             | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions of the comment                  |
+| ``data.mentions``             | The mentions of the comment                  |
 +-----------------------------+----------------------------------------------+
 
 on_calendar_event_comment_update
@@ -228,23 +228,23 @@ on_calendar_event_comment_update
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the calendar comment               |
+| ``data.id``                   | The ID of the calendar comment               |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the comment                   |
+| ``data.content``              | The content of the comment                   |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the comment was created             |
+| ``data.created_at``           | The time the comment was created             |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the comment             |
+| ``data.created_by``           | The user who created the comment             |
 +-----------------------------+----------------------------------------------+
-| `data.updated_at`           | The time the comment was updated             |
+| ``data.updated_at``           | The time the comment was updated             |
 +-----------------------------+----------------------------------------------+
-| `data.event_id`             | The ID of the calendar event                 |
+| ``data.event_id``             | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions of the comment                  |
+| ``data.mentions``             | The mentions of the comment                  |
 +-----------------------------+----------------------------------------------+
 
 on_calendar_event_comment_delete
@@ -259,21 +259,21 @@ on_calendar_event_comment_delete
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the calendar comment               |
+| ``data.id``                   | The ID of the calendar comment               |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the comment                   |
+| ``data.content``              | The content of the comment                   |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the comment was created             |
+| ``data.created_at``           | The time the comment was created             |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the comment             |
+| ``data.created_by``           | The user who created the comment             |
 +-----------------------------+----------------------------------------------+
-| `data.event_id`             | The ID of the calendar event                 |
+| ``data.event_id``             | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions of the comment                  |
+| ``data.mentions``             | The mentions of the comment                  |
 +-----------------------------+----------------------------------------------+
 
 on_calendar_event_rsvp_update
@@ -288,23 +288,23 @@ on_calendar_event_rsvp_update
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the calendar event                 |
+| ``data.id``                   | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.user_id`              | The ID of the user                           |
+| ``data.user_id``              | The ID of the user                           |
 +-----------------------------+----------------------------------------------+
-| `data.status`               | The status of the RSVP                       |
+| ``data.status``               | The status of the RSVP                       |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the RSVP                |
+| ``data.created_by``           | The user who created the RSVP                |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the RSVP was created                |
+| ``data.created_at``           | The time the RSVP was created                |
 +-----------------------------+----------------------------------------------+
-| `data.updated_at`           | The time the RSVP was updated                |
+| ``data.updated_at``           | The time the RSVP was updated                |
 +-----------------------------+----------------------------------------------+
-| `data.updated_by`           | The user who updated the RSVP                |
+| ``data.updated_by``           | The user who updated the RSVP                |
 +-----------------------------+----------------------------------------------+
 
 on_calendar_event_rsvp_many_update
@@ -324,9 +324,9 @@ This way of using the eventdata is only a recommendation, you may use it however
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.calendar_event_rsvps` | A list of calendar event rsvps               |
+| ``data.calendar_event_rsvps`` | A list of calendar event rsvps               |
 +-----------------------------+----------------------------------------------+
 
 on_calendar_event_rsvp_delete
@@ -341,23 +341,23 @@ on_calendar_event_rsvp_delete
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the calendar event                 |
+| ``data.id``                   | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.user_id`              | The ID of the user                           |
+| ``data.user_id``              | The ID of the user                           |
 +-----------------------------+----------------------------------------------+
-| `data.status`               | The status of the RSVP                       |
+| ``data.status``               | The status of the RSVP                       |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the RSVP                |
+| ``data.created_by``           | The user who created the RSVP                |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the RSVP was created                |
+| ``data.created_at``           | The time the RSVP was created                |
 +-----------------------------+----------------------------------------------+
-| `data.updated_at`           | The time the RSVP was updated                |
+| ``data.updated_at``           | The time the RSVP was updated                |
 +-----------------------------+----------------------------------------------+
-| `data.updated_by`           | The user who updated the RSVP                |  
+| ``data.updated_by``           | The user who updated the RSVP                |  
 +-----------------------------+----------------------------------------------+
 
 on_calendar_event_series_create
@@ -372,13 +372,13 @@ on_calendar_event_series_create
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the calendar event series          |
+| ``data.id``                   | The ID of the calendar event series          |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.event_id`             | The ID of the calendar event                 |
+| ``data.event_id``             | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+
 
 on_calendar_event_series_delete
@@ -393,11 +393,11 @@ on_calendar_event_series_delete
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the calendar event series          |
+| ``data.id``                   | The ID of the calendar event series          |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.event_id`             | The ID of the calendar event                 |
+| ``data.event_id``             | The ID of the calendar event                 |
 +-----------------------------+----------------------------------------------+

@@ -23,13 +23,13 @@ on_user_status_create
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.expires_at`           | The time when the status expires.            |
+| ``data.expires_at``           | The time when the status expires.            |
 +-----------------------------+----------------------------------------------+
-| `data.user_id`              | The id of the user who changed their status. |
+| ``data.user_id``              | The id of the user who changed their status. |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the status.                   |
+| ``data.content``              | The content of the status.                   |
 +-----------------------------+----------------------------------------------+
-| `data.emote_id`             | The id of the emote used in the status.      |
+| ``data.emote_id``             | The id of the emote used in the status.      |
 +-----------------------------+----------------------------------------------+
 
 on_user_status_delete
@@ -44,9 +44,9 @@ on_user_status_delete
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.user_id`              | The id of the user who deleted their status. |
+| ``data.user_id``              | The id of the user who deleted their status. |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the status.                   |
+| ``data.content``              | The content of the status.                   |
 +-----------------------------+----------------------------------------------+
-| `data.emote_id`             | The id of the emote used in the status.      |
+| ``data.emote_id``             | The id of the emote used in the status.      |
 +-----------------------------+----------------------------------------------+

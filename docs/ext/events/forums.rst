@@ -23,21 +23,21 @@ on_forum_topic_create
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the forum topic                    |
+| ``data.id``                   | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.title`                | The title of the forum topic                 |
+| ``data.title``                | The title of the forum topic                 |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the forum topic was created         |
+| ``data.created_at``           | The time the forum topic was created         |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the forum topic         |
+| ``data.created_by``           | The user who created the forum topic         |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the forum topic               |
+| ``data.content``              | The content of the forum topic               |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the forum topic              |
+| ``data.mentions``             | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
 
 on_forum_topic_update
@@ -52,29 +52,29 @@ on_forum_topic_update
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the forum topic                    |
+| ``data.id``                   | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.title`                | The title of the forum topic                 |
+| ``data.title``                | The title of the forum topic                 |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the forum topic was created         |
+| ``data.created_at``           | The time the forum topic was created         |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the forum topic         |
+| ``data.created_by``           | The user who created the forum topic         |
 +-----------------------------+----------------------------------------------+
-| `data.updated_at`           | The time the forum topic was updated         |
+| ``data.updated_at``           | The time the forum topic was updated         |
 +-----------------------------+----------------------------------------------+
-| `data.bumped_at`            | The time the forum topic was bumped          |
+| ``data.bumped_at``            | The time the forum topic was bumped          |
 +-----------------------------+----------------------------------------------+
-| `data.is_pinned`            | Whether the forum topic is pinned            |
+| ``data.is_pinned``            | Whether the forum topic is pinned            |
 +-----------------------------+----------------------------------------------+
-| `data.is_locked`            | Whether the forum topic is locked            |
+| ``data.is_locked``            | Whether the forum topic is locked            |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the forum topic               |
+| ``data.content``              | The content of the forum topic               |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the forum topic              |
+| ``data.mentions``             | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
 
 on_forum_topic_delete
@@ -89,29 +89,29 @@ on_forum_topic_delete
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the forum topic                    |
+| ``data.id``                   | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.title`                | The title of the forum topic                 |
+| ``data.title``                | The title of the forum topic                 |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the forum topic was created         |
+| ``data.created_at``           | The time the forum topic was created         |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the forum topic         |
+| ``data.created_by``           | The user who created the forum topic         |
 +-----------------------------+----------------------------------------------+
-| `data.updated_at`           | The time the forum topic was updated         |
+| ``data.updated_at``           | The time the forum topic was updated         |
 +-----------------------------+----------------------------------------------+
-| `data.bumped_at`            | The time the forum topic was bumped          |
+| ``data.bumped_at``            | The time the forum topic was bumped          |
 +-----------------------------+----------------------------------------------+
-| `data.is_pinned`            | Whether the forum topic is pinned            |
+| ``data.is_pinned``            | Whether the forum topic is pinned            |
 +-----------------------------+----------------------------------------------+
-| `data.is_locked`            | Whether the forum topic is locked            |
+| ``data.is_locked``            | Whether the forum topic is locked            |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the forum topic               |
+| ``data.content``              | The content of the forum topic               |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the forum topic              |
+| ``data.mentions``             | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
 
 on_forum_topic_comment_create
@@ -126,21 +126,21 @@ on_forum_topic_comment_create
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the forum topic                    |
+| ``data.id``                   | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the comment                   |
+| ``data.content``              | The content of the comment                   |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the comment was created             |
+| ``data.created_at``           | The time the comment was created             |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the comment             |
+| ``data.created_by``           | The user who created the comment             |
 +-----------------------------+----------------------------------------------+
-| `data.topic_id`             | The ID of the forum topic                    |
+| ``data.topic_id``             | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the comment                  |
+| ``data.mentions``             | The mentions in the comment                  |
 +-----------------------------+----------------------------------------------+
 
 on_forum_topic_comment_update
@@ -155,23 +155,23 @@ on_forum_topic_comment_update
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the forum topic                    |
+| ``data.id``                   | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the comment                   |
+| ``data.content``              | The content of the comment                   |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the comment was created             |
+| ``data.created_at``           | The time the comment was created             |
 +-----------------------------+----------------------------------------------+
-| `data.updated_at`           | The time the comment was updated             |
+| ``data.updated_at``           | The time the comment was updated             |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the comment             |
+| ``data.created_by``           | The user who created the comment             |
 +-----------------------------+----------------------------------------------+
-| `data.topic_id`             | The ID of the forum topic                    |
+| ``data.topic_id``             | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the comment                  |
+| ``data.mentions``             | The mentions in the comment                  |
 +-----------------------------+----------------------------------------------+
 
 on_forum_topic_comment_delete
@@ -186,21 +186,21 @@ on_forum_topic_comment_delete
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the forum topic                    |
+| ``data.id``                   | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the comment                   |
+| ``data.content``              | The content of the comment                   |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the comment was created             |
+| ``data.created_at``           | The time the comment was created             |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the comment             |
+| ``data.created_by``           | The user who created the comment             |
 +-----------------------------+----------------------------------------------+
-| `data.topic_id`             | The ID of the forum topic                    |
+| ``data.topic_id``             | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the comment                  |
+| ``data.mentions``             | The mentions in the comment                  |
 +-----------------------------+----------------------------------------------+
 
 on_forum_topic_pin
@@ -215,27 +215,27 @@ on_forum_topic_pin
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the forum topic                    |
+| ``data.id``                   | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.title`                | The title of the forum topic                 |
+| ``data.title``                | The title of the forum topic                 |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the forum topic was created         |
+| ``data.created_at``           | The time the forum topic was created         |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the forum topic         |
+| ``data.created_by``           | The user who created the forum topic         |
 +-----------------------------+----------------------------------------------+
-| `data.bumped_at`            | The time the forum topic was bumped          |
+| ``data.bumped_at``            | The time the forum topic was bumped          |
 +-----------------------------+----------------------------------------------+
-| `data.is_pinned`            | Whether the forum topic is pinned            |
+| ``data.is_pinned``            | Whether the forum topic is pinned            |
 +-----------------------------+----------------------------------------------+
-| `data.is_locked`            | Whether the forum topic is locked            |
+| ``data.is_locked``            | Whether the forum topic is locked            |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the forum topic               |
+| ``data.content``              | The content of the forum topic               |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the forum topic              |
+| ``data.mentions``             | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
 
 on_forum_topic_unpin
@@ -250,27 +250,27 @@ on_forum_topic_unpin
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the forum topic                    |
+| ``data.id``                   | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.title`                | The title of the forum topic                 |
+| ``data.title``                | The title of the forum topic                 |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the forum topic was created         |
+| ``data.created_at``           | The time the forum topic was created         |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the forum topic         |
+| ``data.created_by``           | The user who created the forum topic         |
 +-----------------------------+----------------------------------------------+
-| `data.bumped_at`            | The time the forum topic was bumped          |
+| ``data.bumped_at``            | The time the forum topic was bumped          |
 +-----------------------------+----------------------------------------------+
-| `data.is_pinned`            | Whether the forum topic is pinned            |
+| ``data.is_pinned``            | Whether the forum topic is pinned            |
 +-----------------------------+----------------------------------------------+
-| `data.is_locked`            | Whether the forum topic is locked            |
+| ``data.is_locked``            | Whether the forum topic is locked            |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the forum topic               |
+| ``data.content``              | The content of the forum topic               |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the forum topic              |
+| ``data.mentions``             | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
 
 on_forum_topic_lock
@@ -285,27 +285,27 @@ on_forum_topic_lock
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the forum topic                    |
+| ``data.id``                   | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.title`                | The title of the forum topic                 |
+| ``data.title``                | The title of the forum topic                 |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the forum topic was created         |
+| ``data.created_at``           | The time the forum topic was created         |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the forum topic         |
+| ``data.created_by``           | The user who created the forum topic         |
 +-----------------------------+----------------------------------------------+
-| `data.bumped_at`            | The time the forum topic was bumped          |
+| ``data.bumped_at``            | The time the forum topic was bumped          |
 +-----------------------------+----------------------------------------------+
-| `data.is_pinned`            | Whether the forum topic is pinned            |
+| ``data.is_pinned``            | Whether the forum topic is pinned            |
 +-----------------------------+----------------------------------------------+
-| `data.is_locked`            | Whether the forum topic is locked            |
+| ``data.is_locked``            | Whether the forum topic is locked            |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the forum topic               |
+| ``data.content``              | The content of the forum topic               |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the forum topic              |
+| ``data.mentions``             | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
 
 
@@ -321,27 +321,27 @@ on_forum_topic_unlock
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| `data.server_id`            | The ID of the server                         |
+| ``data.server_id``            | The ID of the server                         |
 +-----------------------------+----------------------------------------------+
-| `data.id`                   | The ID of the forum topic                    |
+| ``data.id``                   | The ID of the forum topic                    |
 +-----------------------------+----------------------------------------------+
-| `data.channel_id`           | The ID of the channel                        |
+| ``data.channel_id``           | The ID of the channel                        |
 +-----------------------------+----------------------------------------------+
-| `data.title`                | The title of the forum topic                 |
+| ``data.title``                | The title of the forum topic                 |
 +-----------------------------+----------------------------------------------+
-| `data.created_at`           | The time the forum topic was created         |
+| ``data.created_at``           | The time the forum topic was created         |
 +-----------------------------+----------------------------------------------+
-| `data.created_by`           | The user who created the forum topic         |
+| ``data.created_by``           | The user who created the forum topic         |
 +-----------------------------+----------------------------------------------+
-| `data.bumped_at`            | The time the forum topic was bumped          |
+| ``data.bumped_at``            | The time the forum topic was bumped          |
 +-----------------------------+----------------------------------------------+
-| `data.is_pinned`            | Whether the forum topic is pinned            |
+| ``data.is_pinned``            | Whether the forum topic is pinned            |
 +-----------------------------+----------------------------------------------+
-| `data.is_locked`            | Whether the forum topic is locked            |
+| ``data.is_locked``            | Whether the forum topic is locked            |
 +-----------------------------+----------------------------------------------+
-| `data.content`              | The content of the forum topic               |
+| ``data.content``              | The content of the forum topic               |
 +-----------------------------+----------------------------------------------+
-| `data.mentions`             | The mentions in the forum topic              |
+| ``data.mentions``             | The mentions in the forum topic              |
 +-----------------------------+----------------------------------------------+
 
 
