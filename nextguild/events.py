@@ -5,11 +5,9 @@ from functools import wraps
 
 import websockets
 
-from channel import Channel
-from message import Message, Webhook
-from reaction import Reaction, CalendarReaction, ForumTopicCommentReaction
-from classes import Data
-
+from .channel import Channel
+from .message import Message, Webhook
+from .reaction import Reaction, CalendarReaction, ForumTopicCommentReaction
 
 
 class Events:

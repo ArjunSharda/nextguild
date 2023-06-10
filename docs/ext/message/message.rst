@@ -23,7 +23,8 @@ This document provides information for all the information you can recieve from 
 +-----------------------------+----------------------------------------------+
 |``message.id``               |The ID of the message that was sent           |
 +-----------------------------+----------------------------------------------+
-|``message.mentions``         |The user mentions that the message contains   |
+|``message.mentions``         |All of the channel, role, mentions the        |
+|                             |message contains                             |
 +-----------------------------+----------------------------------------------+
 |``message.reply_message_ids``|The user mentions that the message contains   |
 +-----------------------------+----------------------------------------------+
