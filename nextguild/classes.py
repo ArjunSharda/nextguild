@@ -135,6 +135,7 @@ class Data:
     def _get_message_id(self, event_data: dict):
         scenarios = [
             ('channel', 'messageId'),
+            ('reaction', 'messageId'),
         ]
         return self._scenario(event_data, scenarios)
     
