@@ -6,12 +6,16 @@ This file is recommended to read and use. It contains a lot of useful informatio
 What is logging?
 --------------------
 
-When your bot suffers an error, as is fairly common in programming, you need to know what went wrong and you need to ensure that your code doesn't stop or break because of it. This is where logging comes in. Logging is the process of recording information about your application's execution. This information can be used to debug your application and to ensure that it is running smoothly.
+When your bot suffers an error, as is fairly common in programming, you need to know what went wrong and you need to ensure that your code doesn't stop or break because of it. This is where logging comes in.
+
+Logging is the process of recording information about your application's execution. This information can be used to debug your application and to ensure that it is running smoothly.
 
 Why should I use logging?
 --------------------
 
-Once, and if, you release your bot for the public to use, an error would be fatal to your bot. If your bot crashes, it will stop responding to commands and will be unable to do anything. This is a bad thing. Logging allows you to record information about your bot's execution and to debug it. This means that you can find out what went wrong and fix it. Logging also allows you to ensure that your bot is running smoothly and that there are no errors that you don't know about.
+Once, and if, you release your bot for the public to use, an error would be fatal to your bot. If your bot crashes, it will stop responding to commands and will be unable to do anything. This is a bad thing. 
+
+Logging allows you to record information about your bot's execution and to debug it. This means that you can find out what went wrong and fix it. Logging also allows you to ensure that your bot is running smoothly and that there are no errors that you don't know about.
 
 Example
 --------------------
@@ -47,5 +51,6 @@ This is the recommended way to use logging in your application.
 
 
 It's that easy! Now you can handle errors in your application and ensure that your bot is running smoothly.
+
 Happy programming!
 
