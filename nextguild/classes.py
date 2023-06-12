@@ -704,7 +704,7 @@ class Data:
     def _get_announcement_id(self, event_data: dict):
         scenarios = [
             ('reaction', 'announcementId'),
-            ('announcementComment', 'announcementId),
+            ('announcementComment', 'announcementId'),
         ]
         return self._scenario(event_data, scenarios)
     
