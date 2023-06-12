@@ -33,9 +33,9 @@ This is the recommended way to use logging in your application.
 
     # Log an error, this is the function you will be calling whenever an error occurs
     def log_exception(exc_type, exc_value, exc_traceback):
-    timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    logging.exception(f"\n\n\n{timestamp}  -  An unhandled exception occurred", exc_info=(exc_type, exc_value, exc_traceback))
-    print("An error occurred:", exc_value)
+        timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        logging.exception(f"\n\n\n{timestamp}  -  An unhandled exception occurred", exc_info=(exc_type, exc_value, exc_traceback))
+        print("An error occurred:", exc_value)
 
     # botinformation required for the bot to work
     bot = Client('TOKEN')
@@ -44,10 +44,10 @@ This is the recommended way to use logging in your application.
     # This is the proper way to handle an error inside of an event
     @events.on_message
     async def example(data):
-    try:
-        # Do something
-    except Exception as e:
-        log_exception(type(e), e, e.__traceback__)
+        try:
+            # Do something
+        except Exception as e:
+            log_exception(type(e), e, e.__traceback__)
         
     events.run()
 
