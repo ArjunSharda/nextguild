@@ -2,7 +2,7 @@
 import asyncio
 import json
 from functools import wraps
-
+import time
 import websockets
 
 from .classes import Data
@@ -31,7 +31,7 @@ class Events:
         self._channel_update_handlers = []
         self._webhook_create_handlers = []
         self._webhook_delete_handlers = []
-        self._webhook_update_handlers = []   
+        self._webhook_update_handlers = []
         self._bot_server_join_handlers = []
         self._bot_server_leave_handlers = []
         self._member_update_handlers = []
@@ -101,7 +101,7 @@ class Events:
         self._role_update_handlers = []
         self._role_delete_handlers = []
         self.client = client
-    
+
     def on_bot_membership_created(self, func):
         @wraps(func)
         def wrapper(server):
@@ -117,7 +117,7 @@ class Events:
 
         self._bot_server_leave_handlers.append(wrapper)
         return wrapper
-    
+
     def on_member_updated(self, func):
         @wraps(func)
         def wrapper(member):
@@ -125,7 +125,7 @@ class Events:
 
         self._member_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_roles_updated(self, func):
         @wraps(func)
         def wrapper(member):
@@ -133,7 +133,7 @@ class Events:
 
         self._roles_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_member_social_create(self, func):
         @wraps(func)
         def wrapper(member):
@@ -141,7 +141,7 @@ class Events:
 
         self._member_social_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_member_social_update(self, func):
         @wraps(func)
         def wrapper(member):
@@ -149,7 +149,7 @@ class Events:
 
         self._member_social_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_member_social_delete(self, func):
         @wraps(func)
         def wrapper(member):
@@ -157,7 +157,7 @@ class Events:
 
         self._member_social_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_doc_delete(self, func):
         @wraps(func)
         def wrapper(member):
@@ -165,7 +165,7 @@ class Events:
 
         self._doc_deleted_handlers.append(wrapper)
         return wrapper
-    
+
     def on_doc_update(self, func):
         @wraps(func)
         def wrapper(member):
@@ -173,7 +173,7 @@ class Events:
 
         self._doc_updated_handlers.append(wrapper)
         return wrapper
-    
+
     def on_doc_create(self, func):
         @wraps(func)
         def wrapper(member):
@@ -181,7 +181,7 @@ class Events:
 
         self._doc_created_handlers.append(wrapper)
         return wrapper
-    
+
     def on_doc_comment_create(self, func):
         @wraps(func)
         def wrapper(member):
@@ -189,7 +189,7 @@ class Events:
 
         self._doc_comment_created_handlers.append(wrapper)
         return wrapper
-    
+
     def on_doc_comment_update(self, func):
         @wraps(func)
         def wrapper(member):
@@ -197,7 +197,7 @@ class Events:
 
         self._doc_comment_updated_handlers.append(wrapper)
         return wrapper
-    
+
     def on_doc_comment_delete(self, func):
         @wraps(func)
         def wrapper(member):
@@ -205,7 +205,7 @@ class Events:
 
         self._doc_comment_deleted_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -213,7 +213,7 @@ class Events:
 
         self._calendar_event_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -221,7 +221,7 @@ class Events:
 
         self._calendar_event_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -229,7 +229,7 @@ class Events:
 
         self._calendar_event_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -237,7 +237,7 @@ class Events:
 
         self._forum_topic_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -245,7 +245,7 @@ class Events:
 
         self._forum_topic_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -253,7 +253,6 @@ class Events:
 
         self._forum_topic_delete_handlers.append(wrapper)
         return wrapper
-    
 
     def on_message(self, func):
         @wraps(func)
@@ -263,8 +262,6 @@ class Events:
         self._message_create_handlers.append(wrapper)
         return wrapper
 
-
-
     def on_message_update(self, func):
         @wraps(func)
         def wrapper(message):
@@ -272,8 +269,6 @@ class Events:
 
         self._message_update_handlers.append(wrapper)
         return wrapper
-
-
 
     def on_message_delete(self, func):
         @wraps(func)
@@ -283,8 +278,6 @@ class Events:
         self._message_delete_handlers.append(wrapper)
         return wrapper
 
-
-
     def on_member_join(self, func):
         @wraps(func)
         def wrapper(member):
@@ -292,8 +285,6 @@ class Events:
 
         self._member_join_handlers.append(wrapper)
         return wrapper
-
-
 
     def on_member_leave(self, func):
         @wraps(func)
@@ -303,8 +294,6 @@ class Events:
         self._member_leave_handlers.append(wrapper)
         return wrapper
 
-
-
     def on_member_banned(self, func):
         @wraps(func)
         def wrapper(member):
@@ -312,7 +301,6 @@ class Events:
 
         self._member_banned_handlers.append(wrapper)
         return wrapper
-
 
     def on_member_unbanned(self, func):
         @wraps(func)
@@ -322,8 +310,6 @@ class Events:
         self._member_unbanned_handlers.append(wrapper)
         return wrapper
 
-
-
     def on_ready(self, func):
         @wraps(func)
         async def wrapper():
@@ -331,8 +317,6 @@ class Events:
 
         self._ready_handlers.append(wrapper)
         return wrapper
-
-
 
     def on_forum_topic_comment_reaction_create(self, func):
         @wraps(func)
@@ -342,8 +326,6 @@ class Events:
         self._forum_topic_comment_reaction_create_handlers.append(wrapper)
         return wrapper
 
-
-
     def on_forum_topic_comment_reaction_delete(self, func):
         @wraps(func)
         def wrapper(reaction):
@@ -351,7 +333,6 @@ class Events:
 
         self._forum_topic_comment_reaction_delete_handlers.append(wrapper)
         return wrapper
-
 
     def on_calendar_event_reaction_create(self, func):
         @wraps(func)
@@ -361,8 +342,6 @@ class Events:
         self._calendar_event_reaction_create_handlers.append(wrapper)
         return wrapper
 
-
-
     def on_calendar_event_reaction_delete(self, func):
         @wraps(func)
         def wrapper(reaction):
@@ -370,8 +349,6 @@ class Events:
 
         self._calendar_event_reaction_delete_handlers.append(wrapper)
         return wrapper
-
-
 
     def on_channel_create(self, func):
         @wraps(func)
@@ -381,7 +358,6 @@ class Events:
         self._channel_create_handlers.append(wrapper)
         return wrapper
 
-
     def on_channel_delete(self, func):
         @wraps(func)
         def wrapper(channel):
@@ -390,7 +366,6 @@ class Events:
         self._channel_delete_handlers.append(wrapper)
         return wrapper
 
-
     def on_channel_update(self, func):
         @wraps(func)
         def wrapper(channel):
@@ -398,7 +373,6 @@ class Events:
 
         self._channel_update_handlers.append(wrapper)
         return wrapper
-
 
     def on_webhook_create(self, func):
         @wraps(func)
@@ -415,7 +389,7 @@ class Events:
 
         self._webhook_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_pin(self, func):
         @wraps(func)
         def wrapper(event):
@@ -423,7 +397,7 @@ class Events:
 
         self._forum_topic_pinned_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_unpin(self, func):
         @wraps(func)
         def wrapper(event):
@@ -431,7 +405,7 @@ class Events:
 
         self._forum_topic_unpinned_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_reaction_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -439,7 +413,7 @@ class Events:
 
         self._forum_topic_reaction_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_reaction_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -455,7 +429,7 @@ class Events:
 
         self._forum_topic_lock_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_unlock(self, func):
         @wraps(func)
         def wrapper(event):
@@ -463,7 +437,7 @@ class Events:
 
         self._forum_topic_unlock_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_comment_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -471,7 +445,7 @@ class Events:
 
         self._forum_topic_comment_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_comment_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -479,7 +453,7 @@ class Events:
 
         self._forum_topic_comment_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_forum_topic_comment_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -487,7 +461,7 @@ class Events:
 
         self._forum_topic_comment_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_rsvp_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -495,7 +469,7 @@ class Events:
 
         self._calendar_event_rsvp_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_rsvp_many_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -503,7 +477,7 @@ class Events:
 
         self._calendar_event_rsvp_many_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_rsvp_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -511,7 +485,7 @@ class Events:
 
         self._calendar_event_rsvp_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_list_item_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -519,7 +493,7 @@ class Events:
 
         self._list_item_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_list_item_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -527,7 +501,7 @@ class Events:
 
         self._list_item_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_list_item_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -535,7 +509,7 @@ class Events:
 
         self._list_item_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_list_item_complete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -543,7 +517,7 @@ class Events:
 
         self._list_item_complete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_list_item_uncomplete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -551,7 +525,7 @@ class Events:
 
         self._list_item_uncomplete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_channel_message_reaction_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -559,7 +533,7 @@ class Events:
 
         self._channel_message_reaction_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_channel_message_reaction_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -575,7 +549,7 @@ class Events:
 
         self._channel_message_reaction_many_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_comment_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -583,7 +557,7 @@ class Events:
 
         self._calendar_event_comment_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_comment_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -591,7 +565,7 @@ class Events:
 
         self._calendar_event_comment_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_comment_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -599,7 +573,7 @@ class Events:
 
         self._calendar_event_comment_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_comment_reaction_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -607,7 +581,7 @@ class Events:
 
         self._calendar_event_comment_reaction_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_comment_reaction_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -615,7 +589,7 @@ class Events:
 
         self._calendar_event_comment_reaction_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_doc_reaction_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -623,7 +597,7 @@ class Events:
 
         self._doc_reaction_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_doc_reaction_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -631,7 +605,7 @@ class Events:
 
         self._doc_reaction_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_doc_comment_reaction_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -639,7 +613,7 @@ class Events:
 
         self._doc_comment_reaction_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_doc_comment_reaction_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -647,7 +621,7 @@ class Events:
 
         self._doc_comment_reaction_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_series_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -655,7 +629,7 @@ class Events:
 
         self._calendar_event_series_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_calendar_event_series_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -663,7 +637,7 @@ class Events:
 
         self._calendar_event_series_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_announcement_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -671,7 +645,7 @@ class Events:
 
         self._announcement_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_announcement_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -679,7 +653,7 @@ class Events:
 
         self._announcement_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_announcement_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -687,7 +661,7 @@ class Events:
 
         self._announcement_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_announcement_reaction_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -695,7 +669,7 @@ class Events:
 
         self._announcement_reaction_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_announcement_reaction_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -703,7 +677,7 @@ class Events:
 
         self._announcement_reaction_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_announcement_comment_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -711,7 +685,7 @@ class Events:
 
         self._announcement_comment_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_announcement_comment_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -719,7 +693,7 @@ class Events:
 
         self._announcement_comment_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_announcement_comment_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -727,7 +701,7 @@ class Events:
 
         self._announcement_comment_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_announcement_comment_reaction_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -735,7 +709,7 @@ class Events:
 
         self._announcement_comment_reaction_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_announcement_comment_reaction_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -743,7 +717,7 @@ class Events:
 
         self._announcement_comment_reaction_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_group_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -751,7 +725,7 @@ class Events:
 
         self._group_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_group_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -759,7 +733,7 @@ class Events:
 
         self._group_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_group_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -767,7 +741,7 @@ class Events:
 
         self._group_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_user_status_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -775,7 +749,7 @@ class Events:
 
         self._user_status_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_user_status_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -783,7 +757,7 @@ class Events:
 
         self._user_status_delete_handlers.append(wrapper)
         return wrapper
-    
+
     def on_role_create(self, func):
         @wraps(func)
         def wrapper(event):
@@ -791,7 +765,7 @@ class Events:
 
         self._role_create_handlers.append(wrapper)
         return wrapper
-    
+
     def on_role_update(self, func):
         @wraps(func)
         def wrapper(event):
@@ -799,7 +773,7 @@ class Events:
 
         self._role_update_handlers.append(wrapper)
         return wrapper
-    
+
     def on_role_delete(self, func):
         @wraps(func)
         def wrapper(event):
@@ -807,19 +781,17 @@ class Events:
 
         self._role_delete_handlers.append(wrapper)
         return wrapper
-    
-
 
     async def _handle_bot_server_membership_created(self, event_data):
         event = Data(event_data)
         for handler in self._bot_server_join_handlers:
             await handler(event)
-    
+
     async def _handle_bot_server_membership_deleted(self, event_data):
         event = Data(event_data)
         for handler in self._bot_server_leave_handlers:
             await handler(event)
-        
+
     async def _handle_server_member_updated(self, event_data):
         event = Data(event_data)
         for handler in self._member_update_handlers:
@@ -834,12 +806,12 @@ class Events:
         event = Data(event_data)
         for handler in self._member_social_create_handlers:
             await handler(event)
-    
+
     async def _handle_server_member_social_links_updated(self, event_data):
         event = Data(event_data)
         for handler in self._member_social_update_handlers:
             await handler(event)
-    
+
     async def _handle_server_member_social_links_deleted(self, event_data):
         event = Data(event_data)
         for handler in self._member_social_delete_handlers:
@@ -849,12 +821,12 @@ class Events:
         event = Data(event_data)
         for handler in self._doc_create_handlers:
             await handler(event)
-    
+
     async def _handle_doc_updated(self, event_data):
         event = Data(event_data)
         for handler in self._doc_update_handlers:
             await handler(event)
-    
+
     async def _handle_doc_deleted(self, event_data):
         event = Data(event_data)
         for handler in self._doc_delete_handlers:
@@ -864,42 +836,42 @@ class Events:
         event = Data(event_data)
         for handler in self._doc_comment_update_handlers:
             await handler(event)
-    
+
     async def _handle_doc_comment_deleted(self, event_data):
         event = Data(event_data)
         for handler in self._doc_comment_delete_handlers:
             await handler(event)
-    
+
     async def _handle_doc_comment_created(self, event_data):
         event = Data(event_data)
         for handler in self._doc_comment_create_handlers:
             await handler(event)
-    
+
     async def _handle_calendar_event_created(self, event_data):
         event = Data(event_data)
         for handler in self._calendar_event_create_handlers:
             await handler(event)
-    
+
     async def _handle_calendar_event_updated(self, event_data):
         event = Data(event_data)
         for handler in self._calendar_event_update_handlers:
             await handler(event)
-    
+
     async def _handle_calendar_event_deleted(self, event_data):
         event = Data(event_data)
         for handler in self._calendar_event_delete_handlers:
             await handler(event)
-    
+
     async def _handle_forum_topic_created(self, event_data):
         event = Data(event_data)
         for handler in self._forum_topic_create_handlers:
             await handler(event)
-    
+
     async def _handle_forum_topic_updated(self, event_data):
         event = Data(event_data)
         for handler in self._forum_topic_update_handlers:
             await handler(event)
-    
+
     async def _handle_forum_topic_deleted(self, event_data):
         event = Data(event_data)
         for handler in self._forum_topic_delete_handlers:
@@ -988,12 +960,12 @@ class Events:
         event = Data(event_data)
         for handler in self._channel_delete_handlers:
             await handler(event)
-    
+
     async def _handle_update_channel(self, event_data):
         event = Data(event_data)
         for handler in self._channel_update_handlers:
             await handler(event)
-    
+
     async def _handle_create_webhook(self, event_data):
         event = Data(event_data)
         for handler in self._webhook_create_handlers:
@@ -1043,7 +1015,7 @@ class Events:
         event = Data(event_data)
         for handler in self._forum_topic_comment_update_handlers:
             await handler(event)
-    
+
     async def _handle_forum_topic_comment_deleted(self, event_data):
         event = Data(event_data)
         for handler in self._forum_topic_comment_delete_handlers:
@@ -1053,7 +1025,7 @@ class Events:
         event = Data(event_data)
         for handler in self._calendar_event_rsvp_update_handlers:
             await handler(event)
-    
+
     async def _handle_calendar_event_rsvp_many_updated(self, event_data):
         event = Data(event_data)
         for handler in self._calendar_event_rsvp_many_update_handlers:
@@ -1103,7 +1075,7 @@ class Events:
         event = Data(event_data)
         for handler in self._channel_message_reaction_many_delete_handlers:
             await handler(event)
-    
+
     async def _handle_calendar_event_comment_created(self, event_data):
         event = Data(event_data)
         for handler in self._calendar_event_comment_create_handlers:
@@ -1143,7 +1115,7 @@ class Events:
         event = Data(event_data)
         for handler in self._doc_comment_reaction_create_handlers:
             await handler(event)
-    
+
     async def _handle_doc_comment_reaction_deleted(self, event_data):
         event = Data(event_data)
         for handler in self._doc_comment_reaction_delete_handlers:
@@ -1223,7 +1195,7 @@ class Events:
         event = Data(event_data)
         for handler in self._group_delete_handlers:
             await handler(event)
-    
+
     async def _handle_user_status_created(self, event_data):
         event = Data(event_data)
         for handler in self._user_status_create_handlers:
@@ -1354,15 +1326,26 @@ class Events:
                     'RoleUpdated': self._handle_role_updated,
                     'RoleDeleted': self._handle_role_deleted,
 
-
                 }
                 handler = event_handlers.get(event_type)
                 if handler:
                     await handler(event_data)
 
-    def run(self):
+    async def on_disconnect(self):
+        while True:
+            try:
+                await self.start()
+                break
+            except Exception as e:
+                print(f"Reconnection failed: {e}")
+                time.sleep(10)
+
+    async def start(self):
+
+
+     def run(self):
         try:
-            asyncio.run(self.start())
+            asyncio.run(self.on_disconnect())
         except KeyboardInterrupt:
             # TODO Handle standard exit
             pass
