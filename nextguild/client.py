@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
+import asyncio
 import json
 import time
 from datetime import datetime
 
 import requests
 
-from .embed import Embed
 from .classes import Data
+from .embed import Embed
 
 
 class Client:
@@ -21,6 +22,35 @@ class Client:
         self.base_url = 'https://www.guilded.gg/api/v1'
         self.cache = {}
         self._message_handlers = []
+
+        asyncio.run(self.check_rate_limit())
+
+    async def check_rate_limit(self):
+        while True:
+            try:
+                response = await self._send_request('GET', self.base_url)
+                if response.status == 429:
+                    retry_after = response.headers.get('Retry-After')
+                    if retry_after:
+                        retry_after = int(retry_after)
+                        print(f"Rate limited during initialization. Retrying after {retry_after} seconds...")
+                        await asyncio.sleep(retry_after)
+                    else:
+                        print("Rate limited during initialization. Retrying with exponential backoff...")
+                        await self._exponential_backoff()
+                    continue
+                break
+            except Exception as e:
+                print(f"Error occurred during initialization: {e}")
+                await asyncio.sleep(1)
+
+    async def _exponential_backoff(self):
+        retries = 0
+        while True:
+            delay = (2 ** retries)
+            print(f"Retrying in {delay} seconds...")
+            await asyncio.sleep(delay)
+            retries += 1
 
     def send_message(
             self,
@@ -332,7 +362,7 @@ class Client:
             f'{self.base_url}/servers/{server_id}/bans/{user_id}'
         )
         return response
-    
+
     def create_role(
             self,
             server_id: str,
@@ -341,7 +371,7 @@ class Client:
             is_self_assignable: bool = False,
             is_mentionable: bool = False,
             permissions: list[str] = [],
-            colors = []
+            colors=[]
     ):
         data = {
             'name': name,
@@ -350,14 +380,14 @@ class Client:
             'isMentionable': str(is_mentionable).lower(),
             'permissions': permissions,
             'colors': colors
-                }
+        }
         response = self.request(
             'POST',
             f'{self.base_url}/servers/{server_id}/roles',
             json=data
         )
         return response
-    
+
     def get_role(
             self,
             server_id: str,
@@ -368,7 +398,7 @@ class Client:
             f'{self.base_url}/servers/{server_id}/roles/{role_id}'
         )
         return response
-    
+
     def get_roles(
             self,
             server_id: str
@@ -378,7 +408,7 @@ class Client:
             f'{self.base_url}/servers/{server_id}/roles'
         )
         return response
-    
+
     def update_role(
             self,
             server_id: str,
@@ -388,7 +418,7 @@ class Client:
             is_self_assignable: bool = False,
             is_mentionable: bool = False,
             permissions: list[str] = [],
-            colors = []
+            colors=[]
     ):
         response = self.request(
             'PATCH',
@@ -403,7 +433,7 @@ class Client:
             }
         )
         return response
-    
+
     def delete_role(
             self,
             server_id: str,
@@ -1448,15 +1478,15 @@ class Client:
             response = 'No default channel found'
         return response
 
-
     def create_group(self, server_id: str, name: str, description: str, emote_id: int, is_public: bool):
-        response = self.request('POST', f'{self.base_url}/servers/{server_id}/groups', json={'name': name, 'description': description, 'emoteId': emote_id, 'isPublic': is_public})
+        response = self.request('POST', f'{self.base_url}/servers/{server_id}/groups',
+                                json={'name': name, 'description': description, 'emoteId': emote_id,
+                                      'isPublic': is_public})
         return response
 
     def get_groups(self, server_id: str):
         response = self.request('GET', f'{self.base_url}/servers/{server_id}/groups')
         return response
-
 
     def get_group(self, server_id: str, group_id: str):
         response = self.request('GET', f'{self.base_url}/servers/{server_id}/groups/{group_id}')
@@ -1464,15 +1494,14 @@ class Client:
 
     def update_group(self, server_id: str, group_id: str, name: str, description: str, emote_id: int, is_public: bool):
 
-        response = self.request('PATCH', f'{self.base_url}/servers/{server_id}/groups/{group_id}', json={'name': name, 'description': description, 'emoteId': emote_id, 'isPublic': is_public})
+        response = self.request('PATCH', f'{self.base_url}/servers/{server_id}/groups/{group_id}',
+                                json={'name': name, 'description': description, 'emoteId': emote_id,
+                                      'isPublic': is_public})
         return response
-
 
     def delete_group(self, server_id: str, group_id: str):
         response = self.request('DELETE', f'{self.base_url}/servers/{server_id}/groups/{group_id}')
         return response
-
-
 
     def update_status(self, content: str, emote_id: int, expires_at: str = None):
         json = {'content': content, 'emoteId': emote_id}
@@ -1481,11 +1510,9 @@ class Client:
         response = self.request('PUT', f'{self.base_url}/users/@me/status', json=json)
         return response
 
-
     def delete_status(self):
         response = self.request('DELETE', f'{self.base_url}/users/@me/status')
         return response
-
 
     def member_has_role(self, server_id: str, user_id: str, role_id: int or list, type: str = 'any'):
         r = self.get_member_roles(server_id, user_id)
@@ -1511,7 +1538,3 @@ class Client:
             return True
         else:
             return False
-
-
-
-
