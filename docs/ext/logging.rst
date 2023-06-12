@@ -48,6 +48,8 @@ This is the recommended way to use logging in your application.
         # Do something
     except Exception as e:
         log_exception(type(e), e, e.__traceback__)
+        
+    events.run()
 
 
 It's that easy! Now you can handle errors in your application and ensure that your bot is running smoothly.
