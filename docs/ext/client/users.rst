@@ -145,3 +145,12 @@ Checks if a user is the owner of a server. Returns True or False.
 +-------------------+---------+--------------------------------------------+
 | user_id           | string  | The ID of the user to check.               |
 +-------------------+---------+--------------------------------------------+
+
+get_member_permissions
+-----------------
+
+.. code-block:: python
+
+    get_member_permissions(server_id, user_id, permissions)
+
+Gets the permissions of a user on a server.
