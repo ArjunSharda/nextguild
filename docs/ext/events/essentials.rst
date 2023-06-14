@@ -20,14 +20,14 @@ It is generally recommended to save the data in a global variable, so you can ac
 
     @events.on_ready
     async def on_ready(data):
-        global bot
-        bot = data
-        print(f'Successfully logged in as {bot.name}! ({bot.id})')
+        global bot_data
+        bot_data = data
+        print(f'Successfully logged in as {bot_data.name}! ({bot_data.user_id})')
 
 +-----------------------------+----------------------------------------------+
 | Type                        | Description                                  |
 +=============================+==============================================+
-| ``bot.id``                  | The ID of the bot.                           |
+| ``bot.user_id``             | The ID of the bot.                           |
 +-----------------------------+----------------------------------------------+
 | ``bot.name``                | The name of the bot.                         |	
 +-----------------------------+----------------------------------------------+
