@@ -23,12 +23,12 @@ class Client:
         self.cache = {}
         self._message_handlers = []
 
-        asyncio.run(self.check_rate_limit())
+        #asyncio.run(self.check_rate_limit())
 
     async def check_rate_limit(self):
         while True:
             try:
-                response = await self._send_request('GET', self.base_url)
+                response = await self.request('GET', self.base_url)
                 if response.status == 429:
                     retry_after = response.headers.get('Retry-After')
                     if retry_after:
