@@ -16,6 +16,7 @@ on_ready
 --------
 
 It is generally recommended to save the data in a global variable, so you can access it from anywhere in your code.
+
 .. code-block:: python
 
     @events.on_ready
