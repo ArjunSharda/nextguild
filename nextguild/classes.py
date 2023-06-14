@@ -83,6 +83,9 @@ class Data:
         self.position = self._get_position(event_data)
         self.is_base = self._get_is_base(event_data)
         self.bot_user_id = self._get_bot_user_id(event_data)
+        self.last_message_id = self._get_last_message_id(event_data)
+        self.bot_id = self._get_bot_id(event_data)
+        self.heartbeat_interval = self._get_heartbeat_interval(event_data)
 
     def _scenario(self, event_data, scenarios):
         data = ''
@@ -143,6 +146,7 @@ class Data:
         scenarios = [
             ('socialLink', 'userId'),
             ('calendarEventRsvp', 'userId'),
+            ('d', 'user', 'id'),
         ]
         return self._scenario(event_data, scenarios)
 
@@ -205,6 +209,7 @@ class Data:
             ('group', 'createdBy'),
             ('announcement', 'createdBy'),
             ('announcementComment', 'createdBy'),
+            ('d', 'user', 'createdBy')
         ]
         return self._scenario(event_data, scenarios)
     
@@ -228,6 +233,7 @@ class Data:
             ('serverMemberBan', 'user', 'type'),
             ('channel', 'type'),
             ('socialLink', 'type'),
+            ('d', 'user', 'type'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -241,6 +247,7 @@ class Data:
             ('reaction', 'emote', 'name'),
             ('group', 'name'),
             ('role', 'name'),
+            ('d', 'user', 'name')
         ]
         return self._scenario(event_data, scenarios)
             
@@ -265,13 +272,15 @@ class Data:
             ('serverMemberBan', 'user', 'avatar'),
             ('webhook', 'avatar'),
             ('group', 'avatar'),
+            ('d', 'user', 'avatar')
         ]
         return self._scenario(event_data, scenarios)
     
     def _get_banner(self, event_data: dict):
         scenarios = [
             ('server', 'banner'),
-            ('member', 'user', 'banner')
+            ('member', 'user', 'banner'),
+            ('d', 'user', 'banner')
         ]
         return self._scenario(event_data, scenarios)
     
@@ -315,6 +324,7 @@ class Data:
             ('announcement', 'createdAt'),
             ('announcementComment', 'createdAt'),
             ('role', 'createdAt'),
+            ('d', 'user', 'createdAt')
         ]
         return self._scenario(event_data, scenarios)
     
@@ -401,6 +411,7 @@ class Data:
         scenarios = [
             ('member', 'user', 'status', 'content'),
             ('calendarEventRsvp', 'status'),
+            ('d', 'user', 'status', 'content')
         ]
         return self._scenario(event_data, scenarios)
     
@@ -698,6 +709,7 @@ class Data:
     def _get_emote_id(self, event_data: dict):
         scenarios = [
             ('group', 'emoteId'),
+            ('d', 'user', 'status', 'emoteId')
         ]
         return self._scenario(event_data, scenarios)
     
@@ -765,5 +777,23 @@ class Data:
     def _get_bot_user_id(self, event_data: dict):
         scenarios = [
             ('role', 'botUserId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_last_message_id(self, event_data: dict):
+        scenarios = [
+            ('d', 'lastMessageId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_bot_id(self, event_data: dict):
+        scenarios = [
+            ('d', 'botId'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_heartbeat_interval(self, event_data: dict):
+        scenarios = [
+            ('heartbeatInterval'),
         ]
         return self._scenario(event_data, scenarios)

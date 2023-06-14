@@ -312,8 +312,8 @@ class Events:
 
     def on_ready(self, func):
         @wraps(func)
-        async def wrapper():
-            return await func()
+        async def wrapper(ready):
+            return await func(ready)
 
         self._ready_handlers.append(wrapper)
         return wrapper
@@ -917,9 +917,10 @@ class Events:
         for handler in self._member_unbanned_handlers:
             await handler(event)
 
-    async def _handle_ready(self):
+    async def _handle_ready(self, event_data):
+        event = Data(event_data)
         for handler in self._ready_handlers:
-            await handler()
+            await handler(event)
 
     async def _handle_create_reaction(self, event_data):
         event = Data(event_data)
@@ -1228,7 +1229,9 @@ class Events:
                     'Authorization': f'Bearer {self.client.token}'
                 }
         ) as websocket:
-            await self._handle_ready()
+            response = await websocket.recv()
+            data = json.loads(response)
+            await self._handle_ready(data)
             while True:
                 data = await websocket.recv()
                 json_data = json.loads(data)
@@ -1340,10 +1343,7 @@ class Events:
                 print(f"Reconnection failed: {e}")
                 time.sleep(10)
 
-    async def start(self):
-
-
-     def run(self):
+    def run(self):
         try:
             asyncio.run(self.on_disconnect())
         except KeyboardInterrupt:
