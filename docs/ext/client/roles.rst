@@ -90,6 +90,27 @@ Deletes a role from a server.
 | role_id           | int     | The ID of the role to delete.              |
 +-------------------+---------+--------------------------------------------+
 
+update_role_permissions
+-----------------
+
+.. code-block:: python
+
+    update_role_permissions(server_id, role_id, permissions)
+
+Updates the permissions of a role.
+
++-------------------+---------+-----------------------------------------------------------------------------+
+| Parameter         | Type    | Description                                                                 |
++===================+=========+=============================================================================+
+| server_id         | str     | The ID of the server where the role is                                      |
+|                   |         | located.                                                                    |
++-------------------+---------+-----------------------------------------------------------------------------+
+| role_id           | int     | The ID of the role to update.                                               |
++-------------------+---------+-----------------------------------------------------------------------------+
+| permissions       | dict    | The permissions of the role.                                                |
+|                   |         | Example: ``{"permissions":{"CanCreateEvents":false,"CanReadEvents":true}}`` |
++-------------------+---------+-----------------------------------------------------------------------------+
+
 
 get_role
 -----------------

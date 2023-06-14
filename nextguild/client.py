@@ -207,7 +207,7 @@ class Client:
             data: dict = json.loads(response.content)
         except:
             return
-        if 200 <= code < 300:
+        if 200 <= code < 300 or code == 418:
             return data
         raise ValueError(f'Request failed with status {code}: {data}')
 
@@ -418,7 +418,7 @@ class Client:
             is_self_assignable: bool = False,
             is_mentionable: bool = False,
             permissions: list[str] = [],
-            colors=[]
+            colors: None = []
     ):
         response = self.request(
             'PATCH',
@@ -431,6 +431,19 @@ class Client:
                 'permissions': permissions,
                 'colors': colors
             }
+        )
+        return response
+    
+    def update_role_permissions(
+            self,
+            server_id: str,
+            role_id: int,
+            permissions: dict,
+    ):
+        response = self.request(
+            'PATCH',
+            f'{self.base_url}/servers/{server_id}/roles/{role_id}/permissions',
+            json=permissions
         )
         return response
 
@@ -481,6 +494,20 @@ class Client:
             f'{self.base_url}/servers/{server_id}/members/{user_id}/roles'
         )
         return response['roleIds']
+    
+    def get_member_permissions(
+            self,
+            server_id: str,
+            user_id: str,
+            ids: list[str] = []
+    ):
+        response = self.request(
+            'GET',
+            f'{self.base_url}/servers/{server_id}/members/{user_id}/permissions',
+            params={'ids': ids}
+        )
+        return response
+        
 
     def unban_member(
             self,
@@ -1538,3 +1565,12 @@ class Client:
             return True
         else:
             return False
+        
+    def get_subscription_tier(self, server_id: str, subscription_type: str):
+        r = self.request('GET', f'{self.base_url}/servers/{server_id}/subscriptions/tiers/{subscription_type}')
+        return r
+    
+    def get_subscription_tiers(self, server_id: str):
+        r = self.request('GET', f'{self.base_url}/servers/{server_id}/subscriptions/tiers')
+        return r
+ 
