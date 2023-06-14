@@ -154,3 +154,18 @@ get_member_permissions
     get_member_permissions(server_id, user_id, permissions)
 
 Gets the permissions of a user on a server.
+
++-------------------+---------+--------------------------------------------+
+| Parameter         | Type    | Description                                |
++===================+=========+============================================+
+| server_id         | string  | The ID of the server to get the            |
+|                   |         | permissions from.                          |
++-------------------+---------+--------------------------------------------+
+| user_id           | string  | The ID of the user to get the permissions  |
+|                   |         | for.                                       |
++-------------------+---------+--------------------------------------------+
+| permissions       | list,   | A list of permissions to check.            |
+|                   | optional|                                            |
++-------------------+---------+--------------------------------------------+
+If permissions is not set, the method will return a list of all permissions the user has on the server.
+If permissions is set and the user does not have one of the permissions, the method will return a list of the permissions the user does not have.
