@@ -209,7 +209,9 @@ class Client:
             return
         if 200 <= code < 300 or code == 418:
             return data
-        raise ValueError(f'Request failed with status {code}: {data}')
+        headers = self.headers
+        headers['Authorization'] = 'Bearer [REDACTED]'
+        raise ValueError(f'Guilded API error: Request failed with status code {code} and message {data}\nMethod: {method}\nURL: {url}\nHeaders: {self.headers}\nData: {kwargs}')
 
     def create_channel(
             self,
