@@ -10,7 +10,7 @@ NextGuild is a Guilded API wrapper written in Python.
 
 Nextguild is the most user-friendly Python library for interacting with the Guilded API. Because of our commitment to make it as simple and easy to use as possible, it serves as an excellent resource for both beginners learning Python programming and experienced programmers looking for a straightforward development experience. 
 
-Made from a team of 2 people, this was a simple project originally thought for a fun purpose and for testing of the Guilded API, which eventually turned into a bot library for multi-purpose use.
+Made from a team of 2 people, this was a project originally thought for a fun purpose and for testing of the Guilded API, which eventually turned into a bot library for multi-purpose use.
 
 ## Installation
 
