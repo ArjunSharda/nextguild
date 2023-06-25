@@ -14,10 +14,16 @@ Made from a team of 2 people, this was a simple project originally thought for a
 
 ## Installation
 
+Note: You need **Python 3.10+** to use this package.<br><br>
 Use the Python Package Index package manager [pip](https://pip.pypa.io/en/stable/) to install NextGuild to start using this package for your project.
-
 ```bash
 pip install nextguild
+```
+
+<br>NextGuild also requires 2 other packages to be installed before using it. <br>
+If you haven't installed them already, execute the following command in your terminal:
+```bash
+pip install requests websockets
 ```
 
 ## Documentation
