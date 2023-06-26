@@ -5,7 +5,8 @@
 # You can install the appropriate dependencies with the following commands in the terminal:
 # pip install nextguild
 # pip install random
-
+# pip install websockets
+# pip install requests
 
 from nextguild import *
 import random
