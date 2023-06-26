@@ -1,0 +1,1 @@
+This is a placeholder // this folder is being actively worked on. Note to mantainers: Please do not edit this directory without notice in [issue 39](https://github.com/ArjunSharda/nextguild/issues/39).
