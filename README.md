@@ -46,7 +46,7 @@ Please see the [CONTRIBUTING.MD](https://github.com/ArjunSharda/nextguild/blob/m
 
 ## License
 
-The NextGuild Project is under the [MIT](https://choosealicense.com/licenses/mit/) license, and usage is subject to the terms of the MIT license.
+©️ The NextGuild Project (2023-present) is under the [MIT](https://choosealicense.com/licenses/mit/) license, and usage of the library is subject to the terms of the MIT license.
 
 
 <hr>
