@@ -42,8 +42,7 @@ For NextGuild's official documentation, visit [this link](https://github.com/Arj
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+Please see the [CONTRIBUTING.MD](https://github.com/ArjunSharda/nextguild/blob/main/CONTRIBUTING.md) file for the official guidelines to contribute.
 
 ## License
 
