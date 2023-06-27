@@ -86,6 +86,7 @@ class Data:
         self.last_message_id = self._get_last_message_id(event_data)
         self.bot_id = self._get_bot_id(event_data)
         self.heartbeat_interval = self._get_heartbeat_interval(event_data)
+        self.op = self._get_op(event_data)
 
     def _scenario(self, event_data, scenarios):
         data = ''
@@ -795,5 +796,11 @@ class Data:
     def _get_heartbeat_interval(self, event_data: dict):
         scenarios = [
             ('heartbeatInterval'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_op(self, event_data: dict):
+        scenarios = [
+            ('op'),
         ]
         return self._scenario(event_data, scenarios)

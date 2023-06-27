@@ -52,6 +52,37 @@ class Client:
             await asyncio.sleep(delay)
             retries += 1
 
+    def request(self, method: str, url: str, **kwargs) -> dict:
+        response = requests.request(
+            method,
+            url,
+            headers=self.headers,
+            **kwargs
+        )
+        if (code := response.status_code) == 429:
+            retry_after = int(response.headers.get('retry-after', '1'))
+            print(
+                f'Received {code} status. Retrying after'
+                f' {retry_after} seconds.'
+            )
+            time.sleep(retry_after)
+            return self.request(method, url, **kwargs)
+        # try:
+        #     data = response.json()
+        #     breakpoint()
+        # except json.JSONDecodeError:
+        #     data = response.text
+        #     breakpoint()
+        try:
+            data: dict = json.loads(response.content)
+        except:
+            return
+        if 200 <= code < 300 or code == 418:
+            return data
+        headers = self.headers
+        headers['Authorization'] = 'Bearer [REDACTED]'
+        raise ValueError(f'Guilded API error: Request failed with status code {code} and message {data}\nMethod: {method}\nURL: {url}\nHeaders: {self.headers}\nData: {kwargs}')
+
     def send_message(
             self,
             channel_id: str,
@@ -182,36 +213,6 @@ class Client:
             self.delete_message(channel_id, id)
         return len(message_ids)
 
-    def request(self, method: str, url: str, **kwargs) -> dict:
-        response = requests.request(
-            method,
-            url,
-            headers=self.headers,
-            **kwargs
-        )
-        if (code := response.status_code) == 429:
-            retry_after = int(response.headers.get('retry-after', '1'))
-            print(
-                f'Received {code} status. Retrying after'
-                f' {retry_after} seconds.'
-            )
-            time.sleep(retry_after)
-            return self.request(method, url, **kwargs)
-        # try:
-        #     data = response.json()
-        #     breakpoint()
-        # except json.JSONDecodeError:
-        #     data = response.text
-        #     breakpoint()
-        try:
-            data: dict = json.loads(response.content)
-        except:
-            return
-        if 200 <= code < 300 or code == 418:
-            return data
-        headers = self.headers
-        headers['Authorization'] = 'Bearer [REDACTED]'
-        raise ValueError(f'Guilded API error: Request failed with status code {code} and message {data}\nMethod: {method}\nURL: {url}\nHeaders: {self.headers}\nData: {kwargs}')
 
     def create_channel(
             self,
