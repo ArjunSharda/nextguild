@@ -8,21 +8,32 @@
 
 NextGuild is a Guilded API wrapper written in Python.
 
-Planning on being the most simplest python library interacting with the Guilded API, Nextguild is planning to be beginner-friendly and be a great resource to learn Python programming, this is a library, with easy configuration.
 
-Made from a team of 2 people, this was a simple project originally thought for a fun purpose and for testing the Guilded API, which eventually turned into a bot library for multi-purpose use.
+Founded in 2023, the ©️ Nextguild Project (2023-present) is the most user-friendly Python library for interacting with the Guilded API. Because of our commitment to make it as simple and easy to use as possible, it serves as an excellent resource for both beginners learning Python programming and experienced programmers looking for a straightforward development experience. 
 
-## Installation
+Made from a team of 2 people, this was a project originally thought for a fun purpose and for testing of the Guilded API, which eventually turned into a API wrapper for multi-purpose use.
 
-Use the Python Package Index package manager [pip](https://pip.pypa.io/en/stable/) to install NextGuild to start using this package for your project.
 
+Installation
+------------
+**[Python 3.7+](https://www.python.org/downloads/) is required**
 ```bash
-pip install nextguild
+# MacOS / Linux (via Terminal)
+python3 -m pip install -U nextguild
+
+# Windows (via CMD Prompt)
+py -3 -m pip install -U nextguild
+```
+
+<br>NextGuild also requires 2 other packages to be installed before using it. <br>
+If you haven't installed them already, execute the following command in your terminal:
+```bash
+pip install requests websockets
 ```
 
 ## Documentation
 
-For NextGuild's official documentation, click [this link](https://github.com/ArjunSharda/nextguild/tree/main/docs)
+For NextGuild's official documentation, visit [this link](https://github.com/ArjunSharda/nextguild/tree/main/docs).
 
 ## Founders
 
@@ -31,12 +42,11 @@ For NextGuild's official documentation, click [this link](https://github.com/Arj
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+Please see the [CONTRIBUTING.MD](https://github.com/ArjunSharda/nextguild/blob/main/CONTRIBUTING.md) file for the official guidelines to contribute.
 
 ## License
 
-The NextGuild Project is under the [MIT](https://choosealicense.com/licenses/mit/) license, and usage is subject to the terms of the MIT license.
+©️ The NextGuild Project (2023-present) is under the [MIT](https://choosealicense.com/licenses/mit/) license, and usage of the library is subject to the terms of the MIT license.
 
 
 <hr>
