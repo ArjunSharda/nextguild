@@ -117,7 +117,7 @@ class Client:
             url=f'{self.base_url}/channels/{channel_id}/messages',
             json=payload
         )
-        return Data(response)
+        return response
 
     def edit_message(
             self,
@@ -166,7 +166,7 @@ class Client:
             'GET',
             f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
         )
-        return Data(response)
+        return response
 
     def get_channel_messages(
             self,
