@@ -9,13 +9,14 @@ import requests
 from .classes import Data
 from .embed import Embed
 
+version = '1.2.8'
 
 class Client:
     def __init__(self, token: str) -> None:
         self.token = token
         self.headers = {
             'Authorization': f'Bearer {self.token}',
-            'User-Agent': 'NextGuild/1.0',
+            'User-Agent': f'NextGuild/{version}',
             'Content-type': 'application/json',
             'Accept': 'application/json'
         }
@@ -117,7 +118,7 @@ class Client:
             url=f'{self.base_url}/channels/{channel_id}/messages',
             json=payload
         )
-        return Data(response)
+        return response
 
     def edit_message(
             self,
@@ -166,7 +167,7 @@ class Client:
             'GET',
             f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
         )
-        return Data(response)
+        return response
 
     def get_channel_messages(
             self,
