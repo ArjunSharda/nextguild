@@ -93,8 +93,9 @@ class Embed:
     def fields(self) -> list:
         return self.__fields
 
-    def add_field(self, name: str, value: str) -> None:
-        self.__fields.append(EmbedField(name, value))
+    def add_field(self, name: str, value: str, inline: bool = False) -> None:
+        inline = str(inline).lower()
+        self.__fields.append(EmbedField(name, value, inline))
 
     def remove_field(self, index: int) -> None:
         self.__fields.pop(index)
