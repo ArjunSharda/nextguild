@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 class EmbedField:
-    def __init__(self, name: str, value: str):
+    def __init__(self, name: str, value: str, inline: bool = False):
         super().__init__()
         self.name = name
         self.value = value
+        self.inline = inline
 
 
 class Embed:
@@ -41,9 +42,9 @@ class Embed:
         if fields:
             for field in fields:
                 if isinstance(field, EmbedField):
-                    self.add_field(field.name, field.value)
+                    self.add_field(field.name, field.value, field.inline)
                 elif isinstance(field, dict):
-                    self.add_field(field.get('name'), field.get('value'))
+                    self.add_field(field.get('name'), field.get('value'), field.get('inline'))
 
     @property
     def to_dict(self) -> dict:
@@ -84,7 +85,7 @@ class Embed:
 
         fields_list = []
         for field in self.__fields:
-            fields_list.append({'name': field.name, 'value': field.value})
+            fields_list.append({'name': field.name, 'value': field.value, 'inline': field.inline})
         embed.update({'fields': fields_list})
 
         return embed

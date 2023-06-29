@@ -9,13 +9,14 @@ import requests
 from .classes import Data
 from .embed import Embed
 
+version = '1.2.8'
 
 class Client:
     def __init__(self, token: str) -> None:
         self.token = token
         self.headers = {
             'Authorization': f'Bearer {self.token}',
-            'User-Agent': 'NextGuild/1.0',
+            'User-Agent': f'NextGuild/{version}',
             'Content-type': 'application/json',
             'Accept': 'application/json'
         }
