@@ -8,7 +8,7 @@ send_message
 
 .. code-block:: python
 
-    send_message(channel_id, content, embed, isPrivate)
+    send_message(channel_id, content, embed, isPrivate, isSilent, reply_message_ids)
 
 Send a message to the specified channel. Optionally, provide content and/or an embed.
 
