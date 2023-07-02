@@ -1,5 +1,5 @@
 # ©️ The NextGuild Project 2023-present
-# If support is needed, you can join the support server (guilded.gg/nextguild) or raise a issue.
+# If support is needed, you can join the support server (guilded.gg/nextguild) or raise an issue.
 # NOTICE: This example requires a external library, that is not endorsed or supported by The NextGuild Project.
 # CODE LEVEL // BEGINNER - Easy to follow
 # You can install the appropriate dependencies with the following commands in the terminal:
