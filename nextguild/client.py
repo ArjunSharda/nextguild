@@ -1498,7 +1498,7 @@ class Client:
 
     def get_bot_servers(self):
         response = self.request('GET', f'{self.base_url}/users/@me/servers')
-        return response
+        return response['servers']
 
     def get_default_channel(self, server_id: str):
         r = self.request('GET', f'{self.base_url}/servers/{server_id}')
