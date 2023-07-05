@@ -22,8 +22,8 @@ connection = sqlite3.connect('database.sqlite3') # This is the connection, which
 cursor = connection.cursor() # This is the cursor, which we will use to execute SQL commands.
 cursor.execute('CREATE TABLE IF NOT EXISTS helpembeds (id INTEGER, page INTEGER DEFAULT 1, owner STRING)') #we create a table containing information about each help message, if it doesn't exist already. We will update this information later.
 
-#We will now create a function that will return the help embed for a given page, so we don't need to repeat the same code over and over again.
-totalpages = 3 #This is the total amount of pages in the help embed. You can change this to whatever you want, but make sure to update the help_embed function accordingly. You don't necessarily need to do this, but it will clear any confusion.
+#create a function that will return the help embed for a given page, so we don't need to repeat the same code over and over again.
+totalpages = 3 #the total amount of pages in the help embed. You can change this to whatever you want, but make sure to update the help_embed function accordingly. You don't necessarily need to do this, but it will clear any confusion.
 def help_embed(page):
     embed = Embed(title='Help', description='This is a help embed used in an example by NextGuild!', footer=f'You are on page {page}/{totalpages}')
     if page == 1:
@@ -42,10 +42,10 @@ async def ready(bot):
     
     
     
-#the next step is to create a function that will send the help embed to the channel, and add the reactions to it.
+#create a function that will send the help embed to the channel, and add the reactions to it.
 @events.on_message
 async def help(message):
-    if message.created_by == bot_id: #we check if the message was sent by the bot, so we don't get an infinite loop.
+    if message.created_by == bot_id: #if the message was sent by the bot, so we don't get an infinite loop.
         return
 
     if message.content == '!help':
@@ -56,28 +56,28 @@ async def help(message):
         bot.create_message_reaction(message.channel_id, help_embed_id, emotes['arrow_right']) #adding the right arrow reaction to the message.
 
 
-#now we'll listen for the reactions, and edit the help embed accordingly. We'll also check if the user is allowed to edit the message and if the reaction is valid.
+#listen for the reactions, and edit the help embed accordingly. We'll also check if the user is allowed to edit the message and if the reaction is valid.
 @events.on_channel_message_reaction_create
 async def help_reaction(reaction):
-    if reaction.created_by == bot_id: #we check if the reaction was sent by the bot, so we don't get an infinite loop.
+    if reaction.created_by == bot_id: #if the reaction was sent by the bot, so we don't get an infinite loop.
         return
 
     cursor.execute('SELECT id, page, owner FROM helpembeds WHERE id=?', (reaction.message_id,)) #we select the row containing the message id.
-    result = cursor.fetchone() #we all of the data for that embed and store it in a variable.
+    result = cursor.fetchone()
     if result:
-        id, page, owner = result #we unpack the data into variables, so we can use them easier later
-        if reaction.created_by == owner: #we check if the user is allowed to edit the message.
-            if reaction.id == emotes['arrow_left'] and page > 1: #we check if the reaction is the left arrow, and if the page is greater than 1.
-                page -= 1 #we decrease the page by 1.
-                bot.edit_message(reaction.channel_id, reaction.message_id, embed=help_embed(page)) #we edit the message with the new page.
-                cursor.execute('UPDATE helpembeds SET page=? WHERE id=?', (page, id)) #we update the page in the database.
+        id, page, owner = result #unpack the data into variables, so we can use them easier later
+        if reaction.created_by == owner: #check if the user is allowed to edit the message.
+            if reaction.id == emotes['arrow_left'] and page > 1: #if the reaction is the left arrow, and if the page is greater than 1.
+                page -= 1 #decrease the page by 1.
+                bot.edit_message(reaction.channel_id, reaction.message_id, embed=help_embed(page)) #edit the message with the new page.
+                cursor.execute('UPDATE helpembeds SET page=? WHERE id=?', (page, id)) #update the page in the database.
                 connection.commit() #committing the changes to the database, so we can access them later.
-            elif reaction.id == emotes['arrow_right'] and page < totalpages: #we check if the reaction is the right arrow, and if the page is less than the total amount of pages.
-                page += 1 #we increase the page by 1.
-                bot.edit_message(reaction.channel_id, reaction.message_id, embed=help_embed(page)) #we edit the message with the new page.
-                cursor.execute('UPDATE helpembeds SET page=? WHERE id=?', (page, id)) #we update the page in the database.
+            elif reaction.id == emotes['arrow_right'] and page < totalpages: #if the reaction is the right arrow, and if the page is less than the total amount of pages.
+                page += 1 #increase the page by 1.
+                bot.edit_message(reaction.channel_id, reaction.message_id, embed=help_embed(page)) #edit the message with the new page.
+                cursor.execute('UPDATE helpembeds SET page=? WHERE id=?', (page, id)) #update the page in the database.
                 connection.commit() #committing the changes to the database, so we can access them later.
-        bot.delete_message_reaction(reaction.channel_id, reaction.message_id, reaction.id, reaction.created_by) #we delete the reaction, so the message doesn't get spammed with reactions.
+        bot.delete_message_reaction(reaction.channel_id, reaction.message_id, reaction.id, reaction.created_by) #delete the reaction, so the message doesn't get spammed with reactions.
         
 
 events.run()
