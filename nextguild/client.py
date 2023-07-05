@@ -929,12 +929,16 @@ class Client:
             self,
             server_id: str,
             channel_id: str,
-            name: str
+            name: str,
+            avatar_url: str = None
     ):
+        json={'name': name, 'channelId': channel_id}
+        if avatar_url:
+            json['avatar_url'] = avatar_url
         response = self.request(
             'POST',
             f'{self.base_url}/servers/{server_id}/webhooks',
-            json={'name': name, 'channel_id': channel_id}
+            json=json
         )
         return response
 
@@ -943,12 +947,15 @@ class Client:
             server_id: str,
             webhook_id: str,
             name: str,
-            channel_id: str = None
+            channel_id: str = None,
+            avatar_url: str = None
     ):
         data = {'name': name}
 
         if channel_id:
-            data.update({'channel_id': channel_id})
+            data['channel_id'] = channel_id
+        if avatar_url:
+            data['avatar_url'] = avatar_url
 
         response = self.request(
             'PUT',
@@ -996,13 +1003,22 @@ class Client:
             server_id: str,
             webhook_id: str,
             content: str,
+            embeds: list = None,
+            username: str = None,
+            avatar_url: str = None
     ):
         token = self.get_webhook(server_id, webhook_id)['webhook']['token']
-
+        json = {'content': content}
+        if embeds:
+            json['embeds'] = [embeds.to_dict]
+        if username:
+            json['username'] = username
+        if avatar_url:
+            json['avatar_url'] = avatar_url
         response = self.request(
             'POST',
             f'https://media.guilded.gg/webhooks/{webhook_id}/{token}',
-            json={'content': content}
+            json=json
         )
         return response
 

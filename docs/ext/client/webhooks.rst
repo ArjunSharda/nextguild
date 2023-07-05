@@ -8,7 +8,7 @@ create_webhook
 
 .. code-block:: python
 
-    create_webhook(server_id, channel_id, name)
+    create_webhook(server_id, channel_id, name, avatar_url)
 
 Create a webhook in the specified channel.
 
@@ -23,13 +23,16 @@ Create a webhook in the specified channel.
 +-------------------+---------+--------------------------------------------+
 | name              | str     | The name of the webhook.                   |
 +-------------------+---------+--------------------------------------------+
+| avatar_url        | str     | The URL of the avatar to use for the       |
+|                   |         | webhook.                                   |
++-------------------+---------+--------------------------------------------+
 
 update_webhook
 -----------------
 
 .. code-block:: python
 
-    update_webhook(server_id, webhook_id, name, channel_id)
+    update_webhook(server_id, webhook_id, name, channel_id, avatar_url)
 
 Update a webhook.
 
@@ -44,6 +47,9 @@ Update a webhook.
 | name              | str     | The new name of the webhook.               |
 +-------------------+---------+--------------------------------------------+
 | channel_id        | str     | The channel ID to move the webhook to.     |
++-------------------+---------+--------------------------------------------+
+| avatar_url        | str     | The URL of the avatar to use for the       |
+|                   |         | webhook.                                   |
 +-------------------+---------+--------------------------------------------+
 
 delete_webhook
@@ -106,7 +112,7 @@ send_webhook_message
 
 .. code-block:: python
 
-    send_webhook_message(server_id, webhook_id, content)
+    send_webhook_message(server_id, webhook_id, content, embeds, username, avatar_url)
 
 Send a message with a webhook.
 
@@ -119,5 +125,16 @@ Send a message with a webhook.
 | webhook_id        | str     | The ID of the webhook to send the message  |
 |                   |         | with.                                      |
 +-------------------+---------+--------------------------------------------+
-| content           | str     | The content of the message.                |
+| content           | str,    | The content of the message.                |
+|                   | OPTIONAL|                                            |
 +-------------------+---------+--------------------------------------------+
+| embeds            | list,   | A list of embeds to send.                  |
+|                   | OPTIONAL|                                            |
++-------------------+---------+--------------------------------------------+
+| username          | str,    | The username to send the message with.     |
+|                   | OPTIONAL|                                            |
++-------------------+---------+--------------------------------------------+
+| avatar_url        | str,    | The URL of the avatar to send the message  |
+|                   | OPTIONAL| with.                                      |
++-------------------+---------+--------------------------------------------+
+Note that the avatar and username parameters are temporary, and apply only to the message being sent.
