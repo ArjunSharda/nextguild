@@ -251,7 +251,8 @@ class Data:
             ('group', 'name'),
             ('role', 'name'),
             ('d', 'user', 'name'),
-            ('user', 'name')
+            ('user', 'name'),
+            ('nickname')
         ]
         return self._scenario(event_data, scenarios)
             
