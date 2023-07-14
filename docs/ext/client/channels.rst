@@ -80,6 +80,34 @@ Delete a channel.
 | channel_id        | str     | The ID of the channel to delete.            |
 +-------------------+---------+---------------------------------------------+
 
+archive_channel
+---------------
+.. code-block:: python
+
+    archive_channel(channel_id)
+
+Archive a channel.
+
++-------------------+---------+---------------------------------------------+
+| Parameter         | Type    | Description                                 |
++===================+=========+=============================================+
+| channel_id        | str     | The ID of the channel to archive.           |
++-------------------+---------+---------------------------------------------+
+
+restore_channel
+---------------
+.. code-block:: python
+
+    restore_channel(channel_id)
+
+Restore a channel.
+
++-------------------+---------+---------------------------------------------+
+| Parameter         | Type    | Description                                 |
++===================+=========+=============================================+
+| channel_id        | str     | The ID of the channel to restore.           |
++-------------------+---------+---------------------------------------------+
+
 get_channel
 ------------
 

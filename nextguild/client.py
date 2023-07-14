@@ -293,6 +293,26 @@ class Client:
             json=data
         )
         return response
+    
+    def archive_channel(
+            self,
+            channel_id: str
+    ):
+        response = self.request(
+            'PUT',
+            f'{self.base_url}/channels/{channel_id}/archive'
+        )
+        return response
+    
+    def restore_channel(
+            self,
+            channel_id: str
+    ):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/archive'
+        )
+        return response
 
     def get_server(
             self,
