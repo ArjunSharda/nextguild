@@ -240,7 +240,8 @@ class Client:
             data.update({'parentId': parent_id})
         if message_id:
             data.update({'messageId': message_id})
-        data.update({"isPublic": str(is_public).lower()})
+        if is_public != False:
+            data.update({"isPublic": str(is_public).lower()})
         response = self.request(
             'POST',
             f'{self.base_url}/channels',
@@ -292,6 +293,26 @@ class Client:
             json=data
         )
         return response
+    
+    def archive_channel(
+            self,
+            channel_id: str
+    ):
+        response = self.request(
+            'PUT',
+            f'{self.base_url}/channels/{channel_id}/archive'
+        )
+        return response
+    
+    def restore_channel(
+            self,
+            channel_id: str
+    ):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/archive'
+        )
+        return response
 
     def get_server(
             self,
@@ -308,7 +329,7 @@ class Client:
             'GET',
             f'{self.base_url}/servers/{server_id}/members'
         )
-        return response
+        return list(response['members'])
 
     def get_server_member(
             self,
@@ -319,7 +340,7 @@ class Client:
             'GET',
             f'{self.base_url}/servers/{server_id}/members/{user_id}'
         )
-        return response
+        return response['member']
 
     def update_nickname(
             self,
@@ -929,16 +950,12 @@ class Client:
             self,
             server_id: str,
             channel_id: str,
-            name: str,
-            avatar_url: str = None
+            name: str
     ):
-        json={'name': name, 'channelId': channel_id}
-        if avatar_url:
-            json['avatar_url'] = avatar_url
         response = self.request(
             'POST',
             f'{self.base_url}/servers/{server_id}/webhooks',
-            json=json
+            json={'name': name, 'channel_id': channel_id}
         )
         return response
 
@@ -947,15 +964,12 @@ class Client:
             server_id: str,
             webhook_id: str,
             name: str,
-            channel_id: str = None,
-            avatar_url: str = None
+            channel_id: str = None
     ):
         data = {'name': name}
 
         if channel_id:
-            data['channel_id'] = channel_id
-        if avatar_url:
-            data['avatar_url'] = avatar_url
+            data.update({'channel_id': channel_id})
 
         response = self.request(
             'PUT',
@@ -1003,22 +1017,13 @@ class Client:
             server_id: str,
             webhook_id: str,
             content: str,
-            embeds: list = None,
-            username: str = None,
-            avatar_url: str = None
     ):
         token = self.get_webhook(server_id, webhook_id)['webhook']['token']
-        json = {'content': content}
-        if embeds:
-            json['embeds'] = [embeds.to_dict]
-        if username:
-            json['username'] = username
-        if avatar_url:
-            json['avatar_url'] = avatar_url
+
         response = self.request(
             'POST',
             f'https://media.guilded.gg/webhooks/{webhook_id}/{token}',
-            json=json
+            json={'content': content}
         )
         return response
 
