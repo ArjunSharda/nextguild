@@ -1025,8 +1025,7 @@ class Client:
         
 
 
-        if content && embeds is not None:
-            raise ValueError("Guilded API Error: You cannot use both content and embed parameters at the same time!")
+        if content && embeds is None: raise ValueError("Guilded API Error: You must supply at least one of either content or embed parameters!")
             if embeds is not None:
                 payload['embeds'] = [embeds.to_dict]
 
