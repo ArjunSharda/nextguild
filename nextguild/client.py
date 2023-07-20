@@ -1017,7 +1017,8 @@ class Client:
             server_id: str,
             webhook_id: str,
             content: str = None,
-            embed: list[Embed] = None,
+            embeds: list[Embed] = None,
+            username: str = None,
             avatar_url: str = None
     ):
         token = self.get_webhook(server_id, webhook_id)['webhook']['token']
@@ -1026,14 +1027,17 @@ class Client:
 
         if content && embeds is not None:
             raise ValueError("Guilded API Error: You cannot use both content and embed parameters at the same time!")
-            if embed is not None:
-                payload['embeds'] = [embed.to_dict]
+            if embeds is not None:
+                payload['embeds'] = [embeds.to_dict]
 
             if content is not None:
                 payload['content'] = content
 
             if avatar_url is not None:
-                payload['avatar_url] = avatar_url
+                payload['avatar_url'] = avatar_url
+
+            if username is not None:
+                payload['username'] = username
         
 
         
