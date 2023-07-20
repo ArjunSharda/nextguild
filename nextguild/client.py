@@ -1016,14 +1016,32 @@ class Client:
             self,
             server_id: str,
             webhook_id: str,
-            content: str,
+            content: str = None,
+            embed: list[Embed] = None,
+            avatar_url: str = None
     ):
         token = self.get_webhook(server_id, webhook_id)['webhook']['token']
+        
+
+
+        if content && embeds is not None:
+            raise ValueError("Guilded API Error: You cannot use both content and embed parameters at the same time!")
+            if embed is not None:
+                payload['embeds'] = [embed.to_dict]
+
+            if content is not None:
+                payload['content'] = content
+
+            if avatar_url is not None:
+                payload['avatar_url] = avatar_url
+        
+
+        
 
         response = self.request(
             'POST',
             f'https://media.guilded.gg/webhooks/{webhook_id}/{token}',
-            json={'content': content}
+            json=payload
         )
         return response
 
