@@ -30,8 +30,8 @@ Create a channel.
 | category_id       | str,    | The ID of the category to create the        |
 |                   | optional| channel.                                    |
 +-------------------+---------+---------------------------------------------+
-| is_public         | bool    | If the channel is public.                   |
-|                   | optional|                                             |
+| visibility        | str,    | The channel's visibility. None by default   |
+|                   | optional| None, private or public                     |
 +-------------------+---------+---------------------------------------------+
 | parent_id         | str,    | The ID of the parent channel.               |
 |                   | optional|                                             |
@@ -61,8 +61,8 @@ Update a channel.
 | topic             | str     | The topic of the channel.                   |
 |                   | optional|                                             |
 +-------------------+---------+---------------------------------------------+
-| is_public         | bool    | If the channel is public.                   |
-|                   | optional|                                             |
+| visibility        | str     | If the channel is public. Private by default|
+|                   | optional| None, private or public                     |
 +-------------------+---------+---------------------------------------------+
 
 delete_channel

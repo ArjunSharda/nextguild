@@ -155,6 +155,28 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
         )
         return response
+    
+    def pin_message(
+            self,
+            channel_id, 
+            message_id
+    ):
+        response = self.request(
+            'POST',
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/pin'
+        )
+        return response
+    
+    def unpin_message(
+            self,
+            channel_id,
+            message_id
+    ):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/pin'
+        )
+        return response
 
     def get_message(
             self,
@@ -223,7 +245,7 @@ class Client:
             server_id: str = None,
             group_id: str = None,
             category_id: int = None,
-            is_public: bool = False,
+            visibility: str = None,
             parent_id: str = None,
             message_id: str = None
     ):
@@ -240,8 +262,7 @@ class Client:
             data.update({'parentId': parent_id})
         if message_id:
             data.update({'messageId': message_id})
-        if is_public != False:
-            data.update({"isPublic": str(is_public).lower()})
+        data.update({"visibility": visibility})
         response = self.request(
             'POST',
             f'{self.base_url}/channels',
@@ -274,7 +295,7 @@ class Client:
             channel_id: str,
             name: str = None,
             topic: str = None,
-            is_public: bool = False
+            visibility: str = None
     ):
         data = {}
 
@@ -284,8 +305,7 @@ class Client:
         if topic:
             data.update({'topic': topic})
 
-        if is_public:
-            data.update({'isPublic': str(is_public).lower()})
+        data.update({'visibility': visibility})
 
         response = self.request(
             'PATCH',

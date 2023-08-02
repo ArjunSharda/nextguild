@@ -49,7 +49,7 @@ on_channel_create
 +-----------------------------+----------------------------------------------+
 | ``data.group_id``           | The ID of the group the channel is in        |
 +-----------------------------+----------------------------------------------+
-| ``data.is_public``          | Whether the channel is public                |
+| ``data.visibility``         | The visibility of the channel                |
 +-----------------------------+----------------------------------------------+
     
 on_channel_update
@@ -90,7 +90,7 @@ on_channel_update
 +-----------------------------+----------------------------------------------+
 | ``data.group_id``           | The ID of the group the channel is in        |
 +-----------------------------+----------------------------------------------+
-| ``data.is_public``          | Whether the channel is public                |
+| ``data.visibility``         | The visibility of the channel                |
 +-----------------------------+----------------------------------------------+
 
 on_channel_delete
@@ -131,5 +131,5 @@ on_channel_delete
 +-----------------------------+----------------------------------------------+
 | ``data.group_id``           | The ID of the group the channel is in        |
 +-----------------------------+----------------------------------------------+
-| ``data.is_public``          | Whether the channel is public                |
+| ``data.visibility``         | The visibility of the channel                |
 +-----------------------------+----------------------------------------------+
