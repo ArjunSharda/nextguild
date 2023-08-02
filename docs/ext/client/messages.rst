@@ -72,6 +72,40 @@ Delete a message in the specified channel.
 | message_id        | str     | The ID of the message in the channel.       |
 +-------------------+---------+---------------------------------------------+
 
+pin_message
+------------
+
+.. code-block:: python
+
+    pin_message(channel_id, message_id)
+
+Pin a message in the specified channel.
+
++-------------------+---------+---------------------------------------------+
+| Parameter         | Type    | Description                                 |
++===================+=========+=============================================+
+| channel_id        | str     | The ID of the channel to pin the message.   |
++-------------------+---------+---------------------------------------------+
+| message_id        | str     | The ID of the message in the channel.       |
++-------------------+---------+---------------------------------------------+
+
+unpin_message
+--------------
+
+.. code-block:: python
+
+    unpin_message(channel_id, message_id)
+
+Unpin a message in the specified channel.
+
++-------------------+---------+---------------------------------------------+
+| Parameter         | Type    | Description                                 |
++===================+=========+=============================================+
+| channel_id        | str     | The ID of the channel to unpin the message. |
++-------------------+---------+---------------------------------------------+
+| message_id        | str     | The ID of the message in the channel.       |
++-------------------+---------+---------------------------------------------+
+
 get_message
 ------------
 .. code-block:: python
