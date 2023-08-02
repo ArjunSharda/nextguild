@@ -134,6 +134,7 @@ class Data:
             ('announcement', 'id'),
             ('announcementComment', 'id'),
             ('role', 'id'),
+            ('user', 'id'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -236,6 +237,7 @@ class Data:
             ('channel', 'type'),
             ('socialLink', 'type'),
             ('d', 'user', 'type'),
+            ('user', 'type'),
         ]
         return self._scenario(event_data, scenarios)
     
@@ -249,7 +251,9 @@ class Data:
             ('reaction', 'emote', 'name'),
             ('group', 'name'),
             ('role', 'name'),
-            ('d', 'user', 'name')
+            ('d', 'user', 'name'),
+            ('user', 'name'),
+            ('nickname')
         ]
         return self._scenario(event_data, scenarios)
             
@@ -274,7 +278,8 @@ class Data:
             ('serverMemberBan', 'user', 'avatar'),
             ('webhook', 'avatar'),
             ('group', 'avatar'),
-            ('d', 'user', 'avatar')
+            ('d', 'user', 'avatar'),
+            ('user', 'avatar')
         ]
         return self._scenario(event_data, scenarios)
     
@@ -574,6 +579,7 @@ class Data:
         scenarios = [
             ('memberRoleIds',),
             ('calendarEvent', 'roleIds'),
+            ('user', 'roleIds'),
         ]
         return self._scenario(event_data, scenarios)
 
