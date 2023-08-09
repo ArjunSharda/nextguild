@@ -4,6 +4,7 @@ import json
 from functools import wraps
 import time
 import websockets
+import traceback
 
 from .classes import Data
 
@@ -1340,7 +1341,8 @@ class Events:
                 await self.start()
                 break
             except Exception as e:
-                print(f"An unexpected error occurred: {type(e), e, e.__traceback__}")
+                print(f"An exception occurred: {e}")
+                traceback.print_exc()
                 time.sleep(10)
 
     def run(self):
