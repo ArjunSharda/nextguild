@@ -1340,7 +1340,7 @@ class Events:
                 await self.start()
                 break
             except Exception as e:
-                print(f"An unexpected error occurred: {type(e), e, e.__traceback__}")
+                print(f"Reconnection failed: {e}")
                 time.sleep(10)
 
     def run(self):
