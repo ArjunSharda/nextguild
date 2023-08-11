@@ -9,6 +9,8 @@ Example Bot
 .. code-block:: python
 
     from nextguild import *
+    import asyncio
+
     token = "YOUR_TOKEN_HERE"
 
     bot = Client(token)
@@ -18,7 +20,7 @@ Example Bot
     async def pingcommand(message):
         if message.content == "!ping":
             bot.send_message(message.channel_id, "Pong!")
-    events.run()
+    asyncio.run(events.run())
 
 This bot will respond to any message that says "!ping" with "Pong!".
 
