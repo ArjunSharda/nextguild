@@ -1345,9 +1345,9 @@ class Events:
                 traceback.print_exc()
                 time.sleep(10)
 
-    def run(self):
+    async def run(self):
         try:
-            asyncio.run(self.on_disconnect())
+            await self.on_disconnect()
         except KeyboardInterrupt:
             # TODO Handle standard exit
             pass
