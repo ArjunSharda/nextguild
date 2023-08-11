@@ -13,7 +13,7 @@ We recommend using Python 3.8+ to ensure proper support in case you encounter an
 Once you have verified you have the correct Python version, you can install NextGuild by running:
 
 .. code-block:: shell
-    $ pip install nextguild
+    $ pip install nextguild websockets requests
 
 Support and Troubleshooting
 =========================
