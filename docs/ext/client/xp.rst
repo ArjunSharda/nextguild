@@ -60,6 +60,26 @@ Sets the amount of XP a member of a server has.
 | amount            | int     | The amount of XP to set.                   |
 +-------------------+---------+--------------------------------------------+
 
+award_bulk_xp
+-----------------
+
+.. code-block:: python
+
+    award_bulk_xp(server_id, user_ids, amount)
+
+Award a bulk amount of XP for multiple members.
+
++-------------------+---------+--------------------------------------------+
+| Parameter         | Type    | Description                                |
++===================+=========+============================================+
+| server_id         | str     | The ID of the server where the user is     |
+|                   |         | located.                                   |
++-------------------+---------+--------------------------------------------+
+| user_ids          | list    | The IDs of the users to award the XP to.   |
++-------------------+---------+--------------------------------------------+
+| amount            | int     | The amount of XP to award.                  |
++-------------------+---------+--------------------------------------------+
+
 set_bulk_xp
 -----------------
 
@@ -67,7 +87,7 @@ set_bulk_xp
 
     set_bulk_xp(server_id, user_ids, amount)
 
-Sets the amount of XP for multiple members.
+Set a specific amount of XP for multiple members.
 
 +-------------------+---------+--------------------------------------------+
 | Parameter         | Type    | Description                                |
@@ -79,6 +99,7 @@ Sets the amount of XP for multiple members.
 +-------------------+---------+--------------------------------------------+
 | amount            | int     | The amount of XP to set.                   |
 +-------------------+---------+--------------------------------------------+
+
 
 award_xp_to_role
 -----------------
