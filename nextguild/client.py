@@ -9,7 +9,7 @@ import requests
 from .classes import Data
 from .embed import Embed
 
-version = '1.2.13'
+version = '1.2.14'
 
 class Client:
     def __init__(self, token: str) -> None:
