@@ -9,7 +9,8 @@
 NextGuild is a Guilded API wrapper written in Python.
 
 
-Founded in 2023, the ©️ Nextguild Project (2023-present) is the most user-friendly Python library for interacting with the Guilded API. Because of our commitment to make it as simple and easy to use as possible, it serves as an excellent resource for both beginners learning Python programming and experienced programmers looking for a straightforward development experience. 
+Founded in 2023, the ©️ Nextguild Project (2023-present) is the most user-friendly Python library for interacting with the Guilded API. Because of our commitment to make it as simple and easy to use as possible, it serves as an excellent resource for both beginners learning Python programming and experienced programmers looking for a straightforward development experience.
+
 
 Made from a team of 2 people, this was a project originally thought for a fun purpose and for testing of the Guilded API, which eventually turned into a API wrapper for multi-purpose use.
 
@@ -26,10 +27,11 @@ py -3 -m pip install -U nextguild
 ```
 
 <br>NextGuild also requires 2 other packages to be installed before using it. <br>
-If you haven't installed them already, execute the following command in your terminal:
-```bash
-pip install requests websockets
-```
+> [!TIP]
+> If you haven't installed them already, execute the following command in your terminal:
+> ```bash
+> pip install requests websockets
+> ```
 
 ## Documentation
 
