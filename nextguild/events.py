@@ -4,6 +4,7 @@ import json
 from functools import wraps
 import time
 import websockets
+import traceback
 
 from .classes import Data
 
@@ -1371,12 +1372,14 @@ class Events:
                 await self.start()
                 break
             except Exception as e:
-                print(f"Reconnection failed: {e}")
+                print(f"An exception occurred: {e}")
+                traceback.print_exc()
                 time.sleep(10)
 
-    def run(self):
+    async def run(self):
         try:
-            asyncio.run(self.on_disconnect())
+            await self.on_disconnect()
         except KeyboardInterrupt:
             # TODO Handle standard exit
             pass
+

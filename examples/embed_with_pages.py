@@ -9,6 +9,7 @@
 # pip install requests
 
 from nextguild import *
+import asyncio
 import sqlite3
 
 bot = Client('INSERT YOUR TOKEN HERE')
@@ -80,4 +81,4 @@ async def help_reaction(reaction):
         bot.delete_message_reaction(reaction.channel_id, reaction.message_id, reaction.id, reaction.created_by) #delete the reaction, so the message doesn't get spammed with reactions.
         
 
-events.run()
+asyncio.run(events.run())

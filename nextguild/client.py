@@ -9,7 +9,7 @@ import requests
 from .classes import Data
 from .embed import Embed
 
-version = '1.2.10'
+version = '1.2.13'
 
 class Client:
     def __init__(self, token: str) -> None:
@@ -155,6 +155,28 @@ class Client:
             f'{self.base_url}/channels/{channel_id}/messages/{message_id}'
         )
         return response
+    
+    def pin_message(
+            self,
+            channel_id, 
+            message_id
+    ):
+        response = self.request(
+            'POST',
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/pin'
+        )
+        return response
+    
+    def unpin_message(
+            self,
+            channel_id,
+            message_id
+    ):
+        response = self.request(
+            'DELETE',
+            f'{self.base_url}/channels/{channel_id}/messages/{message_id}/pin'
+        )
+        return response
 
     def get_message(
             self,
@@ -223,7 +245,7 @@ class Client:
             server_id: str = None,
             group_id: str = None,
             category_id: int = None,
-            is_public: bool = False,
+            visibility: str = None,
             parent_id: str = None,
             message_id: str = None
     ):
@@ -240,8 +262,7 @@ class Client:
             data.update({'parentId': parent_id})
         if message_id:
             data.update({'messageId': message_id})
-        if is_public != False:
-            data.update({"isPublic": str(is_public).lower()})
+        data.update({"visibility": visibility})
         response = self.request(
             'POST',
             f'{self.base_url}/channels',
@@ -274,7 +295,7 @@ class Client:
             channel_id: str,
             name: str = None,
             topic: str = None,
-            is_public: bool = False
+            visibility: str = None
     ):
         data = {}
 
@@ -284,8 +305,7 @@ class Client:
         if topic:
             data.update({'topic': topic})
 
-        if is_public:
-            data.update({'isPublic': str(is_public).lower()})
+        data.update({'visibility': visibility})
 
         response = self.request(
             'PATCH',
@@ -635,6 +655,20 @@ class Client:
             json={'amount': amount}
         )
         return response
+
+    def set_bulk_xp(
+        self,
+        server_id: str,
+        amount: int,
+        user_ids: list[str] = []
+    ):
+        response = self.request(
+            'POST',
+            f'{self.base_url}/servers/{server_id}/xp',
+            json={'amount': amount, 'userIds': user_ids}
+        )
+        return response
+        
 
     def award_xp_to_role(
             self,
@@ -1016,14 +1050,35 @@ class Client:
             self,
             server_id: str,
             webhook_id: str,
-            content: str,
+            content: str = None,
+            embeds: list[Embed] = None,
+            username: str = None,
+            avatar_url: str = None
     ):
         token = self.get_webhook(server_id, webhook_id)['webhook']['token']
+        
+
+
+        if content && embeds is None: raise ValueError("Guilded API Error: You must supply at least one of either content or embed parameters!")
+            if embeds is not None:
+                payload['embeds'] = [embeds.to_dict]
+
+            if content is not None:
+                payload['content'] = content
+
+            if avatar_url is not None:
+                payload['avatar_url'] = avatar_url
+
+            if username is not None:
+                payload['username'] = username
+        
+
+        
 
         response = self.request(
             'POST',
             f'https://media.guilded.gg/webhooks/{webhook_id}/{token}',
-            json={'content': content}
+            json=payload
         )
         return response
 

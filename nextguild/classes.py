@@ -87,6 +87,10 @@ class Data:
         self.bot_id = self._get_bot_id(event_data)
         self.heartbeat_interval = self._get_heartbeat_interval(event_data)
         self.op = self._get_op(event_data)
+        self.visibility = self._get_visibility(event_data)
+        self.users = self._get_users(event_data)
+        self.channels = self._get_channels(event_data)
+        self.roles = self._get_roles(event_data)
 
     def _scenario(self, event_data, scenarios):
         data = ''
@@ -252,7 +256,8 @@ class Data:
             ('role', 'name'),
             ('d', 'user', 'name'),
             ('user', 'name'),
-            ('nickname')
+            ('nickname'),
+            ('channel', 'name'),
         ]
         return self._scenario(event_data, scenarios)
             
@@ -808,5 +813,30 @@ class Data:
     def _get_op(self, event_data: dict):
         scenarios = [
             ('op'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_visibility(self, event_data: dict):
+        scenarios = [
+            ('visibility'),
+            ('channel', 'visibility'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_users(self, event_data: dict):
+        scenarios = [
+            ('users'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_channels(self, event_data: dict):
+        scenarios = [
+            ('channels'),
+        ]
+        return self._scenario(event_data, scenarios)
+    
+    def _get_roles(self, event_data: dict):
+        scenarios = [
+            ('roles'),
         ]
         return self._scenario(event_data, scenarios)
