@@ -72,6 +72,8 @@ class Events:
         self._channel_message_reaction_create_handlers = []
         self._channel_message_reaction_delete_handlers = []
         self._channel_message_reaction_many_delete_handlers = []
+        self._channel_archive_handlers = []
+        self._channel_restore_handlers = []
         self._calendar_event_comment_create_handlers = []
         self._calendar_event_comment_update_handlers = []
         self._calendar_event_comment_delete_handlers = []
@@ -373,6 +375,24 @@ class Events:
             return func(channel)
 
         self._channel_update_handlers.append(wrapper)
+        return wrapper
+
+    def on_channel_archive(self, func):
+        @wraps(func)
+        def wrapper(channel):
+            return func(channel)
+            
+        self._channel_archive_handlers.append(wrapper)
+        return wrapper
+
+
+
+    def on_channel_restore(self, func):
+        @wraps(func)
+        def wrapper(channel):
+            return func(channel)
+            
+        self._channel_restore_handlers.append(wrapper)
         return wrapper
 
     def on_webhook_create(self, func):
@@ -966,6 +986,17 @@ class Events:
     async def _handle_update_channel(self, event_data):
         event = Data(event_data)
         for handler in self._channel_update_handlers:
+            await handler(event)
+
+    async def _handle_channel_archive(self, event_data):
+        event = Data(event_data)
+        for handler in self._channel_archive_handlers:
+            await handler(event)
+
+
+    async def _handle_channel_restore(self, event_data):
+        event = Data(event_data)
+        for handler in self._channel_restore_handlers:
             await handler(event)
 
     async def _handle_create_webhook(self, event_data):

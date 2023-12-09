@@ -131,5 +131,91 @@ on_channel_delete
 +-----------------------------+----------------------------------------------+
 | ``data.group_id``           | The ID of the group the channel is in        |
 +-----------------------------+----------------------------------------------+
+| ``data.is_public``          | Whether the channel is public                |
++-----------------------------+----------------------------------------------+
+
+on_channel_archive
+------------------
+
+.. code-block:: python
+
+    @events.on_channel_archive
+    async def example(data):
+        print(f'A channel with the name {data.name} was archived!')
+
++-----------------------------+----------------------------------------------+
+| Type                        | Description                                  |
++=============================+==============================================+
+| ``data.server_id``          | The ID of the server the channel was deleted |
+|                             | in.                                          |
++-----------------------------+----------------------------------------------+
+| ``data.id``                 | The ID of the channel                        |
++-----------------------------+----------------------------------------------+
+| ``data.type``               | The type of the channel                      |
++-----------------------------+----------------------------------------------+
+| ``data.name``               | The name of the channel                      |
++-----------------------------+----------------------------------------------+
+| ``data.topic``              | The topic of the channel                     |
++-----------------------------+----------------------------------------------+
+| ``data.created_at``         | The time the channel was created             |
++-----------------------------+----------------------------------------------+
+| ``data.created_by``         | The ID of the user who created the channel   |
++-----------------------------+----------------------------------------------+
+| ``data.root_id``            | The ID of the root channel                   |
++-----------------------------+----------------------------------------------+
+| ``data.parent_id``          | The ID of the parent channel                 |
++-----------------------------+----------------------------------------------+
+| ``data.message_id``         | The ID of the message that created the       |
+|                             | channel                                      |
++-----------------------------+----------------------------------------------+
+| ``data.category_id``        | The ID of the category the channel is in     |
++-----------------------------+----------------------------------------------+
+| ``data.group_id``           | The ID of the group the channel is in        |
++-----------------------------+----------------------------------------------+
+| ``data.is_public``          | Whether the channel is public                |
++-----------------------------+----------------------------------------------+
+
+
+
+on_channel_restore
+------------------
+
+.. code-block:: python
+
+    @events.on_channel_restore
+    async def example(data):
+        print(f'A channel with the name {data.name} was restored!')
+
++-----------------------------+----------------------------------------------+
+| Type                        | Description                                  |
++=============================+==============================================+
+| ``data.server_id``          | The ID of the server the channel was deleted |
+|                             | in.                                          |
++-----------------------------+----------------------------------------------+
+| ``data.id``                 | The ID of the channel                        |
++-----------------------------+----------------------------------------------+
+| ``data.type``               | The type of the channel                      |
++-----------------------------+----------------------------------------------+
+| ``data.name``               | The name of the channel                      |
++-----------------------------+----------------------------------------------+
+| ``data.topic``              | The topic of the channel                     |
++-----------------------------+----------------------------------------------+
+| ``data.created_at``         | The time the channel was created             |
++-----------------------------+----------------------------------------------+
+| ``data.created_by``         | The ID of the user who created the channel   |
++-----------------------------+----------------------------------------------+
+| ``data.root_id``            | The ID of the root channel                   |
++-----------------------------+----------------------------------------------+
+| ``data.parent_id``          | The ID of the parent channel                 |
++-----------------------------+----------------------------------------------+
+| ``data.message_id``         | The ID of the message that created the       |
+|                             | channel                                      |
++-----------------------------+----------------------------------------------+
+| ``data.category_id``        | The ID of the category the channel is in     |
++-----------------------------+----------------------------------------------+
+| ``data.group_id``           | The ID of the group the channel is in        |
++-----------------------------+----------------------------------------------+
+| ``data.is_public``          | Whether the channel is public                |
++-----------------------------+----------------------------------------------+
 | ``data.visibility``         | The visibility of the channel                |
 +-----------------------------+----------------------------------------------+
