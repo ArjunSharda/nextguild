@@ -77,7 +77,7 @@ Award a bulk amount of XP for multiple members.
 +-------------------+---------+--------------------------------------------+
 | user_ids          | list    | The IDs of the users to award the XP to.   |
 +-------------------+---------+--------------------------------------------+
-| amount            | int     | The amount of XP to award.                  |
+| amount            | int     | The amount of XP to award.                 |
 +-------------------+---------+--------------------------------------------+
 
 set_bulk_xp
