@@ -656,6 +656,20 @@ class Client:
         )
         return response
 
+    def set_bulk_xp(
+        self,
+        server_id: str,
+        amount: int,
+        user_ids: list[str] = []
+    ):
+        response = self.request(
+            'POST',
+            f'{self.base_url}/servers/{server_id}/xp',
+            json={'amount': amount, 'userIds': user_ids}
+        )
+        return response
+        
+
     def award_xp_to_role(
             self,
             server_id: str,
