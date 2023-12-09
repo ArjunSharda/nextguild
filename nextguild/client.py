@@ -659,8 +659,8 @@ class Client:
     def set_bulk_xp(
         self,
         server_id: str,
-        amount: int,
-        user_ids: list[str] = []
+        user_ids: list[str] = [],
+        amount: int
     ):
         response = self.request(
             'POST',
