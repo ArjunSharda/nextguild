@@ -1036,14 +1036,35 @@ class Client:
             self,
             server_id: str,
             webhook_id: str,
-            content: str,
+            content: str = None,
+            embeds: list[Embed] = None,
+            username: str = None,
+            avatar_url: str = None
     ):
         token = self.get_webhook(server_id, webhook_id)['webhook']['token']
+        
+
+
+        if content && embeds is None: raise ValueError("Guilded API Error: You must supply at least one of either content or embed parameters!")
+            if embeds is not None:
+                payload['embeds'] = [embeds.to_dict]
+
+            if content is not None:
+                payload['content'] = content
+
+            if avatar_url is not None:
+                payload['avatar_url'] = avatar_url
+
+            if username is not None:
+                payload['username'] = username
+        
+
+        
 
         response = self.request(
             'POST',
             f'https://media.guilded.gg/webhooks/{webhook_id}/{token}',
-            json={'content': content}
+            json=payload
         )
         return response
 
