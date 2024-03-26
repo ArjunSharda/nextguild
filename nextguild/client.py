@@ -672,7 +672,7 @@ class Client:
     def set_bulk_xp(
             self,
             server_id: str,
-            amount: int
+            amount: int,
             user_ids: list[str] = [],
     ):
         response = self.request(
@@ -1071,18 +1071,18 @@ class Client:
         
 
 
-        if content && embeds is None: raise ValueError("Guilded API Error: You must supply at least one of either content or embed parameters!")
-            if embeds is not None:
-                payload['embeds'] = [embeds.to_dict]
+        if content and embeds is None: raise ValueError("Guilded API Error: You must supply at least one of either content or embed parameters!")
+        if embeds is not None:
+            payload['embeds'] = [embeds.to_dict]
 
-            if content is not None:
-                payload['content'] = content
+        if content is not None:
+            payload['content'] = content
 
-            if avatar_url is not None:
-                payload['avatar_url'] = avatar_url
+        if avatar_url is not None:
+            payload['avatar_url'] = avatar_url
 
-            if username is not None:
-                payload['username'] = username
+        if username is not None:
+            payload['username'] = username
         
 
         
